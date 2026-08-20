@@ -1,0 +1,19 @@
+# Build LaTeX
+build/*
+
+# tiene il pdf
+!build/metodi-2.pdf
+
+# File temporanei
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.bcf
+*.run.xml
+
+# Mac
+.DS_Store

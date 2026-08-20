@@ -1,0 +1,197 @@
+\documentclass[11pt,oneside]{scrbook} % KOMA
+
+% ---------- LINGUA & CODIFICA ----------
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% ---------- TIPOGRAFIA ----------
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- GEOMETRIA PAGINA ----------
+\usepackage[
+  a4paper,
+  top=24mm,
+  bottom=28mm,
+  inner=24mm,   % margine interno (verso rilegatura)
+  outer=30mm,   % margine esterno: note a margine
+  heightrounded
+]{geometry}
+\setlength{\headheight}{17pt} % evita sovrapposizioni con l'header
+\setlength{\headsep}{6mm}     % distanza tra header e corpo
+
+\usepackage{scrlayer-scrpage}
+\clearpairofpagestyles
+\ihead{\leftmark}
+\ofoot*{\pagemark}
+\automark{chapter}
+
+% ---------- STRUMENTI DI STRUTTURA ----------
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% ---------- STILE TITOLI IN STILE KOMA ----------
+\setkomafont{chapter}{\normalfont\huge\bfseries}
+\setkomafont{section}{\normalfont\Large\bfseries}
+\setkomafont{subsection}{\normalfont\large\bfseries}
+\setkomafont{subsubsection}{\normalfont\normalsize\bfseries}
+
+% ---------- STILE FRONTESPIZIO ----------
+\setkomafont{title}{\sffamily\bfseries\Huge}
+\setkomafont{author}{\sffamily\large}
+\setkomafont{publishers}{\sffamily\normalsize}
+\setkomafont{date}{\large}
+
+\RedeclareSectionCommand[beforeskip=1.5ex,afterskip=1.5ex]{chapter}
+\RedeclareSectionCommand[beforeskip=1ex,afterskip=0.8ex]{section}
+\RedeclareSectionCommand[beforeskip=0.8ex,afterskip=0.6ex]{subsection}
+\RedeclareSectionCommand[beforeskip=0.6ex,afterskip=0.4ex]{subsubsection}
+
+% ---------- AMBIENTI UTILI ----------
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{subcaption} 
+\usepackage{upgreek} % \uptau
+\usepackage{mathrsfs} % \mathscr{}
+\usepackage{dsfont}
+\usepackage{tikz}
+\usetikzlibrary{intersections}
+\usepackage{pgfplots} % grafici, creato in tikZ
+\pgfplotsset{compat = 1.18}
+\usetikzlibrary{
+arrows.meta,
+positioning,
+calc,
+decorations.markings,
+angles,
+quotes,
+3d,
+patterns
+}
+\usepackage[european]{circuitikz} % circuiti
+\usepackage{comment} % \begin{comment}  \end{comment}
+\usepackage{mathtools} % \coloneqq
+\usepackage{siunitx}
+\usepackage{hyperref}
+\hypersetup{  % stile dei riferimenti
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=blue,
+  urlcolor=blue
+}
+\sisetup{separate-uncertainty=true}
+%----------- TEOREMI E STRUTTURE VARIE (KOMA, AMSTHM)
+
+% Stile "teorema" (corsivo)
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{proposition}[theorem]{Proposizione}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollario}
+
+% Stile "definizione" (testo dritto)
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definizione}
+
+% Stile "nota" (più discorsivo)
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Osservazione}
+\newtheorem{example}[theorem]{Esempio}
+
+% ---------- NOTE A MARGINE ----------
+% \marginpar stampa nel margine esterno con oneside.
+\newcommand{\mkeyword}[1]{%
+  \marginpar{\raggedright\footnotesize\emph{#1}}%
+}
+
+% per le note a sinistra:
+% \reversemarginpar
+
+% ---------- PARAGRAFI E SPAZI ----------
+\setlength{\parindent}{0.8em}
+\setlength{\parskip}{0.25em}
+
+%----------- COMANDI AGGIUNTIVI -----------
+
+\newcommand{\1}{\mathds{1}} % in stile funzione caratteristica
+
+% --- vettore colonna ---
+\newcommand{\colvec}[1]{%
+  \begin{pmatrix}
+    #1
+  \end{pmatrix}%
+}
+
+% --- derivata parziale ---
+\newcommand{\der}[3][]{%
+  \frac{\partial^{#1} {#2}}{\partial {#3}^{#1}}%
+}
+
+% --- versore --- 
+\newcommand{\vers}[1]{
+  \hat{\boldsymbol{#1}}
+}
+
+% --- epsilon ---
+\newcommand{\eps}[0]{
+  \varepsilon
+}
+
+% --- norma ---
+\newcommand{\norm}[1]{
+  \left\lVert #1 \right\rVert
+}
+
+% --- prodotto scalare ---
+\newcommand{\sc}[1]{
+  \langle #1 \rangle
+}
+
+% --- vettore ---
+\renewcommand{\v}[1]{
+  \mathbf{#1}
+}
+
+% --- \mathbb{R} --- R numeri reali
+\newcommand{\R}[0]{
+    \mathbb{R}
+}
+
+% --- \displaystyle ---
+\newcommand{\DS}[0]{
+	\displaystyle 
+}
+
+% --- \backslash ---
+\newcommand{\bs}[0]{
+	\backslash 
+}
+
+% --- \diag ---
+\newcommand{\diag}[0]{
+	\textnormal{diag} 
+}
+
+% --- \mathbb{C} --- C numeri complessi
+\newcommand{\C}[0]{
+    \mathbb{C}
+}
+% ---------- BIBLIOGRAFIA ----------
+\usepackage{csquotes} % \enquote{}
+\usepackage[backend=biber,style=numeric,sorting=nyt]{biblatex}
+\addbibresource{bibliografia.bib} % nome del file .bib
+
+% ---------- FRONTESPIZIO ----------
+\title{\textbf{\titolo}}
+\author{Cosimo Pascarella}
+\date{Anno Accademico 2026--2027}
+
+\publishers{
+  Email: \text{c.pascarella2@studenti.unipi.it}\\
+  Versione: v0.1
+}

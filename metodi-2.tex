@@ -1,0 +1,61 @@
+\def \titolo {Metodi matematici 2}
+
+\input{preambolo_metodi-2.tex}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\cleardoublepage
+\markboth{}{}
+\mainmatter
+
+\chapter{Analisi complessa}
+In questo capitolo studieremo le funzioni complesse di variabile complessa, cioè
+\begin{align}
+  f:\C \to \C.
+\end{align}
+I concetti di limite e di continuità sono gli stessi dell'analisi reale, quindi diciamo che 
+\begin{align}
+  \lim_{z\to z_0} f(z) = \alpha
+\end{align}
+se
+\begin{align}
+  \forall\,\eps, \delta > 0 \quad |z - z_0| < \delta \implies |f(z) - \alpha| < \eps
+\end{align}
+e diremo che la funzione $ f $ è continua nel punto $ z_0 $ se 
+\begin{align}
+  \lim_{z \to z_0 }f(z) = f(z_0).
+\end{align}
+Il concetto di derivata viene intuitivo dal limite del rapporto incrementale ma nel campo complesso diventa una condizione più forte:
+\begin{definition}[ Derivata in senso complesso ]
+  Sia $ f: A \subset \C \to \C $, definiamo la sua derivata nel punto $ z_0 \in A $ come 
+  \begin{align} \label{eq: limite rapporto incrementale}
+    f'(z_0) = \lim_{z \to z_0} \frac{f(z) - f(z_0)}{z - z_0}.
+  \end{align}
+\end{definition}
+Questa definizione richiede implicitamente che il valore del limite sia lo stesso per qualunque direzione del piano complesso, e questo 
+ci porterà a dare delle condizioni di derivabilità. 
+\begin{definition}[ Funzione olomorfa ]
+  Una funzione $ f: A \subset \C \to \C $ si dice olomorfa o analitica (o derivabile in senso complesso in $ A $) se è derivabile in ogni $ z \in A $, 
+  ossia esiste (unico) il limite \eqref{eq: limite rapporto incrementale}.
+\end{definition}
+
+\begin{theorem}[ Condizioni di Cauchy-Riemann ]
+  Sia $ f:A\subset \C \to \C $ e indichiamo le sue parti reale e immaginaria con $ u,v $, cioè $ f(x + i y) = u + i v $, allora $ f $ è olomorfa se e 
+  soltanto se valgono le seguenti:
+  \begin{align}
+    &\der{u}{x} = \der{v}{y}
+    \\
+    &\der{u}{y} = - \der{v}{x}
+  \end{align}
+  che prendono il nome di condizioni di Cauchy-Riemann. Possono essere riscritte in maniera più compatta con la relazione 
+  \begin{align}
+    f_x = \frac1i f_y
+  \end{align}
+\end{theorem}
+Quest'ultima relazione può essere utile quando la divisione dell'immagine in parte reale e immaginaria non è ovvia a priori. 
+
+
+
+\end{document}
