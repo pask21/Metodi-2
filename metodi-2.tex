@@ -11,6 +11,7 @@
 \mainmatter
 
 \chapter{Analisi complessa}
+\section{Derivabilità in senso complesso}
 In questo capitolo studieremo le funzioni complesse di variabile complessa, cioè
 \begin{align}
   f:\C \to \C.
@@ -43,7 +44,7 @@ ci porterà a dare delle condizioni di derivabilità.
 
 \begin{theorem}[ Condizioni di Cauchy-Riemann ]
   Sia $ f:A\subset \C \to \C $ e indichiamo le sue parti reale e immaginaria con $ u,v $, cioè $ f(x + i y) = u + i v $, allora $ f $ è olomorfa se e 
-  soltanto se valgono le seguenti:
+  soltanto se esistono continue le derivate parziali e soddisfano le seguenti:
   \begin{align}
     &\der{u}{x} = \der{v}{y}
     \\
@@ -54,8 +55,53 @@ ci porterà a dare delle condizioni di derivabilità.
     f_x = \frac1i f_y
   \end{align}
 \end{theorem}
-Quest'ultima relazione può essere utile quando la divisione dell'immagine in parte reale e immaginaria non è ovvia a priori. 
+Quest'ultima relazione può essere utile quando la divisione dell'immagine in parte reale e immaginaria non è ovvia a priori.
+\begin{proof}
+  
+\end{proof}
+
+\begin{theorem}[  ]
+  Sia $ F: A \subset \R^2 \to \R^2 $ e siano $ F_1, F_2 $ le sue componenti. Se è differenziabile in senso reale e valgono le relazioni di Cauchy-Riemann 
+  per le componenti, allora la funzione $ f(z) = F_1 + i F_2 $ è derivabile in senso complesso.
+\end{theorem}
+Si noti che nel teorema precedente spesso è utile verificare che esistano continue le derivate parziali, dato che 
+$ F \in C^1 \implies F \; \textnormal{differenziabile} $.
+\begin{proof}
+  
+\end{proof}
+
+\begin{definition}[ Derivata rispetto a una variabile complessa ]
+  Sia $ f $ derivabile in senso reale (non necessariamente analitica), definiamo gli operatori differenziali complessi $ \der{f}{z}, \der{f}{z*} $ come
+  \begin{align}
+    \der{f}{z} &\coloneq \frac{f_x -i f_y}{2}
+    \\
+    \der{f}{z^*} &\coloneq \frac{f_x +i f_y}{2}
+  \end{align}
+\end{definition}
+Dunque una funzione è derivabile in senso complesso se (oltre all'esistenza delle derivate continue) vale $ \der{f}{z^*} = 0 $. Trattare $ z,z^* $ in 
+maniera algebrica per calcolare derivate o verificare la derivabilità in senso complesso è un metodo rapido e in genere affidabile, tuttavia i limiti di 
+questo criterio risiedono in quello che l'algebra non vede come domini, punti singolari e altro su cui si deve fare attenzione.
 
 
+\section{Integrale di Cauchy}
+
+
+
+
+
+
+\section{Serie di Potenze}
+
+
+\begin{definition}[ Serie di potenze ]
+  Si definisce serie di potenze a termini complessi la scrittura 
+  \begin{align}
+    F(z) = \sum_{n = 0}^{+\infty} a_n (z - z_0)^n \quad \textnormal{con} \; a_n \in \C
+  \end{align}
+\end{definition}
+Per le serie di potenze si può definire un raggio di convergenza $ R \in [0, +\infty] $ tale che per ogni $ z $ all'interno del disco $ B_R(z_0) $ la serie 
+converge, con $ R = 0 $ se non converge mai e $ R = +\infty $ se converge sempre. Applicando direttamente le condizioni di Cauchy-Riemann si vede che le 
+serie di potenze sono olomorfe, e le possiamo inoltre derivare termine a termine dato che la derivata ha lo stesso raggio di convergenza (si vede trovando 
+un'espressione con il $ \lim \sup $) e dunque converge (totalmente) alla derivata della serie.
 
 \end{document}
