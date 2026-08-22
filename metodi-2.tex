@@ -82,6 +82,123 @@ Dunque una funzione è derivabile in senso complesso se (oltre all'esistenza del
 maniera algebrica per calcolare derivate o verificare la derivabilità in senso complesso è un metodo rapido e in genere affidabile, tuttavia i limiti di 
 questo criterio risiedono in quello che l'algebra non vede come domini, punti singolari e altro su cui si deve fare attenzione.
 
+\begin{lemma}[  ]
+  Se $ f(z) $ è analitica in $ z_0 \in D $ allora $ f(z) $ è continua in $ z_0 $.
+\end{lemma}
+\begin{proof}
+  Se è analitica allora 
+  \begin{align}
+    \exists f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} \implies \exists \lim_{h \to 0} f(z_0 + h) - f(z_0) = 0 
+  \end{align}
+  e quindi, con $ h = z - z_0 $, si ha che $\DS \lim_{z \to z_0} f(z) = f(z_0) $.
+\end{proof}
+Per linearità abbiamo che la composizione di funzioni analitiche è anch'essa analitica, vale lo stesso per il prodotto e rapporto (esclusi i punti in cui
+il denominatore si annulla).
+
+Infine può essere utile riportare le condizioni di Cauchy-Riemann in coordinate polari, tramite $ x = \rho \cos\varphi, y = \rho \sin \varphi $, si ha 
+\begin{align}
+  f_\rho = \der{f}{\rho} &= \der{f}{x} \der{x}{\rho} + \der{f}{y} \der{y}{\rho} = f_x \cos \varphi + f_y \sin \varphi
+  \\
+  f_\varphi = \der{f}{\varphi} &= \der{f}{x} \der{x}{\varphi} + \der{f}{y} \der{y}{\varphi} = - f_x \sin \varphi + f_y \cos \varphi.
+\end{align}
+Ricombiniamo e otteniamo 
+\begin{align}
+  f_\rho + \frac{i}\rho f_\varphi &= (f_x + if_y) e^{-i\varphi}
+  \\
+  f_\rho -\frac{i}{\rho} f_\varphi &= (f_x - if_y) e^{i \varphi}
+\end{align}
+e quindi le relazioni di Cauchy-Riemann (nella forma $ f_x + if_y = 0 $) sono equivalenti all'annullamento della prima, cioè
+\begin{align}
+  f_x + if_y = 0 \iff f_\rho + \frac{i}\rho f_\varphi = 0.
+\end{align}
+
+\begin{definition}[ Funzione intera ]
+  Una funzione che è analitica in tutto il piano complesso si dice \textit{intera}.
+\end{definition}
+
+\section{Funzioni elementari complesse}
+Definiamo la funzione esponenziale complessa $ e^z $ nel seguente
+\begin{align}
+  e^z \coloneq e^x e^{iy} = e^x (\cos y + i \sin y)
+\end{align}
+dove notiamo subito che sull'asse reale ($ y = 0 $) si riduce all'esponenziale reale. Inoltre vale la proprietà classica di trasformare prodotti in somme 
+e cioè 
+\begin{align}
+  e^{z_1} e^{z_2} = e^{z_1 + z_2} \quad \forall z_1,z_2 \in \C
+\end{align}
+la quale non era ovvia a priori, e si ottiene rapidamente dalla definizione. Si nota subito che è analitica per ogni $ z\in\C $ e quindi intera, e che 
+\begin{align}
+  (e^z)' = e^{z}.
+\end{align}
+Definiamo anche le funzioni trigonometriche complesse:
+\begin{align}
+  \cos z &\coloneq \frac{e^{iz} + e^{-iz}}{2}
+  \\
+  \sin z &\coloneq \frac{e^{iz} - e^{-iz}}{2i}
+\end{align}
+che risultano anch'esse delle funzioni intere, a differenza delle classiche $ \cos x , \sin x $ che non sono analitiche. Valgono le stesse regole di 
+derivazione e le stesse identità del caso reale.
+Infine definiamo le funzioni iperboliche complesse:
+\begin{align}
+  \cosh z &\coloneq \frac{e^{z} + e^{-z}}{2}
+  \\
+  \sinh z &\coloneq \frac{e^{z} - e^{-z}}{2}
+\end{align}
+le quali sono a loro volta funzioni intere e rispettano le stesse proprietà del caso reale.
+Ci sono differenze dal caso reale nel definire la funzione logaritmo complesso: è definito tramite la relazione
+\begin{align}
+  e^{\log z} = z
+\end{align}
+che sfruttando le coordinate polari $ z = \rho e^{i\varphi} $ diventa 
+\begin{align}
+  \log z = \log \rho + i\varphi = \log |z| + i \arg z
+\end{align}
+dove abbiamo sfruttato la funzione argomento per far notare che non è univoca. Funzioni di questo tipo vengono dette \textit{polidrome}. Naturalmente il 
+logaritmo non è definito per $ z = 0 $ e quindi l'insieme su cui lavoriamo è $ \C^* \coloneq \C \bs \{0\} $ (gruppo moltiplicativo del campo $ \C $) che 
+non è semplicemente connesso. 
+La funzione argomento è definita come 
+\begin{align}
+  \arg z = \varphi + 2\pi k \quad \textnormal{con} \; k \in \mathbb{Z}
+\end{align}
+e sulla base di questa chiameremo \textit{rami} o \textit{determinazioni} gli elementi della classe
+\begin{align}
+  \left( \log z \right)_k = \log |z| + i \varphi + i2\pi k, \quad k \in \mathbb{Z}.
+\end{align}
+Al fine di rendere univoche queste diramazioni si taglia il piano complesso con una curva semplice che collega lo $ 0 $ all'infinito, in modo da rendere 
+lo spazio semplicemente connesso così da essere impossibile girare attorno all'origine con una curva chiusa continua.
+Un esempio di taglio è $ \C \bs (-\infty, 0] $ con la funzione argomento definita fra $ -\pi < \arg z < \pi $, e questa determinazione viene detta 
+\textit{principale} dato che sull'asse reale coincide la funzione logaritmo reale. Ciascuna determinazione è una funzione analitica nel suo 
+dominio di definizione, dato che le relazioni di Cauchy-Riemann riguardano le derivate prime:
+\begin{align}
+  \Log z \coloneq \left( \log z \right)_0 = \log \rho + i \varphi
+  \\
+  \der{(\Log z)}{\rho} + \frac{i}\rho \der{(\Log z)}{\varphi} = 0.
+\end{align}
+Infine, calcoliamo la derivata del logaritmo complesso $ \log z = f(z) $ secondo le regole che abbiamo definito:
+\begin{align}
+  \der{f(z)}{z} = \frac{f_x - i f_y}2 = \frac{e^{-i\varphi}}{2} \left( f_\rho -\frac{i}\rho f_\varphi \right) 
+  = \frac{e^{-i\varphi}}{2} \left( \frac1\rho - \frac{i}\rho i \right) = \frac1{\rho e^{i\varphi}} = \frac1z
+\end{align}
+esattamente come nel caso reale. (Non valgono le proprietà di $ \log(z_1 z_2) \neq \log z_1 + \log z_2 $).
+
+Definiamo la funzione elevamento a potenza complessa $ \alpha \in \C $ come 
+\begin{align}
+  z^\alpha \coloneq e^{\alpha \log z} = e^{\alpha \left( \log |z| + i\arg z + i2\pi k \right)} = |z|^\alpha e^{i\alpha \arg z} e^{i\alpha 2\pi k},  
+  \;\; k \in \mathbb{Z}
+\end{align}
+tramite il logaritmo complesso, infatti anch'essa non è univoca. Tramite la derivata del logaritmo complesso si trova facilmente che 
+\begin{align}
+  \left( z^\alpha \right)' = \alpha z^{\alpha -1}
+\end{align}
+come nel caso reale.
+
+
+
+
+
+
+
+
 
 \section{Integrale di Cauchy}
 
