@@ -193,16 +193,162 @@ tramite il logaritmo complesso, infatti anch'essa non è univoca. Tramite la der
 come nel caso reale.
 
 
-
-
-
-
-
-
-
 \section{Integrale di Cauchy}
+In questa sezione studieremo la teoria sull'integrazione di funzioni complesse. 
+\begin{definition}[ Integrale di funzione complessa ]
+  Sia $ \gamma \in C^1_{\text{tratti}}([a,b], \C) $, $ f:\C \to \C $, definiamo l'integrale della funzione $ f $ lungo la curva $ \gamma $ come
+  \begin{align}
+    \int_\gamma f(z) \,dz \coloneq \int_a^b f(\gamma(t)) \gamma'(t) \,dt
+  \end{align}
+  e considerando che $ \gamma(t) = x(t) + i y(t) $ si ottiene la definizione equivalente 
+  \begin{align}
+    \int_\gamma f(z) \,dz = \int_a^b f(x(t), y(t)) \left( x'(t) + i y'(t) \right) \,dt = \int_\gamma f(x, y) (dx + i dy).
+  \end{align}
+  Da quest'ultima si nota che è l'integrale della 1-forma differenziale $ f(x,y)dx + i f(x,y) dy $.
+\end{definition}
+L'integrale di funzione complessa eredita quindi tutte le proprietà dell'integrale curvilineo di seconda specie. 
+\begin{lemma}[ di Darboux ]
+  Siano $ f:A\subset \C \to \C $, $ \gamma \in C^1_{\text{tratti}}([a,b], A) $, indichiamo con $ M = \max_{z \in A}|f(z)| $ e 
+  $ L = \ell(\gamma) = \int_\gamma ds $, allora si ha che 
+  \begin{align}
+    \left| \int_\gamma f(z) \,dz \right| \leq M \cdot L
+  \end{align}
+\end{lemma}
+\begin{proof}
+  \begin{align}
+    \left| \int_\gamma f(z) \,dz \right| \leq \int_\gamma |f(z)| \,dz \leq M \cdot \int_\gamma dz = M \cdot L
+  \end{align}
+\end{proof}
+Riportiamo adesso il teorema di Gauss-Green nel piano dato che ci sarà utile successivamente.
+\begin{theorem}[  di Gauss-Green nel piano ]
+  Sia $ \Omega \subset \R^2 $ un aperto regolare, siano $ A,B \in C^1(\overline{\Omega}, \R^2) $ cioè continue sulla chiusura di $ \Omega $, e sia 
+  $ \partial\Omega $ il bordo di $ \Omega $ positivamente orientato, allora vale il seguente
+  \begin{align}
+    \int_\Omega \left( \der{B}{x} - \der{A}{y} \right) dx dy = \int_{\partial\Omega} A \,dx + B \,dy
+  \end{align}
+\end{theorem}
 
+\begin{definition}[ alternativa di semplicemente connesso  ]
+  Un dominio $ \Omega \subset \C $ connesso ad archi si dice semplicemente connesso se ogni curva semplice chiusa è frontiera di un dominio $ D $ 
+  contenuto in $ \Omega $.
+\end{definition}
 
+\begin{theorem}[ di Cauchy ]
+  Sia $ A \subset \C $ semplicemente connesso,$ \gamma \in C^1_{\text{tratti}}([a,b], A) $ chiusa e sia $ f:A \to \C $ una funzione analitica, allora 
+  \begin{align}
+    \oint_\gamma f(z) \,dz = 0.
+  \end{align}
+  Da notare che questo vale per ogni contorno chiuso contenuto in $ A $.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+Il precedente risultato si può generalizzare domini non semplicemente connessi con il seguente teorema.
+\begin{theorem}[  ]
+  Sia $ \Omega \subset \C $ connesso ad archi, $ f:A \to \C $ e sia $ \Gamma \in C^1_{\text{tratti}}([a,b], \Omega) $, 
+  supponiamo che siano presenti $ p $ buchi all'interno di $ \Gamma $, cioè $ p $ regioni in cui $ f $ non è analitica, ognuna racchiusa da una curva 
+  $ \gamma_i $ semplice chiusa, esterne l'una all'altra e tutte contenute in $ \Gamma $. Nella regione interna a $ \Gamma $ ed esterna alle 
+  $ \gamma_1, \dots, \gamma_p $ la funzione $ f $ è analitica e vale che
+  \begin{align}
+    \oint_\Gamma f(z) \,dz = \sum_{i = 1}^p \oint_{\gamma_i} f(z) \,dz.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+Una prima conseguenza del teorema di Cauchy è che l'integrale fra due punti non dipende dal percorso scelto, infatti siano 
+$ \Gamma_1, \Gamma_2 \in C^1_{\text{tratti}}([a,b], \C) $ tali che $ \Gamma_1(a) = \Gamma_2(a) = z_0, \Gamma_1(b) = \Gamma_2(b) = z $, allora
+\begin{align}
+  \int_{\Gamma_1} f(\eta) \,d\eta = \int_{\Gamma_2} f(\eta) \,d\eta \eqcolon \int_{z_0}^z f(\eta) \,d\eta.
+\end{align}
+
+\begin{theorem}[  ]
+  Sia $ f(z) $ continua su un dominio semplicemente connesso $ A \subset \C $ e tale che 
+  \begin{align}
+    \oint_\Gamma f(z) \,dz = 0
+  \end{align}
+  per ogni contorno chiuso $ \Gamma \subset A $, allora la funzione 
+  \begin{align}
+    F(z) \coloneq \int_{z_0}^{z} f(\eta) \,d\eta
+  \end{align}
+  è una funzione analitica nel dominio $ A $ per ogni $ z_0,z \in A $, e inoltre vale che $ F'(z) = f(z) $.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+\begin{definition}[ Primitiva ]
+  La funzione analitica $ F(z) $ tale che $ F'(z) = f(z) $ si dice \textit{integrale indefinito} o \textit{primitiva} della funzione $ f(z) $.
+\end{definition}
+
+Possiamo applicare i teoremi che abbiamo introdotto al caso della funzione $ f(z) = \frac1z $. Definiamo il dominio $ D = \C \bs (-\infty, 0] $ cioè il 
+piano complesso senza la semiretta reale negativa, che è semplicemente connesso e notiamo subito che in questo dominio la funzione $ f $ è 
+analitica (l'unico punto non definito era $ z = 0 $), allora per il teorema precedente sappiamo che la funzione 
+$ F(z) = \int_{z_0}^{z} \frac{d\eta}{\eta} $ è analitica a sua volta. Avevamo già calcolato una funzione tale che $ F'(z) = f(z) $ ed era il logaritmo 
+complesso, per tanto possiamo dire che $ F(z) = \Log z $ è una primitiva della funzione $ f(z) $ che differisce dalle altre primitive per una costante 
+e cioè $ i2\pi k $, in accordo col teorema dell'analisi in più variabili che primitive diverse di una stessa funzione differiscono per una costante.
+
+\begin{theorem}[ Formula di Cauchy ]
+  Sia $ f(z)  $ analitica definita su un aperto $ A \subset \C $, sia $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ semplice chiusa, 
+  percorsa in senso antiorario e che racchiude solo punti in cui $ f $ è definita, 
+  allora preso un punto $ z $ nella parte interna della regione racchiusa da $ \gamma $ (ma non su $ \gamma $) vale la seguente
+  \begin{align}
+    f(z) = \frac1{2\pi i} \oint_\gamma \frac{f(\eta)}{\eta - z} \,d\eta
+  \end{align}
+  cioè il valore della funzione in un punto è determinato dai valori sul bordo dell'integranda.
+\end{theorem}
+Notiamo alcuni dettagli della formula di Cauchy così come l'abbiamo formulata: non abbiamo richiesto che lo spazio sia semplicemente connesso, e questo 
+perché ci limitiamo a prendere delle curve $ \gamma $ che racchiudono solo punti in cui la funzione è definita, il che equivale a richiedere la semplice 
+connessione e prendere qualsiasi curva che vogliamo; il punto deve essere scelto nella parte interna della regione racchiusa da $ \gamma $, cioè 
+$ z \in \textnormal{Int}(\gamma) $, mentre se viene preso nella parte esterna (purché non sulla curva) il risultato dell'integrale è $ 0 $ dato che la 
+funzione $ \frac{f(\eta)}{\eta - z} $ è analitica fuori da $ z $.
+\begin{proof}
+  
+\end{proof}
+
+Una prima applicazione della formula di Cauchy è data dalla cosiddetta \textit{formula del valor medio}: presa $ C_R $ la circonferenza di raggio $ R $ 
+e centro $ z_0 $ si ha che
+\begin{gather}
+  f(z_0) = \frac{1}{2\pi i} \oint_{C_R} \frac{f(z)}{z - z_0} \,dz 
+  = \frac1{2\pi i} \int_0^{2\pi} \frac{f(z_0 + R e^{i\theta})}{R e^{i \theta}}i R e^{i \theta}\, d\theta
+  \\
+   = \frac1{2\pi} \int_0^{2\pi} f({z_0 + R e^{i\theta}})\, d\theta
+\end{gather}
+che rappresenta la media della funzione sulla circonferenza di raggio $ R $ e centro in $ z_0 $.
+
+\begin{theorem}[ Principio del massimo modulo ]
+  Sia $ f(z) $ analitica nell'aperto $ A $ connesso e limitato, e continua sul compatto $ \overline{A} $, allora il massimo del modulo 
+  $ |f(z)| $ è assunto sulla frontiera $ \partial A $.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+Abbiamo l'analogo per il minimo.
+\begin{theorem}[ Principio del minimo modulo ]
+  Sia $ f(z) $ analitica nell'aperto $ A $ connesso e limitato, continua sul compatto $ \overline{A} $ e $ f(z) \neq 0 \; \forall z \in A $ 
+  allora il minimo del modulo $ |f(z)| $ è assunto sulla frontiera $ \partial A $.
+\end{theorem}
+Di conseguenza abbiamo che se sul bordo il modulo della funzione è costante allora è costante anche all'interno e viceversa per la continuità 
+delle funzioni olomorfe, quindi possiamo dire che
+\begin{align}
+  |f(z)| = \textnormal{costante} \; \; \forall z \in \partial A \iff f(z) = \textnormal{costante} \; \; \forall z \in A.
+\end{align}
+
+\begin{theorem}[  ]
+  Siano $ A,B \subset \C $ aperti connessi, sia $ g: A\times B \to \C $ una funzione complessa di due variabili complesse e sia 
+  $ \gamma \in C^1_{\text{tratti}}([a,b], B) $. Se valgono
+  \begin{enumerate}
+    \item $ g(z,\eta) $ è analitica rispetto a $ z $ per ogni $ z \in A, \eta \in \gamma $ 
+    \item $ g(z,\eta ) $ e $ \DS \der{g}{z}(z,\eta) $ sono continue nelle variabili $ z,\eta $ per ogni $ z\in A, \eta \in \gamma $
+  \end{enumerate} 
+  allora la funzione $ F: A \to \C $ definita come 
+  \begin{align}
+    F(z) = \int_\gamma g(z, \eta) \, d\eta
+  \end{align}
+  è analitica rispetto a $ z $ in $ A $ e la sua derivata può essere calcolata sotto il segno di integrale.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
 
 
 
