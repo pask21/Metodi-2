@@ -233,7 +233,7 @@ Riportiamo adesso il teorema di Gauss-Green nel piano dato che ci sarà utile su
   contenuto in $ \Omega $.
 \end{definition}
 
-\begin{theorem}[ di Cauchy ]
+\begin{theorem}[ di Cauchy ] \label{thm: di Cauchy}
   Sia $ A \subset \C $ semplicemente connesso,$ \gamma \in C^1_{\text{tratti}}([a,b], A) $ chiusa e sia $ f:A \to \C $ una funzione analitica, allora 
   \begin{align}
     \oint_\gamma f(z) \,dz = 0.
@@ -262,7 +262,7 @@ $ \Gamma_1, \Gamma_2 \in C^1_{\text{tratti}}([a,b], \C) $ tali che $ \Gamma_1(a)
   \int_{\Gamma_1} f(\eta) \,d\eta = \int_{\Gamma_2} f(\eta) \,d\eta \eqcolon \int_{z_0}^z f(\eta) \,d\eta.
 \end{align}
 
-\begin{theorem}[  ]
+\begin{theorem}[  ] \label{thm: A}
   Sia $ f(z) $ continua su un dominio semplicemente connesso $ A \subset \C $ e tale che 
   \begin{align}
     \oint_\Gamma f(z) \,dz = 0
@@ -350,11 +350,108 @@ delle funzioni olomorfe, quindi possiamo dire che
   
 \end{proof}
 
+\begin{theorem}[ Derivata $ n $-esima di funzioni analitiche ] \label{thm: derivata n-esima di funzioni analitiche}
+  Sia $ f(z) $ una funzione analitica nel aperto regolare $ A \subset \C $ e continua nel chiuso $ \overline{A} $, allora $ \forall z \in A $ esiste la 
+  derivata di ordine $ n $ della funzione $ f $ e vale
+  \begin{align}
+    f^{(n)}(z) = \frac{n!}{2\pi i} \oint_{\partial A} \frac{f(\zeta)}{(\zeta - z)^{n + 1}} \, d\zeta.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+Osserviamo che con il precedente teorema abbiamo che una funzione analitica possiede derivate continue nel dominio di ordine qualsiasi.
 
+\begin{theorem}[ di Morera ]
+  Sia $ f(z) $ una funzione continua su un semplicemente connesso $ A \subset \C $, se vale che 
+  \begin{align}
+    \oint_\Gamma f(z) \,dz = 0
+  \end{align}
+  per ogni curva semplice chiusa $ \Gamma \in C^1_{\text{tratti}}([a,b], A) $, allora la funzione $ f(z) $ è analitica in $ A $.
+\end{theorem}
+\begin{proof}
+  Per il teorema \ref{thm: A} (sono le stesse ipotesi) abbiamo che la funzione $ F(z) = \int_{z_0}^z f(z) \,dz $ è analitica con $ F'(z) = f(z) $, 
+  e per il teorema \ref{thm: derivata n-esima di funzioni analitiche} la derivata di una funzione analitica è anch'essa analitica.
+\end{proof}
+Notiamo che questo teorema è in pratica l'inverso del teorema di Cauchy \ref{thm: di Cauchy}.
+\begin{theorem}[ di Liuville ]
+  Sia $ f(z) $ intera (analitica $ \forall z\in \C $) e il suo modulo sia uniformemente limitato, cioè 
+  $ \exists M > 0 $ tale che $ |f(z)| \leq M \; \forall z \in \C $, allora $ f(z) = $ costante $ \forall z \in \C $.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
 
 
 \section{Serie di Potenze}
 
+\begin{definition}[ Serie di funzioni ]
+  Sia $ u_n(z): A \subset \C \to \C $ una successione di funzioni univoche, chiameremo \textit{serie di funzioni} l'espressione
+  \begin{align}
+    \sum_{n=0}^{\infty} u_n(z).
+  \end{align}
+\end{definition}
+\begin{definition}[ Serie convergente ]
+  Diremo che una serie di funzioni è convergente nel dominio $ A $ alla funzione univoca $ f(z) $ se 
+  \begin{align}
+    \exists \lim_{n \to \infty} S_n(z) = f(z) \quad \forall z \in A 
+  \end{align}
+  dove $ S_n(z) = \sum_{k = 0}^n u_k(z) $ è la successione delle somme parziali. Esplicitando il limite si ha che una serie è convergente se 
+  \begin{align}
+    \forall \eps > 0, \; \forall z \in A, \; \exists N(\eps, z) : \left| f(z) - \sum_{k = 0}^{n} u_k(z) \right| < \eps \quad \forall n \geq N(\eps, z).
+  \end{align}  
+  In tal caso la funzione $ f(z) $ si dice \textit{somma della serie} nel 
+  dominio $ A $, mentre definiamo il \textit{resto $n$-esimo della serie} la quantità 
+  \begin{align}
+    R_n(z) \coloneq f(z) - S_n(z) = \sum_{k = n + 1}^\infty u_k(z)
+  \end{align}
+  e tale che $ \lim_{n\to \infty} R_n(z) = 0 $.
+\end{definition}
+
+\begin{definition}[ Serie uniformemente convergente ]
+  Una serie di funzioni è \textit{uniformemente convergente} nel dominio $ A $ alla funzione univoca $ f(z) $ se 
+  \begin{align}
+    \forall \eps > 0, \; \exists N(\eps) : \left| f(z) - \sum_{k = 0}^{n} u_k(z) \right| < \eps \quad \forall n \geq N(\eps), \; \forall z \in A
+  \end{align}
+  che differisce dalla convergenza per il fatto che deve esistere un $ N $ che funziona per ogni $ z \in A $.
+\end{definition}
+\begin{theorem}[ Criterio di Weierstrass ]
+  Se $ |u_n(z)| \leq |a_n| \; \forall z \in A $, e la serie $ \sum_{n = 0}^\infty |a_n| $ è convergente, allora la serie di funzioni 
+  $ \sum_{n = 0}^\infty u_n(z) $ è uniformemente convergente. 
+\end{theorem}
+\begin{proof}
+  Dato che $ \sum_{n = 0}^\infty |a_n| $ è convergente allora $ \forall \eps > 0, \; \exists N(\eps) $ tale che 
+  $ \sum_{n = 0}^\infty |a_n|<\eps \; \forall n \geq N(\eps) $, quindi 
+  \begin{align}
+    |R_n(z)| \leq \sum_{k = n + 1}^\infty |u_k(z)| \leq \sum_{n = 0}^\infty |a_n| < \eps \quad \forall n \geq N(\eps),\; \forall z \in A
+  \end{align}
+  che significa che la serie converge uniformemente.
+\end{proof}
+Il precedente criterio rappresenta una condizione sufficiente ma non necessaria per la convergenza uniforme. Di seguito illustriamo alcune 
+proprietà delle serie uniformemente convergenti.
+
+\begin{theorem}[  ]
+  Se le funzioni $ u_n(z) $ sono continue e la serie è uniformemente convergente, allora anche la somma $ f(z) $ è continua.
+\end{theorem}
+
+\begin{theorem}[ Scambio di serie e integrale ]
+  Sia $ f(z) = \sum_{n = 0}^\infty u_n(z) $ una serie di funzioni continue uniformemente convergente nel dominio $ A $, allora 
+  \begin{align}
+    \int_\Gamma f(z) \,dz = \sum_{n = 0}^\infty \int_\Gamma u_n(z) \,dz
+  \end{align}
+  per ogni curva $ \Gamma \in C^1_{\text{tratti}}([a,b], A) $.
+\end{theorem}
+Le dimostrazioni di questi due teoremi sono analoghe al caso reale.
+\begin{theorem}[ di Weierstrass ]
+  Sia $ f(z) = \sum_{n = 0}^\infty u_n(z) $ una serie di funzioni analitiche uniformemente convergente nel dominio $ A $, allora valgono i seguenti:
+  \begin{enumerate}
+    \item $ f(z) $ è analitica in $ A $;
+    \item $ f^{(k)}(z) = \sum_{n = 0}^\infty u_n^{(k)}(z) $;
+    \item la serie $ \sum_{n = 0}^\infty u_n^{k}(z) $ converge uniformemente a $ f^{(k)}(z) $ in ogni sottodominio chiuso $ \overline{B} \subset A $.
+  \end{enumerate}
+\end{theorem}
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 \begin{definition}[ Serie di potenze ]
   Si definisce serie di potenze a termini complessi la scrittura 
