@@ -287,7 +287,7 @@ $ F(z) = \int_{z_0}^{z} \frac{d\eta}{\eta} $ è analitica a sua volta. Avevamo g
 complesso, per tanto possiamo dire che $ F(z) = \Log z $ è una primitiva della funzione $ f(z) $ che differisce dalle altre primitive per una costante 
 e cioè $ i2\pi k $, in accordo col teorema dell'analisi in più variabili che primitive diverse di una stessa funzione differiscono per una costante.
 
-\begin{theorem}[ Formula di Cauchy ]
+\begin{theorem}[ Formula di Cauchy ] \label{thm: formula di Cauchy}
   Sia $ f(z)  $ analitica definita su un aperto $ A \subset \C $, sia $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ semplice chiusa, 
   percorsa in senso antiorario e che racchiude solo punti in cui $ f $ è definita, 
   allora preso un punto $ z $ nella parte interna della regione racchiusa da $ \gamma $ (ma non su $ \gamma $) vale la seguente
@@ -352,10 +352,11 @@ delle funzioni olomorfe, quindi possiamo dire che
 
 \begin{theorem}[ Derivata $ n $-esima di funzioni analitiche ] \label{thm: derivata n-esima di funzioni analitiche}
   Sia $ f(z) $ una funzione analitica nel aperto regolare $ A \subset \C $ e continua nel chiuso $ \overline{A} $, allora $ \forall z \in A $ esiste la 
-  derivata di ordine $ n $ della funzione $ f $ e vale
+  derivata di ordine $ n $ della funzione $ f $ che vale
   \begin{align}
-    f^{(n)}(z) = \frac{n!}{2\pi i} \oint_{\partial A} \frac{f(\zeta)}{(\zeta - z)^{n + 1}} \, d\zeta.
+    f^{(n)}(z) = \frac{n!}{2\pi i} \oint_{\partial A} \frac{f(\zeta)}{(\zeta - z)^{n + 1}} \, d\zeta
   \end{align}
+  e sono tutte analitiche a loro volta nel dominio $ A $.
 \end{theorem}
 \begin{proof}
   
@@ -443,25 +444,168 @@ proprietà delle serie uniformemente convergenti.
 \end{theorem}
 Le dimostrazioni di questi due teoremi sono analoghe al caso reale.
 \begin{theorem}[ di Weierstrass ]
-  Sia $ f(z) = \sum_{n = 0}^\infty u_n(z) $ una serie di funzioni analitiche uniformemente convergente nel dominio $ A $, allora valgono i seguenti:
+  Sia $ f(z) = \sum_{n = 0}^\infty u_n(z) $ una serie di funzioni analitiche uniformemente convergente nell'aperto $ A \subset \C $, allora valgono i seguenti:
   \begin{enumerate}
     \item $ f(z) $ è analitica in $ A $;
     \item $ f^{(k)}(z) = \sum_{n = 0}^\infty u_n^{(k)}(z) $;
     \item la serie $ \sum_{n = 0}^\infty u_n^{k}(z) $ converge uniformemente a $ f^{(k)}(z) $ in ogni sottodominio chiuso $ \overline{B} \subset A $.
   \end{enumerate}
 \end{theorem}
-
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+Da notare che se la serie convergesse uniformemente nel chiuso $ \overline{A} $, non è detto che la serie delle derivate converga uniformemente in 
+$ \ol{A} $, ma è garantito soltanto nei sottodomini chiusi dell'aperto $ A $. Consideriamo la successione $ u_n(z) = \frac{z^n}{n^2} $, sono tutte 
+analitiche come abbiamo già mostrato, inoltre nel disco $ |z| \leq 1 $ si ha che $ \abs{u_n(z)} \leq \frac{1}{n^2} $ e la serie $ \sum_n \frac1{n^2} $ 
+è convergente, possiamo quindi concludere per il criterio di Weierstrass che la serie $ \sum_n \frac{z^n}{n^2} $ è uniformemente convergente nel disco 
+$ \abs{z} \leq 1 $, mentre per il teorema di Weierstrass la somma è analitica e la serie delle derivate converge uniformemente in ogni sottodominio 
+chiuso dell'aperto $ \abs{z} < 1 $.
 
 \begin{definition}[ Serie di potenze ]
   Si definisce serie di potenze a termini complessi la scrittura 
   \begin{align}
     F(z) = \sum_{n = 0}^{+\infty} a_n (z - z_0)^n \quad \textnormal{con} \; a_n \in \C
   \end{align}
+  dove notiamo che le funzioni $ a_n (z - z_0)^n $ sono intere.
 \end{definition}
-Per le serie di potenze si può definire un raggio di convergenza $ R \in [0, +\infty] $ tale che per ogni $ z $ all'interno del disco $ B_R(z_0) $ la serie 
-converge, con $ R = 0 $ se non converge mai e $ R = +\infty $ se converge sempre. Applicando direttamente le condizioni di Cauchy-Riemann si vede che le 
-serie di potenze sono olomorfe, e le possiamo inoltre derivare termine a termine dato che la derivata ha lo stesso raggio di convergenza (si vede trovando 
-un'espressione con il $ \lim \sup $) e dunque converge (totalmente) alla derivata della serie.
+Alcuni esempi. La serie $ \sum_n n! (z -z_0)^n $ converge soltanto in $ z = z_0 $ dato che non è soddisfatta la condizione necessaria per la convergenza 
+cioè che $ \lim_n u_n(z) = 0 $. La serie $ \sum_n \frac{(z - z_0)^n}{n!} $ converge $ \forall z \in \C $ e per mostrarlo applichiamo il 
+criterio del rapporto:
+\begin{align}
+  \lim_{n\to \infty} \frac{\abs{u_{n+1}(z)}}{\abs{u_n(z)}} = \frac{\abs{z - z_0}}{n+1} = 0 < 1 \quad \forall z \in \C
+\end{align}
+per cui la serie è assolutamente convergente e quindi converge.
+\begin{theorem}[ di Abel ]
+  Se la serie di potenze $ \sum_n a_n (z - z_0)^n $ converge in $ z_1 \neq z_0 $, allora converge assolutamente per ogni $ z $ nel disco 
+  $ \abs{z - z_0} < \abs{z_1 - z_0}  $.
+\end{theorem}
+Da notare che il teorema non ci dà alcuna informazione per il cerchio $ \abs{z - z_0} = \abs{z_1 - z_0} $.
+\begin{proof}
+  Preso $ z $ nel disco $ \abs{z - z_0} < \abs{z_1 - z_0} $ definiamo la quantità $ q = \frac{\abs{z - z_0}}{\abs{z_1 - z_0}} \leq 1 $, dato che la serie 
+  $ \sum_n a_n (z_1 - z_0)^n $ è convergente si ha che la successione $ a_n (z_1 - z_0)^n $ è infinitesima e in particolare limitata, cioè 
+  $ \exists M \geq 0  $ tale che $ \abs{a_n (z_1 - z_0)^n} \leq M \; \forall n $. Allora abbiamo che 
+  \begin{align}
+    \sum_{n} \abs{a_n} \abs{z - z_0}^n = \sum_n \abs{a_n} \abs{z_1 - z_0}^n q^n 
+    \left( \leq \sum_{n} \abs{a_n} \abs{z_1 - z_0}^n \right) \cdot \sum_n q^n \leq M \cdot \frac1{1 - q}
+  \end{align}
+  quindi è assolutamente convergente $ \forall z : \abs{z - z_0} < \abs{z_1 - z_0} $. Inoltre, dato che abbiamo trovato una successione 
+  $ \abs{q^n} \geq \abs{a_n (z - z_0)^n} $ la cui serie (geometrica) converge, si ha per il criterio di Weierstrass che la serie 
+  $ \sum_n a_n (z - z_0^n) $ converge anche uniformemente.
+\end{proof}
+
+\begin{lemma}[  ]
+  Se la serie di potenze diverge in un punto $ z_1 $ allora diverge $ \forall z: \abs{z - z_0} > \abs{z_1 - z_0} $.
+\end{lemma}
+\begin{proof}
+  Se per assurdo convergesse in punto $ \ol{z} : \abs{\ol{z} - z_0} > \abs{z_1 - z_0} $ allora per il teorema di Abel dovrebbe convergere per ogni 
+  $ z $ nel disco $ \abs{z - z_0} < \abs{\ol{z} - z_0} $, compreso quindi il punto $ z_1 $, che nega l'ipotesi.
+\end{proof}
+Per quanto visto nel teorema di Abel è possibile definire un raggio di convergenza per le serie di potenze.
+\begin{definition}[ Raggio di convergenza ]
+  Definiamo il raggio di convergenza di una serie di potenze il numero reale $ R \in [0, +\infty] $ tale che la serie converge per ogni 
+  $ z: \abs{z - z_0} < R $. Tale raggio si può esprimere come 
+  \begin{align}
+    R \coloneq \sup \,\{ \abs{z - z_0} : \;\textnormal{la serie converge in} \,z\}.
+  \end{align}
+\end{definition}
+Se $ R = 0 $ la serie converge soltanto in $ z = z_0 $ e la somma vale $ a_0 $, se $ R = +\infty $ la serie converge $ \forall z \in \C $, fuori dal raggio 
+di convergenza la serie diverge mentre per $ \abs{z - z_0} = R $ non ci dà informazioni a priori.
+\begin{theorem}[ Formula di Cauchy-Hadamard ]
+  Il raggio di convergenza di una serie di potenze è caratterizzato dalla relazione
+  \begin{align}
+    \frac1R = \limsup_{n \to \infty} \abs{a_n}^{\frac1n}.
+  \end{align}
+\end{theorem}
+
+\begin{theorem}[  ]
+  Nel disco $ D = \{ z: \abs{z - z_0} < R\} $ dove $ R $ è il raggio di convergenza la somma della serie è analitica, inoltre la serie delle 
+  derivate di ordine $ n $ è convergente nel disco, in particolare il raggio di convergenza $ R $ è lo stesso.
+\end{theorem}
+\begin{proof}
+  Le funzioni $ a_n (z - z_0)^n $ sono intere quindi per il teorema di Weierstrass la somma è analitica in $ D $ e la serie delle derivate converge 
+  per ogni sottodominio chiuso $ \ol{B} \subset D $, possiamo quindi derivare termine a termine e otteniamo
+  \begin{align}
+    f'(z) = \sum_{n = 1}^\infty n \,a_n (z - z_0)^{n -1}
+  \end{align}
+  ma allora per la formula di Cauchy-Hadamard il raggio di convergenza della serie delle derivate vale
+  \begin{align}
+    \frac1{R'} = \limsup_{n\to\infty} \abs{n \,a_n}^{\frac1n} = \limsup_{n\to\infty} \abs{n}^{\frac1n} \cdot \abs{a_n}^{\frac1n} 
+    = \limsup_{n\to\infty} \abs{a_n}^{\frac1n} = \frac1R
+  \end{align}
+  dato che $ \abs{n}^{\frac1n} \to 1 $. Concludiamo che per tutte le derivate il raggio di convergenza è sempre $ R $.
+\end{proof}
+
+\begin{theorem}[  ] \label{thm: coefficienti sviluppo di Taylor}
+  Sia $ f(z) $ la somma della serie $ \sum_n a_n (z - z_0)^n $ all'interno del disco di convergenza $ D $, allora i coefficienti $ a_n $ valgono
+  \begin{align}
+    a_n = \frac{f^{(n)}(z_0)}{n!}.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Per il teorema precedente possiamo derivare termine a termine all'interno del disco di convergenza, per cui
+  \begin{align}
+    f'(z) = \sum_{n = 1}^\infty n \, a_n (z - z_0)^{n-1}
+  \end{align}
+  che calcolata in $ z_0 $ ci dà $ f'(z_0) = a_1 $, e continuando si ottengono gli altri coefficienti della serie.
+\end{proof}
+La serie con $ a_n = 1 \,\forall n $ è detta \textit{serie geometrica complessa}, che si vede avere raggio di converga $ R = 1 $ e somma 
+\begin{align}
+  f(z) = \frac1{1 - (z - z_0)}.
+\end{align}
+
+\begin{theorem}[ di Taylor ]
+  Sia $ f(z) $ una funzione analitica nel disco $ D = \{ z: \abs{z - z_0} < R\} $, allora in $ D $ può essere rappresentata in modo univoco tramite la 
+  serie di potenze 
+  \begin{align}
+    f(z) = \sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!} \,(z - z_0)^n
+  \end{align}
+  che è detta sviluppo in serie di Taylor della funzione $ f $ nel punto $ z_0 $.
+\end{theorem}
+\begin{proof}
+  Sia $ 0 < r < R $ e sia $ z $ tale che $ \abs{z - z_0} < r < R $, con $ C_r $ la circonferenza di raggio $ r $ e centro in $ z_0 $, allora per la formula 
+  di Cauchy si ha che 
+  \begin{align}
+    f(z) = \frac1{2\pi i} \oint_{C_r} \frac{f(\eta)}{\eta - z} \,d\eta.
+  \end{align}
+  Definiamo la quantità $ q = \frac{z - z_0}{\eta - z_0} $, che per $ \eta \in C_r $ si ha $ \abs{q} < 1 $, sviluppiamo quindi il denominatore 
+  dell'integrale nel modo seguente:
+  \begin{gather}
+    \frac1{\eta - z} = \frac1{(\eta - z_0) - (z - z_0)} = \frac1{\eta - z_0} \frac1{1 - \frac{z - z_0}{\eta - z_0}} 
+    = \frac1{\eta - z_0} \sum_{n=0}^\infty \frac{(z - z_0)^n}{(\eta - z_0)^n}
+    \\
+    = \sum_{n=0}^\infty \frac{(z - z_0)^n}{(\eta - z_0)^{n+1}}
+  \end{gather}
+  dove abbiamo usato il fatto che $ \abs{q} < 1 $ per scrivere $ \frac1{1-q} $ come somma di una serie geometrica. Sostituendo nell'integrale diventa
+  \begin{gather}
+    f(z) = \frac1{2\pi i} \oint_{C_r} f(\eta) \sum_{n=0}^\infty \frac{(z - z_0)^n}{(\eta - z_0)^{n+1}} \, d\eta 
+    = \sum_{n=0}^\infty (z - z_0)^n \frac1{2\pi i} \oint_{C_r} \frac{f(\eta)}{(\eta - z)^{n+1}} \,d\eta 
+    \\
+    = \sum_{n=0}^\infty (z - z_0)^n \cdot \frac{f^{(n)}(z_0)}{n!}
+  \end{gather}
+  dalla formula per la derivata $ n $-esima. Abbiamo potuto scambiare la serie con l'integrale per la convergenza uniforme della serie geometrica per 
+  $ \eta \in C_r $.
+\end{proof}
+Consideriamo la funzione $ f(z) = \Log z $ (determinazione principale del logaritmo complesso) nel semplicemente connesso $ \C^- = \C \bs (-\infty,0] $, 
+in questo spazio è analitica per cui ammette sviluppo in Taylor:
+\begin{align}
+  (\Log z)' = \frac1z,\quad (\Log z)'' = - \frac1{z^2},\quad \dots\quad(\Log z)^{(n)} = (-1)^{n - 1} \frac{(n-1)!}{z^n}
+\end{align}
+per cui lo sviluppo in Taylor in $ z_0 \in \C^- $ vale
+\begin{gather}
+  \Log z - \Log z_0 = \sum_{n = 1}^\infty \frac{(-1)^{n-1}(z - z_0)^n}{n\, z_0^n} 
+  = \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n} \left( \frac{z}{z_0} - 1 \right)^n 
+  \\
+  = \sum_{n = 1}^\infty \frac{-1}{n} \left( 1 - \frac{z}{z_0} \right)^n.
+\end{gather}
+Il raggio di convergenza è vincolato dal taglio $ R = \sup\,\{ \abs{z -z_0} : D \cap (-\infty, 0] = \emptyset \} $ dove $ D $ è il disco di raggio $ R $ 
+e centro in $ z_0 $, quindi stiamo chiedendo che $ R $ sia la massima distanza per la quale il disco non attraversi il taglio e quindi sia contenuto 
+completamente in $ \C^- $ ($ D \cap \C^- = D $). Lo sviluppo di $ e^z $ nel punto $ z = 0 $ è il medesimo del caso reale cioè
+\begin{align}
+  e^z = \sum_{n = 0}^\infty \frac{z^n}{n!}
+\end{align}
+e dato che è intera il raggio di convergenza è $ R = \infty $, e lo stesso vale per $ \cos z, \sin z $. La funzione $ f(z) = \frac1{z - a} $ è analitica 
+per ogni $ z \in \C \bs \{z = a\} $ dunque è sviluppabile con Taylor, il raggio di convergenza è vincolato dalla distanza da $ a $ cioè 
+$ R = \abs{ a - z_0} $ e lo sviluppo vale
+\begin{align}
+  \frac1{z - a} = \frac{1}{(z - z_0) - (a - z_0)} = \frac{-1}{a - z_0} \cdot \frac1{1 - \frac{z - z_0}{a - z_0}} 
+  = -\sum_{n = 0}^\infty \frac{(z - z_0)^n}{(a - z_0)^{n+1}}
+\end{align}
 
 \end{document}
