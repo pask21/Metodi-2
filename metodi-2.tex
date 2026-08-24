@@ -608,4 +608,68 @@ $ R = \abs{ a - z_0} $ e lo sviluppo vale
   = -\sum_{n = 0}^\infty \frac{(z - z_0)^n}{(a - z_0)^{n+1}}
 \end{align}
 
+\section{Zeri di una funzione analitica}
+\begin{theorem}[  ]
+  Sia $ f(z) $ analitica in un dominio connesso $ A $, se $ \exists z_0 \in A $ tale che la funzione e tutte le sue derivate si annullano in $ z_0 $, 
+  cioè $ f(z_0) = f'(z_0) = \dots = f^{(n)}(z_0) = \dots = 0 $, allora la funzione è identicamente nulla $ \forall z \in A $.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+\begin{definition}[ Zeri di una funzione analitica ]
+  Sia $ f(z) $ una funzione analitica non identicamente nulla in un dominio connesso $ A $, se $ z_0 \in A $ è tale che $ f(z_0) = 0 $ diremo che è uno 
+  \textit{zero della funzione $ f $}, inoltre se $ f(z_0) = 0 $ ma $ f'(z_0) \neq 0 $ diremo che è uno \textit{zero di ordine 1}, in particolare definiamo 
+  l'\textit{ordine di uno zero} come il massimo $ n $ tale che $ f^{(k)}(z_0) = 0 \; \forall k < n $.
+\end{definition}
+\begin{theorem}[  ]
+  Gli zeri di una funzione analitica non identicamente nulla sono punti isolati, cioè $ \forall z_0 : f(z_0) = 0 $ si ha che $ \exists U $ intorno di 
+  $ z_0 $ tale che $ f(z) \neq 0 \; \;\forall z \in U, z \neq z_0 $. Inoltre sia $ \Omega $ l'insieme degli zeri di $ f $ in un connesso $ A $, allora 
+  gli eventuali punti di accumulazione di $ \Omega $ non appartengono ad $ A $.
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+Consideriamo la funzione $ \sin \left( \frac1z \right) $, è analitica in $ \C^* = \C \bs \{0\} $ e si annulla in $ z = \frac1{n\pi}\; n \in \mathbb{Z} $, 
+allora sia $ \Omega $ l'insieme degli zeri, si nota che ha un punto di accumulazione in $ 0 $, che infatti non è di olomorfia per la funzione.
+
+\begin{corollary}
+  Sia $ f(z) $ una funzione analitica non identicamente nulla in un dominio connesso $ A $, allora in ogni sottodominio compatto $ C \subset A $ può avere 
+  solo un numero finito di zeri.
+\end{corollary}
+Quindi può avere un numero infinito di zeri solo in un dominio aperto o illimitato.
+\begin{proof}
+  Se per assurdo avesse un numero infinito di zeri in un compatto, allora si potrebbe trovare una successione degli zeri convergente a un punto nel 
+  compatto, che sarebbe di accumulazione e quindi in contrasto con il teorema precedente.
+\end{proof}
+
+\begin{theorem}[ di unicità ]
+  Siano $ f_1(z), f_2(z) $ due funzioni analitiche in un dominio connesso $ A $ e sia $ \Omega $ l'insieme dei punti $ z \in A $ tali che 
+  $ f_1(z) = f_2(z) $, se $ \Omega $ ha almeno un punto di accumulazione in $ A $ allora $ f_1(z) = f_2(z) \; \forall z \in A $.
+\end{theorem}
+\begin{proof}
+  Consideriamo la funzione $ F(z) = f_1(z) - f_2(z) $ analitica in $ A $, se $ F $ non è identicamente nulla allora l'insieme dei suoi zeri cioè $ \Omega $ 
+  non può avere punti di accumulazione in $ A $, dunque se ne ha almeno uno la funzione è nulla e quindi $ f_1,f_2 $ sono identiche.
+\end{proof}
+\begin{corollary}
+  Se $ f_1(z), f_2(z) $ analitiche in un connesso $ A $ assumono gli stessi valori su una curva $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ allora 
+  le funzioni sono identiche in $ A $.
+\end{corollary}
+\begin{proof}
+  Per la formula di Cauchy si ha che una funzione è completamente determinata dai valori al bordo e quindi si ha la seguente uguaglianza
+  \begin{align}
+    f_1(z) = \frac1{2\pi i} \oint_\gamma \frac{f_1(\eta)}{\eta - z} \, d\eta = \frac1{2\pi i} \oint_\gamma \frac{f_2(\eta)}{\eta - z} \, d\eta 
+    = f_2(z) \quad \forall z \in A.
+  \end{align}
+\end{proof}
+
+\begin{theorem}[ di de l'Hôpital ]
+  Siano $ f(z), g(z) $ analitiche in un dominio $ A $ e sia $ z_0 \in A $ uno zero di ordine $ n $ per entrambe, allora si ha che 
+  \begin{align}
+    \lim_{z \to z_0} \frac{f(z)}{g(z)} = \lim_{z \to z_0} \frac{f^{(n)}(z)}{g^{(n)}(z)} = \frac{f^{(n)}(z)}{g^{(n)}(z)}.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+
 \end{document}
