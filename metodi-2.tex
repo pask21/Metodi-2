@@ -985,7 +985,7 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
   volte e infine correggere dividendo per il fattore $ (m -1)! $ dovuto alla derivata, attraverso il limite otteniamo il residuo dato che è l'unico 
   termine a non avere più potenze di $ (z - z_0) $. 
 \end{proof}
-\begin{theorem}[ fondamentale della teoria dei residui ]
+\begin{theorem}[ fondamentale dei residui ]
   Sia $ A $ un aperto regolare e sia $ \Gamma = \partial A $ il suo bordo, se la funzione $ f(z) $ è analitica in $ \ol{A} $ tranne che in un 
   numero $ N $ finito di punti interni, cioè ammette un numero finito di singolarità $ z_1, \dots, z_N \in A $, allora vale la seguente 
   \begin{align}
@@ -996,8 +996,8 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
 \begin{proof}
   La dimostrazione di questo risultato sfrutta la tecnica già applicata di isolare le singolarità con una curva chiusa in modo da ottenere un 
   semplicemente connesso in cui $ f(z) $ è analitica e così applicare il teorema di Cauchy per dire che il suo integrale è nullo. Siano 
-  $ C_1, \dots, C_N $ delle circonferenze centrate ognuna in una singolarità, sia $ \sigma = \Gamma \cup C_1 \cup \dots C_N $ l'unione di $ \Gamma $ 
-  con le circonferenze tale che all'interno di $ \sigma $ si ha che $ f(z) $ è analitica, allora abbiamo che 
+  $ C_1, \dots, C_N $ delle circonferenze (disgiunte) centrate ognuna in una singolarità, sia $ \sigma = \Gamma \cup C_1 \cup \dots C_N $ l'unione di 
+  $ \Gamma $ con le circonferenze (e i tagli) tale che all'interno di $ \sigma $ si ha che $ f(z) $ è analitica su un semplicemente connesso, allora abbiamo che 
   \begin{align}
     \oint_\Gamma f(z)\,dz - \sum_{n = 1}^N \oint_{C_n} f(z) \, dz = \oint_\sigma f(z)\,dz = 0
   \end{align}
@@ -1006,10 +1006,80 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
   localmente esiste una corona circolare nel quale sviluppare la funzione, e quindi 
   \begin{align}
     \oint_\Gamma f(z)\,dz = \sum_{n = 1}^N \oint_{C_n} f(z) \, dz 
-    = \sum_{n = 1}^N {a_{-1}}_n = 2\pi i\sum_{n = 1}^N \Res[ f(z), z_n ]
+    = 2\pi i\sum_{n = 1}^N {a_{-1}}_n = 2\pi i\sum_{n = 1}^N \Res[ f(z), z_n ]
   \end{align}
   dalla definizione di residui.
 \end{proof}
+Il teorema dei residui è in generale ancora più forte: si può dimostrare che la tesi vale anche per una quantità numerabile di singolarità a patto che non 
+ci sia un punto di accumulazione. 
+\begin{definition}[ Residuo all'infinito ]
+  Se $ z = \infty \in \hat{\C} $ è una singolarità isolata per la funzione $ f(z) $ analitica nella corona $ r < \abs{z-z_0} < R = \infty $, allora 
+  si dice \textit{residuo all'infinito} della funzione $ f(z) $ la quantità
+  \begin{align}
+    \Res[ f(z), \infty ] \coloneq - a_{-1} = -\frac1{2\pi i}\oint_\gamma f(\eta)\,d\eta
+  \end{align}
+  dove la curva semplice chiusa $ \gamma $ è percorsa in senso antiorario, e per questo motivo c'è il segno $ - $ dato che stiamo considerando l'esterno 
+  della curva e non l'interno.
+\end{definition}
+A differenza dei casi precedenti, se $ z = \infty $ è una singolarità eliminabile per una funzione $ f(z) $, allora non necessariamente 
+$ \Res[ f(z), \infty ] $ deve essere nullo, ad esempio per $ \frac1z $ abbiamo che $ -a_{-1} = -1 $ benché il limite $ \lim_{z \to \infty}\frac1z = 0 $ 
+esista finito.
+\begin{theorem}[ esterno dei residui ]
+  Sia $ A $ un aperto regolare $ r $-intorno di $ z = \infty $ (cioè $ \abs{z} > r $) e sia $ \Gamma = \partial A $ il suo bordo, 
+  se la funzione $ f(z) $ è analitica in $ \ol{A} $ tranne che in un numero $ N $ finito di punti di $ A $, cioè ammette un numero 
+  finito di singolarità $ z_1, \dots, z_N \in A $, allora vale la seguente 
+  \begin{align}
+    \oint_\Gamma f(z) \,dz = -2\pi i \sum_{n = 1}^{N} \Res[ f(z), z_n ] - 2\pi i \,\Res[ f(z), \infty ]
+  \end{align}
+  con $ \Gamma $ percorsa in senso antiorario.
+\end{theorem}
+\begin{proof}
+  La logica di questa dimostrazione è la stessa del teorema interno dei residui, con la differenza che adesso nel dominio avremo anche il punto 
+  $ z = \infty $, il quale "avvolgeremo" con una circonferenza $ C_\infty $ di raggio $ R_\infty $. Per comprendere questo passaggio può essere 
+  utile visualizzare il punto all'infinito sulla sfera $ S^2 $ e la circonferenza $ C_\infty $ si avvolge attorno a $ z = \infty $. 
+  Siano $ C_1, \dots, C_N $ delle circonferenze (disgiunte) di raggi $ R_1, \dots, R_N $ ognuna centrata in una singolarità e sia 
+  $ C_\infty $ una circonferenza di raggio $ R_\infty $ che contiene tutte le singolarità, cioè $ R_\infty > \max\{\abs{z_n}\} $. Sia 
+  $ \sigma = \Gamma \cup \C_\infty \cup C_1 \cup \dots \cup C_N $ l'unione di $ \Gamma $ con tutte le circonferenze e i tagli necessari,  
+  allora l'interno di $ \sigma $ è semplicemente connesso e $ f(z) $ è analitica, per tanto 
+  \begin{align}
+    0 = \oint_\sigma f(z)\,dz = \oint_\Gamma f(z)\,dz + \sum_{n = 1}^N \oint_{C_n} f(z) \, dz - \oint_{C_\infty} f(z) \,dz
+  \end{align}
+  tutte percorse in senso antiorario (per questo $ C_\infty $ ha il segno $ - $). Il secondo termine sono i residui dovuti alle singolarità, 
+  mentre l'ultimo è quello dovuto a $ z = \infty $, e otteniamo 
+  \begin{align}
+    \oint_\Gamma f(z)\,dz = - 2\pi i \sum_{n = 1}^{N} \Res[ f(z), z_n ] - 2\pi i \,\Res[ f(z), \infty ] 
+  \end{align}
+  per la definizione di residuo all'infinito.
+\end{proof}
+Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ è una singolarità sia quando è un punto regolare. 
+\begin{corollary}
+  Se la funzione $ f(z) $ è analitica su tutto il piano complesso tranne che in un numero finito di punti, allora vale la seguente 
+  \begin{align}
+    \sum_{n = 1}^{N} \Res[ f(z), z_n ] + \Res[ f(z), \infty ] = 0.
+  \end{align}
+\end{corollary}
+\begin{proof}
+  Presa una circonferenza $ \Gamma $ orientata positivamente di raggio $ r < \min\{\abs{z_n}\} $, 
+  che al cui interno contiene solo punti di analiticità $ f(z) $, per il teorema esterno dei residui abbiamo che 
+  \begin{align}
+    0 = \oint_\Gamma f(z)\,dz = - 2\pi i \sum_{n = 1}^{N} \Res[ f(z), z_n ] - 2\pi i \,\Res[ f(z), \infty ] 
+  \end{align}
+  dove abbiamo usato il teorema di Cauchy per annullare l'integrale su $ \Gamma $.
+\end{proof}
+\begin{corollary}
+  Sia $ f(z) $ una funzione analitica in tutto il piano complesso tranne che in un numero $ N = N_{\text{int}} + N_{\text{ext}} $ 
+  finito di punti $ z_n, n = 1, \dots, N$. Sia $ \Gamma $ una curva semplice chiusa orientata positivamente 
+  tale che $ z_n \notin \Gamma \; \forall n  $, allora dette $ z_1, \dots, z_{N_{\text{int}}} $ le singolarità interne a $ \Gamma $, e dette 
+  $ \ol{z}_1, \dots, \ol{z}_{N_{\text{ext}}} $ le singolarità esterne a $ \Gamma $, vale la seguente 
+  \begin{align}
+    \oint_\Gamma f(z)\,dz = 2 \pi i \sum_{n = 1}^{N_{\text{int}}}\Res[ f(z), z_n ] 
+    = - 2 \pi i \sum_{n = 1}^{N_{\text{ext}}}\Res[ f(z), \ol{z}_n ] - 2\pi i \,\Res[ f(z), \infty ] 
+  \end{align}
+\end{corollary}
+\begin{proof}
+  Segue applicando i teoremi interno ed esterno dei residui agli aperti regolari interno ed esterno separati da $ \Gamma $.
+\end{proof}
 
+\section{funzioni armoniche}
 
 \end{document}
