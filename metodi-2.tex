@@ -621,7 +621,7 @@ $ R = \abs{ a - z_0} $ e lo sviluppo vale
   \textit{zero della funzione $ f $}, inoltre se $ f(z_0) = 0 $ ma $ f'(z_0) \neq 0 $ diremo che è uno \textit{zero di ordine 1}, in particolare definiamo 
   l'\textit{ordine di uno zero} come il massimo $ n $ tale che $ f^{(k)}(z_0) = 0 \; \forall k < n $.
 \end{definition}
-\begin{theorem}[  ]
+\begin{theorem}[  ] \label{thm: gli zeri sono punti isolati}
   Gli zeri di una funzione analitica non identicamente nulla sono punti isolati, cioè $ \forall z_0 : f(z_0) = 0 $ si ha che $ \exists U $ intorno di 
   $ z_0 $ tale che $ f(z) \neq 0 \; \;\forall z \in U, z \neq z_0 $. Inoltre sia $ \Omega $ l'insieme degli zeri di $ f $ in un connesso $ A $, allora 
   gli eventuali punti di accumulazione di $ \Omega $ non appartengono ad $ A $.
@@ -655,12 +655,12 @@ Quindi può avere un numero infinito di zeri solo in un dominio aperto o illimit
   le funzioni sono identiche in $ A $.
 \end{corollary}
 \begin{proof}
-  Per la formula di Cauchy si ha che una funzione è completamente determinata dai valori al bordo e quindi si ha la seguente uguaglianza
-  \begin{align}
-    f_1(z) = \frac1{2\pi i} \oint_\gamma \frac{f_1(\eta)}{\eta - z} \, d\eta = \frac1{2\pi i} \oint_\gamma \frac{f_2(\eta)}{\eta - z} \, d\eta 
-    = f_2(z) \quad \forall z \in A.
-  \end{align}
+  È una conseguenza diretta del teorema di unicità.
 \end{proof}
+Grazie al teorema di unicità possiamo dire che le funzioni intere $ e^z, \cos z, \sin z, \cosh z, \sinh z $ sono le uniche estensioni analitiche delle 
+rispettive funzioni reali dato che coincidono sull'asse reale. Allo stesso modo il logaritmo principale $ \Log z $ è l'estensione analitica del logaritmo 
+reale nello spazio $ \C^- $. Inoltre le due funzioni intere $ f_1(z) = \cos^2 z + \sin^2 z $ e $ f_2(z) = 1 $ coincidono sull'asse reale e quindi sono la 
+stessa funzione, dunque l'identità trigonometrica $ \cos^2 z + \sin^2 z = 1 $ vale per ogni $ z \in \C $.
 
 \begin{theorem}[ di de l'Hôpital ]
   Siano $ f(z), g(z) $ analitiche in un dominio $ A $ e sia $ z_0 \in A $ uno zero di ordine $ n $ per entrambe, allora si ha che 
@@ -669,7 +669,347 @@ Quindi può avere un numero infinito di zeri solo in un dominio aperto o illimit
   \end{align}
 \end{theorem}
 \begin{proof}
-  
+  Dalla definizione di zero di ordine $ n $ si ha che $ f(z_0) = f'(z_0) = \dots = 0 , f^{(n)}(z_0) \neq 0 $ e lo stesso vale per $ g $, per cui in un 
+  intorno di $ z_0 $ possiamo sviluppare in serie le due funzioni, e in particolare il denominatore non si annulla per il teorema 
+  \ref{thm: gli zeri sono punti isolati} che afferma che gli zeri sono punti isolati, e abbiamo 
+  \begin{align}
+    f(z) = \sum_{k = n}^\infty c_k (z - z_0)^k = (z - z_0)^n \sum_{k = 0}^\infty c_{k + n} (z - z_0)^{k - n}
+  \end{align}
+  e lo stesso per $ g $. Valutando il limite si ha
+  \begin{align}
+    \lim_{z \to z_0} \frac{f(z)}{g(z)} = \lim_{z \to z_0} \frac{c_{n} + c_{n+1}(z - z_0) + \dots}{d_{n} + d_{n+1}(z - z_0) + \dots} = \frac{c_n}{d_n} 
+    = \frac{f^{(n)}(z_0)}{g^{(n)}(z_0)}
+  \end{align}
 \end{proof}
+
+\begin{definition}[ Serie di Taylor-Laurent ]
+  Chiameremo la serie 
+  \begin{align}
+    \sum_{n = -\infty}^{+\infty}a_n (z - z_0)^n
+  \end{align}
+  come \textit{serie bilatera} o \textit{serie di Taylor-Laurent}, che può essere scritta nella forma 
+  \begin{align}
+    \sum_{n = 0}^{\infty} a_n (z - z_0)^n + \sum_{n = 1}^\infty \frac{c_{-n}}{(z - z_0)^n}
+  \end{align}
+  e indicheremo il primo termine come parte di Taylor e il secondo come parte di Laurent.
+\end{definition}
+La parte di Taylor è la serie di potenze classica per cui vale la teoria che abbiamo sviluppato fin'ora, studiamo quindi la convergenza della parte di 
+Laurent. Se poniamo $ \eta = \frac{1}{z - z_0} $ anche la parte di Laurent si riscrive come una serie di potenze $ \sum_{n = 1}^\infty c_{-n} \eta^n $ 
+e quindi convergerà all'interno di un certo disco di convergenza di raggio $ R' $:
+\begin{align}
+  \abs{\eta} < R' \implies \abs{z - z_0} > \frac1{R'}.
+\end{align}
+Il dominio di convergenza della serie bilatera è quindi una corona circolare di raggio interno $ \frac{1}{R'} $ e raggio esterno $ R $, cioè
+\begin{align}
+  \frac1{R'} < \abs{z - z_0} < R.
+\end{align}
+Chiamiamo $ r = \frac1{R'} $, allora la serie non convergerà se $ r > R $, mentre all'interno della corona circolare di convergenza abbiamo che 
+\begin{align}
+  \sum_{n = 0}^{\infty} a_n (z - z_0)^n + \sum_{n = 1}^\infty \frac{c_{-n}}{(z - z_0)^n} 
+  = f_T(z) + f_L(z) = f(z) \quad \forall z: r < \abs{z - z_0} < R
+\end{align}
+è analitica.
+
+\begin{theorem}[  ]
+  Sia $ f(z) $ una funzione analitica nella corona circolare (aperta)
+  \begin{align}
+    A = \{z: r < \abs{z - z_0} < R \}
+  \end{align}
+  allora può essere rappresentata in modo univoco tramite una serie di Taylor-Laurent
+  \begin{align}
+    f(z) = \sum_{n = -\infty}^\infty a_n (z - z_0)^n, \quad \textnormal{con}\; 
+    a_n = \frac1{2\pi i} \oint_\gamma \frac{f(\eta)}{(\eta - z_0)^{n+1}} \, d\eta
+  \end{align}
+  dove $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ è una qualunque curva semplice chiusa (percorsa in senso antiorario) nella corona circolare 
+  $ A $ che racchiude il punto $ z_0 $.
+\end{theorem}
+\begin{proof}
+  Sia $ z \in A $, prendiamo due circonferenze $ C_{\rho_1},C_{\rho_2} $ centrate in $ z_0 $ di raggi $ r < \rho_1 < \abs{z - z_0} < \rho_2 < R $
+  e per la formula di Cauchy abbiamo che
+  \begin{align}
+    f(z) = \frac1{2\pi i} \oint_{C_{\rho_2}} \frac{f(\eta)}{\eta - z} \, d\eta - \frac1{2\pi i} \oint_{C_{\rho_1}} \frac{f(\eta)}{\eta - z} \, d\eta
+  \end{align}
+  percorse entrambe in senso antiorario. Nel primo integrale abbiamo che $ \frac{ \abs{z - z_0}}{\abs{\eta - z_0}} < 1 $ per $ \eta \in C_{\rho_2} $ e quindi
+  \begin{align}
+    \frac1{\eta - z} = \frac1{(\eta - z_0) - (z - z_0)} = \sum_{n = 0}^\infty \frac{(z - z_0)^n}{(\eta - z_0)^{n+1}}
+  \end{align}
+  che sostituita nel primo integrale ci dà la parte di Taylor 
+  \begin{gather}
+    f_T(z) = \frac1{2\pi i} \oint_{C_{\rho_2}} f(\eta) \sum_{n = 0}^\infty \frac{(z - z_0)^n}{(\eta - z_0)^{n+1}} \,d\eta 
+    = \sum_{n = 0}^\infty {(z - z_0)^n} \cdot \frac1{2\pi i} \oint_{C_{\rho_2}} \frac{f(\eta)}{(\eta - z_0)^{n+1}}\,d\eta
+    \\
+    = \sum_{n =0}^\infty a_n (z - z_0)^n
+  \end{gather}
+  dove abbiamo scambiato serie e integrale per la convergenza uniforme nella corona circolare. Per la parte di Laurent notiamo che 
+  $ \frac{\abs{\eta - z_0}}{\abs{z - z_0}} < 1 $ per $ \eta \in C_{\rho_1} $ quindi
+  \begin{align}
+    \frac1{\eta - z} = \frac1{(\eta - z_0) - (z - z_0)} = -\frac1{z - z_0} \cdot \frac1{1 - \frac{\eta - z_0}{z - z_0}} 
+    = - \sum_{n = 0}^\infty \frac{(\eta - z_0)^{n}}{(z - z_0)^{n+1}}
+  \end{align}
+  che sostituita nell'integrale ci dà
+  \begin{align}
+    f_L(z) = \frac1{2\pi i} \oint_{C_{\rho_1}} f(\eta) \sum_{n = 0}^\infty \frac{(\eta - z_0)^{n}}{(z - z_0)^{n+1}} \,d\eta 
+    = \sum_{n = 0}^\infty \frac1{(z - z_0)^{n+1}} \cdot \frac1{2\pi i} \oint_{C_{\rho_1}} {f(\eta)}{(\eta - z_0)^{n}}\,d\eta
+  \end{align}
+  e sostituendo $ n \to -(n+1) $ si ottiene
+  \begin{align}
+    f_L(z) = \sum_{n = -1}^{-\infty} {(z - z_0)^{n}} \cdot \frac1{2\pi i} \oint_{C_{\rho_1}} \frac{f(\eta)}{(\eta - z_0)^{n+1}}\,d\eta 
+    = \sum_{n = -1}^{-\infty} a_{n} (z - z_0)^n
+  \end{align}
+  e quindi la funzione totale si scrive come somma della parte di Taylor e della parte di Laurent.
+\end{proof}
+Se la funzione che consideriamo è analitica in tutto il disco di raggio $ R $, allora si può mostrare che la parte di Laurent è nulla, cioè 
+$ a_n = 0 \; \forall n < 0 $.
+\begin{definition}[ Punti singolari isolati ]
+  Diremo che $ z_0 $ è un \textit{punto singolare isolato} di una funzione $ f(z) $ se è analitica nella corona circolare $ r = 0 < \abs{z - z_0} < R $.
+\end{definition}
+Di seguito classificheremo i punti singolari isolati in tre casi possibili.
+\begin{theorem}[ \textbf{Caso 1}: singolarità eliminabile ]
+  Sia $ z_0 $ un punto singolare isolato per la funzione $ f(z) $ analitica nella corona circolare $ 0 < \abs{z - z_0} < R $, se
+  la parte di Laurent è nulla per $ f $, cioè $ a_n = 0 \; \forall n < 0 $ allora esiste finito il limite
+  \begin{align}
+    \lim_{z \to z_0} f(z) = a_0
+  \end{align}
+  quindi vale il termine $ n = 0 $ dello sviluppo in Taylor di $ f $. In tal caso $ z_0 $ si dice singolarità eliminabile.
+\end{theorem}
+\begin{theorem}[  ] \label{thm: analitica limitata allora la singolarità è eliminabile}
+  Se $ f $ analitica in una corona circolare $ A $ è limitata in un intorno del punto $ z_0 $ contenuto in $ A $, allora $ z_0 $ è una singolarità 
+  eliminabile.
+\end{theorem}
+\begin{proof}
+  Sia $ M > 0 $ tale che $ \abs{f(z)} \leq M $ nell'intorno in cui è limitata, allora per i coefficienti dello sviluppo in serie di Taylor-Laurent vale che 
+  \begin{align}
+    \abs{a_n} = \abs{\frac1{2\pi i} \oint_\gamma \frac{f(\eta)}{(\eta - z_0)^{n+1}} \,d\eta } 
+    \leq \frac1{2\pi} {\oint_\gamma \frac{\abs{f(\eta)}}{\abs{\eta - z_0}^{n+1}} \,d\eta} 
+    \leq \frac{M}{\rho^{n}} \to 0 \quad \textnormal{per} \; n < 0 \; \textnormal{e} \; \rho \to 0
+  \end{align}
+  dove $ \gamma $ è la circonferenza di raggio $ \rho $ e centro in $ z_0 $. Abbiamo mostrato quindi che ogni coefficiente della serie di Laurent tende a 
+  $ 0 $ dunque per la convergenza uniforme la serie di Laurent è identicamente nulla e per tanto $ z_0 $ è una singolarità eliminabile di $ f $.
+\end{proof}
+
+Un esempio è la (classica) funzione $ \frac{\sin z}{z} $ analitica in $ \C^* $, possiamo mostrare che $ z_0 = 0 $ è una singolarità eliminabile in tre 
+modi: il primo dalla definizione calcolando i coefficienti dello sviluppo di Laurent 
+\begin{align}
+  a_n = \frac1{2\pi i} \oint_\gamma \frac{\sin \eta}{\eta^{n+2}} \,d\eta \quad \textnormal{con}\;\; n = -1 = \dots = -\infty
+\end{align}
+e che si riscrive mandando $ n \to -n $ come
+\begin{align}
+  a_{-n} = \frac1{2\pi i} \oint_\gamma {\sin \eta}\cdot{\eta^{n-2}} \,d\eta = 0
+\end{align}
+perché per $ n \geq 2 $ l'integranda è intera, mentre per $ n = 1 $ si ha $ a_{-1} =\frac1{2\pi i} \cdot \sin 0 = 0 $. Il secondo è tramite lo sviluppo 
+in serie esplicito cioè 
+\begin{align}
+  \frac{\sin z}{z} = \frac1z \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n +1)!} \cdot z^{2n +1} = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n +1)!} \cdot z^{2n}
+\end{align}
+che non contiene potenze negative di $ z $, e dunque per l'unicità della parte di Taylor, la parte di Laurent è nulla. Il terzo è con il teorema di de 
+l'Hôpital e il teorema \ref{thm: analitica limitata allora la singolarità è eliminabile}: 
+dato che $ f $ è un rapporto di funzioni intere e per entrambe $ z_0 = 0 $ è uno zero di ordine 1, allora 
+\begin{align}
+  \lim_{z \to 0} \frac{\sin z}{z} =\lim_{z\to 0} \frac{\cos z}{1} = 1
+\end{align}
+dunque è limitata e quindi la singolarità è eliminabile per il teorema precedente. Di conseguenza se costruiamo la funzione
+\begin{align}
+  \tilde{f}(z) =
+  \begin{cases}
+    \DS 1 &\quad z = 0
+    \\
+    \DS \frac{\sin z}{z} &\quad z \in \C^*
+  \end{cases}
+\end{align}
+questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo $ 0 $, dunque per il teorema di unicità è l'unica estensione analitica 
+(intera) di $ f $ in $ \C $.
+
+\begin{definition}[ \textbf{Caso 2}: polo di ordine $ m $ ]
+  Sia $ f(z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ ($ r = 0!!$), se i coefficienti dello sviluppo di Laurent sono un 
+  numero finito $ m $, allora $ z_0 $ si dice \textit{polo di ordine $ m $} della funzione $ f $, cioè
+  \begin{align}
+    a_{n} = 0 \; \forall n < -m \; \text{e} \; a_m \neq 0 \iff z_0 \; \text{è un polo di ordine $ m $}.
+  \end{align}
+\end{definition}
+\begin{theorem}[ Condizione necessaria e sufficiente per poli di ordine $ m $ ]
+  Il punto $ z_0 $ è un polo di ordine $ m $ per la funzione $ f $ analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ se e soltanto se
+  \begin{align}
+    \exists \; \text{finito} \; \lim_{z \to z_0} (z - z_0)^m f(z) = a_{-m} \neq 0.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Basta svolgere il limite 
+  \begin{gather}
+    \lim_{z \to z_0} (z - z_0)^m f(z) 
+    = \lim_{z \to z_0} (z - z_0)^m \cdot \left( \sum_{n = 0}^\infty a_n (z - z_0)^n  + \sum_{n = 1}^\infty \frac{a_{-n}}{(z - z_0)^{n}} \right)
+    \\
+    = \lim_{z \to z_0} a_{-m} + \sum_{n = m + 1}^\infty \frac{a_{-n}}{ (z - z_0)^{n - m}}
+  \end{gather}
+  e quindi il limite esiste finito e vale $ a_{-m} $ solo se tutti i termini successivi sono nulli.
+\end{proof}
+\begin{corollary}
+  $ z_0 $ è un polo di ordine $ m $ della funzione $ f(z) $ se e soltanto se $ z_0 $ è uno zero di ordine $ m $ della funzione $ g(z) = \frac1{f(z)} $.
+\end{corollary}
+\begin{proof}
+  Svolgiamo il seguente limite:
+  \begin{align}
+    0 \neq a_{-m} = \lim_{z \to z_0} (z - z_0)^m f(z) = \lim_{z \to z_0} \frac{(z - z_0)^m}{g(z)} 
+    \\
+    = \lim_{z \to z_0} \frac{1}{\DS \frac{g_L(z)}{(z - z_0)^m} + \sum_{n = 0}^\infty b_n (z - z_0)^{n -m}} 
+  \end{align}
+  dove l'ultimo limite è finito e non nullo solo se $ g_L(z) = 0 $ e $ b_n = 0\; \forall n < m $ con $ b_m \neq 0 $, ovvero solo se $ z_0 $ è 
+  uno zero di ordine $ m $ di $ g(z) $.
+\end{proof}
+
+
+\begin{theorem}[  ]
+  Il punto $ z_0 $ è un polo se e soltanto se $ \exists \lim_{z \to z_0} f(z) = \infty $, inteso nel senso della proiezione stereografica, quindi 
+  $ \exists \lim_{z \to z_0} \abs{f(z)} = +\infty $.
+\end{theorem}
+\begin{proof}
+  Sia $ g(z) = \frac1{f(z)} $, allora
+  \begin{align}
+    \lim_{z \to z_0} f(z) = \lim_{z \to z_0} \frac1{g(z)} = \lim_{z \to z_0} \frac1{g_L(z) + b_0 + \sum_{n = 1}^\infty b_n (z - z_0)^n }
+  \end{align}
+  e quindi il limite è $ \infty $ se e solo se $ g_L(z) $ è nulla e $ b_0 = 0 $, il che significa che $ z_0 $ è uno zero per $ g(z) $, ma per il teorema 
+  precedente lo è se e solo se è un polo dello stesso ordine per $ f(z) $.
+\end{proof}
+
+\begin{definition}[ \textbf{Caso 3}: singolarità essenziale ]
+  Sia $ f(z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $, diremo che $ z_0 $ è una \textit{singolarità essenziale} se 
+  la parte di Laurent della funzione $ f $ ha un numero infinito di termini. In tal caso il limite $ \lim_{z \to z_0} f(z) $ non esiste 
+  (nemmeno $ \infty $) perché altrimenti $ z_0 $ sarebbe un polo e quindi la parte di Laurent avrebbe un numero finito di termini.
+\end{definition}
+
+Sulle singolarità essenziali ci sono dei risultati molto potenti e affascinanti dell'analisi complessa fra cui il seguente teorema.
+\begin{theorem}[ di Picard ]
+  Sia $ f(z) $ analitica nella corona circolare $ 0 < \abs{z - z_0} < R $, se $ z_0 $ è una singolarità essenziale per $ f $ allora in un 
+  qualsiasi intorno di $ z_0 $ la funzione assume ogni numero complesso infinite volte, con al più un'eccezione.
+\end{theorem}
+Una singolarità essenziale è ad esempio $ z_0 = 0 $ per la funzione $ f(z) = e^{\frac1z} $: il limite non esiste e per notarlo basta fare il limite destro 
+e sinistro sull'asse reale che valgono rispettivamente $ +\infty $ e $ -\infty $, e lo sviluppo in serie vale
+\begin{align}
+  e^{\frac1z} = \sum_{n = 0}^\infty \frac1{n!} \cdot \left( \frac1z \right)^n.
+\end{align}
+Essendo potenze negative di $ z $ la funzione è composta da $ a_0 $ e poi soltanto la parte di Laurent con infiniti termini, e per verificare la validità 
+del teorema di Picard risolviamo l'equazione 
+\begin{align}
+  e^{\frac1z} = \alpha = \abs{\alpha} \cdot e^{i\theta} \implies \frac1z = \log \abs{\alpha} + i \arg \alpha
+  \\
+  z = \frac1{\log \abs{\alpha} + i\theta + i2\pi k} \quad \textnormal{con}\; k \in \mathbb{Z}
+\end{align}
+che infatti ammette infinite soluzioni.
+\begin{definition}[ Punto all'infinito ]
+  Definiamo lo spazio $ \hat{\C} \coloneq \C \cup \{\infty\} $ identificato tramite proiezione stereografica con la sfera $ S^2 $ 
+  ($ \hat{\C} $ è quindi compatto), diremo che il \textit{punto all'infinito} $ z = \infty \in \hat{\C} $ è un punto singolare isolato 
+  della funzione $ f(z) $ se si può trovare un $ r $-intorno di $ z = \infty $ in cui la funzione $ f $ è analitica, cioè se per 
+  $ r < \abs{z} < R = \infty $ si ha che $ f $ è analitica.
+\end{definition}
+Il punto all'infinito è l'equivalente della punto singolare per la mappa che manda $ z \to \frac1z $, e infatti possiamo classificarli sempre in tre casi.
+\begin{theorem}[  ]
+  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor di $ f $ è nulla escluso $ a_0 $ allora il punto $ z = \infty $ è 
+  una singolarità eliminabile.
+\end{theorem}
+\begin{proof}
+  Si vede subito che esiste finito il limite $ \lim_{z \to \infty} f(z) = a_0 $.
+\end{proof}
+È il caso della funzione $ \frac1z $, analitica per $ \abs{z} > 0 $ e parte di Taylor chiaramente nulla, infatti il limite per $ z \to \infty $ vale 
+$ a_0 = 0 $.
+\begin{theorem}[  ]
+  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $ e sia $ a_{-m} $ (con $ m > 1 $) il primo termine non nullo dello sviluppo di Laurent, 
+  allora $ z = \infty $ è uno zero di ordine $ m $ della funzione $ f $.
+\end{theorem}
+\begin{theorem}[  ]
+  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $ e sia $ a_{m} $ l'ultimo coefficiente non nullo dello sviluppo di Taylor, allora $ z = \infty $ 
+  è un polo di ordine $ m $ della funzione $ f $, inoltre vale ancora la condizione sufficiente e necessaria $ \lim_{z\to \infty} f(z) = \infty $.
+\end{theorem}
+\begin{theorem}[  ]
+  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor contiene un numero infinito di termini allora 
+  $ z = \infty $ è una singolarità essenziale della funzione $ f $, e in tal caso non esiste il limite $ \lim_{z\to \infty} f(z) $.
+\end{theorem}
+La funzione $ e^z $ ha in $ z = \infty $ una singolarità essenziale, un polinomio $ P(z) $ di grado $ m $ ha all'infinito un polo di ordine $ m $,
+una funzione razionale $ Q(z) $ di grado $ -m $ ha all'infinito uno zero di ordine $ m $.
+
+\section{Residui di una funzione analitica}
+\begin{definition}[ Residuo ]
+  Sia $ f(Z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ e sia $ z_0 $ un punto singolare isolato, 
+  si dice \textit{residuo della funzione $ f(z) $} nel punto $ z_0 $ la quantità 
+  \begin{align}
+    \Res[f(z), z_0] \coloneq a_{-1} = \frac1{2\pi i} \oint_\gamma f(\eta) \,d\eta
+  \end{align}
+  dove $ \gamma \in C^1_{\text{tratti}} $  semplice chiusa, percorsa in senso antiorario, contenuta nella corona e che contiene $ z_0 $.
+\end{definition}
+Si nota subito che se $ z_0 $ è una singolarità eliminabile allora il residuo è nullo:
+\begin{align}
+  \Res[ f(z), z_0 ] = \frac1{2\pi i} \int_0^{2\pi} f(z_0 + \rho e^{i\theta}) i \rho e^{i\theta} d\rho \to 0 \quad \textnormal{per}\; \rho \to 0.
+\end{align}
+Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con $ z_0 $, questa è unica per il teorema di unicità e il suo integrale 
+è nullo su un semplicemente connesso per il teorema di Cauchy, e quindi anche il residuo di $ f $ dato che hanno lo stesso coefficiente $ a_{-1} $.
+
+\begin{theorem}[  ]
+  Se $ z_0 $ è un polo di ordine $ 1 $ allora $ \Res[ f(z), z_0 ] = \lim_{z \to z_0} (z - z_0) f(z) $.
+\end{theorem}
+\begin{proof}
+  Essendo uno zero di ordine $ 1 $ si ha che 
+  \begin{align}
+    f(z) = \frac{c_{-1}}{z - z_0} + f_T(z)
+  \end{align}
+  e quindi il limite vale proprio $ c_{-1} \eqcolon \Res[ f(z), z_0 ] $.
+\end{proof}
+\begin{theorem}[  ]
+  Sia $ f(z) = \frac{g(z)}{h(z)} $ con $ g,h $ analitiche in un intorno di $ z_0 $ e $ g(z_0) \neq 0 $ mentre $ h(z_0) = 0, h'(z_0) \neq 0 $, cioè 
+  $ z_0 $ è uno zero di ordine $ 1 $ di $ h $, allora $ z_0 $ è un polo di ordine $ 1 $ per $ f $ con residuo pari a 
+  \begin{align}
+    \Res\left[ f(z) = \frac{g(z)}{h(z)}, z_0 \right] = \frac{g(z_0)}{h'(z_0)}
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Dato che sono analitiche in un disco possiamo sviluppare in serie di Taylor $ g $ e $ h $ nel limite 
+  \begin{gather}
+    \lim_{z \to z_0} (z - z_0)\, \frac{g(z)}{h(z)} 
+    = \lim_{z \to z_0} (z - z_0)\, \frac{\sum_{n = 0}^\infty c_n (z - z_0)^n}{\sum_{n = 1}^\infty d_n (z - z_0)^n}
+    = \lim_{z \to z_0}  \frac{\sum_{n = 0}^\infty c_n (z - z_0)^n}{\sum_{n = 0}^\infty d_{n + 1} (z - z_0)^n} 
+    \\
+    = \frac{c_0}{d_1} = \frac{g(z_0)}{h'(z_0)}
+  \end{gather}
+  e dunque $ z_0 $ è un polo di ordine $ 1 $ per la funzione $ f(z) $ e per il teorema precedente il suo residuo coincide con il limite che abbiamo 
+  calcolato.
+\end{proof}
+\begin{theorem}[  ]
+  Se $ z_0 $ è un polo di ordine $ m $ della funzione $ f(z) $ allora vale la seguente formula per i residui:
+  \begin{align}
+    \Res[ f(z), z_0 ] = \frac1{( m - 1)!} \lim_{z \to z_0} \frac{d^{m -1}}{dz^{m-1}} \left[ (z - z_0)^m f(z) \right].
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Scriviamo lo sviluppo di Taylor-Laurent di $ f $ in $ z_0 $
+  \begin{align}
+    f(z) = \frac{a_{-m}}{(z - z_0)^m} +\dots + \frac{a_{-1}}{z - z_0} + a_0 + a_1 (z - z_0) + \dots
+  \end{align}
+  e notiamo che l'unico modo per ottenere il coefficiente $ a_{-1} $ (cioè il residuo) è quello di moltiplicare per $ (z - z_0)^m $, derivare $ m -1 $ 
+  volte e infine correggere dividendo per il fattore $ (m -1)! $ dovuto alla derivata, attraverso il limite otteniamo il residuo dato che è l'unico 
+  termine a non avere più potenze di $ (z - z_0) $. 
+\end{proof}
+\begin{theorem}[ fondamentale della teoria dei residui ]
+  Sia $ A $ un aperto regolare e sia $ \Gamma = \partial A $ il suo bordo, se la funzione $ f(z) $ è analitica in $ \ol{A} $ tranne che in un 
+  numero $ N $ finito di punti interni, cioè ammette un numero finito di singolarità $ z_1, \dots, z_N \in A $, allora vale la seguente 
+  \begin{align}
+    \oint_\Gamma f(z) \,dz = 2\pi i \sum_{n = 1}^{N} \Res[ f(z), z_n ]
+  \end{align}
+  con $ \Gamma $ percorsa in senso antiorario.
+\end{theorem}
+\begin{proof}
+  La dimostrazione di questo risultato sfrutta la tecnica già applicata di isolare le singolarità con una curva chiusa in modo da ottenere un 
+  semplicemente connesso in cui $ f(z) $ è analitica e così applicare il teorema di Cauchy per dire che il suo integrale è nullo. Siano 
+  $ C_1, \dots, C_N $ delle circonferenze centrate ognuna in una singolarità, sia $ \sigma = \Gamma \cup C_1 \cup \dots C_N $ l'unione di $ \Gamma $ 
+  con le circonferenze tale che all'interno di $ \sigma $ si ha che $ f(z) $ è analitica, allora abbiamo che 
+  \begin{align}
+    \oint_\Gamma f(z)\,dz - \sum_{n = 1}^N \oint_{C_n} f(z) \, dz = \oint_\sigma f(z)\,dz = 0
+  \end{align}
+  dove il segno $ - $ è dovuto al fatto che sono percorse in senso antiorario, e l'integrale è nullo per il teorema di Cauchy. 
+  Gli integrali sulle circonferenze li ricaviamo dalla formula per i coefficienti dello sviluppo in serie di Taylor-Laurent, che possiamo fare dato che 
+  localmente esiste una corona circolare nel quale sviluppare la funzione, e quindi 
+  \begin{align}
+    \oint_\Gamma f(z)\,dz = \sum_{n = 1}^N \oint_{C_n} f(z) \, dz 
+    = \sum_{n = 1}^N {a_{-1}}_n = 2\pi i\sum_{n = 1}^N \Res[ f(z), z_n ]
+  \end{align}
+  dalla definizione di residui.
+\end{proof}
+
 
 \end{document}

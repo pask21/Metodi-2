@@ -202,6 +202,15 @@ patterns
   \left|{#1}\right|
 }
 
+% --- non andare a capo --- NON FUNZIONA
+\newcommand{\inline}[1]{
+  \binoppenalty=10000 \relpenalty=10000 #1
+}
+
+% --- Residui ---
+\newcommand{\Res}[0]{
+  \textnormal{Res }
+}
 % ---------- BIBLIOGRAFIA ----------
 \usepackage{csquotes} % \enquote{}
 \usepackage[backend=biber,style=numeric,sorting=nyt]{biblatex}
