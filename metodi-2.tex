@@ -1080,6 +1080,85 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   Segue applicando i teoremi interno ed esterno dei residui agli aperti regolari interno ed esterno separati da $ \Gamma $.
 \end{proof}
 
-\section{funzioni armoniche}
+\section{Funzioni armoniche}
+\begin{definition}[ Funzione armonica ]
+  Sia $ \Omega \subset \R^2 $, sia $ u \in C^2(\Omega, \R) $, diremo che $ u $ è una \textit{funzione armonica} se 
+  \begin{align}
+    \nabla^2 u \coloneq \der[2]{u}{x} + \der[2]{u}{y} = 0 \quad \forall (x,y) \in \Omega
+  \end{align}
+  e tale quantità la indicheremo con i simboli $ \nabla^2u, \Delta_2 u $. 
+\end{definition}
+\begin{theorem}[  ]
+  Sia $ f(z) = u(x,y) + i v(x,y) $ una funzione armonica in $ \Omega \subset \C $, con $ z = x + iy $, allora $ u(x,y), v(x,y) $ sono funzioni armoniche. 
+\end{theorem}
+\begin{proof}
+  In tanto la tesi è ben posta perché $ u(x,y), v(x,y): \R^2 \to \R $, e per ottenerla deriviamo le condizioni di Cauchy-Riemann che sono valide 
+  dato che $ f(z) $ è armonica, ottenendo
+  \begin{align}
+    \der{}{x} \left( u_x - v_y = 0 \right) &\implies u_{xx} - v_{yx} = 0
+    \\
+    \der{}{y} \left( u_y + v_x = 0 \right) &\implies u_{yy} + v_{xy} = 0
+  \end{align} 
+  dove possiamo applicare il teorema di Schwarz perché $ f $ armonica ha tutte le derivate armoniche per il teorema 
+  \ref{thm: derivata n-esima di funzioni analitiche}, e dunque 
+  \begin{align}
+    u_{yy} = - v_{yx} \implies u_{xx} + u_{yy} = 0
+  \end{align}
+  e lo stesso vale per $ v $.
+\end{proof}
+\begin{definition}[ Armoniche coniugate ]
+  Data una $ u $ armonica in $ \Omega \subset \R^2 $, allora per una $ v $ armonica in $ \Omega $ tale che $ f(x + i y) = u(x,y) + i v(x,y) $ è 
+  analitica in $ {\Omega} \subset \C $ diremo che $ u,v $ sono \textit{armoniche coniugate}.
+\end{definition}
+
+\begin{theorem}[ Esistenza e unicità di armoniche coniugate ]
+  Sia $ u(x,y) $ armonica in un aperto semplicemente connesso $ \Omega \subset \R^2 $, allora esiste una funzione $ v(x,y) $ 
+  armonica in $ \Omega $ tale che $ u,v $ sono armoniche coniugate, cioè che la funzione $ f = u + i v $ è analitica in $ \Omega $. Tale $ v $ è unica a 
+  meno di una costante additiva.
+\end{theorem}
+\begin{proof}
+  Consideriamo la forma differenziale $ \omega = -u_y \,dx + u_x \,dy $, dato che $ u $ è armonica abbiamo che $ \omega $ è chiusa infatti 
+  $ \der{-u_y}{y} = \der{u_x}{y} $, ma chiusa in un semplicemente connesso implica che $ \omega $ è anche esatta, allora esiste una primitiva $ v $ tale 
+  che $ dv = v_x\,dx + v_y\,dy = \omega = -u_y \,dx + u_x \,dy $. Uguagliando i funzionali si ottiene proprio le relazioni di Cauchy-Riemann 
+  \begin{align}
+    \begin{cases}
+      \DS u_x = v_y
+      \\
+      \DS u_y = -v_x
+    \end{cases}
+  \end{align}
+  e dato che la primitiva di una forma differenziale esatta è unica a meno di una costante abbiamo la tesi.
+\end{proof}
+\begin{theorem}[ della media per le funzioni armoniche ]
+  Sia $ u(x,y) $ armonica nell'aperto $ \Omega \subset \R^2 $ e sia $ D \subset \Omega $ 
+  il disco di raggio $ R $ centrato nel punto $ (x_0,y_0) \in \Omega $, allora si ha che la media sul bordo del disco della funzione $ u(x,y) $ è uguale 
+  al valore nel centro $ u(x_0, y_0) $, cioè vale che 
+  \begin{align}
+    u(x_0,y_0) = \frac1{2\pi} \int_0^{2\pi} u(x_0 + R\cos \theta, y_0 + R \sin \theta) \, d\theta.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Dato che $ u $ è armonica, per il teorema precedente esiste una $ v $ coniugata tale che $ f = u + i v $ sia armonica, e applicando il teorema 
+  della media per le funzioni armoniche si ha che 
+  \begin{align}
+    f(x_0, y_0) = \frac{1}{2\pi} \int_0^{2\pi} f(x_0 + R \cos \theta , y_0 + R \sin \theta) \, d\theta
+  \end{align}
+  e prendendo la parte reale da entrambi i termini si ottiene la tesi.
+\end{proof}
+\begin{theorem}[ Principio del massimo/minimo ]
+  Sia $ u(x,y) $ armonica in un aperto regolare semplicemente connesso $ A $ e continua nel chiuso $ \ol{A} $, allora i punti di massimo e di minimo 
+  di $ u $ si trovano nella frontiera $ \partial A $, cioè 
+  \begin{align}
+    \min_{(x,y) \in \partial A} u(x,y) \leq u(x,y) \leq \max_{(x,y) \in \partial A} u(x,y) \quad \forall (x,y) \in A.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Sia $ v $ l'armonica coniugata di $ u $, allora possiamo applicare il principio del massimo (minimo) modulo alla funzione analitica 
+  $ e^{f(z)} = e^u \cdot e^{iv} $, il cui modulo è $ \abs{e^f} = e^u $ che essendo monotona crescente garantisce che un massimo (minimo) di 
+  $ u $ lo è anche per $ e^u $, e dunque si ottiene il principio per le funzioni armoniche. 
+\end{proof}
+\begin{definition}[ Trasformazioni conformi ]
+  Sia $ f(z) $ analitica in un aperto $ A $ con $ f'(z) \neq 0 \; \forall z \in A $, diremo che l'applicazione 
+\end{definition}
 
 \end{document}
