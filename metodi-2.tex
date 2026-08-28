@@ -1086,7 +1086,7 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   \begin{align}
     \nabla^2 u \coloneq \der[2]{u}{x} + \der[2]{u}{y} = 0 \quad \forall (x,y) \in \Omega
   \end{align}
-  e tale quantità la indicheremo con i simboli $ \nabla^2u, \Delta_2 u $. 
+  e tale quantità la indicheremo con i simboli $ \nabla^2u, \Delta_2 u, \Delta u $ che si leggono \textit{laplaciano di $ u $}
 \end{definition}
 \begin{theorem}[  ]
   Sia $ f(z) = u(x,y) + i v(x,y) $ una funzione armonica in $ \Omega \subset \C $, con $ z = x + iy $, allora $ u(x,y), v(x,y) $ sono funzioni armoniche. 
@@ -1158,7 +1158,296 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   $ u $ lo è anche per $ e^u $, e dunque si ottiene il principio per le funzioni armoniche. 
 \end{proof}
 \begin{definition}[ Trasformazioni conformi ]
-  Sia $ f(z) $ analitica in un aperto $ A $ con $ f'(z) \neq 0 \; \forall z \in A $, diremo che l'applicazione 
+  Sia $ f(z) $ analitica in un aperto $ A $ con $ f'(z) \neq 0 \; \forall z \in A $, diremo che l'applicazione $ z \mapsto z' = f(z) $, se biunivoca, è 
+  una \textit{trasformazione conforme} del dominio $ A $ nel dominio $ A' = f(A) $.
 \end{definition}
+Questa definizione delle trasformazioni conformi è quella analitica, cioè che ci dà una regola operativa per verificare se una funzione è tale, ma in 
+realtà la conformità è anche un concetto geometrico cioè è la proprietà di conservare gli angoli. Col seguente teorema vediamo come il concetto 
+geometrico e il concetto analitico sono equivalenti.
+\begin{theorem}[  ]
+  Una trasformazione è conforme se e soltanto se conserva gli angoli orientati fra le curve.
+\end{theorem}
+\begin{proof}
+  $ \implies $: Mostriamo che una funzione $ f(z) $ analitica, con derivata non nulla in $ A $ aperto regolare semplicemente connesso, conserva gli 
+  angoli fra le curve mantenendo l'orientazione. Scriviamo lo jacobiano di $ f $ nel punto $ z = x + iy \in A $ 
+  \begin{align}
+    J\!f(z) = 
+    \begin{pmatrix}
+      \partial_x u & \partial_y u \\
+      \partial_x v & \partial_y v
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+      u_x & u_y \\
+      -u_y & u_x
+    \end{pmatrix}
+    = 
+    \begin{pmatrix}
+      a & -b \\
+      b & a
+    \end{pmatrix}
+  \end{align}
+  dove abbiamo applicato le condizioni di Cauchy-Riemann. Per ogni coppia $ a,b \in \R $ non contemporaneamente nulli 
+  esistono $ \lambda \in \R, \theta \in [0,2\pi) $ tali che 
+  $ a = \lambda \cos \theta, b = \lambda \sin \theta $, per tanto lo jacobiano in un punto qualunque è la composizione di una dilatazione 
+  e di una rotazione
+  \begin{align}
+    J\!f(z) = \lambda 
+    \begin{pmatrix}
+      \cos \theta & -\sin \theta \\
+      \sin \theta & \cos \theta
+    \end{pmatrix}
+    = \lambda R(\theta)
+  \end{align}
+  e dunque gli angoli sono localmente conservati.
+\end{proof}
+
+Una trasformazione conforme utile è quella di Möebius $ f(z) = \frac{az + b}{cz + d} $ con $ a,c \neq 0 $, analitica in $ z \neq -d/c $ dove ha un 
+polo di ordine $ 1 $. $ f'(z) =  $
+
+\begin{theorem}[ di Riemann ]
+  Per ogni dominio $ A\subset \C $ semplicemente connesso esiste una trasformazione conforme $ f(z) $ tale che $ f(A) = D_1 $ dove $ D_1 $ è il 
+  disco di raggio $ 1 $ centrato in $ z = 0 $, cioè $ D_1 = \{\abs{z} < 1\} $.
+\end{theorem}
+
+\chapter{Teoria delle distribuzioni}
+\section{Spazi di distribuzioni}
+Prima di costruire la teoria servono alcune nozioni preliminari.
+\begin{definition}[ Funzioni a decrescenza rapida ]
+  Diremo che una funzione $ f:\R \to \R $ è a \textit{decrescenza rapida} se 
+  \begin{align}
+    \sup_{x \in \R} \abs{x^h f(x) } < + \infty
+  \end{align}
+  per ogni $ h \in \mathbb{N} $.
+\end{definition}
+
+\begin{definition}[ Supporto ]
+  Sia $ f:\Omega \subset \R \to \R $ continua, definiamo \textit{supporto di $ f $} l'insieme
+  \begin{align}
+    \supp f = \ol{\{x \in \Omega : f(x) \neq 0\}}
+  \end{align}
+  cioè la chiusura dell'insieme in cui $ f $ è non nulla. 
+\end{definition}
+
+Definiamo ora tre spazi di funzioni che saranno poi le nostre funzioni di test, e da ognuno di questi si costruisce uno spazio di distribuzioni diverso.
+
+\begin{definition}[ Spazio $ \E $ ]
+  Sia $ \phi \in C^\infty(\R) $ una funzione infinitamente derivabile (liscia), indicheremo lo spazio di queste funzioni con il simbolo 
+  $ \E \coloneq C^\infty $, con la seguente nozione di convergenza: sia $ \phi_n \in \E $ una successione, 
+  diremo che $ \phi_n \ov{\to}{\E} 0 $ se 
+  \begin{align}
+    \forall n \in \mathbb{N}\quad \frac{d^k \phi_n }{dx^k} \to 0 \quad \textnormal{per} \quad n\to +\infty
+  \end{align}
+  uniformemente su ogni $ K \subset \R $ compatto.
+\end{definition}
+
+\begin{definition}[ Spazio $ \S $ ]
+  Sia $ \phi(x) \in C^\infty(\R) $ e tale che sia a decrescenza rapida con tutte le sue derivate, cioè 
+  \begin{align}
+    \sup_{x \in \R} \abs{x^h \frac{d^k \phi}{dx^k}} < +\infty
+  \end{align}
+  per ogni $ h,k \in \mathbb{N}_0 = \mathbb{N} \cup 0 $. Indicheremo lo spazio formato da tali funzioni $ \phi $ con $ \S $ con la seguente 
+  nozione di convergenza: sia $ \phi_n \in \S $ una successione, allora diremo che $ \phi_n \ov{\to}{\S} \phi 0 $ se 
+  \begin{align}
+    \sup_{x \in \R} \abs{x^h \frac{d^k \phi}{dx^k}} \to 0 \quad \textnormal{per} \quad n\to +\infty
+  \end{align}
+  uniformemente, per ogni $ h,k \in \mathbb{N}_0 $.
+\end{definition}
+
+\begin{definition}[ Spazio $ \D $ ]
+  Sia $ \phi \in C^\infty(\R) $ a supporto compatto, cioè $ \supp \phi $ chiuso e limitato, allora indicheremo lo spazio di tali funzioni con 
+  $ \D $ con la seguente nozione di convergenza: sia $ \phi_n \in \D $ una successione, e siano $ K_n = \supp \phi_n $ 
+  allora diremo che $ \phi_n \ov{\to}{\D} 0 $ se esiste un compatto $ K \subset \R $ tale che 
+  \begin{align}
+    K_n \subset K \quad \textnormal{e} \quad \frac{d^k \phi_n }{dx^k} \to 0 \quad \textnormal{per} \quad n\to +\infty
+  \end{align}
+  uniformemente in $ K $, per ogni $ k \in \mathbb{N}_0 $.
+\end{definition}
+
+\begin{lemma}[  ]
+  Gli spazi $ \E,\S,\D $ sono spazi vettoriali.
+\end{lemma}
+\begin{proof}
+  Segue dalla linearità dello spazio $ C^\infty $ e della derivata $ k $-esima.
+\end{proof}
+
+\begin{lemma}[  ] \label{lem: D in S in E}
+  Valgono le inclusioni $ \D \subset \S \subset \E $.
+\end{lemma}
+\begin{proof}
+  Sia $ \phi \in \D $ allora dato che è liscia e $ K = \supp \phi $ è compatto, è limitata, inoltre il supporto delle derivate è contenuto in 
+  $ K $, cioè $ \supp \phi^{(k)} \subset \supp \phi \; \forall k \in \mathbb{N} $, ed essendo continue vale il teorema di Weierstrass che ci dice che 
+  funzioni continue su un compatto ammettono massimo e minimo, per ciò sono limitate, e dunque
+  \begin{align}
+    \sup_{x \in \R} \abs{x^h \frac{d^k \phi}{dx^k}} = \sup_{x \in K} \abs{x^h \frac{d^k \phi}{dx^k}} < +\infty
+  \end{align}
+  e quindi $ \phi \in \S $. L'inclusione $ \S \subset \E $ si ha per costruzione di $\S$.
+\end{proof}
+
+In seguito chiameremo \textit{funzione test} (o \textit{funzione bumb}) un elemento di uno di questi tre spazi, specificando qualora non fosse chiaro a 
+quale dei tre ci stiamo riferendo. Inoltre, grazie al lemma precedente, sappiamo che lo spazio $ \E $ è lo spazio di funzioni di test più generale 
+possibile.
+
+In tutti gli spazi che abbiamo definito, la convergenza di una successione $ \phi_n \to \phi $ è da intendersi come $ (\phi_n - \phi) \to 0 $ con la 
+relativa nozione di convergenza a $ 0 $ di ognuno, inoltre risultano tutti e tre completi ognuno nel senso della sua convergenza, cioè ogni successione 
+di Cauchy converge a un elemento dello spazio.
+
+Veniamo ora alla costruzione degli spazi delle distribuzioni.
+
+\begin{definition}[ Distribuzioni ]
+  Sia $ \mathds{X} \in \{ \E,\S,\D\} $ uno spazio fra i tre spazi delle funzioni test,
+  chiameremo \textit{distribuzione su $ \mathds{X} $} un funzionale lineare continuo di 
+  $ \mathds{X} $ in $ \C $, cioè le applicazioni $ T:\mathds{X} \to \C $ tali da essere 
+  lineari rispetto alla struttura di spazio vettoriale di $ \mathds{X} $ e di essere continui secondo la nozione di convergenza di $ \mathds{X} $. 
+  Lo spazio di tali applicazioni è lo spazio duale di $ \mathds{X} $ che indicheremo con $ \mathds{X}' \in \{ \E',\S',\D'\} $.
+
+  Indicheremo inoltre le distribuzioni di $ \E' $ con \textit{distribuzioni su funzioni lisce}, quelle di $ \S' $ con \textit{distribuzioni temperate}, 
+  quelle di $ \D' $ con \textit{distribuzioni di Schwartz} (matematico che nel 1950 introdusse le distribuzioni, da non confondere con Schwarz della 
+  disuguaglianza).
+\end{definition}
+
+La nozione di continuità di una distribuzione $ T \in \mathds{X} $ si scrive nel seguente modo: data una successione $ \phi_n \in \mathds{X} $ allora 
+\begin{align}
+  T(\phi_n) \to T(\phi) \quad \textnormal{se} \quad \phi_n \to \phi \quad \textnormal{in} \quad \mathds{X}.
+\end{align}
+
+\begin{lemma}[  ]
+  Valgono le inclusioni inverse per i duali, cioè $ \D' \supset \S' \supset \E' $.
+\end{lemma}
+\begin{proof}
+  Iniziamo mostrando che un funzionale lineare continuo di $ \E' $ lo è anche di $ \S' $, cioè che $ T_\E \in \E $ è lineare e continuo 
+  nelle funzioni test $ \phi_\S $, ma per il lemma \ref{lem: D in S in E} le funzioni di $ \S $ sono tutte funzioni di $ \E $ e per ipotesi 
+  $ T_\E $ è lineare continuo su $ \E $. Da $ \S' $ a $ \D' $ vale lo stesso ragionamento.
+\end{proof}
+
+\begin{definition}[ Funzione localmente sommabile ]
+  Diremo che una funzione $ u:\R \to \R $ è \textit{localmente sommabile} e scriveremo $ u \in L_{\text{loc}}^1(\R) $ se è sommabile su ogni sottoinsieme 
+  compatto di $ \R $.
+\end{definition}
+
+\begin{lemma}[  ] \label{lem: funzioni test sono L1} 
+  $ \S \subset L^1(\R) $, cioè le funzioni test con le derivate a decrescenza rapida sono tutte sommabili.
+\end{lemma}
+\begin{proof}
+  Dalla definizione, per $ \phi \in \S $ abbiamo che $ \sup_{x\in \R} \abs{x^k \phi} < +\infty \; \forall k \in \mathbb{N}_0 $, allora si ha che
+  \begin{align}
+    \abs{\phi} < \frac{c}{(1 + \abs{x})^k}
+  \end{align}
+  e quindi integrando su $ \R $ per $ k > 1 $ abbiamo che
+  \begin{align}
+    \int_\R \abs{\phi} \, dx < \int_\R \frac{c}{(1 + \abs{x})^k}  \, dx < +\infty 
+  \end{align}
+  e quindi $ \phi \in L^1(\R) $.
+\end{proof}
+
+\begin{lemma}[  ]
+  $ \S \subset L^p(\R) \;\;\forall p \in \mathbb{N} $ e $ \S \subset L^\infty(\R)$.
+\end{lemma}
+\begin{proof}
+  Il precedente lemma è il caso $ p = 1 $, per $ L^\infty $ segue direttamente dalla definizione di $ \phi \in \S $ dato che 
+  $\norm{\phi}_\infty = \sup_{x \in \R} \abs{\phi} < +\infty $, mentre per $ L^p $ sfruttiamo la disuguaglianza ricavata prima cioè
+  \begin{align}
+    \abs{\phi}^p \leq \frac{c^p}{(1 + \abs{x})^{kp}}
+  \end{align}
+  per ogni $ k \in \mathbb{N}_0 $, e quindi per la norma $ p $-esima vale
+  \begin{align}
+    (\norm{\phi}_p)^p = \int_\R \abs{\phi}^p \,dx \leq \int_\R \frac{c^p}{(1 + \abs{x})^{kp}} \,dx < +\infty
+  \end{align}
+  per $ k > 1 $, segue che $ \phi \in L^p(\R) \; \forall p \in \mathbb{N} $.
+\end{proof}
+
+\begin{theorem}[  ]
+  Sia $ u(x) \in L_{\text{loc}}^1(\R) $ localmente sommabile e limitata, sia $ \phi \in \S $ una funzione di test, allora il funzionale idividuato 
+  dall'integrale 
+  \begin{align}
+    T_u(\phi) \coloneq \int_{-\infty}^{+\infty} u(x) \phi (x) \, dx \label{}
+  \end{align}
+  è una distribuzione temperata cioè $ T_u \in \S' $ e lo indicheremo con $ T_u(\phi), \sc{T_u, \phi} $. Se invece $ u(x) $ non è limitata allora 
+  è possibile che $ T_u \notin \S' $, ma comunque $ T_u \in \D' $ (per una $ \phi \in \D $).
+\end{theorem}
+\begin{proof}
+  Iniziamo mostrando la prima parte del teorema (considerando $ u(x) $ limitata e mostrando che $ T_u \in \S $)
+  Per prima cosa il prodotto $ u(x)\phi(x) $ è sommabile perché con $ u $ è limitata si ha
+  \begin{align}
+    \int_{-\infty}^{+\infty} \abs{u(x) \phi(x)} \,dx \leq M_u \int_{-\infty}^{+\infty} \abs{\phi(x)} \,dx < +\infty
+  \end{align}
+  dato che per il lemma \ref{lem: funzioni test sono L1}, dove $ M_u = \sup_{x \in \R} \abs{u(x)} < +\infty $.
+
+  Per mostrare che $ T_u $ è una distribuzione temperata serve mostrare che è lineare, 
+  che segue dalla linearità dell'integrale, e che è continuo cioè $ T_u(\phi_n) \to T_u(\phi) $ per $ \phi_n \to \phi $ e si dal fatto che 
+  \begin{align}
+    \abs{T_u (\phi_n - \phi)} \leq M_u \int_{-\infty}^{+\infty} \abs{\phi_n(x) - \phi(x)} \,dx \to 0
+  \end{align}
+  e per tanto $ T_u (\phi_n) \to T_u(\phi) $. 
+  
+  Per la seconda parte, dato che adesso consideriamo $ \phi \in \D $, l'integrale non è su un dominio illimitato ma sul compatto $ K = \supp \phi $, 
+  quindi si riscrive come 
+  \begin{align}
+    \int_K \abs{u(x) \phi(x)} \,dx \leq \sup_{x \in K} \abs{\phi(x)} \int_K \abs{u} \,dx < +\infty
+  \end{align}
+  per la limitatezza di $ \phi $ e perché $ u \in L^1_{\text{loc}}(\R) $.
+\end{proof}
+
+Possiamo moltiplicare una distribuzione $ T $ per una funzione $ f(x) $ definendo questa operazione come $ \sc{f T,\phi } = \sc{T, f\phi} \in \C $, 
+tutta via per poterlo fare la funzione $ f $ deve essere tale che $ f\phi $ è ancora una funzione di test: per $ \D' $ basta che $ f \in C^\infty $, 
+per $ \S' $ serve che sia a crescita lenta e per $ \E' $ di nuovo $ f \in C^\infty $. 
+Ad esempio per $ T \in \S' $ e $ P(x) $ un polinomio si ha che $ P(x) T $ è ancora una distribuzione temperata.
+
+\begin{definition}[ Delta di Dirac ]
+  Sia $ x_0 \in \R $ chiameremo \textit{delta di Dirac} il funzionale $ \delta_{x_0} \in \E' $ che associa alla funzione di test $ \phi \in \E $ il 
+  suo valore in $ x_0 $, cioè
+  \begin{align}
+    \delta_{x_0}(\phi) = \phi(x_0)
+  \end{align}
+  e scriveremo anche $ \sc{\delta_{x_0}, \phi} $. 
+  Notiamo che la $ \delta $ è definita in $ \E' $ (e quindi appartiene a tutti e tre gli spazi di distribuzioni) perché l'operazione 
+  $ \sc{\delta_{x_0}, \phi} $ ha senso per qualsiasi funzione continua, quindi anche per $ \phi \in \E $.
+\end{definition}
+
+\begin{definition}[ Convergenza debole in $ \S' $ ]
+  Sia $ T_n \in \S' $ una successione di distribuzioni temperate, allora diremo che $ T_n $ \textit{converge debolmente} a $ T \in \S' $ se per ogni 
+  $ \phi \in \S $ si ha che 
+  \begin{align}
+    \sc{T_n, \phi} \to \sc{T,\phi}
+  \end{align}
+  inteso nella convergenza fra numeri complessi, cioè 
+  \begin{align}
+    \forall \eps > 0 \;\; \exists N(\eps, \phi) : \;\abs{ \sc{T_n, \phi} - \sc{T,\phi}} < \eps \quad \forall n \geq N.
+  \end{align}
+\end{definition}
+
+\begin{definition}[ Distribuzione nulla ]
+  Definiamo la \textit{distribuzione nulla} $ T = 0 $ in $ \Omega \subset \R $ aperto tale che $ \sc{T, \phi} = 0 $ per ogni $ \phi $ con 
+  $ \supp \phi \subset \Omega $ nello spazio di test che stiamo considerando.
+\end{definition}
+
+Con questa definizione possiamo definire l'uguaglianza fra distribuzioni: diremo che $ T_1 = T_2 $ se $ \sc{T_1, \phi} = \sc{T_2, \phi} $ 
+per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T_2, \phi} = 0 $, e quindi se $ T_1 - T_2 = 0 $.
+
+\begin{definition}[ Supporto di una distribuzione ]
+  Definiamo il \textit{supporto di una distribuzione $ T $} come il complementare del più grande aperto su cui $ T $ si annulla, cioè 
+  \begin{align}
+    \supp T \coloneq \R \bs \bigcup\{\Omega \; \textnormal{aperto} : \left.T\right|_\Omega = 0\}.
+  \end{align}
+\end{definition}
+
+\begin{lemma}[  ]
+  Vale la seguente implicazione: $ T = T_u \implies \supp T_u = \supp u $, cioè se una distribuzione è individuata da una funzione 
+  $ u \in L^1_{\text{loc}}(\R) $, allora il supporto della distribuzione
+\end{lemma}
+\begin{proof}
+  Se $ T = T_u $ allora 
+  \begin{align}
+    \sc{T_u, \phi} = \int_{-\infty}^{+\infty} u(x) \phi(x) \, dx 
+  \end{align}
+\end{proof}
+
+\begin{lemma}[ Caratterizzazione di $ \E' $ ]
+  Le distribuzioni in $ \E' $ sono tutte e sole le distribuzioni a supporto compatto, cioè
+  \begin{align}
+    T \in \E' \iff \supp T \; \textnormal{è compatto}.
+  \end{align}
+\end{lemma}
+
 
 \end{document}

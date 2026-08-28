@@ -3,7 +3,6 @@
 % ---------- LINGUA & CODIFICA ----------
 \usepackage[italian]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 
 % ---------- TIPOGRAFIA ----------
 \usepackage{lmodern}
@@ -157,11 +156,6 @@ patterns
   \mathbf{#1}
 }
 
-% --- \mathbb{R} --- R numeri reali
-\newcommand{\R}[0]{
-    \mathbb{R}
-}
-
 % --- \displaystyle ---
 \newcommand{\DS}[0]{
 	\displaystyle 
@@ -175,11 +169,6 @@ patterns
 % --- \diag ---
 \newcommand{\diag}[0]{
 	\textnormal{diag} 
-}
-
-% --- \mathbb{C} --- C numeri complessi
-\newcommand{\C}[0]{
-  \mathbb{C}
 }
 
 % --- Logaritmo principale ---
@@ -208,9 +197,82 @@ patterns
 }
 
 % --- Residui ---
-\newcommand{\Res}[0]{
-  \textnormal{Res }
+\DeclareMathOperator{\Res}{
+  \textnormal{Res}
 }
+
+% --- Supporto ---
+\DeclareMathOperator{\supp}{
+  \textnormal{supp}
+}
+
+% --- Overset ---
+\newcommand{\ov}[2]{
+  \overset{#2}{#1}
+}
+
+% --- Underset ---
+\newcommand{\un}[2]{
+  \underset{#2}{#1}
+}
+
+% =================== Spazi ===================
+
+% --- R numeri reali --- 
+\newcommand{\R}[0]{
+  \mathbb{R}
+}
+
+% --- C numeri complessi --- 
+\newcommand{\C}[0]{
+  \mathbb{C}
+}
+
+% --- E Funzioni lisce --- 
+\newcommand{\E}[0]{
+  \mathcal{E}
+}
+
+% --- S funzioni a decrescenza rapida --- 
+\let\S\relax
+\newcommand{\S}[0]{
+  \mathcal{S}
+}
+
+% --- D Funzioni lisce a supporto compatto --- 
+\newcommand{\D}[0]{
+  \mathcal{D}
+}
+
+% =================== Trasformate ===================
+
+% --- Fourier ---
+\DeclareMathOperator{\F}{
+  \mathcal{F}
+}
+
+% --- Laplace ---
+\let\L\relax
+\DeclareMathOperator{\L}{
+  \mathcal{L}
+}
+
+% --- Hilbert ---
+\let\H\relax
+\DeclareMathOperator{\H}{
+  \mathcal{H}
+}
+
+% =================== Scambi ===================
+
+\renewcommand{\phi}{
+  \varphi
+}
+
+% =================== Template ===================
+
+% \mathrm{F}, \mathit{F}, \mathbf{F}, \mathsf{F}, \mathtt{F}, \boldsymbol{F}, \mathcal{F}, \mathscr{F}, \mathbb{F}, \mathds{F}, \mathfrak{F}
+
 % ---------- BIBLIOGRAFIA ----------
 \usepackage{csquotes} % \enquote{}
 \usepackage[backend=biber,style=numeric,sorting=nyt]{biblatex}
