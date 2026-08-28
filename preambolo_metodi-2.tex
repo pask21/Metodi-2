@@ -1,4 +1,4 @@
-\documentclass[11pt,oneside]{scrbook} % KOMA
+\documentclass[11pt,twoside]{scrbook} % KOMA
 
 % ---------- LINGUA & CODIFICA ----------
 \usepackage[italian]{babel}
@@ -20,11 +20,12 @@
 \setlength{\headheight}{17pt} % evita sovrapposizioni con l'header
 \setlength{\headsep}{6mm}     % distanza tra header e corpo
 
-\usepackage{scrlayer-scrpage}
+\usepackage[automark]{scrlayer-scrpage}
 \clearpairofpagestyles
-\ihead{\leftmark}
+\automark[section]{chapter}
+\ohead{\headmark}
 \ofoot*{\pagemark}
-\automark{chapter}
+\pagestyle{scrheadings}
 
 % ---------- STRUMENTI DI STRUTTURA ----------
 \setcounter{secnumdepth}{3}
@@ -265,9 +266,12 @@ patterns
 
 % =================== Scambi ===================
 
-\renewcommand{\phi}{
-  \varphi
-}
+% --- phi φ ϕ ---
+\let \ORIGINALphi \phi
+\let \ORIGINALvarphi \varphi
+
+\renewcommand{\phi}{\ORIGINALvarphi}
+\renewcommand{\varphi}{\ORIGINALphi}
 
 % =================== Template ===================
 

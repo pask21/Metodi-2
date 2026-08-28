@@ -1432,8 +1432,12 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
 \end{definition}
 
 \begin{lemma}[  ]
-  Vale la seguente implicazione: $ T = T_u \implies \supp T_u = \supp u $, cioè se una distribuzione è individuata da una funzione 
-  $ u \in L^1_{\text{loc}}(\R) $, allora il supporto della distribuzione
+  Vale la seguente implicazione:
+  \begin{align}
+    T = T_u \implies \supp T_u = \supp u
+  \end{align}
+  cioè se una distribuzione è individuata da una funzione $ u \in L^1_{\text{loc}}(\R) $, allora il supporto della distribuzione coincide con 
+  quello della funzione $ u $.
 \end{lemma}
 \begin{proof}
   Se $ T = T_u $ allora 
@@ -1448,6 +1452,57 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
     T \in \E' \iff \supp T \; \textnormal{è compatto}.
   \end{align}
 \end{lemma}
+
+\begin{lemma}[  ]
+  Sia $ u_n \in L^2(\R) $ una successione convergente in norma $ \norm{\cdot}_2 $ a $ u \in L^2(\R) $, allora $ T_{u_n} $ converge a $ T_u $ 
+  con la convergenza debole di $ \S' $, cioè se $ \norm{u_n - u}_2 \to 0 $ allora $ T_{u_n} \to T_u $. 
+  La tesi vale anche se $ u_n \to u $ debolmente in $ L^2 $, cioè se $ \sc{u_n, g} \to \sc{u, g} \; \forall g \in L^(\R) $  allora $ T_{u_n} \to T_u $.
+\end{lemma}
+\begin{proof}
+  Naturalmente il secondo caso comprende anche il primo dato che la tesi è la stessa ma la convergenza in norma implica la convergenza debole in 
+  $ L^2(\R) $, ma è istruttivo mostrarli entrambi. 
+  
+  Per il primo abbiamo che 
+  \begin{align}
+    \abs{\sc{T_{u_n} - T_u , \phi}} \leq \int_{-\infty}^{+\infty} \abs{(u_n(x) - u(x))\phi(x)}\,dx \leq \norm{u_n - u}_2 \cdot \norm{\phi}_2 \to 0
+  \end{align}
+  dove abbiamo usato la disuguaglianza di Hölder con $ p = q = 2 $ (non Cauchy-Scharz perché non è un vero prodotto scalare di $ L^2 $) e il fatto che 
+  le funzioni test di $ \S $ sono $ L^2 $.
+
+  Per la convergenza debole si ha
+  \begin{align}
+    \sc{T_{u_n}, \phi} = \int_{-\infty}^{+\infty} {u_n(x)\phi(x)}\,dx = \sc{u_n^*, \phi} \to \sc{u^*, \phi} = \sc{T_u, \phi} \quad \forall \phi \in \S
+  \end{align}
+  dove $ u_n, u $ sono reali, sebbene sia vero anche per funzioni complesse. Notiamo che nell'equazione gli unici veri e propri prodotti scalari 
+  di $ L^2 $ sono $ \sc{u_n, \phi} , \sc{u, \phi} $, nonostante si usi lo stesso simbolo per denotare l'azione di una distribuzione su una funzione di 
+  test, che viene usato proprio per questa analogia.
+\end{proof}
+
+\begin{lemma}[  ]
+  Sia $ u_n \in L^1(\R) $ una successione convergente puntualmente q.o. a $ u \in L^1(\R) $, cioè che $ \lim_{n \to \infty} u_n(x) = u(x) $, e inoltre 
+  è soddisfatta la convergenza dominata di Lebesgue, cioè $ \exists F(x) \in L^1(\R) $ tale che $ \abs{u(x)} \leq F(x) \; \forall n $, 
+  allora $ T_{u_n} \to T_u $ in $ \S' $.
+\end{lemma}
+\begin{proof}
+  
+\end{proof}
+
+\begin{lemma}[  ]
+  Sia $ u_n(x) $ una successione di funzioni convergente puntualmente alla funzione $ u(x) $, tutte maggiorate tutte dallo stesso polinomio $ P(x) $, 
+  allora $ T_{u_n} \to T_u $ in $ \S' $.
+\end{lemma}
+\begin{proof}
+  
+\end{proof}
+
+\begin{theorem}[ Delta come limite di una successione ]
+  
+\end{theorem}
+\begin{proof}
+  
+\end{proof}
+
+\section{Derivata delle distribuzioni}
 
 
 \end{document}
