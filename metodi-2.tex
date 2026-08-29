@@ -1320,6 +1320,8 @@ La nozione di continuità di una distribuzione $ T \in \mathds{X} $ si scrive ne
   $ T_\E $ è lineare continuo su $ \E $. Da $ \S' $ a $ \D' $ vale lo stesso ragionamento.
 \end{proof}
 
+\section{Convergenza di distribuzioni}
+
 \begin{definition}[ Funzione localmente sommabile ]
   Diremo che una funzione $ u:\R \to \R $ è \textit{localmente sommabile} e scriveremo $ u \in L_{\text{loc}}^1(\R) $ se è sommabile su ogni sottoinsieme 
   compatto di $ \R $.
@@ -1357,10 +1359,10 @@ La nozione di continuità di una distribuzione $ T \in \mathds{X} $ si scrive ne
 \end{proof}
 
 \begin{theorem}[  ]
-  Sia $ u(x) \in L_{\text{loc}}^1(\R) $ localmente sommabile e limitata, sia $ \phi \in \S $ una funzione di test, allora il funzionale idividuato 
+  Sia $ u(x) \in L_{\text{loc}}^1(\R) $ localmente sommabile e limitata, sia $ \phi \in \S $ una funzione di test, allora il funzionale individuato 
   dall'integrale 
   \begin{align}
-    T_u(\phi) \coloneq \int_{-\infty}^{+\infty} u(x) \phi (x) \, dx \label{}
+    T_u(\phi) \coloneq \int_{-\infty}^{+\infty} u(x) \phi (x) \, dx \label{eq: T_u}
   \end{align}
   è una distribuzione temperata cioè $ T_u \in \S' $ e lo indicheremo con $ T_u(\phi), \sc{T_u, \phi} $. Se invece $ u(x) $ non è limitata allora 
   è possibile che $ T_u \notin \S' $, ma comunque $ T_u \in \D' $ (per una $ \phi \in \D $).
@@ -1431,7 +1433,7 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
   \end{align}
 \end{definition}
 
-\begin{lemma}[  ]
+\begin{lemma}[  ] \label{lem: supp T_u {=} supp u}
   Vale la seguente implicazione:
   \begin{align}
     T = T_u \implies \supp T_u = \supp u
@@ -1446,7 +1448,7 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
   \end{align}
 \end{proof}
 
-\begin{lemma}[ Caratterizzazione di $ \E' $ ]
+\begin{lemma}[ Caratterizzazione di $ \E' $ ] \label{lem: caratterizzazione di E'}
   Le distribuzioni in $ \E' $ sono tutte e sole le distribuzioni a supporto compatto, cioè
   \begin{align}
     T \in \E' \iff \supp T \; \textnormal{è compatto}.
@@ -1484,20 +1486,117 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
   allora $ T_{u_n} \to T_u $ in $ \S' $.
 \end{lemma}
 \begin{proof}
-  
+  L'ipotesi della convergenza dominata suggerisce di scrivere il limite per la differenza delle distribuzioni e poi portarlo all'interno dell'integrale: 
+  \begin{gather}
+    \lim_{n\to \infty} \abs{\sc{T_{u_n} - T_u , \phi}} \leq \lim_{n\to \infty} \int_{-\infty}^{+\infty} \abs{(u_n(x) - u(x))\phi(x)}\,dx 
+    \\
+    = \int_{-\infty}^{+\infty} \lim_{n\to \infty} \abs{(u_n(x) - u(x))} \abs{\phi(x)}\,dx = 0
+  \end{gather}
+  dove abbiamo potuto applicare il teorema di Lebesgue perché, come avevamo già mostrato, il prodotto di una funzione $ L^1 $ per una funzione test 
+  $ \phi \in \S $ è ancora in $ L^1 $.
 \end{proof}
 
 \begin{lemma}[  ]
-  Sia $ u_n(x) $ una successione di funzioni convergente puntualmente alla funzione $ u(x) $, tutte maggiorate tutte dallo stesso polinomio $ P(x) $, 
-  allora $ T_{u_n} \to T_u $ in $ \S' $.
+  Sia $ u_n(x) $ una successione di funzioni convergente puntualmente q.o. alla funzione $ u(x) $, tutte maggiorate tutte dallo stesso polinomio $ P(x) $, 
+  cioè tale che $ \abs{u_n(x)} \leq P(x) \;\forall n\in\mathbb{N}$, allora $ T_{u_n} \to T_u $ in $ \S' $.
 \end{lemma}
 \begin{proof}
-  
+  L'idea è la stessa del precedente lemma, infatti se mostriamo che $ \exists F(x) \in L^1(\R) $ tale che maggiora $ u_n(x) $, allora possiamo scambiare 
+  il limite con l'integrale. Scriviamo 
+  \begin{gather}
+    \lim_{n\to \infty} \abs{\sc{T_{u_n} - T_u , \phi}} \leq \lim_{n\to \infty} \int_{-\infty}^{+\infty} \abs{(u_n(x) - u(x))\phi(x)}\,dx 
+    \\
+    \leq \lim_{n\to \infty} \int_{-\infty}^{+\infty} (\abs{u_n(x)} + \abs{u(x)}) \abs{\phi(x)} \,dx 
+    \leq \int_{-\infty}^{+\infty} 2P(x) \abs{\phi(x)} \,dx 
+  \end{gather}
+  dove abbiamo usato la disuguaglianza triangolare $ \abs{u_n - u} \leq \abs{u_n} + \abs{u} $. A questo punto notiamo che con la stessa tecnica usata 
+  per dimostrare il lemma \ref{lem: funzioni test sono L1} possiamo dire che $ \phi \in \S $ rimane sommabile moltiplicata per qualsiasi polinomio, 
+  infatti 
+  \begin{align}
+    \sup_{x \in \R} \abs{x^k \phi} < +\infty \; \forall k \in \mathbb{N}_0 
+    \implies \sum_{n=0}^{N \; \textnormal{finito}} a_n \sup_{x \in \R} \abs{x^n \phi} < +\infty
+  \end{align}
+  e quindi per ogni polinomio $ P(x) $ vale che 
+  \begin{align}
+    \abs{P(x) \phi(x)} = \frac{\abs{P(x)\phi(x)}(1 + \abs{x})^k}{(1 + \abs{x})^k} \leq \frac{c}{(1 + \abs{x})^k} \in L^1(\R)
+  \end{align} per $ k > 1 $. Essendo $ P(x) \phi(x)  $ sommabile possiamo applicare la convergenza dominata di Lebesgue all'integrale e portare il 
+  limite dentro con gli stessi passaggi del lemma precedente, e dunque la tesi.
 \end{proof}
 
-\begin{theorem}[ Delta come limite di una successione ]
-  
-\end{theorem}
+Fin ora abbiamo considerato limiti (nel senso della convergenza debole) di successioni di distribuzioni alle quali è associata una funzione 
+nel senso della \eqref{eq: T_u}, vediamo ora delle successioni di distribuzioni associate a delle funzioni che convergono però a una 
+distribuzione che non è associata ad alcuna funzione, ad esempio la delta di Dirac.
+
+Consideriamo le funzioni a gradino $ f_{\tau, a}(x) $ centrate in $ x = a $, definite come 
+\begin{align}
+  f_{\tau, a}(x) = 
+  \begin{cases}
+    \frac1{2\tau} \; &\textnormal{per}\; \abs{x - a} \leq \tau
+    \\
+     0 \; &\textnormal{per}\; \abs{x - a} > \tau
+  \end{cases}
+\end{align}
+allora si ha che le distribuzioni associate $ T_{f_{\tau,a}} \in \E' $ perché il $ \supp f_{\tau,a} $  è compatto, e per il lemma 
+\ref{lem: supp T_u {=} supp u} $ \supp f_{\tau,a} = \supp T_{f_{\tau,a}} $, allora la distribuzione sta in $ \E' $ per la caratterizzazione 
+\ref{lem: caratterizzazione di E'}. Svolgiamo il limite della successione di distribuzioni per $ \tau \to 0 $: sia $ \phi \in \E $,
+\begin{gather}
+  \lim_{\tau \to 0} \sc{T_{f_{\tau,a}}, \phi} = \lim_{\tau \to 0} \int_{-\infty}^{+\infty} f_{\tau,a}(x) \phi(x) \, dx 
+  = \lim_{\tau \to 0} \frac1{2\tau} \int_{a-\tau}^{a + \tau} \phi(x)\,dx
+  \\
+  = \lim_{\tau \to 0} \,\frac1{2\tau}\, 2\tau \cdot \phi\left( c \in [a - \tau, a + \tau] \right) = \phi(a) = \sc{\delta_a,\phi} 
+\end{gather}
+per il teorema della media integrale. Puntualizziamo che non abbiamo realmente definito il limite continuo di una distribuzione in $ \E' $, tuttavia 
+i limiti continui possono essere riscritti (tutti per quanto ci riguarda) come il limite di una successione e la convergenza debole può essere definita 
+in questo modo anche su $ \E' $.
+
+Il risultato precedente ci dice che la delta può essere vista come limite continuo o di una successione di distribuzioni, vediamo ora altre 
+successioni che portano alla delta. Sia la successione
+\begin{align}
+  u_n(x) = \frac1{\pi} \frac{n}{1 + n^2x^2} \quad \textnormal{o} \quad u_\eps(x) = \frac1{\pi} \frac{\eps}{\eps^2 + x^2} 
+\end{align}
+che abbiamo riscritto nella versione continua con $ \eps = \frac1{n} $ (che possiamo fare perché $ \frac1{n} $ ha un punto di accumulazione in $ 0 $ 
+perciò il $ \lim_{\eps \to 0^+} $ ha senso). Svolgiamo il limite per $ n\to +\infty $ anche se quello per $ \eps \to 0 $ sarebbe identico:
+\begin{align}
+  \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \lim_{n\to \infty} \frac1{\pi} \int_{-\infty}^{+\infty} \frac{n}{1 + n^2x^2} \phi(x) \, dx 
+  = \lim_{n\to \infty} \frac1{\pi} \int_{-\infty}^{+\infty} \frac1{1 + y^2}\phi \left( \frac{y}{n} \right) \,dy
+\end{align}
+dove abbiamo usato la sostituzione $ y = nx $. Osserviamo che la successione $ f_n = \frac1{1 + y^2} \phi\left( \frac{y}{n} \right) $ converge 
+puntualmente a $ f = \frac1{1+y^2} \phi\left( 0 \right) $, inoltre è maggiorata dalla funzione
+\begin{align}
+  \abs{\frac1{1 + y^2} \phi\left( \frac{y}{n} \right)} \leq \sup_{y\in \R} \abs{\phi(y)} \frac1{1+y^2} \in L^1(\R)
+\end{align}
+per ogni $ n \in \mathbb{N} $, dunque possiamo applicare la convergenza dominata ottenendo 
+\begin{align}
+  \lim_{n\to \infty} \sc{T_{u_n}, \phi} = \frac1{\pi} \int_{-\infty}^{+\infty} \frac1{1+y^2} \lim_{n\to \infty} \phi \left( \frac{y}{n} \right) \,dy 
+  = \phi(0) = \sc{\delta_0, \phi}.
+\end{align}
+Consideriamo ancora la successione 
+\begin{align}
+  u_n(x) = \frac{n}{\sqrt{\pi}} e^{-n^2x^2} \quad \textnormal{o} \quad u_\eps(x) = \frac1{\eps\sqrt{\pi}} e^{-x^2/\eps^2}
+\end{align}
+che sono delle gaussiane centrate in $ x = 0 $. Svolgiamo il limite 
+\begin{align}
+  \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \int_{-\infty}^{+\infty} \frac{n}{\sqrt{\pi}} e^{-n^2x^2} \phi(x) \,dx 
+  = \int_{-\infty}^{+\infty} \frac1{\sqrt{\pi}} e^{-y^2} \phi\left( \frac{y}{n} \right)\,dy
+\end{align}
+ed esattamente come prima abbiamo che la successione $ f_n(y) = \frac1{\sqrt{\pi}} e^{-y^2} \phi\left( \frac{y}{n} \right) $ converge puntualmente a 
+$ f(y) = \frac1{\sqrt{\pi}} e^{-y^2} \phi(0) $ ed è maggiorata dalla funzione
+\begin{align}
+  F(y) = \frac1{\sqrt{\pi}} e^{-y^2} \sup_{y \in \R}\abs{\phi(y)} \in L^1(\R)
+\end{align}
+e quindi possiamo applicare la convergenza dominata di Lebesgue:
+\begin{align}
+  \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \phi(0) \int_{-\infty}^{+\infty} \frac1{\sqrt{\pi}} e^{-y^2} \,dy = \phi(0) = \sc{\delta_0, \phi}.
+\end{align}
+
+\begin{lemma}[  ]
+  Sia $ h \in L^1_{\text{loc}}(\R) $, allora la successione 
+  \begin{align}
+    u_n(x) = \frac{n\, h(nx)}{\DS \int_{-\infty}^{+\infty} h(y) \,dy}
+  \end{align}
+  converge alla delta $ \delta_0 $.
+\end{lemma}
+
 \begin{proof}
   
 \end{proof}
