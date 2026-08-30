@@ -1370,6 +1370,47 @@ un codominio dell'operatore $ \F $, vediamo quindi una proprietà di questo oper
   \end{align}
 \end{theorem}
 
+\begin{definition}[ Convoluzione ]
+  Siano $ f_1, f_2 \in L^1(\R) $ allora definiamo il \textit{prodotto di convoluzione} fra $ f_1 $ e $ f_2 $ indicato con il simbolo $ f_1*f_2 $ 
+  la funzione individuata dal seguente integrale 
+  \begin{align}
+    (f_1*f_2)(x) = \int_{-\infty}^{+\infty} f_1(x - y)f_2(y) \, dy.
+  \end{align}
+\end{definition}
+
+\begin{lemma}[  ]
+  Le convoluzioni sono sommabili, cioè $ f_1, f_2 \in L^1(\R) $ allora anche $ (f_1*f_2) \in L^1(\R) $.
+\end{lemma}
+\begin{proof}
+  Mostriamo che una convoluzione è effettivamente sommabile:
+  \begin{align}
+    \int_{-\infty}^{+\infty} \abs{f_1*f_2} \,dx = &\int_{-\infty}^{+\infty} \abs{\int_{-\infty}^{+\infty} f_1(x - y)f_2(y) \, dy} \,dx 
+    \leq \iint_{-\infty}^{+\infty}  \abs{f_1(x - y)f_2(y)} \, dy \,dx
+    \\
+    \ov{=}{\textnormal{Tonelli}} &\int_{-\infty}^{+\infty} \abs{f_2(y)} \int_{-\infty}^{+\infty} \abs{f_1(x - y)} dx \, dy 
+    \leq c_1 \int_{-\infty}^{+\infty} \abs{f_2(y)} \,dy \leq c_1 c_2
+  \end{align}
+  dove abbiamo usato il teorema di Tonelli essendo l'integranda misurabile e non negativa. 
+\end{proof}
+
+\begin{theorem}[  ]
+  La trasformata di Fourier trasforma convoluzioni in prodotti, cioè siano $ f_1, f_2 \in L^1(\R) $, allora 
+  \begin{align}
+    \F[f_1*f_2] = \hat{f}_1 \cdot \hat{f}_2.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  L'idea è quella del lemma precedente: scriviamo la trasformata della convoluzione
+  \begin{align}
+    \F[f_1*f_2] = &\int_{-\infty}^{+\infty} e^{i\omega x}(f_1*f_2)(x)  \,dx
+    = \int_{-\infty}^{+\infty} e^{i\omega x} \int_{-\infty}^{+\infty} f_1(x - y)f_2(y) \, dy \,dx 
+    \\
+    \ov{=}{\textnormal{Fubini}} &\int_{-\infty}^{+\infty} {f_2(x)} \int_{-\infty}^{+\infty} {f_1(x - y)} e^{i\omega x} dx \, dy 
+    = \int_{-\infty}^{+\infty} {f_2(y)} e^{i\omega y} \hat{f}_1(\omega) \, dy = \hat{f}_1 \hat{f}_2
+  \end{align}
+  dove abbiamo applicato il teorema di Fubini dato che l'integranda è sommabile per il lemma precedente.
+\end{proof}
+
 \section{Derivata della trasformata di Fourier}
 
 Per definire la derivata della trasformata di Fourier vogliamo prima capire per quale classe di funzioni la loro trasformata è una funzione derivabile.
@@ -1417,6 +1458,13 @@ possiamo sfruttare la seguente:
   {Trasformata di Fourier in $ L^2(\R) $}
   {Trasformata di Fourier in L²(R)}
 }
+La trasformata di Fourier così come l'abbiamo definita su $ L^1(\R) $ presenta dei limiti: in generale non è invertibile, 
+infatti esistono dei controesempi in cui la funzione trasformata non sia sommabile. Non è un operatore di uno spazio in se stesso, cioè non è un 
+endomorfismo e non c'è quindi struttura di gruppo. Lo spazio $ L^2(\R) $ possiede una struttura geometrica essendo l'unico spazio $ L^p(\R) $ a 
+essere di Hilbert, inoltre molte funzioni fisiche rilevanti sono in questo spazio, come l'energia elettromagnetica che è quadratica nei campi 
+elettromagnetici. Già per questi motivi è utile cercare di definire la trasformata di Fourier su $ L^2(\R) $, vedremo successivamente che questo spazio 
+è quello più naturale in cui ambientare la trasformata di Fourier.
+
 
 
 
