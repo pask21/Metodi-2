@@ -1247,7 +1247,7 @@ Definiamo ora tre spazi di funzioni che saranno poi le nostre funzioni di test, 
     \sup_{x \in \R} \abs{x^h \frac{d^k \phi}{dx^k}} < +\infty
   \end{align}
   per ogni $ h,k \in \mathbb{N}_0 = \mathbb{N} \cup 0 $. Indicheremo lo spazio formato da tali funzioni $ \phi $ con $ \S $ con la seguente 
-  nozione di convergenza: sia $ \phi_n \in \S $ una successione, allora diremo che $ \phi_n \ov{\to}{\S} \phi 0 $ se 
+  nozione di convergenza: sia $ \phi_n \in \S $ una successione, allora diremo che $ \phi_n \ov{\to}{\S} 0 $ se 
   \begin{align}
     \sup_{x \in \R} \abs{x^h \frac{d^k \phi}{dx^k}} \to 0 \quad \textnormal{per} \quad n\to +\infty
   \end{align}
@@ -1496,7 +1496,7 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
   $ \phi \in \S $ è ancora in $ L^1 $.
 \end{proof}
 
-\begin{lemma}[  ]
+\begin{lemma}[  ] \label{lem: successione maggiorata da un polinomio allora converge la distribuzione}
   Sia $ u_n(x) $ una successione di funzioni convergente puntualmente q.o. alla funzione $ u(x) $, tutte maggiorate tutte dallo stesso polinomio $ P(x) $, 
   cioè tale che $ \abs{u_n(x)} \leq P(x) \;\forall n\in\mathbb{N}$, allora $ T_{u_n} \to T_u $ in $ \S' $.
 \end{lemma}
@@ -1522,6 +1522,11 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
   \end{align} per $ k > 1 $. Essendo $ P(x) \phi(x)  $ sommabile possiamo applicare la convergenza dominata di Lebesgue all'integrale e portare il 
   limite dentro con gli stessi passaggi del lemma precedente, e dunque la tesi.
 \end{proof}
+\begin{remark}
+  Il precedente lemma sarà molto utile successivamente dato che ci estende la famiglia delle funzioni a cui possiamo associare una distribuzione. 
+  La richiesta che una funzione (o una successione) sia $ L^1(\R) $ cioè sommabile è abbastanza stringente per la generalità della teoria 
+  che vogliamo costruire, mentre grazie a questo lemma possiamo richiedere soltanto che sia maggiorata da un polinomio. 
+\end{remark}
 
 Fin ora abbiamo considerato limiti (nel senso della convergenza debole) di successioni di distribuzioni alle quali è associata una funzione 
 nel senso della \eqref{eq: T_u}, vediamo ora delle successioni di distribuzioni associate a delle funzioni che convergono però a una 
@@ -1588,20 +1593,122 @@ e quindi possiamo applicare la convergenza dominata di Lebesgue:
 \begin{align}
   \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \phi(0) \int_{-\infty}^{+\infty} \frac1{\sqrt{\pi}} e^{-y^2} \,dy = \phi(0) = \sc{\delta_0, \phi}.
 \end{align}
+Più avanti mostreremo una intera classe di successioni le cui distribuzioni associate convergono alla delta.
+
+\section{Derivata delle distribuzioni}
+Consideriamo $ T_u $ cioè una distribuzione a cui è associata una funzione $ u \in L^1(\R) $ derivabile, 
+vogliamo che la derivata delle distribuzioni del tipo $ T_u $ sia definita come la distribuzione associata alla derivata quindi $ T_{u'} $, 
+ovvero 
+\begin{align}
+  DT_u(\phi) \coloneq DT_{u'}(\phi) = \sc{T_{u'}, \phi} = \int_{-\infty}^{+\infty} u'(x) \phi(x) \,dx
+\end{align}
+applicando l'integrazione per parti diventa
+\begin{align}
+  DT_u(\phi) = \left. u(x)\phi(x) \vphantom{\int} \right|_{-\infty}^{+\infty}  - \int_{-\infty}^{+\infty} u(x) \phi'(x) \,dx = - \sc{T_u, \phi'}
+\end{align}
+dove il primo termine è nullo per la condizione necessaria di funzione sommabile e cioè essere infinitesima: $ \lim_{x \to \infty} f(x) = 0 $. 
+Quindi abbiamo visto che per le distribuzioni a cui è associata una funzione si ha che $ \sc{DT_u, \phi} = - \sc{T_u, \phi'} $, e vogliamo che questa 
+sia la proprietà che definisce la derivata di una distribuzione anche per quelle a cui non è associata una distribuzione. 
+
+\begin{definition}[ Derivata di una distribuzione ]
+  Sia $ T  $ una distribuzione, definiamo la sua derivata $ DT $ come 
+  \begin{align}
+    \sc{DT, \phi} \coloneq \sc{T, \phi'}
+  \end{align}
+  dalla quale per iterazione si ottiene la formula per la derivata $ k $-esima $ D^kT $:
+  \begin{align}
+    \sc{D^kT, \phi} = (-1)^k \sc{T, \phi^{(k)}}
+  \end{align}
+  che è ben definita dato che $ \phi \in C^\infty $ per ogni tipo di funzione test.
+\end{definition}
 
 \begin{lemma}[  ]
-  Sia $ h \in L^1_{\text{loc}}(\R) $, allora la successione 
+  La derivata $ k $-esima di una distribuzione è ancora una distribuzione. 
+\end{lemma}
+\begin{proof}
+  La linearità segue da quella della derivata, verifichiamo la continuità: sia $ \phi_n \to \phi $ una successione di funzioni test che converge a 
+  $ \phi $, allora
+  \begin{align}
+    \sc{D^kT, \phi_n} = (-1)^k \sc{T, \phi_n^{(k)}} \to (-1)^k \sc{T, \phi^{(k)}} = \sc{D^kT, \phi}
+  \end{align}
+  uniformemente per $ \phi_n \to \phi $, per la continuità di $ T $.
+\end{proof}
+
+\begin{definition}[ Funzione di Heaviside ]
+  Definiamo la funzione $ \theta(x):\R \to \R $ come 
+  \begin{align}
+    \theta(x) = 
+    \begin{cases}
+      1 \; &\textnormal{per}\; x \geq 0
+      \\
+      0 \; &\textnormal{per}\; x < 0
+    \end{cases}
+  \end{align}
+  detta \textit{funzione di Heaviside}.
+\end{definition}
+
+La funzione $ \theta(x) $ non è derivabile in $ x = 0 $ non essendo continua, tuttavia in senso distribuzionale: sia $ T_{\theta} $ la distribuzione 
+associata, che è lecita come avevamo anticipato grazie al lemma \ref{lem: successione maggiorata da un polinomio allora converge la distribuzione},
+allora la derivata vale
+\begin{gather}
+  \sc{DT_\theta, \phi} = \sc{T_\theta', \phi} = -\sc{T_\theta, \phi'} = - \int_{-\infty}^{+ \infty} \theta(x) \phi'(x)\,dx 
+  \\
+  = - \int_0^{+ \infty} \phi'(x)\,dx = -[\phi(+\infty) - \phi(0)] = \phi (0) = \sc{\delta_0, \phi}
+\end{gather}
+dove $ \phi(+\infty) = 0 $ è vero solo per $ \phi \in \S $. 
+Quindi la derivata della $ \theta(x) $ intesa come la derivata distribuzionale di $ T_\theta $ è la delta di Dirac $ \delta $.
+Sulla stessa idea calcoliamo la derivata $ k $-esima della delta: 
+\begin{align}
+  \sc{D^k\delta_{x_0}, \phi} = (-1)^k \sc{\delta_{x_0}, \phi^{(k)}} = (-1)^k \phi^{(k)}(x_0)
+\end{align}
+per ogni $ \phi \in \E $.
+
+\begin{theorem}[ di continuità dell'operatore $ D $ ] \label{thm: l'operatore derivata è un operatore continuo}
+  Sia $ T_n \to T $ una successione di distribuzioni convergente, allora la successione delle derivate converge cioè $ D^kT_n \to D^k T $.
+\end{theorem}
+\begin{proof}
+  Si ha che 
+  \begin{align}
+    \sc{DT_n, \phi} = (-1)^k \sc{T_n, \phi^{(k)}} \to (-1)^k \sc{T, \phi^{(k)}} = \sc{D^k T, \phi}.
+  \end{align}
+\end{proof}
+
+\begin{lemma}[  ]
+  Sia $ h \in L^1(\R) $ continua e con $ \int_{-\infty}^{+\infty} h(x) \,dx \neq 0 $, allora la successione di distribuzioni individuata 
+  dalla successione di funzioni 
   \begin{align}
     u_n(x) = \frac{n\, h(nx)}{\DS \int_{-\infty}^{+\infty} h(y) \,dy}
   \end{align}
   converge alla delta $ \delta_0 $.
 \end{lemma}
-
 \begin{proof}
-  
+  Poniamo $ c = \int_{-\infty}^{+\infty} h(y)\, dy $, definiamo la successione 
+  \begin{align}
+    v_n(x) = \frac{1}{c} \int_{-\infty}^{nx} h(y) \,dy
+    = \frac{n}{c} \int_{-\infty}^{x} h(nt) \,dt
+  \end{align}
+  con le distribuzioni associate 
+  \begin{align}
+    \sc{T_{v_n}, \phi} 
+    = \frac{1}{c} \int_{-\infty}^{+\infty}\, \phi(x)  \left( \int_{-\infty}^{nx} h(y) \,dy \right) \,dx.
+  \end{align}
+  Mostriamo che il limite di puntuale della successione $ v_n $ è la $ \theta(x) $:
+  \begin{align}
+    \lim_{n\to \infty} v_n(x) =
+    \begin{cases}
+      \DS 1 \; &\textnormal{per} \; x > 0
+      \\
+      \DS 0 \; &\textnormal{per} \; x < 0
+    \end{cases}  
+    \quad= \theta(x)
+  \end{align}
+  mentre per $ x = 0 $ la convergenza puntuale fallisce, ma dato che ha misura nulla questo non è rilevante e possiamo definirlo a posteriori in 
+  base a come abbiamo definito la funzioni di Heaviside. Dato che la funzione $ h $ è continua e sommabile allora le $ v_n(x) $ sono limitate e 
+  quindi maggiorate da un polinomio per tanto possiamo applicare il lemma 
+  \ref{lem: successione maggiorata da un polinomio allora converge la distribuzione} e quindi la successione $ T_{v_n} \to T_\theta $. 
+  Infine per mostrare la tesi basta il teorema precedente cioè il \ref{thm: l'operatore derivata è un operatore continuo} che essendo la  
+  derivata distribuzionale un operatore continuo allora $ DT_{v_n} \to DT_{\theta} = \delta_0 $ ovvero la tesi.
 \end{proof}
-
-\section{Derivata delle distribuzioni}
 
 
 \end{document}
