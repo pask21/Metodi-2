@@ -1210,6 +1210,217 @@ polo di ordine $ 1 $. $ f'(z) =  $
   disco di raggio $ 1 $ centrato in $ z = 0 $, cioè $ D_1 = \{\abs{z} < 1\} $.
 \end{theorem}
 
+\chapter{Trasformata di Fourier e di Laplace}
+
+\section{Trasformata di Fourier}
+
+\begin{definition}[ Trasformabile secondo Fourier ]
+  Sia $ f:\R \to \C $, allora diremo che $ f $ è \textit{trasformabile secondo Fourier} se esiste finito l'integrale 
+  \begin{align}
+    \int_{-\infty}^{+\infty} f(t) e^{i\omega t} \,dt
+  \end{align}
+\end{definition}
+
+Con questa definizione non viene specificato quale sia lo spazio in cui stanno le funzioni trasformabili secondo Fourier, andiamo quindi a dare 
+una condizione sufficiente affinché venga definita la trasformata di una funzione.
+
+\begin{definition}[ Trasformata di Fourier in $ L^1(\R) $]
+  Sia $ f \in L^1(\R) $, allora la funzione $ \omega \mapsto \hat{f}(\omega) $ (da $ \R \to \C $) definita da 
+  \begin{align}
+    \F[f(t)](\omega) = \hat{f}(\omega) = \int_{-\infty}^{+\infty} f(t) e^{i\omega t} \,dt
+  \end{align}
+  è detta \textit{trasformata di Fourier} della funzione $ f $, che indicheremo anche con $ \hat{f} $
+\end{definition}
+
+La definizione precedente è ben posta, dato che le funzioni $ L^1(\R) $ sono trasformabili secondo Fourier: se $ f \in L^1(\R) $ allora
+\begin{align} \label{eq: F[f] è limitata}
+  \abs{\int_{-\infty}^{+\infty} f(t) e^{i\omega t} \,dt} \leq \int_{-\infty}^{+\infty} \abs{f(t)} {\TS \abs{e^{i\omega t}}} \,dt 
+  = \int_{-\infty}^{+\infty} \abs{f(t)} \,dt< +\infty
+\end{align}
+dove chiaramente $ \abs{e^{i\omega t}} = 1 $, abbiamo mostrato quindi che l'integrale è assolutamente convergente per ogni $ \omega \in \R $.
+\begin{remark}
+  Se fosse $ \omega \in \C $ allora l'integrale non sarebbe sempre assolutamente convergente, infatti riscrivendo 
+  $ e^{i \omega t} = e^{i x t} \cdot e^{-y t} $ dove $ \omega = x + i y $ abbiamo che per $ y < 0 $ è ancora possibile applicare la convergenza dominata 
+  mentre per $ y > 0 $ l'integranda non è limitata. Tuttavia questa tecnica di passare a una variabile complessa ci sarà utile successivamente per 
+  ricavare le relazioni di Kramers-Kronig.
+\end{remark}
+
+La trasformata di Fourier può essere definita in vari modi cambiando il segno all'esponente o aggiungendo dei fattori davanti, tutti equivalenti purché
+si mantenga la coerenza. In questo testo useremo la convenzione con $ e^{i\omega t} $ e senza fattori moltiplicativi.
+
+\begin{definition}[ Trasformata in $ L^1(\R^n) $ ]
+  Siano $ f \in L^1(\R^n) $, $ x, k \in \R^n $ cioè $ x = (x_1, \dots, x_n) $ e sia $ \sc{x,k} = x_1k_1 + \dots + x_n k_n $ il prodotto scalare euclideo 
+  su $ \R^n $, allora la funzione $ k \mapsto \hat{f}(k) $ definita dall'integrale 
+  \begin{align}
+    \F[f(t)](k) = \hat{f}(k_1, \dots, k_n) = \int_{-\infty}^{+\infty} f(x_1, \dots, x_n) e^{i \sc{x,k}} \,d^nx
+  \end{align}
+  è detta \textit{trasformata di Fourier in $ L^1(\R^n) $}
+\end{definition}
+\begin{lemma}[ Proprietà della trasformata di Fourier ] 
+  Valgono le seguenti proprietà per la trasformata di Fourier:
+  \begin{enumerate}
+    \item $ \F $ è lineare;
+    \item sia $ f \in L^1(\R) $ allora la sua trasformata $ \hat{f}(\omega) $ è limitata;
+    \item la funzione trasformata $ \hat{f}(\omega) $ è continua.
+  \end{enumerate}
+\end{lemma}
+\begin{proof}
+  Andiamo in ordine. La linearità segue da quella dell'integrale, che è valida dato che $ L^1(\R) $ è uno spazio vettoriale.
+  La limitatezza segue dalla catena di disuguaglianze \eqref{eq: F[f] è limitata} e quindi dal fatto che le funzioni $ L^1(\R) $ sono trasformabili per 
+  Fourier. Mostriamo la continuità: 
+  \begin{gather}
+    \abs{\hat{f}(\omega + h) - \hat{f}(\omega)} = \abs{\int_{-\infty}^{+\infty} f(t) \left[ e^{i(\omega + h)t} - e^{i\omega t}\right]\,dt} 
+    \leq \int_{-\infty}^{+\infty} \abs{f(t)}{\TS \abs{e^{i\omega t}} \abs{ e^{iht} - 1} }\,dt
+    \\
+    = \int_{-\infty}^{+\infty} \abs{f(t)} {\abs{ e^{iht} - 1} }\,dt \to 0 \quad \textnormal{per} \quad h \to 0
+  \end{gather}
+  dove possiamo fare il limite $ \lim_{h \to 0} $ per la convergenza dominata di Lebesgue dato che l'integranda è maggiorata da una funzione $ L^1(\R) $ 
+  cioè $ \abs{f(t)} {\abs{ e^{iht} - 1} } \leq 2 \abs{f(t)} $.
+\end{proof}
+
+\begin{lemma}[  ]
+  La trasformata di Fourier conserva la parità, cioè se $ f \in L^1(\R) $ è pari allora $ \hat{f}(\omega) $ è pari e reale, mentre se $ f $ è dispari 
+  allora $ \hat{f}(\omega) $ è dispari e immaginaria.
+\end{lemma}
+\begin{proof}
+  Con la formula di Eulero abbiamo 
+  \begin{align}
+    \hat{f}(\omega) = \int_{-\infty}^{+\infty} f(t) \cos({\omega t}) \,dt + i \int_{-\infty}^{+\infty} f(t) \sin({\omega t}) \,dt
+  \end{align}
+  da cui si vede che se $ f $ è pari il secondo integrale è nullo, mentre se $ f $ è dispari è nullo il primo e quindi la tesi.
+\end{proof}
+
+Abbiamo mostrato alcune proprietà della funzione trasformata $ \hat{f}(\omega) $, fra cui il fatto che è continua e questo ci permette di identificare 
+un codominio dell'operatore $ \F $, vediamo quindi una proprietà di questo operatore.
+
+\begin{lemma}[ Continuità dell'operatore $ \F $ ]
+  L'operatore trasformata di Fourier $ \F: L^1(\R) \to C^0(\R) $ è un operatore continuo.
+\end{lemma}
+\begin{proof}
+  Mostrare la continuità (sequenziale) di $ \F $ significa mostrare che per una successione $ f_n \in L^1(\R) $ tale che $ f_n \to f \in L^1(\R) $ in 
+  norma, allora la successione $ \hat{f}_n \to \hat{f} \in C^0(\R) $ con la norma $ \norm{\cdot}_\infty $. Abbiamo che 
+  \begin{align}
+    \sup_{\omega \in \R} \abs{\hat{f}_n(\omega) - \hat{f}(\omega)} 
+    &= \sup_{\omega \in \R} \abs{\int_{-\infty}^{+\infty} \left[f_n(t) - f(t) \right]e^{i\omega t} \,dt}
+    \leq \sup_{\omega \in \R} \int_{-\infty}^{+\infty} \abs{[f_n(t) - f(t) ]e^{i\omega t}}dt
+    \\
+    &\leq \sup_{\omega \in \R} {\int_{-\infty}^{+\infty} \abs{f_n(t) - f(t)} \,dt } = \norm{f_n(t) - f(t)}_1 \to 0
+  \end{align}
+  e dunque l'operatore $ \F $ è continuo con il codominio $ C^0(\R) $.
+\end{proof}
+
+\begin{theorem}[  ]
+  Valgono le seguenti proprietà di traslazione 
+  \begin{enumerate}
+    \item 
+      \begin{align}
+        \F[f(t - a)] = e^{i\omega a}\F[f(t)]
+      \end{align}
+    \item 
+      \begin{align}
+        \F\left[ e^{-i a t} f(t) \right](\omega) = \F\left[ f(t) \right](\omega - a)
+      \end{align}
+  \end{enumerate}
+  la proprietà di riscalamento
+  \begin{align}
+    \F[f(at)](\omega) = \frac1{\abs{a}} \F[f(t)]\left( \frac{\omega}{a} \right)
+  \end{align}
+  e infine la proprietà di coniugio
+  \begin{align}
+    \F[f^*(t)](\omega) = {\F^*[f(t)](-\omega)}.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Proprietà di traslazione: per la prima abbiamo che
+  \begin{align}
+    \F[f(t - a)] &= \int_{-\infty}^{+\infty} f(t - a) e^{i\omega t} \, dt = \int_{-\infty}^{+\infty} f(t') e^{i\omega (t' + a)} \, dt' 
+    \\
+    &= e^{i\omega a} \int_{-\infty}^{+\infty} f(t') e^{i\omega t'} \, dt' = e^{i\omega a}\F[f(t)]
+  \end{align}
+  mentre per la seconda
+  \begin{align}
+    \F\left[ e^{-i a t} f(t) \right](\omega) = \int_{-\infty}^{+\infty} e^{-i a t} f(t) e^{i\omega t} \, dt 
+    = \int_{-\infty}^{+\infty} f(t ) e^{i(\omega -a) t} \, dt = \F\left[ f(t) \right](\omega - a).
+  \end{align}
+  Per il riscalamento vale 
+  \begin{gather}
+    \F[f(at)](\omega) = \int_{-\infty}^{+\infty} f(at) e^{i\omega t} \, dt 
+    = \frac{1}{\abs{a}} \int_{-\infty}^{+\infty} f(t') e^{i \frac{\omega}{a} t'} \, dt' 
+    \\ 
+    = \frac1{\abs{a}} \F[f(t)]\left( \frac{\omega}{a} \right)
+  \end{gather}
+  dove il valore assoluto è necessario per non invertire l'ordine degli estremi di integrazione.
+  Per il coniugio vale 
+  \begin{gather}
+    \F[f^*(t)](\omega) = \int_{-\infty}^{+\infty} f^*(t) e^{i\omega t} \, dt 
+    = \left( \int_{-\infty}^{+\infty} f(t) e^{- i \frac{\omega}{a} t'} \, dt' \right)^*
+    \\ 
+    = \F^*[f(t)]\left(-\omega \right)
+  \end{gather}
+\end{proof}
+
+\begin{theorem}[ di Riemann-Lebesgue ]
+  Sia $ f \in L^1(\R) $ allora vale il seguente limite:
+  \begin{align}
+    \lim_{\omega \to \pm \infty} \hat{f}(\omega) = 0
+  \end{align}
+  e cioè che 
+  \begin{align}
+    \lim_{\omega \to \pm\infty} \int_{-\infty}^{+\infty} f(t ) e^{i \omega t} \, dt = 0.
+  \end{align}
+\end{theorem}
+
+\section{Derivata della trasformata di Fourier}
+
+Per definire la derivata della trasformata di Fourier vogliamo prima capire per quale classe di funzioni la loro trasformata è una funzione derivabile.
+Per farlo scriviamo il limite del rapporto incrementale della trasformata di $ f \in L^1(\R) $:
+\begin{align}
+  \lim_{h\to 0} \frac{\hat{f}(\omega + h) - \hat{f}(\omega)}{h} 
+  = \lim_{h\to0} \int_{-\infty}^{+\infty} f(t) e^{i\omega t} \left( \frac{e^{iht} - 1 }{h}\right) \, dt 
+  = \int_{-\infty}^{+\infty} i\,t\,f(t) e^{i\omega t} \, dt 
+\end{align}
+dove abbiamo potuto svolgere il limite sempre la convergenza dominata. Dunque per $ f \in L^1(\R) $ la condizione necessaria e sufficiente affinché la 
+funzione trasformata $ \hat{f} $ sia derivabile è che esista finito l'integrale $ \int_{-\infty}^{+\infty} i\,t\,f(t) e^{i\omega t} \, dt $, che come 
+abbiamo già visto equivale a richiedere che $ t f(t) \in L^1(\R) $ 
+Quindi è dimostrato il seguente teorema.
+\begin{theorem}[ Derivata della trasformata di Fourier ]
+  Sia $ f(t), t f(t) \in L^1(\R) $ allora la trasformata di Fourier $ \hat{f}(\omega) $ è derivabile e vale
+  \begin{align}
+    \hat{f}'(\omega) = i \F[t\,f(t)](\omega).
+  \end{align}
+  In generale sia $ k \in \mathbb{N} $, se $ f(t), tf(t), \dots, t^k f(t) \in L^1(\R) $ allora $ \hat{f}^{(k)} $ è ben definita e vale 
+  \begin{align}
+    \hat{f}^{(k)}(\omega) = i^k \F[t^k f(t)](\omega) 
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Abbiamo già mostrato che $ t f(t) \in L^1(\R) $ è una condizione necessaria e sufficiente affinché $ \hat{f}' $ sia ben definita e come si ricava la 
+  sua espressione. Per quanto riguarda la derivata $ k $-esima la condizione che $ t^n f(t) $ sia sommabile ci permette di derivare in $ \omega $ 
+  sotto il segno di integrale per la convergenza dominata di Lebesgue, quindi
+  \begin{align}
+    \hat{f}^{(k)}(\omega) = \frac{d^{k}}{d\omega^k} \int_{-\infty}^{+\infty} f(t) e^{i\omega t} \, dt 
+    = \int_{-\infty}^{+\infty} i^k t^k f(t)e^{i\omega t} \, dt
+  \end{align}
+  e quindi la tesi.
+\end{proof}
+
+Per calcolare la trasformata di Fourier della derivata $ k $-esima di una funzione $ f \in C^k(\R) $ (con tutte le derivate sommabili) 
+possiamo sfruttare la seguente:
+\begin{align}
+  \F[f^{(k)}] &= \int_{-\infty}^{+\infty} f^{(k)}(t) e^{i\omega t} \, dt = - i \omega \int_{-\infty}^{+\infty} f^{(k-1)}(t)e^{i\omega t} \, dt 
+  \\
+  &= -i \omega \F[f^{(k-1)}] = (-i\omega)^k \F[f]
+\end{align}
+
+\section{
+  \texorpdfstring
+  {Trasformata di Fourier in $ L^2(\R) $}
+  {Trasformata di Fourier in L²(R)}
+}
+
+
+
+
 \chapter{Teoria delle distribuzioni}
 \section{Spazi di distribuzioni}
 Prima di costruire la teoria servono alcune nozioni preliminari.
