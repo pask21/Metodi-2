@@ -1252,9 +1252,9 @@ si mantenga la coerenza. In questo testo useremo la convenzione con $ e^{i\omega
   Siano $ f \in L^1(\R^n) $, $ x, k \in \R^n $ cioè $ x = (x_1, \dots, x_n) $ e sia $ \sc{x,k} = x_1k_1 + \dots + x_n k_n $ il prodotto scalare euclideo 
   su $ \R^n $, allora la funzione $ k \mapsto \hat{f}(k) $ definita dall'integrale 
   \begin{align}
-    \F[f(t)](k) = \hat{f}(k_1, \dots, k_n) = \int_{-\infty}^{+\infty} f(x_1, \dots, x_n) e^{i \sc{x,k}} \,d^nx
+    \F[f(t)](k) = \hat{f}(k_1, \dots, k_n) = \int_{\R^n} f(x_1, \dots, x_n) e^{i \sc{x,k}} \,d^nx
   \end{align}
-  è detta \textit{trasformata di Fourier in $ L^1(\R^n) $}
+  è detta \textit{trasformata di Fourier in $ L^1(\R^n) $}.
 \end{definition}
 \begin{lemma}[ Proprietà della trasformata di Fourier ] 
   Valgono le seguenti proprietà per la trasformata di Fourier:
@@ -1452,6 +1452,7 @@ possiamo sfruttare la seguente:
   \\
   &= -i \omega \F[f^{(k-1)}] = (-i\omega)^k \F[f]
 \end{align}
+dove l'ultima uguaglianza è per ricorsione.
 
 \section{
   \texorpdfstring
@@ -1465,8 +1466,79 @@ essere di Hilbert, inoltre molte funzioni fisiche rilevanti sono in questo spazi
 elettromagnetici. Già per questi motivi è utile cercare di definire la trasformata di Fourier su $ L^2(\R) $, vedremo successivamente che questo spazio 
 è quello più naturale in cui ambientare la trasformata di Fourier.
 
+\textbf{BOZZA}: Plancherel per $f = g  \implies $ Plancherel con peso gaussiano (così si può applicare Fubini)
+\begin{lemma}[ di Plancherel ]
+  Se $ f \in L^1(\R) \cap L^2(\R) $ allora 
+  \begin{align}
+    \sc{\hat{f}, \hat{g}}_{L^2(\R)} = 2\pi \sc{f,g}_{L^2(\R)}
+  \end{align}
+  cioè il prodotto scalare in $ L^2 $ delle trasformate è uguale al prodotto scalare delle funzioni a meno di un fattore $ 2\pi $.
+\end{lemma}
+\begin{proof}
+  Si tratta di applicare lo stesso ragionamento del teorema di convoluzione:
+  \begin{align}
+    \sc{\hat{f}, \hat{g}} = \int_{-\infty}^{+\infty} \hat{f}^*(\omega) \hat{g}(\omega) \, d\omega 
+    = \int_{-\infty}^{+\infty} \hat{g}(\omega) \int_{-\infty}^{+\infty} {f}^*(t)e^{-i\omega t} \,dt \, d\omega 
+    \\=  \iint_{-\infty}^{+\infty} {f}^*(t)e^{-i\omega t} \int_{-\infty}^{+\infty} g(y)e^{i\omega y} \, dy \,dt \, d\omega
+  \end{align}
+\end{proof}
 
+\begin{enumerate}
+  \item $ L^1(\R) \cap L^2(\R) $ è denso in $ L^2(\R) $
+  \item presa una successione $ f_n \in L^(\R) \cap L^2(\R) $ tale che $ f_n \to f \in L^2(\R) $ in norma, allora anche $ \hat{f}_n $ converge e si 
+  definisce $ \hat{f} = \lim_n \hat{f}_n $
+  \item la trasformata non dipende dalla successione, cioè per ogni successione convergente a $ f $ si ha che la successione delle trasformate converge 
+  alla trasformata
+\end{enumerate}
 
+\textbf{FINE BOZZA}
+
+\begin{definition}[ ]
+  Sia $ f \in L^2(\R) $, definiamo la trasformata di Fourier di $ f $ come la funzione
+  \begin{align}
+    \hat{f}(\omega) = \lim_{n \to \infty} \hat{f}_n(\omega) = \lim_{n\to\infty} \int_{-n}^{+n} f(t) e^{i\omega t} \,dt
+  \end{align}
+  che si può riscrivere tramite l'integrale in parte principale 
+  \begin{align}
+    \hat{f}(\omega) = \mathcal{P} \int_{-\infty}^{+\infty} f(t) e^{i\omega t} \,dt
+  \end{align}
+\end{definition}
+
+\begin{lemma}[  ]
+  La trasformata di Fourier $ \F: L^2(\R) \to L^2(\R) $ è un operatore lineare
+\end{lemma}
+\begin{proof}
+  Per l'uguaglianza di Parseval si ha che la trasformata di Fourier è una isometria, cioè conserva le norme, pertanto una successione 
+  convergente di funzioni viene mandata in una successione convergente di trasformate.
+\end{proof}
+
+\begin{theorem}[ di inversione di Fourier ]
+  La trasformata di Fourier $ \F: L^2(\R) \to L^2(\R) $ è una biezione e pertanto è invertibile.
+\end{theorem}
+\begin{proof}
+  L'iniettività segue da Parseval perché siano $ \hat{f}_1, \hat{f}_2 \in L^2(\R) $ allora 
+  $ \norm{\hat{f}_1 - \hat{f}_2}_2 = \sqrt{2\pi} \norm{f_1 - f_2}_2 $, e dunque se le immagini coincidono quasi ovunque deve valere anche 
+  per le preimmagini. Per dimostrare la suriettività mostriamo che per una qualsiasi $ g \in L^2(\R) $ è sempre possibile trovare una funzione 
+  $ f \in L^2(\R) $ la cui trasformata è proprio $ g $. Consideriamo la funzione $ f $ definita come
+  \begin{align}
+    f(t) = \frac1{2\pi} \mathcal{P} \int_{-\infty}^{+\infty} g(\omega) e^{-i\omega t} d\omega
+  \end{align}
+  e verifichiamo che $ f \in L^2(\R) $: 
+\end{proof}
+\begin{corollary}
+  L'operatore inverso della trasformata di Fourier $ \F^{-1}: L^2(\R) \to L^2(\R) $ è definito proprio da 
+  \begin{align}
+    f(t) = \frac1{2\pi} \int_{-\infty}^{+\infty} \hat{f}(\omega) e^{-i\omega t} \, d\omega.
+  \end{align}
+\end{corollary}
+
+\begin{definition}[ Antitrasformata in $ L^2(\R^n) $ ]
+  Siano $ f \in L^2(\R^n) $, $ x,k \in \R^n $ e $ \sc{x,k} = x_1 k_1 + \dots + x_nk_n $ il prodotto scalare euclideo in $ \R^n $, allora la funzione 
+  \begin{align}
+    \F^{-1}[f(k)](x) = \frac1{(2\pi)^n} \int_{\R^n} f(x_1, \dots, x_n) e^{-i \sc{x,k}} \, d^nk
+  \end{align}
+  è l'antitrasformata di Fourier della funzione $ f(k) $.
+\end{definition}
 
 
 \chapter{Teoria delle distribuzioni}
