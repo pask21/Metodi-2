@@ -1309,7 +1309,7 @@ un codominio dell'operatore $ \F $, vediamo quindi una proprietà di questo oper
   e dunque l'operatore $ \F $ è continuo con il codominio $ C^0(\R) $.
 \end{proof}
 
-\begin{theorem}[  ]
+\begin{theorem}[  ] \label{thm: traslazione, riscalamento e coniugio della trasformata di Fourier}
   Valgono le seguenti proprietà di traslazione 
   \begin{enumerate}
     \item 
@@ -1424,7 +1424,8 @@ dove abbiamo potuto svolgere il limite sempre la convergenza dominata. Dunque pe
 funzione trasformata $ \hat{f} $ sia derivabile è che esista finito l'integrale $ \int_{-\infty}^{+\infty} i\,t\,f(t) e^{i\omega t} \, dt $, che come 
 abbiamo già visto equivale a richiedere che $ t f(t) \in L^1(\R) $ 
 Quindi è dimostrato il seguente teorema.
-\begin{theorem}[ Derivata della trasformata di Fourier ]
+
+\begin{theorem}[ Derivata della trasformata di Fourier ] \label{thm: derivata della trasformata di Fourier}
   Sia $ f(t), t f(t) \in L^1(\R) $ allora la trasformata di Fourier $ \hat{f}(\omega) $ è derivabile e vale
   \begin{align}
     \hat{f}'(\omega) = i \F[t\,f(t)](\omega).
@@ -1689,7 +1690,7 @@ La nozione di continuità di una distribuzione $ T \in \mathds{X} $ si scrive ne
   per $ k > 1 $, segue che $ \phi \in L^p(\R) \; \forall p \in \mathbb{N} $.
 \end{proof}
 
-\begin{theorem}[  ]
+\begin{theorem}[  ] \label{thm: distribuzione associata a una funzione limitata localmente sommabile}
   Sia $ u(x) \in L_{\text{loc}}^1(\R) $ localmente sommabile e limitata, sia $ \phi \in \S $ una funzione di test, allora il funzionale individuato 
   dall'integrale 
   \begin{align}
@@ -2041,5 +2042,91 @@ per ogni $ \phi \in \E $.
   derivata distribuzionale un operatore continuo allora $ DT_{v_n} \to DT_{\theta} = \delta_0 $ ovvero la tesi.
 \end{proof}
 
+\section{Trasformata di Fourier delle distribuzioni}
+In analogia con quanto fatto con le derivate, vorremmo definire la trasformata di Fourier di una distribuzione associata a una funzione 
+(almeno $ L^1(\R) $) come la trasformata della funzione stessa, cioè se $ u \in L^1(\R) $ allora vorremmo che 
+\begin{align}
+  \F[T_u] = T_{\F[u]}
+\end{align}
+e perciò esplicitando la distribuzione diventa 
+\begin{align}
+  \sc{\F[T_u], \phi} &= \sc{T_{\F[u]}, \phi} = \int_{-\infty}^{+\infty} \hat{u}(x) \phi(x) \,dx 
+  = \int_{-\infty}^{+\infty} \phi(x)  \int_{-\infty}^{+\infty} {u}(k) e^{ikx} \,dk \,dx 
+  \\
+  &= \iint_{-\infty}^{+\infty} \phi(x) {u}(k) e^{ikx}  \,dx \,dk 
+  = \int_{-\infty}^{+\infty} {u}(k) \hat{\phi}(k) \,dk = \sc{T_u, \F[\phi]}
+\end{align}
+dove abbiamo applicato il teorema di Fubini per scambiare l'ordine di integrazione. La trasformata $ \hat{\phi} $ è ben definita per $ \phi \in \S $ 
+dato che $ \S(\R) \subset L^2(\R) $ e abbiamo già definito la trasformata di Fourier per funzioni a quadrato sommabile. 
+Quindi proprio come per le derivate diamo la seguente definizione.
+
+\begin{definition}[ Trasformata di Fourier di una distribuzione ]
+  Siano $ T \in \S' $, $ \phi \in \S $, definiamo la trasformata di Fourier della distribuzione $ T $ come 
+  \begin{align}
+    \sc{\F[T], \phi} \coloneq \sc{T, \F[\phi]}
+  \end{align}
+  cioè come la distribuzione applicata alla trasformata della funzione test $ \hat{\phi} $. Allo stesso modo definiamo  
+  \begin{align}
+    \sc{\F^{-1}[T], \phi} \coloneq \sc{T, \F^{-1}[\phi]}
+  \end{align}
+  come l'antitrasformata della distribuzione $ T $.
+\end{definition}
+
+Calcoliamo la trasformata di $ g = e^{-i a x} $ nel senso delle distribuzioni:
+\begin{align}
+  \sc{\F[T_{e^{-iax}}], \phi} = \sc{T_{e^{-iax}}, \F[\phi]} = \int_{-\infty}^{+\infty} \hat{\phi}(x) e^{-iax} \, dx 
+  = 2\pi \phi(a) = 2\pi \sc{\delta_a, \phi}
+\end{align}
+che è dunque la distribuzione delta nel punto $ a $(per $ 2\pi $), e notiamo che questo vale anche per $ a = 0 $ e cioè $ g = 1 $ costante. Quindi 
+abbiamo che $ \F[c] = c \cdot 2\pi \delta_0 $ con $ c \in \C $ una costante.
+Un altro esempio notevole: calcoliamo l'antitrasformata di $ g = e^{ib\omega} $
+\begin{align}
+  \sc{\F^{-1}[T_{e^{ib\omega}}], \phi} &= \sc{T_{e^{ib\omega}}, \F^{-1}[\phi]} = \int_{-\infty}^{+\infty}e^{ib\omega} \F^{-1}[{\phi}](\omega) \,d\omega
+  \\
+  &= \F[\F^{-1}[\phi]](b) = \phi(b) = \sc{\delta_b, \phi}
+\end{align}
+
+\begin{lemma}[  ]
+  La trasformata di Fourier $ \F:\S' \to \S' $ è un omeomorfismo, ovvero è continuo con inversa continua.
+\end{lemma}
+\begin{proof}
+  Sia $ T_n \to T $ una successione di distribuzioni temperate, allora 
+  \begin{align}
+    \sc{\F[T_n], \phi} = \sc{T_n, \F[\phi]} \to \sc{T, \F[\phi]} = \sc{\F[T], \phi}
+  \end{align}
+  e lo stesso vale per $ \F^{-1} $.
+\end{proof}
+
+\begin{theorem}[  ]
+  Per la trasformata di Fourier delle distribuzioni valgono proprietà analoghe a quelle per la trasformata di funzioni, e cioè 
+  \begin{align}
+    D^k\F[T] =  \F[(ix)^k T] \quad \textnormal{e} \quad \F[D^kT] = (-i\omega)^k \F[T]
+  \end{align}
+\end{theorem}
+
+A funzioni come $ \frac1x, \frac1{x^2} $ che non sono sommabili e nemmeno si possono maggiorare con un polinomio, non ammettono una distribuzione 
+associata nel senso del teorema \ref{thm: distribuzione associata a una funzione limitata localmente sommabile} e neanche nel senso del lemma 
+più forte \ref{lem: successione maggiorata da un polinomio allora converge la distribuzione}. Il problema non sta nel fatto che integriamo andando 
+all'infinito ma bensì nella singolarità in $ x = 0 $, dunque è naturale considerare l'integrale preso in parte principale che ricordiamo essere 
+\begin{align}
+  \P \int_{-R}^{R} \frac1x \,dx = \lim_{\eps \to 0} \left[ \int_{-R}^{-\eps} \frac1x \,dx + \int_{\eps}^{R} \frac1x \,dx \right].
+\end{align}
+Considerando anche gli estremi (quindi unendo con la definizione di integrale improprio) otteniamo i due limiti indipendenti 
+\begin{align}
+  \P \int_{-\infty}^{\infty} \frac1x \,dx 
+  = \lim_{\un{\eps \to 0}{ R \to \infty}} \left[ \int_{-R}^{-\eps} \frac1x \,dx + \int_{\eps}^{R} \frac1x \,dx \right] 
+  = \log \left( \frac{-\eps}{-R} \right) + \log \left( \frac{R}{\eps} \right) = 0.
+\end{align}
+In questo modo ha senso la seguente definizione.
+\begin{definition}[ Distribuzione parte principale ]
+  Sia $ \phi \in \S $, chiameremo la distribuzione definita tramite 
+  \begin{align}
+    \left< \P \frac1x, \phi \right> \coloneq \P \int_{-\infty}^{+\infty} \frac{\phi(x)}{x} \, dx 
+  \end{align}
+  come \textit{Distribuzione parte principale} e la indicheremo con $ \P \frac1x $.
+\end{definition}
+
+Grazie a ciò che abbiamo calcolato prima, se l'integrale converge per una costante allora converge per una qualsiasi funzione a decrescenza rapida 
+quindi la $ \P \frac1x $ è ben definita.
 
 \end{document}
