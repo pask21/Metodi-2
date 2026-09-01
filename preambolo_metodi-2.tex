@@ -152,6 +152,11 @@ patterns
   \langle #1 \rangle
 }
 
+% --- prodotto scalare aggiustabile ---
+\newcommand{\sca}[1]{
+  \left< #1 \right>
+}
+
 % --- vettore ---
 \renewcommand{\v}[1]{
   \mathbf{#1}
@@ -216,6 +221,11 @@ patterns
 \let\P\relax
 \DeclareMathOperator{\P}{
   \mathcal{P}
+}
+
+% --- Funzione segno ---
+\DeclareMathOperator{\sgn}{
+  \textnormal{sgn}
 }
 
 % =================== Spazi ===================

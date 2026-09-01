@@ -1887,44 +1887,51 @@ i limiti continui possono essere riscritti (tutti per quanto ci riguarda) come i
 in questo modo anche su $ \E' $.
 
 Il risultato precedente ci dice che la delta può essere vista come limite continuo o di una successione di distribuzioni, vediamo ora altre 
-successioni che portano alla delta. Sia la successione
-\begin{align}
-  u_n(x) = \frac1{\pi} \frac{n}{1 + n^2x^2} \quad \textnormal{o} \quad u_\eps(x) = \frac1{\pi} \frac{\eps}{\eps^2 + x^2} 
-\end{align}
-che abbiamo riscritto nella versione continua con $ \eps = \frac1{n} $ (che possiamo fare perché $ \frac1{n} $ ha un punto di accumulazione in $ 0 $ 
-perciò il $ \lim_{\eps \to 0^+} $ ha senso). Svolgiamo il limite per $ n\to +\infty $ anche se quello per $ \eps \to 0 $ sarebbe identico:
-\begin{align}
-  \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \lim_{n\to \infty} \frac1{\pi} \int_{-\infty}^{+\infty} \frac{n}{1 + n^2x^2} \phi(x) \, dx 
-  = \lim_{n\to \infty} \frac1{\pi} \int_{-\infty}^{+\infty} \frac1{1 + y^2}\phi \left( \frac{y}{n} \right) \,dy
-\end{align}
-dove abbiamo usato la sostituzione $ y = nx $. Osserviamo che la successione $ f_n = \frac1{1 + y^2} \phi\left( \frac{y}{n} \right) $ converge 
-puntualmente a $ f = \frac1{1+y^2} \phi\left( 0 \right) $, inoltre è maggiorata dalla funzione
-\begin{align}
-  \abs{\frac1{1 + y^2} \phi\left( \frac{y}{n} \right)} \leq \sup_{y\in \R} \abs{\phi(y)} \frac1{1+y^2} \in L^1(\R)
-\end{align}
-per ogni $ n \in \mathbb{N} $, dunque possiamo applicare la convergenza dominata ottenendo 
-\begin{align}
-  \lim_{n\to \infty} \sc{T_{u_n}, \phi} = \frac1{\pi} \int_{-\infty}^{+\infty} \frac1{1+y^2} \lim_{n\to \infty} \phi \left( \frac{y}{n} \right) \,dy 
-  = \phi(0) = \sc{\delta_0, \phi}.
-\end{align}
-Consideriamo ancora la successione 
-\begin{align}
-  u_n(x) = \frac{n}{\sqrt{\pi}} e^{-n^2x^2} \quad \textnormal{o} \quad u_\eps(x) = \frac1{\eps\sqrt{\pi}} e^{-x^2/\eps^2}
-\end{align}
-che sono delle gaussiane centrate in $ x = 0 $. Svolgiamo il limite 
-\begin{align}
-  \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \int_{-\infty}^{+\infty} \frac{n}{\sqrt{\pi}} e^{-n^2x^2} \phi(x) \,dx 
-  = \int_{-\infty}^{+\infty} \frac1{\sqrt{\pi}} e^{-y^2} \phi\left( \frac{y}{n} \right)\,dy
-\end{align}
-ed esattamente come prima abbiamo che la successione $ f_n(y) = \frac1{\sqrt{\pi}} e^{-y^2} \phi\left( \frac{y}{n} \right) $ converge puntualmente a 
-$ f(y) = \frac1{\sqrt{\pi}} e^{-y^2} \phi(0) $ ed è maggiorata dalla funzione
-\begin{align}
-  F(y) = \frac1{\sqrt{\pi}} e^{-y^2} \sup_{y \in \R}\abs{\phi(y)} \in L^1(\R)
-\end{align}
-e quindi possiamo applicare la convergenza dominata di Lebesgue:
-\begin{align}
-  \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \phi(0) \int_{-\infty}^{+\infty} \frac1{\sqrt{\pi}} e^{-y^2} \,dy = \phi(0) = \sc{\delta_0, \phi}.
-\end{align}
+successioni che portano alla delta. 
+\begin{example} \label{exa: successione che converge alla delta}
+  Sia la successione
+  \begin{align}
+    u_n(x) = \frac1{\pi} \frac{n}{1 + n^2x^2} \quad \textnormal{o} \quad u_\eps(x) = \frac1{\pi} \frac{\eps}{\eps^2 + x^2} 
+  \end{align}
+  che abbiamo riscritto nella versione continua con $ \eps = \frac1{n} $ (che possiamo fare perché $ \frac1{n} $ ha un punto di accumulazione in $ 0 $ 
+  perciò il $ \lim_{\eps \to 0^+} $ ha senso). Svolgiamo il limite per $ n\to +\infty $ anche se quello per $ \eps \to 0 $ sarebbe identico:
+  \begin{align}
+    \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \lim_{n\to \infty} \frac1{\pi} \int_{-\infty}^{+\infty} \frac{n}{1 + n^2x^2} \phi(x) \, dx 
+    = \lim_{n\to \infty} \frac1{\pi} \int_{-\infty}^{+\infty} \frac1{1 + y^2}\phi \left( \frac{y}{n} \right) \,dy
+  \end{align}
+  dove abbiamo usato la sostituzione $ y = nx $. Osserviamo che la successione $ f_n = \frac1{1 + y^2} \phi\left( \frac{y}{n} \right) $ converge 
+  puntualmente a $ f = \frac1{1+y^2} \phi\left( 0 \right) $, inoltre è maggiorata dalla funzione
+  \begin{align}
+    \abs{\frac1{1 + y^2} \phi\left( \frac{y}{n} \right)} \leq \sup_{y\in \R} \abs{\phi(y)} \frac1{1+y^2} \in L^1(\R)
+  \end{align}
+  per ogni $ n \in \mathbb{N} $, dunque possiamo applicare la convergenza dominata ottenendo 
+  \begin{align}
+    \lim_{n\to \infty} \sc{T_{u_n}, \phi} = \frac1{\pi} \int_{-\infty}^{+\infty} \frac1{1+y^2} \lim_{n\to \infty} \phi \left( \frac{y}{n} \right) \,dy 
+    = \phi(0) = \sc{\delta_0, \phi}.
+  \end{align}
+\end{example}
+
+\begin{example}
+  Consideriamo ancora la successione 
+  \begin{align}
+    u_n(x) = \frac{n}{\sqrt{\pi}} e^{-n^2x^2} \quad \textnormal{o} \quad u_\eps(x) = \frac1{\eps\sqrt{\pi}} e^{-x^2/\eps^2}
+  \end{align}
+  che sono delle gaussiane centrate in $ x = 0 $. Svolgiamo il limite 
+  \begin{align}
+    \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \int_{-\infty}^{+\infty} \frac{n}{\sqrt{\pi}} e^{-n^2x^2} \phi(x) \,dx 
+    = \int_{-\infty}^{+\infty} \frac1{\sqrt{\pi}} e^{-y^2} \phi\left( \frac{y}{n} \right)\,dy
+  \end{align}
+  ed esattamente come prima abbiamo che la successione $ f_n(y) = \frac1{\sqrt{\pi}} e^{-y^2} \phi\left( \frac{y}{n} \right) $ converge puntualmente a 
+  $ f(y) = \frac1{\sqrt{\pi}} e^{-y^2} \phi(0) $ ed è maggiorata dalla funzione
+  \begin{align}
+    F(y) = \frac1{\sqrt{\pi}} e^{-y^2} \sup_{y \in \R}\abs{\phi(y)} \in L^1(\R)
+  \end{align}
+  e quindi possiamo applicare la convergenza dominata di Lebesgue:
+  \begin{align}
+    \lim_{n \to \infty} \sc{T_{u_n}, \phi} = \phi(0) \int_{-\infty}^{+\infty} \frac1{\sqrt{\pi}} e^{-y^2} \,dy = \phi(0) = \sc{\delta_0, \phi}.
+  \end{align}
+\end{example}
+
 Più avanti mostreremo una intera classe di successioni le cui distribuzioni associate convergono alla delta.
 
 \section{Derivata delle distribuzioni}
@@ -2077,7 +2084,7 @@ Calcoliamo la trasformata di $ g = e^{-i a x} $ nel senso delle distribuzioni:
   \sc{\F[T_{e^{-iax}}], \phi} = \sc{T_{e^{-iax}}, \F[\phi]} = \int_{-\infty}^{+\infty} \hat{\phi}(x) e^{-iax} \, dx 
   = 2\pi \phi(a) = 2\pi \sc{\delta_a, \phi}
 \end{align}
-che è dunque la distribuzione delta nel punto $ a $(per $ 2\pi $), e notiamo che questo vale anche per $ a = 0 $ e cioè $ g = 1 $ costante. Quindi 
+che è dunque la distribuzione delta nel punto $ a $ (per $ 2\pi $), e notiamo che questo vale anche per $ a = 0 $ e cioè $ g = 1 $ costante. Quindi 
 abbiamo che $ \F[c] = c \cdot 2\pi \delta_0 $ con $ c \in \C $ una costante.
 Un altro esempio notevole: calcoliamo l'antitrasformata di $ g = e^{ib\omega} $
 \begin{align}
@@ -2100,7 +2107,7 @@ Un altro esempio notevole: calcoliamo l'antitrasformata di $ g = e^{ib\omega} $
 \begin{theorem}[  ]
   Per la trasformata di Fourier delle distribuzioni valgono proprietà analoghe a quelle per la trasformata di funzioni, e cioè 
   \begin{align}
-    D^k\F[T] =  \F[(ix)^k T] \quad \textnormal{e} \quad \F[D^kT] = (-i\omega)^k \F[T]
+    D^k\F[T] =  \F[(ix)^k T] \quad \textnormal{e} \quad \F[D^kT] = (-i\omega)^k \F[T].
   \end{align}
 \end{theorem}
 
@@ -2127,6 +2134,276 @@ In questo modo ha senso la seguente definizione.
 \end{definition}
 
 Grazie a ciò che abbiamo calcolato prima, se l'integrale converge per una costante allora converge per una qualsiasi funzione a decrescenza rapida 
-quindi la $ \P \frac1x $ è ben definita.
+quindi la $ \P \frac1x $ è ben definita. La distribuzione parte principale si può ottenere limite di una successione di distribuzioni associate, 
+ma comunque non nel senso del lemma \ref{lem: successione maggiorata da un polinomio allora converge la distribuzione}. Sia $ u_n(x) $ la successione 
+definita come 
+\begin{align}
+  u_n(x) = 
+  \begin{cases}
+    \DS 0 \; &\textnormal{per}\; \abs{x} < \frac1n
+    \\
+    \DS\frac1x \; &\textnormal{per}\; \abs{x} > \frac1n
+  \end{cases}
+  \qquad \textnormal{o} \quad u_{\sigma}(x) = 
+  \begin{cases}
+    \DS 0 \; &\textnormal{per}\; \abs{x} < \sigma
+    \\
+    \DS\frac1x \; &\textnormal{per}\; \abs{x} > \sigma
+  \end{cases}
+\end{align}
+e vediamo che la distribuzione $ \P \frac1x $ si ottiene proprio come il limite 
+\begin{align}
+  \lim_{\sigma \to 0} \sc{T_{u_\sigma}, \phi} 
+  = \lim_{\sigma\to0} \int_{-\infty}^{-\sigma} \frac{\phi(x)}{x} \, dx + \int_{\sigma}^{+\infty} \frac{\phi(x)}{x} \, dx = \sca{\P\frac1x, \phi}.
+\end{align}
+Sfruttiamo questo per calcolarne la trasformata di Fourier:
+\begin{gather}
+  \sca{\F\left[ \P\frac1\omega \right], \phi} 
+  = \P \int_{-\infty}^{+\infty} \frac{\hat{\phi}(\omega)}{\omega} \, d\omega 
+  = \P \int_{-\infty}^{+\infty} \frac1\omega \int_{-\infty}^{+\infty} \phi(x) e^{i\omega x}\,dx\,d\omega
+  \\
+  = \int_{-\infty}^{+\infty} \phi(x) \P \int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{\omega} \,d\omega\,dx
+\end{gather}
+dove abbiamo scambiato gli integrali per Fubini. A questo punto ci ritroviamo con un integrale di variabile reale $ \omega $ che non sappiamo svolgere,
+in realtà possiamo applicare le tecniche dell'analisi complessa ridefinendo la variabile $ \omega = \omega_1 + i \omega_2 $. 
+Fissato $ x > 0 $, la funzione $ f=\frac{e^{i\omega x}}{z} $ è analitica in $ \C^* = \C \bs\{0\} $, 
+consideriamo il cammino chiuso $ \Gamma $ composto dai seguenti pezzi:
+\begin{itemize}
+  \item i segmenti $ [-R, -\eps], [\eps, R] $;
+  \item la semicirconferenza $ \gamma_\eps: \omega = \eps e^{i\theta} $ con $ \theta \in [0, \pi] $;
+  \item la semicirconferenza $ C_R $ di raggio $ R $ con centro in $ \omega = 0 $.
+\end{itemize}
+Nell'interno di $ \Gamma $ la funzione $ f $ è analitica per tanto
+\begin{align}
+  \int_{-R}^{-\eps} + \int_{\eps}^{R} + \int_{\gamma_\eps} + \int_{C_R} = \int_{\Gamma} = 0.
+\end{align}
+Calcolando il limite per $ R \to \infty $ abbiamo che l'integrale su $ C^R $ è nullo per il lemma di Jordan, nel limite $ \eps \to 0 $ 
+l'integrale su $ \gamma_\eps $ vale metà del residuo (cambiato di segno per il verso di percorrenza) 
+dato che l'angolo totale che percorre attorno al polo $ \omega = 0 $ è $ \pi $, e quindi rimaniamo con
+\begin{align}
+  \pi i \Res[ f(\omega), \omega = 0 ] = \pi i = \lim_{\un{\eps \to 0}{ R \to \infty}} \int_{-R}^{-\eps} f\,d\omega + \int_{\eps}^{R}f\,d\omega 
+  = \P\int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{\omega}\,d\omega.
+\end{align}
+Il risultato che abbiamo ottenuto valeva per $ x > 0 $, per $ x < 0 $ cambiano segno l'integrale su $ \gamma_\eps $ e quello su $ C_R $ 
+(che è comunque nullo) perché le prendiamo nel semipiano inferiore del piano complesso, dunque il risultato è col segno opposto al caso $ x > 0 $, 
+infine per $ x = 0 $ l'integrale in parte principale di $ \frac1\omega $ è nullo. Per ciò si può esprimere questo risultato mediante la funzione 
+$ \sgn x $ definita come 
+\begin{align}
+  \sgn x = 
+  \begin{cases}
+    +1 \;\;\textnormal{per} &x > 0
+    \\
+    0  \;\;\phantom{per} &x = 0
+    \\
+    -1 \;\;\phantom{per} &x < 0
+  \end{cases}
+\end{align}
+e dunque 
+\begin{align}
+  \P\int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{\omega} \, d\omega = \pi i \sgn x
+\end{align}
+Riportando questo risultato al problema iniziale si trova che 
+\begin{align}
+  \sca{\F\left[ \P\frac1x \right], \phi} = \int_{-\infty}^{+\infty}  \phi(x) \cdot \pi i \sgn(x) \, dx = \pi i\sc{T_{\sgn x}, \phi}.
+\end{align}
+Dunque la trasformata di Fourier della funzione $ \frac1x $ nel senso delle distribuzioni è la funzione $ \pi i\sgn x $. Esplicitando la funzione segno 
+all'interno dell'integrale si ottiene 
+\begin{align}
+  \pi i\sc{T_{\sgn x}, \phi} = \pi i  \int_{0}^{+\infty}  \phi(x) \, dx - \pi i  \int_{-\infty}^{0}  \phi(x) \, dx 
+  = \pi i \int_{-\infty}^{+\infty} \phi(x) + \phi(-x) \, dx.
+\end{align}
+Consideriamo ora la successione $ u_n(x) $ definita come 
+\begin{align}
+  u_n(x) = \frac{\sin(nx)}{\pi x}
+\end{align}
+e calcoliamone la trasformata di Fourier nel senso delle distribuzioni. Ricordando che $ \sin(nx) = \frac1{2i} \left( e^{inx} -e^{-inx} \right) $ si ha
+\begin{gather}
+  \sca{\F\left[ T_{u_n} \right], \phi} = \int_{-\infty}^{+\infty} \frac{\sin(nx)}{\pi x} \hat{\phi}(x) \, dx 
+  = \int_{-\infty}^{+\infty} \frac{e^{inx} -e^{-inx}}{2\pi i x} \int_{-\infty}^{+\infty} \phi(t) e^{ixt} \,dt\,dx
+  \\
+  = \int_{-\infty}^{+\infty} \phi(t) \int_{-\infty}^{+\infty} \frac{e^{inx} -e^{-inx}}{2\pi i x} e^{ixt} \,dx\,dt
+  = \int_{-\infty}^{+\infty} \phi(t) \int_{-\infty}^{+\infty} \frac{e^{ix(n + t)} -e^{-ix(n-t)}}{2\pi i x} \,dx\,dt
+  \\
+  = \frac1{2}\int_{-\infty}^{+\infty} \phi(t) \left[ \sgn (n + t) - \sgn (t - n) \right] \,dt
+\end{gather}
+dove riconosciamo che $ \sgn (n + t) - \sgn (t - n) = 2 \chi_{[-n, n]} $ (funzione caratteristica dell'intervallo). Prendendo il limite per 
+$ n\to\infty $ si ha
+\begin{align}
+  \lim_{n\to\infty} \sca{\F[T_{u_n}], \phi} = \int_{-\infty}^{+\infty} \phi(x)\,dx = \sc{T_1, \phi}
+\end{align}
+dunque la trasformata della successione $ u_n $ è la funzione costante $ 1 $, la cui antitrasformata abbiamo già dimostrato essere la 
+$ \delta $, per tanto concludiamo che il limite della successione $ u_n $ è la delta cioè
+\begin{align}
+  \lim_{n\to\infty} \frac{\sin(nx)}{\pi x} = \delta(x).
+\end{align}
+
+\begin{definition}[ Distribuzioni $ \delta_\pm $ ] 
+  Definiamo le distribuzioni 
+  \begin{align}
+    \delta_\pm(x) \coloneq \frac12\delta{(x)} \pm \frac1{2\pi i} \P\frac1x
+  \end{align}
+  come \textit{distribuzioni delta $ \delta_\pm(x) $}.
+\end{definition}
+
+La trasformata di Fourier delle distribuzioni $ \delta_\pm $ vale 
+\begin{align}
+  \F[\delta_\pm (x)] = \frac12\F[\delta(x)] \pm \frac1{2\pi i} \F\left[ \P\frac1x \right] 
+  = \frac12 \pm \frac1{2\pi i} \pi i \sgn(x) = \frac12 (1 \pm \sgn(x)) = \theta(\pm x).
+\end{align}
+Inoltre se calcoliamo l'antitrasformata della parte principale si ottiene
+\begin{gather}
+  \sca{\F^{-1}\left[ \P\frac1x \right], \phi} = \P\int_{-\infty}^{+\infty} \frac{\F^{-1}[\phi(x)]}{x} \,dx
+  = \frac1{2\pi} \P\int_{-\infty}^{+\infty} \frac1x \int_{-\infty}^{+\infty} \phi(t) e^{-ixt} \,dt\,dx
+  \\
+  = \frac1{2\pi} \P \int_{-\infty}^{+\infty} \phi(t) \int_{-\infty}^{+\infty} \frac{e^{-ixt}}{x} \,dx\,dt
+  = \frac1{2\pi} \P \int_{-\infty}^{+\infty} \phi(t) \pi i \sgn(-t)\,dt = \sca{\frac1{2i}\sgn(t), \phi(t)}
+\end{gather}
+che ci permette di calcolare la trasformata della $ \theta(\pm x) $. Per farlo sfruttiamo il risultato precedente con le $ \delta_\pm(x) $:
+\begin{align}
+  \F[\theta(\pm x)] = \frac12\left( \F[1] \pm \F[\sgn(x)] \right) = \pi \delta(x) \pm i \P\frac1x = 2\pi \delta_{\mp}(x).
+\end{align}
+
+\begin{remark}
+  Le distribuzioni $ \theta(\pm x), \delta_\pm $ godono di una relazione molto simile a quella fra $ 1,\delta_0 $. 
+  In entrambe le coppie, una funzione si ottiene dall'altra mediante trasformata di Fourier a meno di un fattore 
+  $ 2\pi $ pertanto costituiscono un sottospazio invariante rispetto all'operatore trasformata di Fourier. Lo schema può essere rappresentato come 
+  \begin{equation}
+    \setlength{\arraycolsep}{0.35em}
+    \begin{array}{ccccccccccc}
+      \delta_0   & \to & 1               & \to & 2\pi\,\delta_0   & \to & 2\pi                & \to & (2\pi)^2\,\delta_0   & \to & \cdots \\[1.2ex]
+      \delta_\pm & \to & \theta(\pm x)   & \to & 2\pi\,\delta_\mp & \to & 2\pi\,\theta(\mp x) & \to & (2\pi)^2\,\delta_\pm & \to & \cdots
+    \end{array}
+  \end{equation}
+  dove ogni freccia rappresenta l'operazione di trasformata di Fourier, e mediante $ \F^{-1} $ possiamo spostarci verso sinistra.
+\end{remark}
+
+\begin{example}
+  Consideriamo il seguente limite 
+  \begin{align}
+    \lim_{\eps\to0} \frac1{x \pm i\eps}
+  \end{align}
+  tale limite si potrebbe fare nel senso delle funzioni per ogni punto $ x \neq 0 $, ma se lo svolgiamo nel senso delle distribuzioni ci porta ad un
+  risultato più profondo. Dividendo in parte reale e immaginaria si ha 
+  \begin{align}
+    \frac1{x \pm i\eps} = \frac1{x^2 + \eps^2} \left( x \mp i\eps \right)
+  \end{align} 
+  e notiamo subito che la parte immaginaria è una successione convergente alla delta (a meno di un $ \pi $) da quanto abbiamo mostrato nell'esempio 
+  \ref{exa: successione che converge alla delta}. Per quanto riguarda la parte reale sia 
+  \begin{align}
+    u_{\sigma, \eps}(x) = \frac{x}{x^2 + \eps^2}\, \chi_{\abs{x} > \sigma}
+  \end{align}
+  e scriviamo la distribuzione associata come 
+  \begin{align}
+    \sca{ T_{u_{\sigma,\eps}} , \phi} 
+    = \int_{\abs{x} > \sigma} \frac{x \,\phi(x)}{x^2 + \eps^2} \, dx 
+    = \int_{\abs{x} > \sigma} \frac1{1 + \frac{\eps^2}{x^2}}\frac{\phi(x)}{x} \, dx 
+  \end{align}
+  a questo punto possiamo svolgere il limite in $ \eps $ dato che per $ \sigma $ fissato l'integranda è sommabile, e poi il limite in $ \sigma $ 
+  ottenendo la definizione di $ \P\frac1x $, cioè
+  \begin{align}
+    \lim_{\sigma \to 0}\lim_{\eps \to 0} \int_{\abs{x} > \sigma} \frac1{1 + \frac{\eps^2}{x^2}}\frac{\phi(x)}{x} \, dx 
+    =\lim_{\sigma \to 0} \int_{\abs{x} > \sigma} \frac{\phi(x)}{x} \, dx = \P\int_{-\infty}^{+\infty} \frac{\phi(x)}{x} \, dx =\sca{ \P \frac1x,\phi(x)}.
+  \end{align}
+  Il limite in $ \eps $ che abbiamo svolto non è veramente il limite iniziale che volevamo calcolare dato che abbiamo eliminato il pezzo di integrale 
+  in $ \abs{x} < \sigma $, tutta via quel pezzo tende a $ 0 $ in modo uniforme in $ \eps $ e questo si può vedere dal fatto che 
+  $ \frac{x}{x^2 + \eps^2} $ è dispari e la funzione test è regolare. 
+  Mettendo insieme parte reale e immaginaria si ha 
+  \begin{align}
+    \lim_{\eps\to0} \frac1{x \pm i\eps} = \P\frac1x \mp i \pi \delta_0.
+  \end{align}
+\end{example}
+
+\begin{definition}[ Convoluzione di distribuzioni ]
+  Siano $ u,v \in L^1(\R) $ allora definiamo la convoluzione delle distribuzioni $ T_u,T,v $ come 
+  \begin{align}
+    T_u * T_v \coloneq T_{u*v}
+  \end{align}
+  che applicato a una funzione test si riscrive come 
+  \begin{gather}
+    \sc{T_u * T_v,\phi} = \int_{-\infty}^{+\infty} \phi(x) \int_{-\infty}^{+\infty} u(x-y) v(y) \,dx \,dy
+    \\
+    = \int_{-\infty}^{+\infty} v(y) \int_{-\infty}^{+\infty} u(x-y) \phi(x) \,dx \,dy
+    = \int_{-\infty}^{+\infty} v(y) \left( u_- * \phi \right)(y)\,dy = \sc{T_v, u_-*\phi}
+  \end{gather}
+  dove abbiamo definito $ u_(z) = u(-z) $. Allo stesso modo per una distribuzione generica si definisce con 
+  \begin{align}
+    \sc{T_u * T, \phi} \coloneq \sc{T, u_-*\phi} 
+  \end{align}
+  con il vincolo che $ u_- * \phi $ sia ancora una funzione di test per $ T $. La convoluzione di due distribuzioni è ben definita se ha come argomento  
+  ancora una funzione test della distribuzione.
+\end{definition}
+
+\begin{example}
+  Calcoliamo la convoluzione $ T_u * \delta_0 $:
+  \begin{align}
+    \sc{T_u * \delta_0, \phi} = \sc{\delta_0, u_-*\phi} = (u_- * \phi)(0) = \int_{-\infty}^{+\infty} u(y) \phi(y) \, dy = \sc{T_u, \phi}
+  \end{align}
+  e quindi si scrive che 
+  \begin{align}
+    T_u * \delta_0 = T_u.
+  \end{align}
+\end{example}
+
+\begin{lemma}[ Proprietà della convoluzione di distribuzioni ]
+  Sia $ T_1*T_2 $ una convoluzione di distribuzioni ben definita, cioè che c
+  allora valgono le seguenti relazioni;
+  \begin{enumerate}
+    \item $ D(T_1*T_2) = (DT_1) * T_2 = T_1 * (DT_2)$
+    \item $ \F\left[ T_1*T_2 \right] = \F[T_1] \F[T_2] = \hat{T}_1 \hat{T}_2 $
+    \item $ \F^{-1}[\hat{T}_1 * \hat{T}_2] = 2pi T_1T_2 $
+  \end{enumerate}
+\end{lemma}
+
+\begin{remark}
+  Notiamo che la derivata agisce solo su una delle due distribuzioni, mentre la trasformata e l'antitrasformata mantengono la proprietà che avevano con 
+  le funzioni cioè di trasformare convoluzioni in prodotti.
+\end{remark}
+
+\begin{definition}[ Distribuzione traslata ]
+  Data una distribuzione $ T $ si definisce la distribuzione $ T_{(a)} $, con $ a \in \R $, come 
+  \begin{align}
+    \sca{T_{(a)}, \phi}\coloneq \sca{T, \phi_{(-a)}}
+  \end{align}
+  dove $ \phi_{(-a)}(x) \coloneq \phi(x + a) $. Dunque la traslazione di una distribuzione consiste nella traslazione della funzione test.
+\end{definition}
+
+Per le distribuzioni associate a una funzione è facile vedere che vale 
+\begin{align}
+  (T_u)_{(a)} = T_{u_{(a)}}
+\end{align}
+mentre per la distribuzione parte principale vale 
+\begin{align}
+  \left( \P\frac1x \right)_{(a)} = \P\frac1{x-a}.
+\end{align}
+
+Sia $ T \in \S'$ una distribuzione temperata, allora $ \forall \phi \in \S $ valgono le seguenti proprietà di traslazione:
+\begin{enumerate}
+  \item 
+    \begin{gather}
+      \sca{\F\left[ e^{-i a x} T \right], \phi} =  \sca{T, e^{-iax} \hat{\phi}(x)} 
+      = \sca{T, \F[\phi(\omega + a)]} 
+      \\
+      = \sca{\F[T], \phi(\omega+a)}
+      = \sca{(\F[T])_{(a)}, \phi};
+    \end{gather}
+  \item 
+    \begin{gather}
+      \sca{\F\left[ T_{(a)} \right], \phi} = \sca{T_{(a)}, \F[\phi]} = \sca{T, \F[\phi]_{(-a)}} = \sca{T, \F[\phi](x + a)}
+      \\
+      = \sca{T, \F[e^{i\omega a}\phi(\omega)]}  = \sca{\F[T], e^{i\omega a}\phi(\omega)} = \sca{e^{i\omega a}\F[T], \phi(\omega)}.
+    \end{gather}
+\end{enumerate}
+Questi teoremi di traslazione li possiamo riassumere nei due:
+\begin{enumerate}
+  \item 
+    \begin{gather}
+      {\F\left[ e^{-i a x} T \right]} = {\left( \F[T] \right)_{(a)}};
+    \end{gather}
+  \item 
+    \begin{gather}
+      {\F\left[ T_{(a)} \right]} = {e^{i\omega a}\F[T]}.
+    \end{gather}
+\end{enumerate}
+
 
 \end{document}
