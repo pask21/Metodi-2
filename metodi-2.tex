@@ -1541,6 +1541,107 @@ elettromagnetici. Già per questi motivi è utile cercare di definire la trasfor
   è l'antitrasformata di Fourier della funzione $ f(k) $.
 \end{definition}
 
+\section{Trasformata di Laplace}
+
+\begin{definition}[ Trasformata di Laplace ]
+  Sia $ f \in L^1_{\text{loc}}(\R_0^+) $ dove $ \R_0^+ = x \geq 0 $ sono i reali positivi con $ 0 $, e tale che $ f(t) = 0 $ per $ t < 0 $, allora 
+  definiamo la funzione $ s \mapsto \tilde{f}(s) $ definita da 
+  \begin{align}
+    \L\left[ f(t) \right](s) = \int_0^{+\infty} f(t) e^{-st}\, dt = \tilde{f}(s)
+  \end{align}
+  con $ s \in \C $ e $ \text{Re} \,s > \lambda_0 \in \R $. Il semipiano complesso individuato dalla condizione $ s > \lambda_0 $ è detto 
+  \textit{semipiano di convergenza} e $ \lambda_0 $ è detta \textit{ascissa di sommabilità (o di convergenza)}.
+\end{definition}
+
+\begin{theorem}[ Criterio di trasformabilità secondo Laplace ]
+  Sia $ f(t) $, se esistono $ t_0 \geq 0 $, $ M > 0 $ e $ k \in \R $ tali che 
+  \begin{align}
+    \abs{f(t)} \leq M e^{kt} \quad \forall t \geq t_0
+  \end{align}
+  allora $ \L\left[ f(t) \right] $ è ben definita nel semipiano complesso $ \text{Re} \,s > k $ cioè $ k \geq \lambda_0 $.
+\end{theorem}
+
+Per la trasformata di Laplace valgono delle proprietà analoghe alla trasformata di Fourier:
+\begin{enumerate}
+  \item Linearità
+    \begin{align}
+      \L[\alpha f + \beta g] = \alpha \L[f] + \beta \L[g].
+    \end{align}
+  \item Riscalamento
+    \begin{align}
+      \L[f(\alpha t)](s) = \frac1\alpha \L[f(t)]\left( \frac{s}{\alpha} \right) \quad \forall \alpha > 0.
+    \end{align}
+  \item Traslazione
+    \begin{align}
+      \L\left[ e^{ct} f(t) \right] = \L\left[ f(t) \right](s - c)
+      \\
+      \L\left[ f(t-a) \right] = e^{-s a} \L\left[ f(t) \right](s).
+    \end{align}
+  \item Convoluzione
+    \begin{align}
+      \L[(f_1 * f_2)(t)] = \L[f_1] \L[f_2].
+    \end{align}
+\end{enumerate}
+
+Un'altra proprietà che arriva direttamente dalla definizione è che la trasformata di Laplace di una funzione è infinitesima per 
+$ \textnormal{Re} \,s \to +\infty $ cioè 
+\begin{align}
+  \lim_{\textnormal{Re}\,s \to + \infty} \L[f](s) = 0.
+\end{align}
+Inoltre nel semipiano di convergenza la trasformata di Laplace è analitica e la derivata complessa vale 
+\begin{align}
+  \frac{d\tilde{f}}{ds} = \L[-tf(t)]
+\end{align}
+e in generale vale una formula ricorsiva analoga alla trasformata di Fourier cioè
+\begin{align}
+  \tilde{f}^{(n)}(s) = (-1)^n \L\left[ t^n f(t) \right]
+\end{align}
+detta \textit{prima formula fondamentale della trasformata di Laplace}.
+Se la funzione $ f(t) $ è derivabile in $ \R^+ $ allora la trasformata di una derivata vale 
+\begin{align}
+  \L\left[ f'(t) \right]= s\L[f(t)] - f(0)
+\end{align}
+mentre se $ f \in C^n(\R^+) $ si trova per la derivata $ n $-esima la \textit{seconda formula fondamentale della trasformata di Laplace} cioè 
+\begin{align}
+  \L\left[ f^{(n)}(t) \right] &= s^n \L\left[ f(t) \right] - s^{n-1} f(0) - \dots - f^{(n-1)}(0) 
+  \\
+  &= s^n \L[f(t)] - \sum_{k = 0}^{n - 1} s^{n-1-k} f^{(k)}(0).
+\end{align}
+Altri due risultati importanti sono il teorema del valore iniziale e del valore finale: il primo afferma che sotto l'ipotesi che 
+$ f'\in L^1_{\text{loc}}(\R^+_0) $ allora
+\begin{align}
+  \lim_{t\to0^+} f(t) = \lim_{\textnormal{Re}(s) \to + \infty} s \L[f](s)
+\end{align}
+mentre il secondo richiede oltre all'ipotesi che $ f' $ sia localmente sommabile, anche che $ \L[f'] $ abbia ascissa di convergenza $ \lambda_0 < 0  $
+e che esista finito il limite $ \lim_{t\to \infty} f(t) $, se valgono queste ipotesi allora 
+\begin{align}
+  \lim_{t\to+\infty} f(t) = \lim_{s \to 0} s \L[f](s).
+\end{align}
+
+Per quanto riguarda l'inversione della trasformata di Laplace, riscriviamo prima la definizione di $ \L $ in termini della trasformata di Fourier:
+\begin{align}
+  \L[f(t)](s) = \int_0^{+\infty} f(t) e^{-st} dt = \int_0^{+\infty} f(t) e^{-s_1t} e^{-i s_2 t} dt = \F\left[ f(t) e^{-s_1t} \right](\omega = -s_2)
+\end{align}
+dove abbiamo scritto $ s = s_1 + i s_2 $. Per cui possiamo ricavarci la trasformata inversa di Laplace invertendo quella di Fourier:
+\begin{gather}
+  f(t) e^{-s_1 t} = \frac1{2\pi} \int_{-\infty}^{+\infty} \F\left[ f(t) e^{-s_1 t}\right] (\omega) e^{-i\omega t} \,d\omega
+  = \frac1{2\pi} \int_{-\infty}^{+\infty} \F\left[ f(t) e^{-s_1 t}\right] (-s_2) e^{is_2 t} \,ds_2
+  \\
+  = \frac1{2\pi} \int_{-\infty}^{+\infty} \tilde{f} (s_1 + i s_2) e^{is_2 t} \,ds_2
+\end{gather}
+e moltiplicando entrambi i membri per $ e^{s_1 t} $ si ottiene 
+\begin{align}
+  f(t) = \frac1{2\pi}\int_{a-i\infty}^{a+i\infty} \tilde{f}(s) e^{st} \,ds
+\end{align}
+dove l'integrale è fatto sull'asse verticale di ascissa $ s' = a > \lambda_0 $ nel piano complesso. Tale integrale è la 
+\textit{formula di inversione di Riemann-Fourier}. La trasformata di Fourier e quella di Laplace sono tali da poter ricostruire l'una dall'altra nel caso 
+una funzione sia trasformabile secondo entrambi, cioè sia $ f(t) \in L^1(\R^+) $ e $ f(t) = 0 $ per $ t<0 $ esistono entrambe le trasformate e se 
+$ \lambda_0 < 0 $ si ha che 
+\begin{align}
+  \hat{f}(\omega) = \L[f(t)](s = -i\omega) = \tilde{f}(-i\omega).
+\end{align}
+Da ciò segue subito che $ \hat{f}(\omega) $ è analitica nel semipiano complesso $ \textnormal{Re}\, (-i\omega) > \lambda_0 $ e cioè in 
+$ \omega_2 > \lambda_0 $. Inoltre se $ f(t) $ ha supporto compatto allora sia $ \hat{f}(\omega) $ sia $ \tilde{f}(s) $ sono funzioni intere.
 
 \chapter{Teoria delle distribuzioni}
 \section{Spazi di distribuzioni}
@@ -2113,8 +2214,8 @@ Un altro esempio notevole: calcoliamo l'antitrasformata di $ g = e^{ib\omega} $
 
 A funzioni come $ \frac1x, \frac1{x^2} $ che non sono sommabili e nemmeno si possono maggiorare con un polinomio, non ammettono una distribuzione 
 associata nel senso del teorema \ref{thm: distribuzione associata a una funzione limitata localmente sommabile} e neanche nel senso del lemma 
-più forte \ref{lem: successione maggiorata da un polinomio allora converge la distribuzione}. Il problema non sta nel fatto che integriamo andando 
-all'infinito ma bensì nella singolarità in $ x = 0 $, dunque è naturale considerare l'integrale preso in parte principale che ricordiamo essere 
+più forte \ref{lem: successione maggiorata da un polinomio allora converge la distribuzione}. Il problema sta sia nel fatto che integriamo andando 
+all'infinito e sia nella singolarità in $ x = 0 $, dunque è naturale considerare l'integrale preso in parte principale che ricordiamo essere 
 \begin{align}
   \P \int_{-R}^{R} \frac1x \,dx = \lim_{\eps \to 0} \left[ \int_{-R}^{-\eps} \frac1x \,dx + \int_{\eps}^{R} \frac1x \,dx \right].
 \end{align}
@@ -2404,6 +2505,158 @@ Questi teoremi di traslazione li possiamo riassumere nei due:
       {\F\left[ T_{(a)} \right]} = {e^{i\omega a}\F[T]}.
     \end{gather}
 \end{enumerate}
+
+\chapter{Funzione di Green ed equazioni differenziali}
+
+\section{Definizione di funzione di Green}
+Consideriamo un sistema fisico lineare, questo sarà descritto da un operatore differenziale lineare $ L $ che agisce 
+su delle funzioni e ne restituisce altre che noi osserviamo. Sia $ x \in \R^n $ la variabile su cui agisce l'operatore che indicheremo con 
+$ L_x $, allora l'equazione che vogliamo risolvere è 
+\begin{align}
+  L_x a(x) = b(x).
+\end{align}
+Per risolverla sfruttiamo le distribuzioni e in particolare la $ \delta(x) $, infatti diamo la seguente definizione.
+\begin{definition}[ Funzione di Green ]
+  Sia $ L_x $ un operatore differenziale lineare che agisce sulla variabile $ x \in \R^n $, allora definiamo come 
+  \textit{funzione (distribuzione) di Green} 
+  dell'operatore $ L $ una distribuzione $ G $ tale che 
+  \begin{align}
+    L_xG(x, \xi) = \delta(x -\xi)
+  \end{align}
+  con $ \xi \in \R^n $.
+  Cioè per una funzione test $ \phi \in \D(\R^n) $ la funzione $ G $ è tale che 
+  \begin{align}
+    \sca{L_xG(x, \xi), \phi(x)} = \sca{\delta(x - \xi), \phi(x)} = \phi(\xi).
+  \end{align}
+\end{definition}
+
+
+\begin{theorem}[ di Green ]
+  Sia $ V \subset \R^3 $ un volume aperto regolare con superficie $ S = \partial V $, siano $ \phi, \psi $ due funzioni regolari in $ V $ cioè 
+  $ \phi, \psi \in C^2(V) $ e $ C^1\left( \ol{V} \right) $, allora vale la seguente
+  \begin{align}
+    \int_V \psi \nabla^2 \phi - \phi \nabla^2 \psi \,d^3x = \int_S \psi \der{\phi}{{n}} - \phi \der{\psi}{{n}} \,dS
+  \end{align}
+  dove $ \der{\phi}{{n}} = \vec{n} \cdot \nabla \phi $ è la derivata lungo la normale alla superficie orientata verso l'esterno.
+\end{theorem}
+\begin{proof}
+  Partiamo dal teorema della divergenza il quale afferma che dato un campo vettoriale $ \vec{A} $ che sia $ C^1(V) $ e $ C^0\left( \ol{V} \right) $ 
+  allora vale che
+  \begin{align}
+    \int_V \nabla \cdot \vec{A} \,d^3x = \int_S \vec{A} \cdot d\vec{S} = \int_S \vec{A} \cdot \v{n} \,dS.
+  \end{align}
+  Scegliendo $ \v{A} = \psi \nabla \phi $ con $ \phi, \psi \in C^2(V) \cap C^1\left( \ol{V} \right) $ si ha che 
+  $ \nabla \cdot \v{A} = \nabla \psi \cdot \nabla \phi + \psi \nabla^2 \phi $, e per tanto il teorema della divergenza si riscrive come 
+  \begin{align}
+    \int_V \nabla \psi \cdot \nabla \phi + \psi \nabla^2 \phi \,d^3x = \int_S \psi \der{\phi}{n} \,dS
+  \end{align}
+  che è nota come \textit{prima identità di Green}. Sottraendo a questa identità la stessa ma invertendo $ \phi $ e $ \psi $ si elimina il termine 
+  $ \nabla \psi \cdot \nabla \phi $ e diventa la tesi, nota come \textit{seconda identità di Green}
+\end{proof}
+
+Tramite il precedente teorema vogliamo dimostrare che, data l'equazione di Poisson 
+\begin{align}
+  \nabla^2\varphi = -4\pi \rho(\v{x})
+\end{align}
+e la corrispondente equazione per la funzione di Green
+\begin{align}
+  \nabla^2 G(\v{x}) = -4\pi \delta^{3}(\v{x})
+\end{align}
+allora la soluzione è $ G(\v{x}) = \frac{1}{\abs{\v{x}}} $ e la funzione $ \varphi $ si scrive in termini della funzione di Green come 
+\begin{align}
+  \varphi(\v{x}) = \iiint_{\R^3} G(\v{x} - \v{x}') \rho(\v{x}') \,d^3x' = \iiint_{\R^3} \frac{\rho(\v{x}')}{\abs{\v{x} - \v{x}'}} \,d^3x'.
+\end{align}
+Con $ \delta^3(\v{x}) $ indichiamo la generalizzazione di $ \delta(x) $ a spazi di funzioni test $ \phi:\R^3 \to \R $ per cui nel senso delle 
+distribuzioni questa si definisce come 
+\begin{align}
+  \sca{\delta^3(x - \xi), \phi(x)} = \phi(\xi)
+\end{align}
+con $ x,\xi \in \R^3 $, e quindi proprio come la delta di Dirac in $ \R $. Mostrare che il laplaciano di $ \frac1{\abs{x}} $ nel senso delle 
+distribuzioni è $ -4\pi \delta^3(x) $ significa 
+\begin{align}
+  \nabla^2 \frac1{\abs{x}} = -4\pi \delta^3(x) \iff \sca{\nabla^2 T_{\frac1{\abs{x}}}, \phi} = -4\pi \phi(0) 
+\end{align}
+per ogni $ \phi \in \S $. Applicando la definizione di derivata di una distribuzione si ha che 
+\begin{gather}
+  \sca{\nabla^2 T_{\frac1{\abs{x}}}, \phi} = \sca{ T_{\frac1{\abs{x}}}, \nabla^2\phi} = \P \iiint_{\R^3} \frac1{\abs{x}} \nabla^2 \phi (x) \,d^3x
+  \\
+  = \lim_{\un{ \eps \to 0^+}{R \to +\infty}} \iiint_{\eps \leq \abs{x} \leq R} \frac1{\abs{x}} \nabla^2 \phi (x) \,d^3x
+\end{gather}
+e definiamo il volume $ V_{\eps,R} = \{ x \in \R^3: \eps \leq \abs{x} \leq R \} $ il quale rispetta le ipotesi del teorema di Green (aperto regolare).
+La superficie $ S_{\eps,R} = \partial V_{\eps,R} $ è l'unione di due superfici sferiche di raggio rispettivamente $ \eps $ e $ R $ che indichiamo con 
+$ S_\eps, S_R $. Applichiamo il teorema di Green con $ \psi = \frac1{\abs{x}} $ e otteniamo 
+\begin{align}
+  \int_{V_{\eps,R}} \frac1{\abs{x}} \nabla^2 \phi (x) \,d^3x 
+  = \int_{V_{\eps,R}}\nabla^2\left( \frac1{\abs{x}} \right)  \phi (x) \,d^3x 
+  &- \int_{S_\eps} \frac1{\abs{x}} \der{\phi}{{n}} - \phi \der{}{{n}}\left( \frac1{\abs{x}} \right) \,dS
+  \\
+  &+ \int_{S_R} \frac1{\abs{x}} \der{\phi}{{n}} - \phi \der{}{{n}}\left( \frac1{\abs{x}} \right) \,dS
+\end{align}
+dove il segno $ - $ davanti all'integrale su $ S_\eps $ è dovuto al fatto che la normale deve essere presa uscente dal volume, quindi in questo caso verso 
+il centro $ (0,0,0) $ opposta a quella in $ S_R $. Il primo di questi tre termini è nullo perché ($ \abs{x} = r $)
+\begin{align}
+  \nabla^2\left( \frac1r \right) = \frac1{r^2} \der{}{r} \left( r^2 \der{}{r}\left( \frac1r \right)\right) = 0 \quad \forall r \neq 0,
+\end{align}
+per quanto riguarda il terzo termine si ha che 
+\begin{align}
+  \lim_{R \to +\infty} \int_{S_R} \frac1{\abs{x}} \der{\phi}{{n}} - \phi \der{}{{n}}\left( \frac1{\abs{x}} \right) \,dS
+  =  \lim_{R \to +\infty} \int_{S_R}\left( \frac1r \der{\phi}{{n}} + \frac{\phi}{r^2} \right) r^2 d\Omega = 0
+\end{align} 
+perché una distribuzione temperata è infinitesima per $ R\to+\infty $ anche moltiplicata per qualsiasi polinomio.
+Rimane solo il secondo termine:
+\begin{gather}
+  \lim_{\eps \to 0} \int_{S_\eps} \frac1{\abs{x}} \der{\phi}{{n}} - \phi \der{}{{n}}\left( \frac1{\abs{x}} \right) \,dS
+  = \lim_{\eps \to 0} \int_{S_\eps} \left(  \frac1r \der{\phi}{{n}} + \frac{\phi}{r^2} \right) r^2 d\Omega 
+  = \lim_{\eps \to 0} \int_{S_\eps} r \der{\phi}{{n}} + \phi\, d\Omega 
+  \\
+  = \lim_{\eps \to 0} \int_{S_\eps} \eps \der{\phi}{{n}} + \phi(\eps, \theta, \varphi) \, d\Omega = \phi(0) \int_{4\pi} \,d\Omega = 4\pi \phi(0)
+\end{gather}
+dove rimane solo da cambiare di segno per il $ - $ dovuto alla normale. Mettendo tutto insieme si ottiene 
+\begin{align}
+  \sca{\nabla^2 T_{\frac1{\abs{x}}}, \phi} = -4\pi \phi(0) = -4\pi \sca{\delta^3, \phi} 
+\end{align}
+per ogni $ \phi \in \S $.
+
+\section{Equazioni differenziali tramite trasformata di Laplace}
+La trasformata di Laplace al pari della trasformata di Fourier rappresenta uno strumento utile per risolvere delle equazioni differenziali lineari e 
+indipendenti dal tempo. Consideriamo la soluzione di una equazione scritta in termini della funzione di Green del problema:
+\begin{align}
+  b(t) = (G*a)(t) = \int_{-\infty}^{+\infty} G(t - t') a(t') \, dt
+\end{align}
+Se vale che $ a(t) = 0 $ per $ t < 0 $ allora il sistema è causale ($ G(t) = 0 $ per $ t < 0 $) e $ G, a $ sono trasformabili secondo Laplace, allora 
+per il teorema di convoluzione si ha
+\begin{align}
+  \ti{b}(s) = \ti{G}(s) \ti{a}(s)
+\end{align}
+e troviamo $ G(t) $ antitrasformando.
+È possibile estendere la definizione di trasformata di Laplace anche alle distribuzioni temperate con la seguente definizione. 
+\begin{definition}[  ]
+  Sia $ T \in \S' $ a supporto in $ \R^+_0 $, allora si definisce con 
+  \begin{align}
+    \L[T](s) = \sca{T, e^{-st}}
+  \end{align}
+  la trasformata di Laplace della distribuzione temperata $ T $. Notiamo che la trasformata di una distribuzione è una funzione di $ s $, dunque non un 
+  funzionale e perciò non è una distribuzione.
+\end{definition}
+
+La trasformata di Laplace della $ \delta_0 $ vale $ 1 $ dalla definizione
+\begin{align}
+  \L[\delta_0](s) = \sca{\delta_0, e^{-st}} = 1
+\end{align}
+e in generale per la delta $ \delta_a $ abbiamo
+\begin{align}
+  \L[\delta_a](s) = \sca{\delta_a, e^{-st}} = e^{-at}
+\end{align}
+che vale naturalmente solo per $ a > 0 $. Infine la trasformata di Laplace della derivata di una distribuzione $ DT $ si sviluppa come 
+\begin{align}
+  \L\left[ DT \right](s) = \sca{DT, e^{-st}} = - \sca{T, -se^{-st}} = s\L[T](s)
+\end{align}
+la quale si generalizza per la derivata $ n $-esima $ D^nT $ con la formula 
+\begin{align}
+  \L\left[ D^nT \right](s) = \sca{D^nT, e^{-st}} = (-1)^n \sca{T, D^n e^{-st}} = s^n \L[T](s)
+\end{align}
+
+
 
 
 \end{document}

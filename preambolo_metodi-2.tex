@@ -159,7 +159,7 @@ patterns
 
 % --- vettore ---
 \renewcommand{\v}[1]{
-  \mathbf{#1}
+  \vec{#1}
 }
 
 % --- \backslash ---
@@ -263,10 +263,20 @@ patterns
   \mathcal{F}
 }
 
+% --- \hat{} ---
+\newcommand{\h}[1]{
+  \hat{#1}
+}
+
 % --- Laplace ---
 \let\L\relax
 \DeclareMathOperator{\L}{
   \mathcal{L}
+}
+
+% --- \tilde{} ---
+\newcommand{\ti}[1]{
+  \tilde{#1}
 }
 
 % --- Hilbert ---
@@ -274,6 +284,8 @@ patterns
 \DeclareMathOperator{\H}{
   \mathcal{H}
 }
+
+
 
 % =================== Scambi ===================
 
@@ -321,6 +333,5 @@ patterns
 \date{Anno Accademico 2026--2027}
 
 \publishers{
-  Email: \text{c.pascarella2@studenti.unipi.it}\\
-  Versione: v0.1
+  Email: \text{c.pascarella2@studenti.unipi.it}
 }
