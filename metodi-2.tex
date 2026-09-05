@@ -927,7 +927,7 @@ una funzione razionale $ Q(z) $ di grado $ -m $ ha all'infinito uno zero di ordi
 
 \section{Residui di una funzione analitica}
 \begin{definition}[ Residuo ]
-  Sia $ f(Z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ e sia $ z_0 $ un punto singolare isolato, 
+  Sia $ f(z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ e sia $ z_0 $ un punto singolare isolato, 
   si dice \textit{residuo della funzione $ f(z) $} nel punto $ z_0 $ la quantità 
   \begin{align}
     \Res[f(z), z_0] \coloneq a_{-1} = \frac1{2\pi i} \oint_\gamma f(\eta) \,d\eta
@@ -2255,9 +2255,9 @@ definita come
 e vediamo che la distribuzione $ \P \frac1x $ si ottiene proprio come il limite 
 \begin{align}
   \lim_{\sigma \to 0} \sc{T_{u_\sigma}, \phi} 
-  = \lim_{\sigma\to0} \int_{-\infty}^{-\sigma} \frac{\phi(x)}{x} \, dx + \int_{\sigma}^{+\infty} \frac{\phi(x)}{x} \, dx = \sca{\P\frac1x, \phi}.
+  = \lim_{\sigma\to0} \int_{-\infty}^{-\sigma} \frac{\phi(x)}{x} \, dx + \int_{\sigma}^{+\infty} \frac{\phi(x)}{x} \, dx = \sca{\P\frac1x, \phi}
 \end{align}
-Sfruttiamo questo per calcolarne la trasformata di Fourier:
+per ogni $ \phi \in \S $. Sfruttiamo questo per calcolarne la trasformata di Fourier:
 \begin{gather}
   \sca{\F\left[ \P\frac1\omega \right], \phi} 
   = \P \int_{-\infty}^{+\infty} \frac{\hat{\phi}(\omega)}{\omega} \, d\omega 
@@ -2265,14 +2265,23 @@ Sfruttiamo questo per calcolarne la trasformata di Fourier:
   \\
   = \int_{-\infty}^{+\infty} \phi(x) \P \int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{\omega} \,d\omega\,dx
 \end{gather}
-dove abbiamo scambiato gli integrali per Fubini. A questo punto ci ritroviamo con un integrale di variabile reale $ \omega $ che non sappiamo svolgere,
-in realtà possiamo applicare le tecniche dell'analisi complessa ridefinendo la variabile $ \omega = \omega_1 + i \omega_2 $. 
-Fissato $ x > 0 $, la funzione $ f=\frac{e^{i\omega x}}{z} $ è analitica in $ \C^* = \C \bs\{0\} $, 
+\begin{gather}
+  \sca{\F\left[ \P\frac1x \right], \phi} 
+  = \lim_{\un{\eps\to0^+}{R\to+\infty}} \sca{\F\left[ T_{u_{\eps,R}} \right], \phi} 
+  = \lim_{\un{\eps\to0^+}{R\to+\infty}} \sca{T_{\F\left[ u_{\eps,R} \right]}, \phi} 
+\end{gather}
+e quindi si tratta di calcolare la trasformata di Fourier $ \F\left[ u_{\eps, R} \right] $ e cioè
+\begin{align}
+  \F\left[ u_{\eps, R}(x) \right] = \int_{\eps < \abs{x} < R}  \frac{e^{i\omega x}}x \,dx
+\end{align}
+A questo punto ci ritroviamo con un integrale di variabile reale $ x $ che non sappiamo svolgere,
+in realtà possiamo applicare le tecniche dell'analisi complessa definendo la variabile $ z = x + i y $. 
+Fissato $ \omega > 0 $, la funzione $ f(z)=\frac{e^{i\omega z}}{z} $ è analitica in $ \C^* = \C \bs\{0\} $, 
 consideriamo il cammino chiuso $ \Gamma $ composto dai seguenti pezzi:
 \begin{itemize}
   \item i segmenti $ [-R, -\eps], [\eps, R] $;
-  \item la semicirconferenza $ \gamma_\eps: \omega = \eps e^{i\theta} $ con $ \theta \in [0, \pi] $;
-  \item la semicirconferenza $ C_R $ di raggio $ R $ con centro in $ \omega = 0 $.
+  \item la semicirconferenza $ \gamma_\eps: z = \eps e^{i\theta} $ con $ \theta \in [0, \pi] $;
+  \item la semicirconferenza $ C_R $ di raggio $ R $ con centro in $ z = 0 $.
 \end{itemize}
 Nell'interno di $ \Gamma $ la funzione $ f $ è analitica per tanto
 \begin{align}
@@ -2282,32 +2291,39 @@ Calcolando il limite per $ R \to \infty $ abbiamo che l'integrale su $ C^R $ è 
 l'integrale su $ \gamma_\eps $ vale metà del residuo (cambiato di segno per il verso di percorrenza) 
 dato che l'angolo totale che percorre attorno al polo $ \omega = 0 $ è $ \pi $, e quindi rimaniamo con
 \begin{align}
-  \pi i \Res[ f(\omega), \omega = 0 ] = \pi i = \lim_{\un{\eps \to 0}{ R \to \infty}} \int_{-R}^{-\eps} f\,d\omega + \int_{\eps}^{R}f\,d\omega 
-  = \P\int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{\omega}\,d\omega.
+  \pi i \Res[ f(z), z = 0 ] = \pi i 
+  = \lim_{\un{\eps \to 0}{ R \to \infty}} \int_{-R}^{-\eps} f\,dx + \int_{\eps}^{R}f\,dx 
+  = \P\int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{x}\,dx.
 \end{align}
-Il risultato che abbiamo ottenuto valeva per $ x > 0 $, per $ x < 0 $ cambiano segno l'integrale su $ \gamma_\eps $ e quello su $ C_R $ 
-(che è comunque nullo) perché le prendiamo nel semipiano inferiore del piano complesso, dunque il risultato è col segno opposto al caso $ x > 0 $, 
-infine per $ x = 0 $ l'integrale in parte principale di $ \frac1\omega $ è nullo. Per ciò si può esprimere questo risultato mediante la funzione 
-$ \sgn x $ definita come 
+Il risultato che abbiamo ottenuto valeva per $ \omega > 0 $, per $ \omega < 0 $ cambiano segno l'integrale su $ \gamma_\eps $ e quello su $ C_R $ 
+(che è comunque nullo) perché le prendiamo nel semipiano inferiore del piano complesso, dunque il risultato è col segno opposto al caso $ \omega > 0 $, 
+infine per $ \omega = 0 $ l'integrale in parte principale di $ \frac1\omega $ è nullo. Per ciò si può esprimere questo risultato mediante la funzione 
+$ \sgn \omega $ definita come 
 \begin{align}
-  \sgn x = 
+  \sgn \omega = 
   \begin{cases}
-    +1 \;\;\textnormal{per} &x > 0
+    +1 \;\;\textnormal{per} &\omega > 0
     \\
-    0  \;\;\phantom{per} &x = 0
+    0  \;\;\phantom{per} &\omega = 0
     \\
-    -1 \;\;\phantom{per} &x < 0
+    -1 \;\;\phantom{per} &\omega < 0
   \end{cases}
 \end{align}
 e dunque 
 \begin{align}
-  \P\int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{\omega} \, d\omega = \pi i \sgn x
+  \lim_{\un{\eps\to0^+}{R\to+\infty}} \int_{\eps < \abs{x} < R} \frac{e^{i\omega x}}x \,dx = \pi i \sgn(\omega)
 \end{align}
 Riportando questo risultato al problema iniziale si trova che 
 \begin{align}
-  \sca{\F\left[ \P\frac1x \right], \phi} = \int_{-\infty}^{+\infty}  \phi(x) \cdot \pi i \sgn(x) \, dx = \pi i\sc{T_{\sgn x}, \phi}.
+  \sca{\F\left[ \P\frac1x \right], \phi} 
+  = \lim_{\un{\eps\to0^+}{R\to+\infty}} \sca{T_{\F\left[ u_{\eps,R} \right]}, \phi} 
+  = \pi i\sc{T_{\sgn x}, \phi}
 \end{align}
-Dunque la trasformata di Fourier della funzione $ \frac1x $ nel senso delle distribuzioni è la funzione $ \pi i\sgn x $. Esplicitando la funzione segno 
+e per tanto concludiamo che 
+\begin{align}
+  \F\left[ \P\frac1x \right](\omega) = \pi i \sgn(\omega)
+\end{align}
+nel senso delle distribuzioni e soltanto in $ \S' $ dato che $ \P\frac1x $ è una distribuzione temperata. Esplicitando la funzione segno 
 all'interno dell'integrale si ottiene 
 \begin{align}
   \pi i\sc{T_{\sgn x}, \phi} = \pi i  \int_{0}^{+\infty}  \phi(x) \, dx - \pi i  \int_{-\infty}^{0}  \phi(x) \, dx 
