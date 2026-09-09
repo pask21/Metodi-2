@@ -22,7 +22,7 @@ I concetti di limite e di continuità sono gli stessi dell'analisi reale, quindi
 \end{align}
 se
 \begin{align}
-  \forall\,\eps, \delta > 0 \quad |z - z_0| < \delta \implies |f(z) - \alpha| < \eps
+  \forall\eps > 0\; \exists \delta > 0 \quad |z - z_0| < \delta \implies |f(z) - \alpha| < \eps
 \end{align}
 e diremo che la funzione $ f $ è continua nel punto $ z_0 $ se 
 \begin{align}
@@ -99,7 +99,7 @@ Infine può essere utile riportare le condizioni di Cauchy-Riemann in coordinate
 \begin{align}
   f_\rho = \der{f}{\rho} &= \der{f}{x} \der{x}{\rho} + \der{f}{y} \der{y}{\rho} = f_x \cos \varphi + f_y \sin \varphi
   \\
-  f_\varphi = \der{f}{\varphi} &= \der{f}{x} \der{x}{\varphi} + \der{f}{y} \der{y}{\varphi} = - f_x \sin \varphi + f_y \cos \varphi.
+  f_\varphi = \der{f}{\varphi} &= \der{f}{x} \der{x}{\varphi} + \der{f}{y} \der{y}{\varphi} = - \rho \left( f_x \sin \varphi + f_y \cos \varphi \right).
 \end{align}
 Ricombiniamo e otteniamo 
 \begin{align}
@@ -136,7 +136,8 @@ Definiamo anche le funzioni trigonometriche complesse:
   \\
   \sin z &\coloneq \frac{e^{iz} - e^{-iz}}{2i}
 \end{align}
-che risultano anch'esse delle funzioni intere, a differenza delle classiche $ \cos x , \sin x $ che non sono analitiche. Valgono le stesse regole di 
+che risultano anch'esse delle funzioni intere, a differenza delle classiche $ \cos x , \sin x $ che non sono analitiche in $ \C $ cioè considerandole come  
+$ \cos(\textnormal{Re} \,z), \sin(\textnormal{Re} \,z) $. Valgono le stesse regole di 
 derivazione e le stesse identità del caso reale.
 Infine definiamo le funzioni iperboliche complesse:
 \begin{align}
@@ -183,7 +184,7 @@ esattamente come nel caso reale. (Non valgono le proprietà di $ \log(z_1 z_2) \
 
 Definiamo la funzione elevamento a potenza complessa $ \alpha \in \C $ come 
 \begin{align}
-  z^\alpha \coloneq e^{\alpha \log z} = e^{\alpha \left( \log |z| + i\arg z + i2\pi k \right)} = |z|^\alpha e^{i\alpha \arg z} e^{i\alpha 2\pi k},  
+  z^\alpha \coloneq e^{\alpha \log z} = e^{\alpha \left( \log |z| + i\arg z \right)} = |z|^\alpha e^{i\alpha \varphi} e^{i\alpha 2\pi k},  
   \;\; k \in \mathbb{Z}
 \end{align}
 tramite il logaritmo complesso, infatti anch'essa non è univoca. Tramite la derivata del logaritmo complesso si trova facilmente che 
@@ -215,8 +216,10 @@ L'integrale di funzione complessa eredita quindi tutte le proprietà dell'integr
   \end{align}
 \end{lemma}
 \begin{proof}
+  Segue dalle disuguaglianze
   \begin{align}
-    \left| \int_\gamma f(z) \,dz \right| \leq \int_\gamma |f(z)| \,dz \leq M \cdot \int_\gamma dz = M \cdot L
+    \left| \int_\gamma f(z) \,dz \right| \leq \int_a^b |f(\gamma(t))| \abs{\dot{\gamma}(t)} \,dt \leq M \cdot \int_a^b \abs{\dot{\gamma}(t)} \,dt 
+    = M \cdot L
   \end{align}
 \end{proof}
 Riportiamo adesso il teorema di Gauss-Green nel piano dato che ci sarà utile successivamente.
@@ -245,19 +248,21 @@ Riportiamo adesso il teorema di Gauss-Green nel piano dato che ci sarà utile su
 \end{proof}
 Il precedente risultato si può generalizzare domini non semplicemente connessi con il seguente teorema.
 \begin{theorem}[  ]
-  Sia $ \Omega \subset \C $ connesso ad archi, $ f:A \to \C $ e sia $ \Gamma \in C^1_{\text{tratti}}([a,b], \Omega) $, 
+  Sia $ \Omega \subset \C $ connesso ad archi, $ f:\Omega \to \C $ e sia $ \Gamma \in C^1_{\text{tratti}}([a,b], \Omega) $, 
   supponiamo che siano presenti $ p $ buchi all'interno di $ \Gamma $, cioè $ p $ regioni in cui $ f $ non è analitica, ognuna racchiusa da una curva 
   $ \gamma_i $ semplice chiusa, esterne l'una all'altra e tutte contenute in $ \Gamma $. Nella regione interna a $ \Gamma $ ed esterna alle 
   $ \gamma_1, \dots, \gamma_p $ la funzione $ f $ è analitica e vale che
   \begin{align}
-    \oint_\Gamma f(z) \,dz = \sum_{i = 1}^p \oint_{\gamma_i} f(z) \,dz.
+    \oint_\Gamma f(z) \,dz = \sum_{i = 1}^p \oint_{\gamma_i} f(z) \,dz
   \end{align}
+  dove le curve sono tutte orientate positivamente e quindi gli integrali sono percorsi in senso antiorario.
 \end{theorem}
 \begin{proof}
   
 \end{proof}
-Una prima conseguenza del teorema di Cauchy è che l'integrale fra due punti non dipende dal percorso scelto, infatti siano 
-$ \Gamma_1, \Gamma_2 \in C^1_{\text{tratti}}([a,b], \C) $ tali che $ \Gamma_1(a) = \Gamma_2(a) = z_0, \Gamma_1(b) = \Gamma_2(b) = z $, allora
+Una prima conseguenza del teorema di Cauchy è che l'integrale fra due punti non dipende dal percorso scelto, infatti sia $ A\subset \C$ un aperto che 
+contiene solo punti di analiticità di $ f $ e siano $ \Gamma_1, \Gamma_2 \in C^1_{\text{tratti}}([a,b], A) $ dove tali che 
+$ \Gamma_1(a) = \Gamma_2(a) = z_0, \Gamma_1(b) = \Gamma_2(b) = z $, allora
 \begin{align}
   \int_{\Gamma_1} f(\eta) \,d\eta = \int_{\Gamma_2} f(\eta) \,d\eta \eqcolon \int_{z_0}^z f(\eta) \,d\eta.
 \end{align}
@@ -285,7 +290,8 @@ piano complesso senza la semiretta reale negativa, che è semplicemente connesso
 analitica (l'unico punto non definito era $ z = 0 $), allora per il teorema precedente sappiamo che la funzione 
 $ F(z) = \int_{z_0}^{z} \frac{d\eta}{\eta} $ è analitica a sua volta. Avevamo già calcolato una funzione tale che $ F'(z) = f(z) $ ed era il logaritmo 
 complesso, per tanto possiamo dire che $ F(z) = \Log z $ è una primitiva della funzione $ f(z) $ che differisce dalle altre primitive per una costante 
-e cioè $ i2\pi k $, in accordo col teorema dell'analisi in più variabili che primitive diverse di una stessa funzione differiscono per una costante.
+(e in particolare dalle altre determinazioni per $ i2\pi k $), in accordo col teorema dell'analisi in più variabili che primitive diverse di una 
+stessa funzione differiscono per una costante.
 
 \begin{theorem}[ Formula di Cauchy ] \label{thm: formula di Cauchy}
   Sia $ f(z)  $ analitica definita su un aperto $ A \subset \C $, sia $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ semplice chiusa, 
@@ -330,7 +336,7 @@ Abbiamo l'analogo per il minimo.
 Di conseguenza abbiamo che se sul bordo il modulo della funzione è costante allora è costante anche all'interno e viceversa per la continuità 
 delle funzioni olomorfe, quindi possiamo dire che
 \begin{align}
-  |f(z)| = \textnormal{costante} \; \; \forall z \in \partial A \iff f(z) = \textnormal{costante} \; \; \forall z \in A.
+  |f(z)| = \textnormal{costante} \neq 0 \; \; \forall z \in \partial A \iff f(z) = \textnormal{costante} \; \; \forall z \in A.
 \end{align}
 
 \begin{theorem}[  ]
@@ -375,7 +381,7 @@ Osserviamo che con il precedente teorema abbiamo che una funzione analitica poss
   e per il teorema \ref{thm: derivata n-esima di funzioni analitiche} la derivata di una funzione analitica è anch'essa analitica.
 \end{proof}
 Notiamo che questo teorema è in pratica l'inverso del teorema di Cauchy \ref{thm: di Cauchy}.
-\begin{theorem}[ di Liuville ]
+\begin{theorem}[ di Liouville ]
   Sia $ f(z) $ intera (analitica $ \forall z\in \C $) e il suo modulo sia uniformemente limitato, cioè 
   $ \exists M > 0 $ tale che $ |f(z)| \leq M \; \forall z \in \C $, allora $ f(z) = $ costante $ \forall z \in \C $.
 \end{theorem}
@@ -421,10 +427,10 @@ Notiamo che questo teorema è in pratica l'inverso del teorema di Cauchy \ref{th
   $ \sum_{n = 0}^\infty u_n(z) $ è uniformemente convergente. 
 \end{theorem}
 \begin{proof}
-  Dato che $ \sum_{n = 0}^\infty |a_n| $ è convergente allora $ \forall \eps > 0, \; \exists N(\eps) $ tale che 
-  $ \sum_{n = 0}^\infty |a_n|<\eps \; \forall n \geq N(\eps) $, quindi 
+  Dato che $ \sum_{k = 0}^\infty |a_k| $ è convergente allora $ \forall \eps > 0, \; \exists N(\eps) $ tale che 
+  $ \sum_{k = n+1}^\infty |a_k|<\eps \; \forall n \geq N(\eps) $, quindi 
   \begin{align}
-    |R_n(z)| \leq \sum_{k = n + 1}^\infty |u_k(z)| \leq \sum_{n = 0}^\infty |a_n| < \eps \quad \forall n \geq N(\eps),\; \forall z \in A
+    |R_n(z)| \leq \sum_{k = n + 1}^\infty |u_k(z)| \leq \sum_{k = n + 1}^\infty |a_k| < \eps \quad \forall n \geq N(\eps),\; \forall z \in A
   \end{align}
   che significa che la serie converge uniformemente.
 \end{proof}
@@ -478,12 +484,12 @@ per cui la serie è assolutamente convergente e quindi converge.
 \end{theorem}
 Da notare che il teorema non ci dà alcuna informazione per il cerchio $ \abs{z - z_0} = \abs{z_1 - z_0} $.
 \begin{proof}
-  Preso $ z $ nel disco $ \abs{z - z_0} < \abs{z_1 - z_0} $ definiamo la quantità $ q = \frac{\abs{z - z_0}}{\abs{z_1 - z_0}} \leq 1 $, dato che la serie 
+  Preso $ z $ nel disco $ \abs{z - z_0} < \abs{z_1 - z_0} $ definiamo la quantità $ q = \frac{\abs{z - z_0}}{\abs{z_1 - z_0}}  1 $, dato che la serie 
   $ \sum_n a_n (z_1 - z_0)^n $ è convergente si ha che la successione $ a_n (z_1 - z_0)^n $ è infinitesima e in particolare limitata, cioè 
   $ \exists M \geq 0  $ tale che $ \abs{a_n (z_1 - z_0)^n} \leq M \; \forall n $. Allora abbiamo che 
   \begin{align}
-    \sum_{n} \abs{a_n} \abs{z - z_0}^n = \sum_n \abs{a_n} \abs{z_1 - z_0}^n q^n 
-    \left( \leq \sum_{n} \abs{a_n} \abs{z_1 - z_0}^n \right) \cdot \sum_n q^n \leq M \cdot \frac1{1 - q}
+    \sum_{n} \abs{a_n} \abs{z - z_0}^n = \sum_n \abs{a_n} \abs{z_1 - z_0}^n q^n \leq
+    \left( \sum_{n} \abs{a_n} \abs{z_1 - z_0}^n \right) \cdot \sum_n q^n \leq M \cdot \frac1{1 - q}
   \end{align}
   quindi è assolutamente convergente $ \forall z : \abs{z - z_0} < \abs{z_1 - z_0} $. Inoltre, dato che abbiamo trovato una successione 
   $ \abs{q^n} \geq \abs{a_n (z - z_0)^n} $ la cui serie (geometrica) converge, si ha per il criterio di Weierstrass che la serie 
@@ -575,7 +581,7 @@ La serie con $ a_n = 1 \,\forall n $ è detta \textit{serie geometrica complessa
   dove abbiamo usato il fatto che $ \abs{q} < 1 $ per scrivere $ \frac1{1-q} $ come somma di una serie geometrica. Sostituendo nell'integrale diventa
   \begin{gather}
     f(z) = \frac1{2\pi i} \oint_{C_r} f(\eta) \sum_{n=0}^\infty \frac{(z - z_0)^n}{(\eta - z_0)^{n+1}} \, d\eta 
-    = \sum_{n=0}^\infty (z - z_0)^n \frac1{2\pi i} \oint_{C_r} \frac{f(\eta)}{(\eta - z)^{n+1}} \,d\eta 
+    = \sum_{n=0}^\infty (z - z_0)^n \frac1{2\pi i} \oint_{C_r} \frac{f(\eta)}{(\eta - z_0)^{n+1}} \,d\eta 
     \\
     = \sum_{n=0}^\infty (z - z_0)^n \cdot \frac{f^{(n)}(z_0)}{n!}
   \end{gather}
@@ -651,8 +657,8 @@ Quindi può avere un numero infinito di zeri solo in un dominio aperto o illimit
   non può avere punti di accumulazione in $ A $, dunque se ne ha almeno uno la funzione è nulla e quindi $ f_1,f_2 $ sono identiche.
 \end{proof}
 \begin{corollary}
-  Se $ f_1(z), f_2(z) $ analitiche in un connesso $ A $ assumono gli stessi valori su una curva $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ allora 
-  le funzioni sono identiche in $ A $.
+  Se $ f_1(z), f_2(z) $ analitiche in un connesso $ A $ assumono gli stessi valori su una curva $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ 
+  (non costante) allora le funzioni sono identiche in $ A $.
 \end{corollary}
 \begin{proof}
   È una conseguenza diretta del teorema di unicità.
@@ -665,7 +671,7 @@ stessa funzione, dunque l'identità trigonometrica $ \cos^2 z + \sin^2 z = 1 $ v
 \begin{theorem}[ di de l'Hôpital ]
   Siano $ f(z), g(z) $ analitiche in un dominio $ A $ e sia $ z_0 \in A $ uno zero di ordine $ n $ per entrambe, allora si ha che 
   \begin{align}
-    \lim_{z \to z_0} \frac{f(z)}{g(z)} = \lim_{z \to z_0} \frac{f^{(n)}(z)}{g^{(n)}(z)} = \frac{f^{(n)}(z)}{g^{(n)}(z)}.
+    \lim_{z \to z_0} \frac{f(z)}{g(z)} = \lim_{z \to z_0} \frac{f^{(n)}(z)}{g^{(n)}(z)} = \frac{f^{(n)}(z_0)}{g^{(n)}(z_0)}.
   \end{align}
 \end{theorem}
 \begin{proof}
@@ -673,7 +679,7 @@ stessa funzione, dunque l'identità trigonometrica $ \cos^2 z + \sin^2 z = 1 $ v
   intorno di $ z_0 $ possiamo sviluppare in serie le due funzioni, e in particolare il denominatore non si annulla per il teorema 
   \ref{thm: gli zeri sono punti isolati} che afferma che gli zeri sono punti isolati, e abbiamo 
   \begin{align}
-    f(z) = \sum_{k = n}^\infty c_k (z - z_0)^k = (z - z_0)^n \sum_{k = 0}^\infty c_{k + n} (z - z_0)^{k - n}
+    f(z) = \sum_{k = n}^\infty c_k (z - z_0)^k = (z - z_0)^n \sum_{k = 0}^\infty c_{k + n} (z - z_0)^{k}
   \end{align}
   e lo stesso per $ g $. Valutando il limite si ha
   \begin{align}
@@ -689,7 +695,7 @@ stessa funzione, dunque l'identità trigonometrica $ \cos^2 z + \sin^2 z = 1 $ v
   \end{align}
   come \textit{serie bilatera} o \textit{serie di Taylor-Laurent}, che può essere scritta nella forma 
   \begin{align}
-    \sum_{n = 0}^{\infty} a_n (z - z_0)^n + \sum_{n = 1}^\infty \frac{c_{-n}}{(z - z_0)^n}
+    \sum_{n = 0}^{\infty} a_n (z - z_0)^n + \sum_{n = 1}^\infty \frac{a_{-n}}{(z - z_0)^n}
   \end{align}
   e indicheremo il primo termine come parte di Taylor e il secondo come parte di Laurent.
 \end{definition}
@@ -783,8 +789,8 @@ Di seguito classificheremo i punti singolari isolati in tre casi possibili.
     \leq \frac1{2\pi} {\oint_\gamma \frac{\abs{f(\eta)}}{\abs{\eta - z_0}^{n+1}} \,d\eta} 
     \leq \frac{M}{\rho^{n}} \to 0 \quad \textnormal{per} \; n < 0 \; \textnormal{e} \; \rho \to 0
   \end{align}
-  dove $ \gamma $ è la circonferenza di raggio $ \rho $ e centro in $ z_0 $. Abbiamo mostrato quindi che ogni coefficiente della serie di Laurent tende a 
-  $ 0 $ dunque per la convergenza uniforme la serie di Laurent è identicamente nulla e per tanto $ z_0 $ è una singolarità eliminabile di $ f $.
+  dove $ \gamma $ è la circonferenza di raggio $ \rho $ e centro in $ z_0 $. Abbiamo mostrato quindi che ogni coefficiente della serie di Laurent 
+  è nullo dunque per la convergenza uniforme la serie di Laurent è identicamente nulla e per tanto $ z_0 $ è una singolarità eliminabile di $ f $.
 \end{proof}
 
 Un esempio è la (classica) funzione $ \frac{\sin z}{z} $ analitica in $ \C^* $, possiamo mostrare che $ z_0 = 0 $ è una singolarità eliminabile in tre 
@@ -823,7 +829,7 @@ questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo
   Sia $ f(z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ ($ r = 0!!$), se i coefficienti dello sviluppo di Laurent sono un 
   numero finito $ m $, allora $ z_0 $ si dice \textit{polo di ordine $ m $} della funzione $ f $, cioè
   \begin{align}
-    a_{n} = 0 \; \forall n < -m \; \text{e} \; a_m \neq 0 \iff z_0 \; \text{è un polo di ordine $ m $}.
+    a_{n} = 0 \; \forall n < -m \; \text{e} \; a_{-m} \neq 0 \iff z_0 \; \text{è un polo di ordine $ m $}.
   \end{align}
 \end{definition}
 \begin{theorem}[ Condizione necessaria e sufficiente per poli di ordine $ m $ ]
@@ -882,7 +888,7 @@ Sulle singolarità essenziali ci sono dei risultati molto potenti e affascinanti
   qualsiasi intorno di $ z_0 $ la funzione assume ogni numero complesso infinite volte, con al più un'eccezione.
 \end{theorem}
 Una singolarità essenziale è ad esempio $ z_0 = 0 $ per la funzione $ f(z) = e^{\frac1z} $: il limite non esiste e per notarlo basta fare il limite destro 
-e sinistro sull'asse reale che valgono rispettivamente $ +\infty $ e $ -\infty $, e lo sviluppo in serie vale
+e sinistro sull'asse reale che valgono rispettivamente $ +\infty $ e $ 0 $, e lo sviluppo in serie vale
 \begin{align}
   e^{\frac1z} = \sum_{n = 0}^\infty \frac1{n!} \cdot \left( \frac1z \right)^n.
 \end{align}
@@ -911,8 +917,8 @@ Il punto all'infinito è l'equivalente della punto singolare per la mappa che ma
 È il caso della funzione $ \frac1z $, analitica per $ \abs{z} > 0 $ e parte di Taylor chiaramente nulla, infatti il limite per $ z \to \infty $ vale 
 $ a_0 = 0 $.
 \begin{theorem}[  ]
-  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $ e sia $ a_{-m} $ (con $ m > 1 $) il primo termine non nullo dello sviluppo di Laurent, 
-  allora $ z = \infty $ è uno zero di ordine $ m $ della funzione $ f $.
+  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor è nulla e $ a_{-m} $ (con $ m \geq 1 $) è il primo termine non nullo 
+  dello sviluppo di Laurent, allora $ z = \infty $ è uno zero di ordine $ m $ della funzione $ f $.
 \end{theorem}
 \begin{theorem}[  ]
   Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $ e sia $ a_{m} $ l'ultimo coefficiente non nullo dello sviluppo di Taylor, allora $ z = \infty $ 
@@ -1089,17 +1095,17 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   e tale quantità la indicheremo con i simboli $ \nabla^2u, \Delta_2 u, \Delta u $ che si leggono \textit{laplaciano di $ u $}
 \end{definition}
 \begin{theorem}[  ]
-  Sia $ f(z) = u(x,y) + i v(x,y) $ una funzione armonica in $ \Omega \subset \C $, con $ z = x + iy $, allora $ u(x,y), v(x,y) $ sono funzioni armoniche. 
+  Sia $ f(z) = u(x,y) + i v(x,y) $ una funzione analitica in $ \Omega \subset \C $, con $ z = x + iy $, allora $ u(x,y), v(x,y) $ sono funzioni armoniche. 
 \end{theorem}
 \begin{proof}
   In tanto la tesi è ben posta perché $ u(x,y), v(x,y): \R^2 \to \R $, e per ottenerla deriviamo le condizioni di Cauchy-Riemann che sono valide 
-  dato che $ f(z) $ è armonica, ottenendo
+  dato che $ f(z) $ è analitica, ottenendo
   \begin{align}
     \der{}{x} \left( u_x - v_y = 0 \right) &\implies u_{xx} - v_{yx} = 0
     \\
     \der{}{y} \left( u_y + v_x = 0 \right) &\implies u_{yy} + v_{xy} = 0
   \end{align} 
-  dove possiamo applicare il teorema di Schwarz perché $ f $ armonica ha tutte le derivate armoniche per il teorema 
+  dove possiamo applicare il teorema di Schwarz perché $ f $ analitica ha tutte le derivate analitiche per il teorema 
   \ref{thm: derivata n-esima di funzioni analitiche}, e dunque 
   \begin{align}
     u_{yy} = - v_{yx} \implies u_{xx} + u_{yy} = 0
@@ -1118,7 +1124,7 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
 \end{theorem}
 \begin{proof}
   Consideriamo la forma differenziale $ \omega = -u_y \,dx + u_x \,dy $, dato che $ u $ è armonica abbiamo che $ \omega $ è chiusa infatti 
-  $ \der{-u_y}{y} = \der{u_x}{y} $, ma chiusa in un semplicemente connesso implica che $ \omega $ è anche esatta, allora esiste una primitiva $ v $ tale 
+  $ -\der{u_y}{y} = \der{u_x}{x} $, ma chiusa in un semplicemente connesso implica che $ \omega $ è anche esatta, allora esiste una primitiva $ v $ tale 
   che $ dv = v_x\,dx + v_y\,dy = \omega = -u_y \,dx + u_x \,dy $. Uguagliando i funzionali si ottiene proprio le relazioni di Cauchy-Riemann 
   \begin{align}
     \begin{cases}
@@ -1127,7 +1133,7 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
       \DS u_y = -v_x
     \end{cases}
   \end{align}
-  e dato che la primitiva di una forma differenziale esatta è unica a meno di una costante abbiamo la tesi.
+  da cui si ha che $ v $ è armonica, infine dato che la primitiva di una forma differenziale esatta è unica a meno di una costante abbiamo la tesi.
 \end{proof}
 \begin{theorem}[ della media per le funzioni armoniche ]
   Sia $ u(x,y) $ armonica nell'aperto $ \Omega \subset \R^2 $ e sia $ D \subset \Omega $ 
@@ -1202,13 +1208,17 @@ geometrico e il concetto analitico sono equivalenti.
   e dunque gli angoli sono localmente conservati.
 \end{proof}
 
-Una trasformazione conforme utile è quella di Möebius $ f(z) = \frac{az + b}{cz + d} $ con $ a,c \neq 0 $, analitica in $ z \neq -d/c $ dove ha un 
-polo di ordine $ 1 $. $ f'(z) =  $
+Una trasformazione conforme utile è quella di Möbius $ f(z) = \frac{az + b}{cz + d} $, analitica in $ z \neq -d/c $ dove ha un 
+polo di ordine $ 1 $, e derivando $ f'(z) = \frac{ad - bc}{(cz + d)^2} $ si ottiene la condizione $ ad - bc \neq 0 $.
 
 \begin{theorem}[ di Riemann ]
-  Per ogni dominio $ A\subset \C $ semplicemente connesso esiste una trasformazione conforme $ f(z) $ tale che $ f(A) = D_1 $ dove $ D_1 $ è il 
-  disco di raggio $ 1 $ centrato in $ z = 0 $, cioè $ D_1 = \{\abs{z} < 1\} $.
+  Per ogni dominio $ A\subset \C $ ($ A \neq C $) semplicemente connesso esiste una trasformazione conforme $ f(z) $ tale che $ f(A) = D_1 $ 
+  dove $ D_1 $ è il disco di raggio $ 1 $ centrato in $ z = 0 $, cioè $ D_1 = \{\abs{z} < 1\} $.
 \end{theorem}
+
+Da notare che il precedente teorema non vale per $ A \neq \C $ proprio per il teorema di Liouville, perché la trasformazione conforme richiesta sarebbe 
+allora intera e limitata dato che $ f(\C) \subset D_1 \implies \abs{f(z)} < 1 $, e dunque sarebbe costante per il teorema di Liouville, e quindi non può 
+essere suriettiva (e nemmeno iniettiva) su $ D_1 $.
 
 \chapter{Trasformata di Fourier e di Laplace}
 
@@ -1239,10 +1249,10 @@ La definizione precedente è ben posta, dato che le funzioni $ L^1(\R) $ sono tr
 \end{align}
 dove chiaramente $ \abs{e^{i\omega t}} = 1 $, abbiamo mostrato quindi che l'integrale è assolutamente convergente per ogni $ \omega \in \R $.
 \begin{remark}
-  Se fosse $ \omega \in \C $ allora l'integrale non sarebbe sempre assolutamente convergente, infatti riscrivendo 
-  $ e^{i \omega t} = e^{i x t} \cdot e^{-y t} $ dove $ \omega = x + i y $ abbiamo che per $ y < 0 $ è ancora possibile applicare la convergenza dominata 
-  mentre per $ y > 0 $ l'integranda non è limitata. Tuttavia questa tecnica di passare a una variabile complessa ci sarà utile successivamente per 
-  ricavare le relazioni di Kramers-Kronig.
+  Se fosse $ \omega \in \C $ allora riscrivendo $ e^{i \omega t} = e^{i x t} \cdot e^{-y t} $ dove $ \omega = x + i y $ abbiamo che 
+  per $ y \neq 0 $ servono delle ipotesi aggiuntive affinché l'integrale converga assolutamente. Ad esempio per $ y > 0 $ e $ f(t) = 0 $ 
+  per $ t < 0 $ si ha che l'integrale converge assolutamente ed è il caso della trasformata di Laplace. Tuttavia questa tecnica di passare a una 
+  variabile complessa ci sarà utile successivamente per ricavare le relazioni di Kramers-Kronig.
 \end{remark}
 
 La trasformata di Fourier può essere definita in vari modi cambiando il segno all'esponente o aggiungendo dei fattori davanti, tutti equivalenti purché
@@ -1279,8 +1289,8 @@ si mantenga la coerenza. In questo testo useremo la convenzione con $ e^{i\omega
 \end{proof}
 
 \begin{lemma}[  ]
-  La trasformata di Fourier conserva la parità, cioè se $ f \in L^1(\R) $ è pari allora $ \hat{f}(\omega) $ è pari e reale, mentre se $ f $ è dispari 
-  allora $ \hat{f}(\omega) $ è dispari e immaginaria.
+  La trasformata di Fourier conserva la parità, cioè se $ f \in L^1(\R) $ reale è pari allora $ \hat{f}(\omega) $ è pari e reale, mentre se $ f $ è 
+  dispari allora $ \hat{f}(\omega) $ è dispari e immaginaria.
 \end{lemma}
 \begin{proof}
   Con la formula di Eulero abbiamo 
@@ -1420,9 +1430,9 @@ Per farlo scriviamo il limite del rapporto incrementale della trasformata di $ f
   = \lim_{h\to0} \int_{-\infty}^{+\infty} f(t) e^{i\omega t} \left( \frac{e^{iht} - 1 }{h}\right) \, dt 
   = \int_{-\infty}^{+\infty} i\,t\,f(t) e^{i\omega t} \, dt 
 \end{align}
-dove abbiamo potuto svolgere il limite sempre la convergenza dominata. Dunque per $ f \in L^1(\R) $ la condizione necessaria e sufficiente affinché la 
-funzione trasformata $ \hat{f} $ sia derivabile è che esista finito l'integrale $ \int_{-\infty}^{+\infty} i\,t\,f(t) e^{i\omega t} \, dt $, che come 
-abbiamo già visto equivale a richiedere che $ t f(t) \in L^1(\R) $ 
+dove abbiamo potuto svolgere il limite sempre per la convergenza dominata. Dunque per $ f \in L^1(\R) $ la condizione che $ t f(t)\in \L^1(\R) $ 
+è sufficiente affinché la funzione trasformata $ \hat{f} $ sia derivabile, cioè che esista finito l'integrale 
+$ \int_{-\infty}^{+\infty} i\,t\,f(t) e^{i\omega t} \, dt $
 Quindi è dimostrato il seguente teorema.
 
 \begin{theorem}[ Derivata della trasformata di Fourier ] \label{thm: derivata della trasformata di Fourier}
@@ -1453,7 +1463,8 @@ possiamo sfruttare la seguente:
   \\
   &= -i \omega \F[f^{(k-1)}] = (-i\omega)^k \F[f]
 \end{align}
-dove l'ultima uguaglianza è per ricorsione.
+dove l'ultima uguaglianza è per ricorsione e i termini di bordo degli integrali per parti sono nulli dato che le derivate di $ f $ sono tutte sommabili 
+e quindi infinitesime.
 
 \section{
   \texorpdfstring
@@ -1495,22 +1506,30 @@ elettromagnetici. Già per questi motivi è utile cercare di definire la trasfor
 \textbf{FINE BOZZA}
 
 \begin{definition}[ ]
-  Sia $ f \in L^2(\R) $, definiamo la trasformata di Fourier di $ f $ come la funzione
+  Sia $ f \in L^2(\R) $ e sia $ F_n(\omega) $ la successione definita come 
   \begin{align}
-    \hat{f}(\omega) = \lim_{n \to \infty} \hat{f}_n(\omega) = \lim_{n\to\infty} \int_{-n}^{+n} f(t) e^{i\omega t} \,dt
-  \end{align}
-  che si può riscrivere tramite l'integrale in parte principale 
+    F_n(\omega) = \int_{-n}^{n} f(t) e^{i\omega t} \,dt= \int_{-\infty}^{+\infty} f(t) \chi_{(-n , n)} e^{i\omega t} \, dt
+  \end{align}  
+  allora definiamo la trasformata di Fourier di $ f $ come l'elemento $ \hat{f} $ della classe di funzioni uguali q.o. tali che 
   \begin{align}
-    \hat{f}(\omega) = \mathcal{P} \int_{-\infty}^{+\infty} f(t) e^{i\omega t} \,dt
+    \lim_{n\to+\infty} \norm{\hat{f} - F_n}_2 = \lim_{n\to+\infty} \norm{\hat{f} - \int_{-n}^{n} f(t) e^{i\omega t} \,dt}_2 = 0.
   \end{align}
 \end{definition}
 
+Notiamo che la precedente definizione è ben posta per i seguenti motivi: la funzione $ f(t) \chi_{(-n, n)} e^{i\omega t} $ è a supporto compatto quindi 
+è sommabile; la successione $ F_n $ è di Cauchy perché
+\begin{align}
+  \norm{F_n - F_m}_2^2 = 2\pi \int_{m < \abs{t} < n} \abs{f(t)}^2 \,dt \to 0 \;\; \textnormal{per}\; m,n \to +\infty
+\end{align}
+dove abbiamo applicato Plancherel; infine $ L^2(\R) $ è completo e quindi la successione di Cauchy $ F_n $ converge a un unico elemento nella classe delle 
+funzioni quasi ovunque (cioè in $ L^2(\R)/\sim $ con $ \sim $ la relazione di equivalenza quasi ovunque).
+
 \begin{lemma}[  ]
-  La trasformata di Fourier $ \F: L^2(\R) \to L^2(\R) $ è un operatore lineare
+  La trasformata di Fourier $ \F: L^2(\R) \to L^2(\R) $ è un operatore lineare.
 \end{lemma}
 \begin{proof}
-  Per l'uguaglianza di Parseval si ha che la trasformata di Fourier è una isometria, cioè conserva le norme, pertanto una successione 
-  convergente di funzioni viene mandata in una successione convergente di trasformate.
+  Per l'uguaglianza di Parseval si ha che la trasformata di Fourier è una isometria (a meno di un fattore globale $ 2\pi $), 
+  cioè conserva le norme, pertanto una successione convergente di funzioni viene mandata in una successione convergente di trasformate.
 \end{proof}
 
 \begin{theorem}[ di inversione di Fourier ]
@@ -1536,7 +1555,7 @@ elettromagnetici. Già per questi motivi è utile cercare di definire la trasfor
 \begin{definition}[ Antitrasformata in $ L^2(\R^n) $ ]
   Siano $ f \in L^2(\R^n) $, $ x,k \in \R^n $ e $ \sc{x,k} = x_1 k_1 + \dots + x_nk_n $ il prodotto scalare euclideo in $ \R^n $, allora la funzione 
   \begin{align}
-    \F^{-1}[f(k)](x) = \frac1{(2\pi)^n} \int_{\R^n} f(x_1, \dots, x_n) e^{-i \sc{x,k}} \, d^nk
+    \F^{-1}[f(k)](x) = \frac1{(2\pi)^n} \int_{\R^n} f(k_1, \dots, k_n) e^{-i \sc{x,k}} \, d^nk
   \end{align}
   è l'antitrasformata di Fourier della funzione $ f(k) $.
 \end{definition}
@@ -1573,9 +1592,9 @@ Per la trasformata di Laplace valgono delle proprietà analoghe alla trasformata
     \end{align}
   \item Traslazione
     \begin{align}
-      \L\left[ e^{ct} f(t) \right] = \L\left[ f(t) \right](s - c)
+      \L\left[ e^{ct} f(t) \right] &= \L\left[ f(t) \right](s - c)
       \\
-      \L\left[ f(t-a) \right] = e^{-s a} \L\left[ f(t) \right](s).
+      \L\left[ f(t-a) \right] &= e^{-s a} \L\left[ f(t) \right](s)\quad \forall a > 0.
     \end{align}
   \item Convoluzione
     \begin{align}
@@ -1631,7 +1650,7 @@ dove abbiamo scritto $ s = s_1 + i s_2 $. Per cui possiamo ricavarci la trasform
 \end{gather}
 e moltiplicando entrambi i membri per $ e^{s_1 t} $ si ottiene 
 \begin{align}
-  f(t) = \frac1{2\pi}\int_{a-i\infty}^{a+i\infty} \tilde{f}(s) e^{st} \,ds
+  f(t) = \frac1{2\pi}\int_{a-i\infty}^{a+i\infty} \tilde{f}(s) e^{st} \,ds_2
 \end{align}
 dove l'integrale è fatto sull'asse verticale di ascissa $ s' = a > \lambda_0 $ nel piano complesso. Tale integrale è la 
 \textit{formula di inversione di Riemann-Fourier}. La trasformata di Fourier e quella di Laplace sono tali da poter ricostruire l'una dall'altra nel caso 
@@ -1801,19 +1820,19 @@ La nozione di continuità di una distribuzione $ T \in \mathds{X} $ si scrive ne
   è possibile che $ T_u \notin \S' $, ma comunque $ T_u \in \D' $ (per una $ \phi \in \D $).
 \end{theorem}
 \begin{proof}
-  Iniziamo mostrando la prima parte del teorema (considerando $ u(x) $ limitata e mostrando che $ T_u \in \S $)
-  Per prima cosa il prodotto $ u(x)\phi(x) $ è sommabile perché con $ u $ è limitata si ha
+  Iniziamo mostrando la prima parte del teorema (considerando $ u(x) $ limitata e mostrando che $ T_u \in \S $).
+  Per prima cosa il prodotto $ u(x)\phi(x) $ è sommabile perché con $ u $ limitata si ha
   \begin{align}
     \int_{-\infty}^{+\infty} \abs{u(x) \phi(x)} \,dx \leq M_u \int_{-\infty}^{+\infty} \abs{\phi(x)} \,dx < +\infty
   \end{align}
-  dato che per il lemma \ref{lem: funzioni test sono L1}, dove $ M_u = \sup_{x \in \R} \abs{u(x)} < +\infty $.
+  per il lemma \ref{lem: funzioni test sono L1}, dove $ M_u = \sup_{x \in \R} \abs{u(x)} < +\infty $.
 
   Per mostrare che $ T_u $ è una distribuzione temperata serve mostrare che è lineare, 
   che segue dalla linearità dell'integrale, e che è continuo cioè $ T_u(\phi_n) \to T_u(\phi) $ per $ \phi_n \to \phi $ e si dal fatto che 
   \begin{align}
-    \abs{T_u (\phi_n - \phi)} \leq M_u \int_{-\infty}^{+\infty} \abs{\phi_n(x) - \phi(x)} \,dx \to 0
+    \abs{\sc{T_u ,\phi_n - \phi}} \leq M_u \int_{-\infty}^{+\infty} \abs{\phi_n(x) - \phi(x)} \,dx \to 0
   \end{align}
-  e per tanto $ T_u (\phi_n) \to T_u(\phi) $. 
+  dato che la convergenza in $ \S $ implica la convergenza in $ L^1(\R) $, per tanto $ T_u (\phi_n) \to T_u(\phi) $. 
   
   Per la seconda parte, dato che adesso consideriamo $ \phi \in \D $, l'integrale non è su un dominio illimitato ma sul compatto $ K = \supp \phi $, 
   quindi si riscrive come 
@@ -1915,7 +1934,7 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
 
 \begin{lemma}[  ]
   Sia $ u_n \in L^1(\R) $ una successione convergente puntualmente q.o. a $ u \in L^1(\R) $, cioè che $ \lim_{n \to \infty} u_n(x) = u(x) $, e inoltre 
-  è soddisfatta la convergenza dominata di Lebesgue, cioè $ \exists F(x) \in L^1(\R) $ tale che $ \abs{u(x)} \leq F(x) \; \forall n $, 
+  è soddisfatta la convergenza dominata di Lebesgue, cioè $ \exists F(x) \in L^1(\R) $ tale che $ \abs{u_n(x)} \leq F(x) \; \forall n $, 
   allora $ T_{u_n} \to T_u $ in $ \S' $.
 \end{lemma}
 \begin{proof}
@@ -2046,14 +2065,14 @@ applicando l'integrazione per parti diventa
 \begin{align}
   DT_u(\phi) = \left. u(x)\phi(x) \vphantom{\int} \right|_{-\infty}^{+\infty}  - \int_{-\infty}^{+\infty} u(x) \phi'(x) \,dx = - \sc{T_u, \phi'}
 \end{align}
-dove il primo termine è nullo per la condizione necessaria di funzione sommabile e cioè essere infinitesima: $ \lim_{x \to \infty} f(x) = 0 $. 
+dove il primo termine è nullo perché $ \phi \in \S $ è infinitesima: $ \lim_{x \to \infty} \phi(x) = 0 $. 
 Quindi abbiamo visto che per le distribuzioni a cui è associata una funzione si ha che $ \sc{DT_u, \phi} = - \sc{T_u, \phi'} $, e vogliamo che questa 
 sia la proprietà che definisce la derivata di una distribuzione anche per quelle a cui non è associata una distribuzione. 
 
 \begin{definition}[ Derivata di una distribuzione ]
   Sia $ T  $ una distribuzione, definiamo la sua derivata $ DT $ come 
   \begin{align}
-    \sc{DT, \phi} \coloneq \sc{T, \phi'}
+    \sc{DT, \phi} \coloneq  - \sc{T, \phi'}
   \end{align}
   dalla quale per iterazione si ottiene la formula per la derivata $ k $-esima $ D^kT $:
   \begin{align}
@@ -2259,13 +2278,6 @@ e vediamo che la distribuzione $ \P \frac1x $ si ottiene proprio come il limite
 \end{align}
 per ogni $ \phi \in \S $. Sfruttiamo questo per calcolarne la trasformata di Fourier:
 \begin{gather}
-  \sca{\F\left[ \P\frac1\omega \right], \phi} 
-  = \P \int_{-\infty}^{+\infty} \frac{\hat{\phi}(\omega)}{\omega} \, d\omega 
-  = \P \int_{-\infty}^{+\infty} \frac1\omega \int_{-\infty}^{+\infty} \phi(x) e^{i\omega x}\,dx\,d\omega
-  \\
-  = \int_{-\infty}^{+\infty} \phi(x) \P \int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{\omega} \,d\omega\,dx
-\end{gather}
-\begin{gather}
   \sca{\F\left[ \P\frac1x \right], \phi} 
   = \lim_{\un{\eps\to0^+}{R\to+\infty}} \sca{\F\left[ T_{u_{\eps,R}} \right], \phi} 
   = \lim_{\un{\eps\to0^+}{R\to+\infty}} \sca{T_{\F\left[ u_{\eps,R} \right]}, \phi} 
@@ -2327,7 +2339,7 @@ nel senso delle distribuzioni e soltanto in $ \S' $ dato che $ \P\frac1x $ è un
 all'interno dell'integrale si ottiene 
 \begin{align}
   \pi i\sc{T_{\sgn x}, \phi} = \pi i  \int_{0}^{+\infty}  \phi(x) \, dx - \pi i  \int_{-\infty}^{0}  \phi(x) \, dx 
-  = \pi i \int_{-\infty}^{+\infty} \phi(x) + \phi(-x) \, dx.
+  = \pi i \int_{-\infty}^{+\infty} \phi(x) - \phi(-x) \, dx.
 \end{align}
 Consideriamo ora la successione $ u_n(x) $ definita come 
 \begin{align}
@@ -2343,7 +2355,13 @@ e calcoliamone la trasformata di Fourier nel senso delle distribuzioni. Ricordan
   \\
   = \frac1{2}\int_{-\infty}^{+\infty} \phi(t) \left[ \sgn (n + t) - \sgn (t - n) \right] \,dt
 \end{gather}
-dove riconosciamo che $ \sgn (n + t) - \sgn (t - n) = 2 \chi_{[-n, n]} $ (funzione caratteristica dell'intervallo). Prendendo il limite per 
+dove tutti gli integrali sono da intendersi in parte principale, inoltre riconosciamo che $ \sgn (n + t) - \sgn (t - n) = 2 \chi_{[-n, n]} $ 
+(funzione caratteristica dell'intervallo). Notiamo che per scambiare gli integrali non abbiamo applicato Fubini dato che 
+$ \frac{\sin(nx)}{\pi x} $ non è sommabile, ma essendo in $ L^2(\R) $ vale
+\begin{align}
+  \int_{-\infty}^{+\infty}  u(x) \hat{\phi}(x) \, dx = \int_{-\infty}^{+\infty}  \phi(t) \hat{u}(t) \, dt.
+\end{align} 
+Prendendo il limite per 
 $ n\to\infty $ si ha
 \begin{align}
   \lim_{n\to\infty} \sca{\F[T_{u_n}], \phi} = \int_{-\infty}^{+\infty} \phi(x)\,dx = \sc{T_1, \phi}
@@ -2618,7 +2636,7 @@ per quanto riguarda il terzo termine si ha che
   \lim_{R \to +\infty} \int_{S_R} \frac1{\abs{x}} \der{\phi}{{n}} - \phi \der{}{{n}}\left( \frac1{\abs{x}} \right) \,dS
   =  \lim_{R \to +\infty} \int_{S_R}\left( \frac1r \der{\phi}{{n}} + \frac{\phi}{r^2} \right) r^2 d\Omega = 0
 \end{align} 
-perché una distribuzione temperata è infinitesima per $ R\to+\infty $ anche moltiplicata per qualsiasi polinomio.
+perché $ \phi \in \S $  è infinitesima per $ R\to+\infty $ anche moltiplicata per qualsiasi polinomio.
 Rimane solo il secondo termine:
 \begin{gather}
   \lim_{\eps \to 0} \int_{S_\eps} \frac1{\abs{x}} \der{\phi}{{n}} - \phi \der{}{{n}}\left( \frac1{\abs{x}} \right) \,dS
@@ -2639,7 +2657,7 @@ indipendenti dal tempo. Consideriamo la soluzione di una equazione scritta in te
 \begin{align}
   b(t) = (G*a)(t) = \int_{-\infty}^{+\infty} G(t - t') a(t') \, dt
 \end{align}
-Se vale che $ a(t) = 0 $ per $ t < 0 $ allora il sistema è causale ($ G(t) = 0 $ per $ t < 0 $) e $ G, a $ sono trasformabili secondo Laplace, allora 
+Se vale che $ G(t) = 0 $ per $ t < 0 $ allora il sistema è causale e $ G, a $ sono trasformabili secondo Laplace, allora 
 per il teorema di convoluzione si ha
 \begin{align}
   \ti{b}(s) = \ti{G}(s) \ti{a}(s)
@@ -2649,7 +2667,7 @@ e troviamo $ G(t) $ antitrasformando.
 \begin{definition}[  ]
   Sia $ T \in \S' $ a supporto in $ \R^+_0 $, allora si definisce con 
   \begin{align}
-    \L[T](s) = \sca{T, e^{-st}}
+    \L[T](s) = \sca{T, \theta(t) e^{-st}}
   \end{align}
   la trasformata di Laplace della distribuzione temperata $ T $. Notiamo che la trasformata di una distribuzione è una funzione di $ s $, dunque non un 
   funzionale e perciò non è una distribuzione.
@@ -2661,7 +2679,7 @@ La trasformata di Laplace della $ \delta_0 $ vale $ 1 $ dalla definizione
 \end{align}
 e in generale per la delta $ \delta_a $ abbiamo
 \begin{align}
-  \L[\delta_a](s) = \sca{\delta_a, e^{-st}} = e^{-at}
+  \L[\delta_a](s) = \sca{\delta_a, e^{-st}} = e^{-sa}
 \end{align}
 che vale naturalmente solo per $ a > 0 $. Infine la trasformata di Laplace della derivata di una distribuzione $ DT $ si sviluppa come 
 \begin{align}
