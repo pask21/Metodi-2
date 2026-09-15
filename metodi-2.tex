@@ -37,9 +37,13 @@ Il concetto di derivata viene intuitivo dal limite del rapporto incrementale ma 
 \end{definition}
 Questa definizione richiede implicitamente che il valore del limite sia lo stesso per qualunque direzione del piano complesso, e questo 
 ci porterà a dare delle condizioni di derivabilità. 
-\begin{definition}[ Funzione olomorfa ]
+\begin{definition}[ Funzione analitica ]
   Una funzione $ f: A \subset \C \to \C $ si dice olomorfa o analitica (o derivabile in senso complesso in $ A $) se è derivabile in ogni $ z \in A $, 
   ossia esiste (unico) il limite \eqref{eq: limite rapporto incrementale}.
+\end{definition}
+
+\begin{definition}[ Funzione intera ]
+  Una funzione che è analitica in tutto il piano complesso si dice \textit{intera}.
 \end{definition}
 
 \begin{theorem}[ Condizioni di Cauchy-Riemann ]
@@ -57,18 +61,42 @@ ci porterà a dare delle condizioni di derivabilità.
 \end{theorem}
 Quest'ultima relazione può essere utile quando la divisione dell'immagine in parte reale e immaginaria non è ovvia a priori.
 \begin{proof}
-  
+  Se $ f  $ è derivabile in senso complesso allora esistono continue le derivate direzionali, in particolare esiste il limite 
+  del rapporto incrementale per una qualsiasi direzione del piano complesso che 
+  lungo l'asse reale vale
+  \begin{align}
+    \lim_{h\to 0} \frac{f(x_0 + h, y_0) - f(x_0, y_0)}{h} = \der{f}{x}(z_0)
+  \end{align}
+  mentre lungo l'asse immaginario abbiamo
+  \begin{align}
+    \lim_{h\to0} \frac{f(x_0, y_0 + h) - f(x_0, y_0)}{i h} = \frac1i \der{f}{y}(z_0).
+  \end{align}
+  La condizione di olomorfia ci dice proprio che questi due limiti devono essere uguali e dunque otteniamo 
+  \begin{align}
+    \der{f}{x} = \frac1i \der{f}{y}
+  \end{align}
+  che sono proprio le condizioni di Cauchy-Riemann. Per quanto riguarda l'implicazione inversa abbiamo che se esistono continue 
+  le derivate parziali allora $ f $ è differenziabile in senso reale e preso un vettore $ v = (v_x, v_y) $ vale che
+  \begin{align}
+    f(x_0 + v_x, y_0 + v_y) - f(x_0, y_0) = df_{z_0}(v) + o(\abs{v})
+  \end{align}
+  e con le condizioni di Cauchy-Riemann si riscrive 
+  \begin{align}
+    f_x v_x + f_y v_y = f_x(v_x + i v_y) \eqcolon f_x w
+  \end{align}
+  dove abbiamo definito $ w \coloneq v_x + i v_y $ in modo che $ \abs{w} = \abs{v} $. In questo modo dividendo per $ w $ troviamo 
+  \begin{align}
+    \frac{f(z_0 + w) - f(z_0)}{w} = f_x(z_0) + \frac{o(\abs{v})}{w} \xrightarrow[w \to 0]{} f_x(z_0) = -i f_y(z_0)
+  \end{align}
+  e quindi il limite esiste perciò $ f $ è derivabile in senso complesso in $ z_0 $ e questo vale in tutto il suo dominio quindi è analitica.
 \end{proof}
 
-\begin{theorem}[  ]
+\begin{corollary}
   Sia $ F: A \subset \R^2 \to \R^2 $ e siano $ F_1, F_2 $ le sue componenti. Se è differenziabile in senso reale e valgono le relazioni di Cauchy-Riemann 
   per le componenti, allora la funzione $ f(z) = F_1 + i F_2 $ è derivabile in senso complesso.
-\end{theorem}
+\end{corollary}
 Si noti che nel teorema precedente spesso è utile verificare che esistano continue le derivate parziali, dato che 
 $ F \in C^1 \implies F \; \textnormal{differenziabile} $.
-\begin{proof}
-  
-\end{proof}
 
 \begin{definition}[ Derivata rispetto a una variabile complessa ]
   Sia $ f $ derivabile in senso reale (non necessariamente analitica), definiamo gli operatori differenziali complessi $ \der{f}{z}, \der{f}{z*} $ come
@@ -112,9 +140,6 @@ e quindi le relazioni di Cauchy-Riemann (nella forma $ f_x + if_y = 0 $) sono eq
   f_x + if_y = 0 \iff f_\rho + \frac{i}\rho f_\varphi = 0.
 \end{align}
 
-\begin{definition}[ Funzione intera ]
-  Una funzione che è analitica in tutto il piano complesso si dice \textit{intera}.
-\end{definition}
 
 \section{Funzioni elementari complesse}
 Definiamo la funzione esponenziale complessa $ e^z $ nel seguente
@@ -237,17 +262,25 @@ Riportiamo adesso il teorema di Gauss-Green nel piano dato che ci sarà utile su
 \end{definition}
 
 \begin{theorem}[ di Cauchy ] \label{thm: di Cauchy}
-  Sia $ A \subset \C $ semplicemente connesso,$ \gamma \in C^1_{\text{tratti}}([a,b], A) $ chiusa e sia $ f:A \to \C $ una funzione analitica, allora 
+  Sia $ A \subset \C $ semplicemente connesso,$ \Gamma \in C^1_{\text{tratti}}([a,b], A) $ chiusa e sia $ f:A \to \C $ una funzione analitica, allora 
   \begin{align}
-    \oint_\gamma f(z) \,dz = 0.
+    \oint_\Gamma f(z) \,dz = 0.
   \end{align}
   Da notare che questo vale per ogni contorno chiuso contenuto in $ A $.
 \end{theorem}
 \begin{proof}
-  
+  Dato che $ A $ è semplicemente connesso ogni curva chiusa $ \Gamma \in C^1_{\text{tratti}} $ completamente contenuta in $ A $ è frontiera di un 
+  aperto regolare $ \partial\Omega = \Gamma $ e dunque possiamo applicare il teorema di Gauss-Green: 
+  \begin{align}
+    \oint_\Gamma f(z) \,dz &= \oint_\Gamma u \,dx - v\,dy + i \oint_\Gamma v\,dx + u\,dy 
+    \\
+    &= \iint_\Omega (-v_x - u_y )\,dxdy + i \iint_\Omega (u_x - v_y )\,dxdy = 0
+  \end{align}
+  dove entrambi sono nulli per le condizioni di Cauchy-Riemann.
 \end{proof}
+
 Il precedente risultato si può generalizzare domini non semplicemente connessi con il seguente teorema.
-\begin{theorem}[  ]
+\begin{theorem}[  ] \label{thm: di Cauchy in un connesso ad archi}
   Sia $ \Omega \subset \C $ connesso ad archi, $ f:\Omega \to \C $ e sia $ \Gamma \in C^1_{\text{tratti}}([a,b], \Omega) $, 
   supponiamo che siano presenti $ p $ buchi all'interno di $ \Gamma $, cioè $ p $ regioni in cui $ f $ non è analitica, ognuna racchiusa da una curva 
   $ \gamma_i $ semplice chiusa, esterne l'una all'altra e tutte contenute in $ \Gamma $. Nella regione interna a $ \Gamma $ ed esterna alle 
@@ -258,8 +291,20 @@ Il precedente risultato si può generalizzare domini non semplicemente connessi 
   dove le curve sono tutte orientate positivamente e quindi gli integrali sono percorsi in senso antiorario.
 \end{theorem}
 \begin{proof}
-  
+  Eseguiamo dei tagli nella parte interna di $ \Gamma $ in modo da costruire una curva chiusa ($ C^1_{\text{tratti}} $) che escluda le zone in cui $ f $ 
+  non è analitica. Detta $ C $ tale curva, abbiamo che 
+  \begin{align}
+    \oint_C f(z) \,dz = \oint_\Gamma f(z)\,dz + \int_{\textnormal{tagli}} f(z)\, dz - \sum_{i = 1}^p \oint_{\gamma_i} f(z) \,dz
+  \end{align}
+  ma dato che la curva $ C $ contiene solo punti di analiticità per $ f $ allora per il teorema di Cauchy l'integrale su $ C $ di $ f(z) $ è nullo, 
+  e sono nulli anche gli integrali sui tagli dato che sono percorsi tutti sia in un verso che nell'altro. Da notare il segno meno alla sommatoria dovuta 
+  all'orientazione delle curve $ \gamma_i $. Rimane soltanto  
+  \begin{align}
+    \oint_\Gamma f(z)\,dz - \sum_{i = 1}^p \oint_{\gamma_i} f(z) \,dz = 0
+  \end{align}
+  che è appunto la tesi.
 \end{proof}
+
 Una prima conseguenza del teorema di Cauchy è che l'integrale fra due punti non dipende dal percorso scelto, infatti sia $ A\subset \C$ un aperto che 
 contiene solo punti di analiticità di $ f $ e siano $ \Gamma_1, \Gamma_2 \in C^1_{\text{tratti}}([a,b], A) $ dove tali che 
 $ \Gamma_1(a) = \Gamma_2(a) = z_0, \Gamma_1(b) = \Gamma_2(b) = z $, allora
@@ -279,8 +324,24 @@ $ \Gamma_1(a) = \Gamma_2(a) = z_0, \Gamma_1(b) = \Gamma_2(b) = z $, allora
   è una funzione analitica nel dominio $ A $ per ogni $ z_0,z \in A $, e inoltre vale che $ F'(z) = f(z) $.
 \end{theorem}
 \begin{proof}
-  
+  L'ipotesi ci dice che ogni cammino che connette i punti $ z_0,z $ non cambia l'integrale con cui è definita $ F(z) $ perché possiamo sempre trovare un 
+  altro cammino in modo che la loro somma sia un cammino chiuso e quindi ottenere che 
+  \begin{align}
+    \int_{\Gamma_1} f(\eta)\,d\eta + \int_{\Gamma_2} f(\eta)\,d\eta = \oint_{\Gamma_1 \cup \Gamma_2} f(\eta)\,d\eta = 0
+  \end{align}
+  grazie al fatto che $ A $ è semplicemente connesso. Scriviamo allora il rapporto incrementale per $ F(z) $:
+  \begin{align}
+    \frac{F(z + \Delta z) - F(z)}{\Delta z} = \frac1{\Delta z} \int_{z}^{z + \Delta z} f(\eta) \, d\eta
+  \end{align}
+  e siccome vale per ogni cammino prendiamo la retta che congiunge $ z $ e $ z + \Delta z $ cioè $ \gamma(t) = z + t \Delta z $ con $ t \in [0,1] $ e 
+  $ \gamma'(t) = \Delta z $. Integrando su $ \gamma $ si ha
+  \begin{align}
+    \frac1{\Delta z} \int_{z}^{z + \Delta z} f(\eta) \, d\eta = \frac1{\Delta z} \int_{z}^{z + \Delta z} f(z + t \Delta z) \Delta z \, d\eta 
+    \xrightarrow[\Delta z\to 0]{} f(z) \int_0^1 dt = f(z)
+  \end{align}
+  e dunque la derivata di $ F(z) $ esiste e vale $ F'(z) = f(z) $ per ogni $ z\in A $.
 \end{proof}
+
 \begin{definition}[ Primitiva ]
   La funzione analitica $ F(z) $ tale che $ F'(z) = f(z) $ si dice \textit{integrale indefinito} o \textit{primitiva} della funzione $ f(z) $.
 \end{definition}
@@ -306,10 +367,39 @@ Notiamo alcuni dettagli della formula di Cauchy così come l'abbiamo formulata: 
 perché ci limitiamo a prendere delle curve $ \gamma $ che racchiudono solo punti in cui la funzione è definita, il che equivale a richiedere la semplice 
 connessione e prendere qualsiasi curva che vogliamo; il punto deve essere scelto nella parte interna della regione racchiusa da $ \gamma $, cioè 
 $ z \in \textnormal{Int}(\gamma) $, mentre se viene preso nella parte esterna (purché non sulla curva) il risultato dell'integrale è $ 0 $ dato che la 
-funzione $ \frac{f(\eta)}{\eta - z} $ è analitica fuori da $ z $.
+funzione $ \frac{f(\eta)}{\eta - z} $ è analitica in $ \textnormal{Int}(\gamma) $ che adesso risulta semplicemente connesso.
+
 \begin{proof}
-  
+  Consideriamo la funzione ausiliaria $ g(\eta) = \frac{f(\eta)}{\eta - z} $ che è analitica in $ \textnormal{Int}(\gamma) \bs \{z\} $, allora per il 
+  teorema \ref{thm: di Cauchy in un connesso ad archi} abbiamo che 
+  \begin{align}
+    \oint_\gamma g(\eta)\,d\eta = \oint_C g(\eta) \,d\eta
+  \end{align}
+  dove $ C $ è un qualsiasi contorno chiuso che racchiude il punto $ z $, e quindi possiamo scegliere la circonferenza centrata in $ z $ di raggio 
+  $ \rho $: $ \eta = z + \rho e^{i\theta} $ con $ \theta \in [0,2\pi] $. L'integrale diventa
+  \begin{align}
+    \oint_C \frac{f(\eta)}{\eta - z} \,d\eta = \int_0^{2\pi} \frac{f(z + \rho e^{i\theta})}{\rho e^{i\theta}} \,i \rho e^{i\theta} \,d\theta 
+    = i \int_0^{2\pi} f(z + \rho e^{i\theta}) \xrightarrow[\rho \to 0]{} 2\pi i f(z)
+  \end{align}
+  e quindi dividendo per $ 2\pi i $ si ottiene la formula di Cauchy.
 \end{proof}
+
+Come abbiamo già detto, se il punto $ z $ appartiene alla curva $ \gamma $ la formula di Cauchy non è valida dato che l'integrale non è ben definito su 
+tutti i punti di $ \gamma $, tuttavia possiamo usare la seguente definizione per estendere la validità della formula di Cauchy.
+
+\begin{definition}[ Valor principale ]
+  Sia $ f(\eta) $ analitica nel connesso $ A $, sia $ z \in A $ e $ \gamma \in C^1_{\text{tratti}}(A) $ tale che $ z \in \gamma $ con $ \gamma $ derivabile 
+  in $ z $, allora definiamo come \textit{integrale in valor principale o secondo Cauchy} il seguente 
+  \begin{align}
+    \P \int_\gamma \frac{f(\eta)}{\eta - z} \, d\eta \coloneq \lim_{\eps\to 0} \int_{\gamma_\eps} \frac{f(\eta)}{\eta - z} \, d\eta
+  \end{align}
+  dove $ \gamma_\eps = \{ \eta \in \gamma: \abs{\eta - z} \geq \eps \} $ cioè è la curva $ \gamma $ a esclusione di un intorno di raggio $ \eps $ 
+  centrato in $ z $.
+\end{definition}
+
+% =============================================
+% Lemma del piccolo arco ?
+% =============================================
 
 Una prima applicazione della formula di Cauchy è data dalla cosiddetta \textit{formula del valor medio}: presa $ C_R $ la circonferenza di raggio $ R $ 
 e centro $ z_0 $ si ha che
@@ -326,25 +416,33 @@ che rappresenta la media della funzione sulla circonferenza di raggio $ R $ e ce
   $ |f(z)| $ è assunto sulla frontiera $ \partial A $.
 \end{theorem}
 \begin{proof}
-  
+  Supponiamo esista $ z_0 \in A $ tale che $ \abs{f(z_0)} = M = \DS\max_{\ol{A}} \abs{f(z)} $, allora per la formula del valor medio abbiamo 
+  \begin{align}
+    M = \abs{f(z_0)} \leq \frac1{2\pi} \abs{\int_0^{2\pi} f(z_0 + R e^{i\theta})\,d\theta} 
+    \leq \frac1{2\pi}\int_0^{2\pi} \abs{ f(z_0 + R e^{i\theta})}\,d\theta \leq M 
+  \end{align}
+  e perciò le disuguaglianze diventano uguaglianze, ma la media non può coincidere con il massimo se non quando la funzione è identicamente il massimo. 
+  Quindi abbiamo mostrato che se il massimo è interno allora la funzione è costante, ma allora se la funzione non è costante il massimo deve essere 
+  necessariamente sulla frontiera $ \textnormal{Fr}(A) $, dato che deve esistere per il teorema di Weierstrass.
 \end{proof}
+
 Abbiamo l'analogo per il minimo.
 \begin{theorem}[ Principio del minimo modulo ]
   Sia $ f(z) $ analitica nell'aperto $ A $ connesso e limitato, continua sul compatto $ \overline{A} $ e $ f(z) \neq 0 \; \forall z \in A $ 
   allora il minimo del modulo $ |f(z)| $ è assunto sulla frontiera $ \partial A $.
 \end{theorem}
 Di conseguenza abbiamo che se sul bordo il modulo della funzione è costante allora è costante anche all'interno e viceversa per la continuità 
-delle funzioni olomorfe, quindi possiamo dire che
+delle funzioni analitiche, quindi possiamo dire che
 \begin{align}
   |f(z)| = \textnormal{costante} \neq 0 \; \; \forall z \in \partial A \iff f(z) = \textnormal{costante} \; \; \forall z \in A.
 \end{align}
 
-\begin{theorem}[  ]
+\begin{theorem}[ Intregrali dipendenti da un parametro ] \label{thm: integrali dipendenti da un parametro}
   Siano $ A,B \subset \C $ aperti connessi, sia $ g: A\times B \to \C $ una funzione complessa di due variabili complesse e sia 
   $ \gamma \in C^1_{\text{tratti}}([a,b], B) $. Se valgono
   \begin{enumerate}
-    \item $ g(z,\eta) $ è analitica rispetto a $ z $ per ogni $ z \in A, \eta \in \gamma $ 
-    \item $ g(z,\eta ) $ e $ \DS \der{g}{z}(z,\eta) $ sono continue nelle variabili $ z,\eta $ per ogni $ z\in A, \eta \in \gamma $
+    \item $ g(z,\eta) $ è analitica rispetto a $ z $ per ogni $ \eta \in \gamma $,
+    \item $ g(z,\eta ) $ e $ \DS \der{g}{z}(z,\eta) $ sono continue nelle variabili $ z,\eta $ per ogni $ z\in A, \eta \in \gamma $,
   \end{enumerate} 
   allora la funzione $ F: A \to \C $ definita come 
   \begin{align}
@@ -353,7 +451,12 @@ delle funzioni olomorfe, quindi possiamo dire che
   è analitica rispetto a $ z $ in $ A $ e la sua derivata può essere calcolata sotto il segno di integrale.
 \end{theorem}
 \begin{proof}
-  
+  Con le ipotesi fatte su $ g(z,\eta) $ possiamo derivare $ F(z) $ sotto il segno di integrale ottenendo
+  \begin{align}
+    F_x(z) = \int_\gamma g_x(z,\eta)\,d\eta = \int_\gamma - i g_y(z,\eta)\,d\eta = -i F_y(z)
+  \end{align}
+  dove abbiamo usato le condizioni di Cauchy-Riemann su $ g(z,\eta) $, che ci hanno portato alle stesse condizioni per $ F(z) $, ma quindi dato che 
+  $ F(z) \in C^1 $ perché $ g(z,\eta) \in C^1 $ abbiamo che anche $ F(z) $ è analitica.
 \end{proof}
 
 \begin{theorem}[ Derivata $ n $-esima di funzioni analitiche ] \label{thm: derivata n-esima di funzioni analitiche}
@@ -364,10 +467,34 @@ delle funzioni olomorfe, quindi possiamo dire che
   \end{align}
   e sono tutte analitiche a loro volta nel dominio $ A $.
 \end{theorem}
+
+È importante fare attenzione che non è necessario che l'insieme $ A $ sia semplicemente connesso, di conseguenza la frontiera $ \partial A $ è unione 
+di curve semplici chiuse e dunque l'integrale è fatto su tutte queste curve. Per capire consideriamo l'aperto regolare 
+$ A = \{ 1 < \abs{z} < 2\} $ e la funzione $ f(z) = \frac1z $, analitica in $ A $. La frontiera è formata da 
+$ \partial A = \{\abs{z} = 1 \} \cup \{\abs{z} = 2 \} $ (percorse in verso opposto, la più esterna in senso antiorario e la più interna in senso orario, 
+in modo da essere orientate positivamente cioè lasciando il dominio alla propria sinistra) e di fatto l'integrale è su entrambe le curve.
+
 \begin{proof}
-  
+  Dato che $ f(z) $ è analitica per la formula di Cauchy abbiamo che 
+  \begin{align}
+    f(z) = \frac1{2\pi i} \int_{\partial A} \frac{f(\eta)}{\eta - z} \, d\eta
+  \end{align}
+  ma la funzione $ g(z, \eta) = \frac{f(\eta)}{\eta - z} $ è analitica in $ z $ per ogni $ z \neq \eta $ ed è $ C^1 $ in entrambe le variabili, per tanto 
+  possiamo applicare il teorema \ref{thm: integrali dipendenti da un parametro} per derivare $ f(z) $ sotto il segno di integrale cioè
+  \begin{align}
+    f'(z) = \frac1{2\pi i} \int_{\partial A} \frac{f(\eta)}{(\eta - z)^2} \, d\eta.
+  \end{align}
+  L'integranda rispetta a sua volta le ipotesi del teorema \ref{thm: integrali dipendenti da un parametro} e dunque possiamo applicarlo nuovamente 
+  ottenendo 
+  \begin{align}
+    f''(z) = \frac2{2\pi i} \int_{\partial A} \frac{f(\eta)}{(\eta - z)^3} \, d\eta
+  \end{align}
+  e iterando otteniamo la tesi.
 \end{proof}
-Osserviamo che con il precedente teorema abbiamo che una funzione analitica possiede derivate continue nel dominio di ordine qualsiasi.
+
+\begin{corollary}
+  Una funzione analitica è infinitamente derivabile con tutte le derivate analitiche.
+\end{corollary}
 
 \begin{theorem}[ di Morera ]
   Sia $ f(z) $ una funzione continua su un semplicemente connesso $ A \subset \C $, se vale che 
@@ -377,10 +504,13 @@ Osserviamo che con il precedente teorema abbiamo che una funzione analitica poss
   per ogni curva semplice chiusa $ \Gamma \in C^1_{\text{tratti}}([a,b], A) $, allora la funzione $ f(z) $ è analitica in $ A $.
 \end{theorem}
 \begin{proof}
-  Per il teorema \ref{thm: A} (sono le stesse ipotesi) abbiamo che la funzione $ F(z) = \int_{z_0}^z f(z) \,dz $ è analitica con $ F'(z) = f(z) $, 
-  e per il teorema \ref{thm: derivata n-esima di funzioni analitiche} la derivata di una funzione analitica è anch'essa analitica.
+  Per il teorema \ref{thm: A} (sono le stesse ipotesi) abbiamo che è ben definita la funzione $ F(z) = \int_{z_0}^z f(z) \,dz $ ed è analitica 
+  con derivata $ F'(z) = f(z) $, infine per il teorema \ref{thm: derivata n-esima di funzioni analitiche} la derivata di una funzione analitica 
+  è anch'essa analitica.
 \end{proof}
+
 Notiamo che questo teorema è in pratica l'inverso del teorema di Cauchy \ref{thm: di Cauchy}.
+
 \begin{theorem}[ di Liouville ]
   Sia $ f(z) $ intera (analitica $ \forall z\in \C $) e il suo modulo sia uniformemente limitato, cioè 
   $ \exists M > 0 $ tale che $ |f(z)| \leq M \; \forall z \in \C $, allora $ f(z) = $ costante $ \forall z \in \C $.
@@ -914,12 +1044,14 @@ Il punto all'infinito è l'equivalente della punto singolare per la mappa che ma
 \begin{proof}
   Si vede subito che esiste finito il limite $ \lim_{z \to \infty} f(z) = a_0 $.
 \end{proof}
-È il caso della funzione $ \frac1z $, analitica per $ \abs{z} > 0 $ e parte di Taylor chiaramente nulla, infatti il limite per $ z \to \infty $ vale 
-$ a_0 = 0 $.
 \begin{theorem}[  ]
   Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor è nulla e $ a_{-m} $ (con $ m \geq 1 $) è il primo termine non nullo 
   dello sviluppo di Laurent, allora $ z = \infty $ è uno zero di ordine $ m $ della funzione $ f $.
 \end{theorem}
+
+È il caso della funzione $ \frac1z $, analitica per $ \abs{z} > 0 $ e parte di Taylor chiaramente nulla, infatti il limite per $ z \to \infty $ vale 
+$ 0 $ e $ \lim_{z\to\infty} z f(z) = 1 = a_{-1} $ dunque $ z = \infty $ è uno zero di ordine $ 1 $.
+
 \begin{theorem}[  ]
   Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $ e sia $ a_{m} $ l'ultimo coefficiente non nullo dello sviluppo di Taylor, allora $ z = \infty $ 
   è un polo di ordine $ m $ della funzione $ f $, inoltre vale ancora la condizione sufficiente e necessaria $ \lim_{z\to \infty} f(z) = \infty $.
@@ -929,7 +1061,7 @@ $ a_0 = 0 $.
   $ z = \infty $ è una singolarità essenziale della funzione $ f $, e in tal caso non esiste il limite $ \lim_{z\to \infty} f(z) $.
 \end{theorem}
 La funzione $ e^z $ ha in $ z = \infty $ una singolarità essenziale, un polinomio $ P(z) $ di grado $ m $ ha all'infinito un polo di ordine $ m $,
-una funzione razionale $ Q(z) $ di grado $ -m $ ha all'infinito uno zero di ordine $ m $.
+una funzione razionale $ Q(z) $ che scomposta in fratti semplici ha grado massimo $ -m $ ($ f_T = 0 $) ha all'infinito uno zero di ordine $ m $.
 
 \section{Residui di una funzione analitica}
 \begin{definition}[ Residuo ]
@@ -953,9 +1085,9 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
 \begin{proof}
   Essendo uno zero di ordine $ 1 $ si ha che 
   \begin{align}
-    f(z) = \frac{c_{-1}}{z - z_0} + f_T(z)
+    f(z) = \frac{a_{-1}}{z - z_0} + f_T(z)
   \end{align}
-  e quindi il limite vale proprio $ c_{-1} \eqcolon \Res[ f(z), z_0 ] $.
+  e quindi il limite vale proprio $ a_{-1} \eqcolon \Res[ f(z), z_0 ] $.
 \end{proof}
 \begin{theorem}[  ]
   Sia $ f(z) = \frac{g(z)}{h(z)} $ con $ g,h $ analitiche in un intorno di $ z_0 $ e $ g(z_0) \neq 0 $ mentre $ h(z_0) = 0, h'(z_0) \neq 0 $, cioè 
@@ -1688,7 +1820,7 @@ Definiamo ora tre spazi di funzioni che saranno poi le nostre funzioni di test, 
   $ \E \coloneq C^\infty $, con la seguente nozione di convergenza: sia $ \phi_n \in \E $ una successione, 
   diremo che $ \phi_n \ov{\to}{\E} 0 $ se 
   \begin{align}
-    \forall n \in \mathbb{N}\quad \frac{d^k \phi_n }{dx^k} \to 0 \quad \textnormal{per} \quad n\to +\infty
+    \forall k \in \mathbb{N}\quad \frac{d^k \phi_n }{dx^k} \to 0 \quad \textnormal{per} \quad n\to +\infty
   \end{align}
   uniformemente su ogni $ K \subset \R $ compatto.
 \end{definition}
@@ -1711,7 +1843,7 @@ Definiamo ora tre spazi di funzioni che saranno poi le nostre funzioni di test, 
   $ \D $ con la seguente nozione di convergenza: sia $ \phi_n \in \D $ una successione, e siano $ K_n = \supp \phi_n $ 
   allora diremo che $ \phi_n \ov{\to}{\D} 0 $ se esiste un compatto $ K \subset \R $ tale che 
   \begin{align}
-    K_n \subset K \quad \textnormal{e} \quad \frac{d^k \phi_n }{dx^k} \to 0 \quad \textnormal{per} \quad n\to +\infty
+    K_n \subset K \quad \textnormal{e} \quad \abs{\frac{d^k \phi_n }{dx^k}} \to 0 \quad \textnormal{per} \quad n\to +\infty
   \end{align}
   uniformemente in $ K $, per ogni $ k \in \mathbb{N}_0 $.
 \end{definition}
@@ -2460,7 +2592,7 @@ che ci permette di calcolare la trasformata della $ \theta(\pm x) $. Per farlo s
     = \int_{-\infty}^{+\infty} v(y) \int_{-\infty}^{+\infty} u(x-y) \phi(x) \,dx \,dy
     = \int_{-\infty}^{+\infty} v(y) \left( u_- * \phi \right)(y)\,dy = \sc{T_v, u_-*\phi}
   \end{gather}
-  dove abbiamo definito $ u_(z) = u(-z) $. Allo stesso modo per una distribuzione generica si definisce con 
+  dove abbiamo definito $ u_{-}(z) = u(-z) $. Allo stesso modo per una distribuzione generica si definisce con 
   \begin{align}
     \sc{T_u * T, \phi} \coloneq \sc{T, u_-*\phi} 
   \end{align}
@@ -2485,7 +2617,7 @@ che ci permette di calcolare la trasformata della $ \theta(\pm x) $. Per farlo s
   \begin{enumerate}
     \item $ D(T_1*T_2) = (DT_1) * T_2 = T_1 * (DT_2)$
     \item $ \F\left[ T_1*T_2 \right] = \F[T_1] \F[T_2] = \hat{T}_1 \hat{T}_2 $
-    \item $ \F^{-1}[\hat{T}_1 * \hat{T}_2] = 2pi T_1T_2 $
+    \item $ \F^{-1}[\hat{T}_1 * \hat{T}_2] = 2\pi T_1T_2 $
   \end{enumerate}
 \end{lemma}
 
