@@ -516,9 +516,35 @@ Notiamo che questo teorema è in pratica l'inverso del teorema di Cauchy \ref{th
   $ \exists M > 0 $ tale che $ |f(z)| \leq M \; \forall z \in \C $, allora $ f(z) = $ costante $ \forall z \in \C $.
 \end{theorem}
 \begin{proof}
-  
+  Dato che $ f(z) $ è analitica calcoliamo la sua derivata con la formula per le derivate di funzione analitica:
+  \begin{align}
+    \abs{f'(z)} \leq \frac{1}{2\pi} \abs{\oint_\gamma \frac{f(\eta)}{(\eta - z)^2} \, d\eta} 
+    \leq \frac1{2\pi} \int_0^{2\pi} \frac{\abs{f(\eta)}}{R^2} \, R \,d\theta \leq \frac{M}{R}
+  \end{align}
+  dove $ R $ è il raggio della circonferenza $ \gamma $. Siccome la funzione è intera possiamo mandare $ R \to +\infty $ ottenendo  
+  $ \abs{f'(z)} \to 0 $ e quindi $ f(z) $ è necessariamente costante.
 \end{proof}
 
+Sfruttando il teorema di Liouville possiamo dimostrare il seguente.
+
+\begin{theorem}[ fondamentale dell'algebra ]
+  Sia $ P(z) = \sum_k^n a_k z^k $ un polinomio con $ a_n \neq 0 $, allora ha almeno uno zero in $ \C $, cioè $ \exists z_0 \in \C : P(z_0) = 0 $.
+\end{theorem}
+\begin{proof}
+  Se $ a_0 = 0 $ allora $ P(z) = z (a_1 + a_2 z + \dots + a_n z^{n-1}) $ e quindi $ z = 0 $ è uno zero di $ P $. Consideriamo allora il caso in cui 
+  $ a_0 \neq 0 $, se per assordo $ P(z) \neq 0 $ per ogni $ z \in \C $, allora la funzione $ g(z) = \frac1{P(z)} $ è intera e dunque su ogni 
+  $ K \subset \C $ compatto è continua e quindi limitata. Inoltre abbiamo che 
+  \begin{align}
+    \lim_{z \to \infty} \frac1{P(z)} = 0
+  \end{align}
+  e quindi è uniformemente limitata, ma allora per il teorema di Liouville $ g(z) $ dovrebbe essere costante su tutto $ \C $, che è assurdo.
+\end{proof}
+
+Iterando il precedente risultato si ottiene il seguente corollario.
+
+\begin{corollary}
+  Ogni polinomio $ P(z) $ si fattorizza completamente in $ \C $.
+\end{corollary}
 
 \section{Serie di Potenze}
 
@@ -614,7 +640,7 @@ per cui la serie è assolutamente convergente e quindi converge.
 \end{theorem}
 Da notare che il teorema non ci dà alcuna informazione per il cerchio $ \abs{z - z_0} = \abs{z_1 - z_0} $.
 \begin{proof}
-  Preso $ z $ nel disco $ \abs{z - z_0} < \abs{z_1 - z_0} $ definiamo la quantità $ q = \frac{\abs{z - z_0}}{\abs{z_1 - z_0}}  1 $, dato che la serie 
+  Preso $ z $ nel disco $ \abs{z - z_0} < \abs{z_1 - z_0} $ definiamo la quantità $ q = \frac{\abs{z - z_0}}{\abs{z_1 - z_0}} < 1 $, dato che la serie 
   $ \sum_n a_n (z_1 - z_0)^n $ è convergente si ha che la successione $ a_n (z_1 - z_0)^n $ è infinitesima e in particolare limitata, cioè 
   $ \exists M \geq 0  $ tale che $ \abs{a_n (z_1 - z_0)^n} \leq M \; \forall n $. Allora abbiamo che 
   \begin{align}
@@ -1284,7 +1310,7 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   e prendendo la parte reale da entrambi i termini si ottiene la tesi.
 \end{proof}
 \begin{theorem}[ Principio del massimo/minimo ]
-  Sia $ u(x,y) $ armonica in un aperto regolare semplicemente connesso $ A $ e continua nel chiuso $ \ol{A} $, allora i punti di massimo e di minimo 
+  Sia $ u(x,y) $ armonica in un aperto regolare connesso $ A $ e continua nel chiuso $ \ol{A} $, allora i punti di massimo e di minimo 
   di $ u $ si trovano nella frontiera $ \partial A $, cioè 
   \begin{align}
     \min_{(x,y) \in \partial A} u(x,y) \leq u(x,y) \leq \max_{(x,y) \in \partial A} u(x,y) \quad \forall (x,y) \in A.
@@ -1629,7 +1655,7 @@ elettromagnetici. Già per questi motivi è utile cercare di definire la trasfor
 
 \begin{enumerate}
   \item $ L^1(\R) \cap L^2(\R) $ è denso in $ L^2(\R) $
-  \item presa una successione $ f_n \in L^(\R) \cap L^2(\R) $ tale che $ f_n \to f \in L^2(\R) $ in norma, allora anche $ \hat{f}_n $ converge e si 
+  \item presa una successione $ f_n \in L^1(\R) \cap L^2(\R) $ tale che $ f_n \to f \in L^2(\R) $ in norma, allora anche $ \hat{f}_n $ converge e si 
   definisce $ \hat{f} = \lim_n \hat{f}_n $
   \item la trasformata non dipende dalla successione, cioè per ogni successione convergente a $ f $ si ha che la successione delle trasformate converge 
   alla trasformata
