@@ -627,13 +627,22 @@ chiuso dell'aperto $ \abs{z} < 1 $.
   \end{align}
   dove notiamo che le funzioni $ a_n (z - z_0)^n $ sono intere.
 \end{definition}
-Alcuni esempi. La serie $ \sum_n n! (z -z_0)^n $ converge soltanto in $ z = z_0 $ dato che non è soddisfatta la condizione necessaria per la convergenza 
-cioè che $ \lim_n u_n(z) = 0 $. La serie $ \sum_n \frac{(z - z_0)^n}{n!} $ converge $ \forall z \in \C $ e per mostrarlo applichiamo il 
-criterio del rapporto:
-\begin{align}
-  \lim_{n\to \infty} \frac{\abs{u_{n+1}(z)}}{\abs{u_n(z)}} = \frac{\abs{z - z_0}}{n+1} = 0 < 1 \quad \forall z \in \C
-\end{align}
-per cui la serie è assolutamente convergente e quindi converge.
+
+Alcuni esempi. 
+\begin{example}
+  La serie $ \sum_n n! (z - z_0)^n $ converge soltanto in $ z = z_0 $ dato che non è soddisfatta la condizione necessaria per la convergenza 
+  cioè che $ \lim_n u_n(z) = 0 $.
+\end{example}
+
+\begin{example}
+  La serie $ \sum_n \frac{(z - z_0)^n}{n!} $ converge $ \forall z \in \C $ e per mostrarlo applichiamo il 
+  criterio del rapporto:
+  \begin{align}
+    \lim_{n\to \infty} \frac{\abs{u_{n+1}(z)}}{\abs{u_n(z)}} = \frac{\abs{z - z_0}}{n+1} = 0 < 1 \quad \forall z \in \C
+  \end{align}
+  per cui la serie è assolutamente convergente e quindi converge.
+\end{example}
+
 \begin{theorem}[ di Abel ]
   Se la serie di potenze $ \sum_n a_n (z - z_0)^n $ converge in $ z_1 \neq z_0 $, allora converge assolutamente per ogni $ z $ nel disco 
   $ \abs{z - z_0} < \abs{z_1 - z_0}  $.
@@ -707,10 +716,14 @@ di convergenza la serie diverge mentre per $ \abs{z - z_0} = R $ non ci dà info
   \end{align}
   che calcolata in $ z_0 $ ci dà $ f'(z_0) = a_1 $, e continuando si ottengono gli altri coefficienti della serie.
 \end{proof}
-La serie con $ a_n = 1 \,\forall n $ è detta \textit{serie geometrica complessa}, che si vede avere raggio di converga $ R = 1 $ e somma 
-\begin{align}
-  f(z) = \frac1{1 - (z - z_0)}.
-\end{align}
+
+\begin{example}
+  La serie con $ a_n = 1 \,\forall n $ è detta \textit{serie geometrica complessa}, che si vede avere raggio di converga $ R = 1 $ e somma 
+  \begin{align}
+    \sum_{n= 0}^{+\infty} (z - z_0)^n = \frac1{1 - (z - z_0)}
+  \end{align}
+  per $ \abs{ z - z_0} < 1 $.
+\end{example}
 
 \begin{theorem}[ di Taylor ]
   Sia $ f(z) $ una funzione analitica nel disco $ D = \{ z: \abs{z - z_0} < R\} $, allora in $ D $ può essere rappresentata in modo univoco tramite la 
@@ -744,65 +757,112 @@ La serie con $ a_n = 1 \,\forall n $ è detta \textit{serie geometrica complessa
   dalla formula per la derivata $ n $-esima. Abbiamo potuto scambiare la serie con l'integrale per la convergenza uniforme della serie geometrica per 
   $ \eta \in C_r $.
 \end{proof}
-Consideriamo la funzione $ f(z) = \Log z $ (determinazione principale del logaritmo complesso) nel semplicemente connesso $ \C^- = \C \bs (-\infty,0] $, 
-in questo spazio è analitica per cui ammette sviluppo in Taylor:
-\begin{align}
-  (\Log z)' = \frac1z,\quad (\Log z)'' = - \frac1{z^2},\quad \dots\quad(\Log z)^{(n)} = (-1)^{n - 1} \frac{(n-1)!}{z^n}
-\end{align}
-per cui lo sviluppo in Taylor in $ z_0 \in \C^- $ vale
-\begin{gather}
-  \Log z - \Log z_0 = \sum_{n = 1}^\infty \frac{(-1)^{n-1}(z - z_0)^n}{n\, z_0^n} 
-  = \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n} \left( \frac{z}{z_0} - 1 \right)^n 
-  \\
-  = \sum_{n = 1}^\infty \frac{-1}{n} \left( 1 - \frac{z}{z_0} \right)^n.
-\end{gather}
-Il raggio di convergenza è vincolato dal taglio $ R = \sup\,\{ \abs{z -z_0} : D \cap (-\infty, 0] = \emptyset \} $ dove $ D $ è il disco di raggio $ R $ 
-e centro in $ z_0 $, quindi stiamo chiedendo che $ R $ sia la massima distanza per la quale il disco non attraversi il taglio e quindi sia contenuto 
-completamente in $ \C^- $ ($ D \cap \C^- = D $). Lo sviluppo di $ e^z $ nel punto $ z = 0 $ è il medesimo del caso reale cioè
-\begin{align}
-  e^z = \sum_{n = 0}^\infty \frac{z^n}{n!}
-\end{align}
-e dato che è intera il raggio di convergenza è $ R = \infty $, e lo stesso vale per $ \cos z, \sin z $. La funzione $ f(z) = \frac1{z - a} $ è analitica 
-per ogni $ z \in \C \bs \{z = a\} $ dunque è sviluppabile con Taylor, il raggio di convergenza è vincolato dalla distanza da $ a $ cioè 
-$ R = \abs{ a - z_0} $ e lo sviluppo vale
-\begin{align}
-  \frac1{z - a} = \frac{1}{(z - z_0) - (a - z_0)} = \frac{-1}{a - z_0} \cdot \frac1{1 - \frac{z - z_0}{a - z_0}} 
-  = -\sum_{n = 0}^\infty \frac{(z - z_0)^n}{(a - z_0)^{n+1}}
-\end{align}
+
+\begin{example}
+  Consideriamo la funzione $ f(z) = \Log z $ (determinazione principale del logaritmo complesso) nel semplicemente connesso $ \C^- = \C \bs (-\infty,0] $, 
+  in questo spazio è analitica per cui ammette sviluppo in Taylor:
+  \begin{align}
+    (\Log z)' = \frac1z,\quad (\Log z)'' = - \frac1{z^2},\quad \dots\quad(\Log z)^{(n)} = (-1)^{n - 1} \frac{(n-1)!}{z^n}
+  \end{align}
+  per cui lo sviluppo in Taylor in $ z_0 \in \C^- $ vale
+  \begin{gather}
+    \Log z - \Log z_0 = \sum_{n = 1}^\infty \frac{(-1)^{n-1}(z - z_0)^n}{n\, z_0^n} 
+    = \sum_{n = 1}^\infty \frac{(-1)^{n-1}}{n} \left( \frac{z}{z_0} - 1 \right)^n 
+    \\
+    = \sum_{n = 1}^\infty \frac{-1}{n} \left( 1 - \frac{z}{z_0} \right)^n.
+  \end{gather}
+  Il raggio di convergenza è vincolato dal taglio $ R = \sup\,\{ \abs{z -z_0} : D \cap (-\infty, 0] = \emptyset \} $ dove $ D $ è il disco di raggio $ R $ 
+  e centro in $ z_0 $, quindi stiamo chiedendo che $ R $ sia la massima distanza per la quale il disco non attraversi il taglio e quindi sia contenuto 
+  completamente in $ \C^- $ ($ D \cap \C^- = D $).
+\end{example}
+
+\begin{example}
+  Lo sviluppo di $ e^z $ nel punto $ z = 0 $ è il medesimo del caso reale ovvero
+  \begin{align}
+    e^z = \sum_{n = 0}^\infty \frac{z^n}{n!}
+  \end{align}
+  e dato che è intera il raggio di convergenza è $ R = \infty $, e lo stesso vale per $ \cos z, \sin z $ di cui riportiamo gli sviluppi:
+  \begin{align}
+    \cos z = \sum_{n = 0}^{\infty} (-1)^n \frac{z^{2n}}{(2n)!}, \qquad \sin z = \sum_{n = 0}^{\infty} (-1)^n \frac{z^{2n + 1}}{(2n + 1)!}.
+  \end{align}
+\end{example}
+
+\begin{example}
+  La funzione $ f(z) = \frac1{z - a} $ è analitica per ogni $ z \in \C \bs \{z = a\} $ dunque è sviluppabile con Taylor in un qualsiasi disco che non 
+  contenga il punto $ a $, di conseguenza il raggio di convergenza è vincolato dalla distanza da $ a $ cioè 
+  $ R = \abs{ a - z_0} $ dove $ z_0 $ è il punto in cui sviluppiamo. Per trovare l'espressione sfruttiamo la tecnica già usata per dimostrare il 
+  teorema di Taylor cioè
+  \begin{align}
+    \frac1{z - a} = \frac{1}{(z - z_0) - (a - z_0)} = \frac{-1}{a - z_0} \cdot \frac1{1 - \frac{z - z_0}{a - z_0}} 
+    = \frac1{z_0 - a} \cdot \sum_{n = 0}^\infty \frac{(z - z_0)^n}{(a - z_0)^n}
+  \end{align}
+  dove abbiamo usato la serie geometrica complessa dato che $ \abs{z - z_0} < \abs{a - z_0} $, dunque abbiamo ottenuto che lo sviluppo in un 
+  qualsiasi disco che non contiene $ a $ vale
+  \begin{align}
+    \frac{1}{z - a} = -\sum_{n = 0}^\infty \frac{(z - z_0)^n}{(a - z_0)^{n+1}} = \sum_{n = 0}^\infty (-1)^n \frac{(z - z_0)^n}{(z_0 - a)^{n+1}}.
+  \end{align}
+\end{example}
 
 \section{Zeri di una funzione analitica}
+
 \begin{theorem}[  ]
   Sia $ f(z) $ analitica in un dominio connesso $ A $, se $ \exists z_0 \in A $ tale che la funzione e tutte le sue derivate si annullano in $ z_0 $, 
   cioè $ f(z_0) = f'(z_0) = \dots = f^{(n)}(z_0) = \dots = 0 $, allora la funzione è identicamente nulla $ \forall z \in A $.
 \end{theorem}
 \begin{proof}
-  
+  Vogliamo dimostrare che preso un qualsiasi $ z \in A $ si ha che $ f(z) = 0 $, per farlo prendiamo una curva $ \gamma \in C^0([0,1], A) $ tale che 
+  $ \gamma(0) = z_0, \gamma(1) = z $ cioè collega i punti $ z_0 $ e $ z $ (ed esiste perché $ A $ è connesso). 
+  Definiamo 
+  \begin{align}
+    d = \textnormal{dist}(\gamma, \partial A) = \min_{z_1 \in \gamma, z_2 \in \partial A} \abs{z_1 - z_2}
+  \end{align}
+  e prendiamo il disco di $ D_0 $ centrato in $ z_0 $ di raggio $ R = d/2 $, in tale disco la funzione $ f $ è analitica e quindi ammette sviluppo in 
+  Taylor, il quale è nullo dato che i coefficienti $ a_n = \frac{f^{(n)}(z_0)}{n!} $ sono tutti nulli per ipotesi. Preso $ z_1 $ il punto di intersezione 
+  fra il bordo del disco $ \partial D_0 $ e la curva $ \gamma $, abbiamo nuovamente che nel disco $ D_1 $ centrato in $ z_1 $ di raggio $ R = d/2 $ 
+  la funzione $ f $ è analitica e per continuità deve valere che lo sviluppo in Taylor deve essere nullo anche in $ D_1 $, ma questo implica che 
+  $ a_n = \frac{f^{n}(z_1)}{n!} = 0 $. Ripetiamo questo passaggio fino a raggiungere la fine della curva cioè $ \gamma(1) = z $ e 
+  otteniamo che $ f(z) = 0 $.
 \end{proof}
+
 \begin{definition}[ Zeri di una funzione analitica ]
   Sia $ f(z) $ una funzione analitica non identicamente nulla in un dominio connesso $ A $, se $ z_0 \in A $ è tale che $ f(z_0) = 0 $ diremo che è uno 
   \textit{zero della funzione $ f $}, inoltre se $ f(z_0) = 0 $ ma $ f'(z_0) \neq 0 $ diremo che è uno \textit{zero di ordine 1}, in particolare definiamo 
   l'\textit{ordine di uno zero} come il massimo $ n $ tale che $ f^{(k)}(z_0) = 0 \; \forall k < n $.
 \end{definition}
+
 \begin{theorem}[  ] \label{thm: gli zeri sono punti isolati}
   Gli zeri di una funzione analitica non identicamente nulla sono punti isolati, cioè $ \forall z_0 : f(z_0) = 0 $ si ha che $ \exists U $ intorno di 
   $ z_0 $ tale che $ f(z) \neq 0 \; \;\forall z \in U, z \neq z_0 $. Inoltre sia $ \Omega $ l'insieme degli zeri di $ f $ in un connesso $ A $, allora 
   gli eventuali punti di accumulazione di $ \Omega $ non appartengono ad $ A $.
 \end{theorem}
 \begin{proof}
-  
+  Sia $ z_0 $ uno zero di ordine $ m $ per $ f(z) $, dato che è analitica ammette lo sviluppo in serie di Taylor nell'intorno del punto $ z_0 $ che vale 
+  \begin{align}
+    f(z) = \sum_{n = m}^\infty a_n (z - z_0)^n = (z - z_0)^m \sum_{n = 0}^\infty a_{n + m}(z - z_0)^n = (z -z_0)^m g(z)
+  \end{align}
+  dove abbiamo sfruttato che i termini $ n < m $ sono nulli. La funzione $ g(z) $ è analitica e $ g(z_0) \neq 0 $, allora per la continuità esiste 
+  un intorno di $ z_0 $ in cui $ g(z) \neq 0 $, e dato che $ (z - z_0)^m $ si annulla solo in $ z = z_0 $ allora anche la funzione $ f(z) \neq 0 $ 
+  in tale intorno (escluso $ z_0 $) per cui $ z_0 $ è uno punto isolato. Per quanto riguarda l'insieme $ \Omega $ degli zeri di una funzione analitica, 
+  se questo avesse un punto di accumulazione $ \ol{z} \in A $ allora per ogni intorno $ U $ di $ \ol{z} $ si avrebbe che $ U \cap \Omega \bs\{\ol{z}\} $ 
+  sarebbe non vuoto, che è proprio la negazione del fatto che gli zeri sono punti isolati.
 \end{proof}
-Consideriamo la funzione $ \sin \left( \frac1z \right) $, è analitica in $ \C^* = \C \bs \{0\} $ e si annulla in $ z = \frac1{n\pi}\; n \in \mathbb{Z} $, 
-allora sia $ \Omega $ l'insieme degli zeri, si nota che ha un punto di accumulazione in $ 0 $, che infatti non è di olomorfia per la funzione.
+
+\begin{example}
+  Consideriamo la funzione $ \sin \left( \frac1z \right) $, è analitica in $ \C^* = \C \bs \{0\} $ e si annulla in $ z = \frac1{n\pi}\; n \in \mathbb{Z} $, 
+  allora sia $ \Omega $ l'insieme degli zeri, si nota che ha un punto di accumulazione in $ 0 $, che infatti non è di olomorfia per la funzione.
+\end{example}
 
 \begin{corollary}
   Sia $ f(z) $ una funzione analitica non identicamente nulla in un dominio connesso $ A $, allora in ogni sottodominio compatto $ C \subset A $ può avere 
   solo un numero finito di zeri.
 \end{corollary}
-Quindi può avere un numero infinito di zeri solo in un dominio aperto o illimitato.
+
 \begin{proof}
   Se per assurdo avesse un numero infinito di zeri in un compatto, allora si potrebbe trovare una successione degli zeri convergente a un punto nel 
   compatto, che sarebbe di accumulazione e quindi in contrasto con il teorema precedente.
 \end{proof}
+
+Quindi una funzione analitica può avere un numero infinito di zeri solo in un dominio aperto o illimitato.
 
 \begin{theorem}[ di unicità ]
   Siano $ f_1(z), f_2(z) $ due funzioni analitiche in un dominio connesso $ A $ e sia $ \Omega $ l'insieme dei punti $ z \in A $ tali che 
@@ -812,13 +872,15 @@ Quindi può avere un numero infinito di zeri solo in un dominio aperto o illimit
   Consideriamo la funzione $ F(z) = f_1(z) - f_2(z) $ analitica in $ A $, se $ F $ non è identicamente nulla allora l'insieme dei suoi zeri cioè $ \Omega $ 
   non può avere punti di accumulazione in $ A $, dunque se ne ha almeno uno la funzione è nulla e quindi $ f_1,f_2 $ sono identiche.
 \end{proof}
+
 \begin{corollary}
-  Se $ f_1(z), f_2(z) $ analitiche in un connesso $ A $ assumono gli stessi valori su una curva $ \gamma \in C^1_{\text{tratti}}([a,b], A) $ 
+  Se $ f_1(z), f_2(z) $ analitiche in un connesso $ A $ assumono gli stessi valori su una curva $ \gamma \in C^0(A) $ 
   (non costante) allora le funzioni sono identiche in $ A $.
 \end{corollary}
 \begin{proof}
-  È una conseguenza diretta del teorema di unicità.
+  È una conseguenza diretta del teorema di unicità dato che ogni punto della curva continua è un punto di accumulazione.
 \end{proof}
+
 Grazie al teorema di unicità possiamo dire che le funzioni intere $ e^z, \cos z, \sin z, \cosh z, \sinh z $ sono le uniche estensioni analitiche delle 
 rispettive funzioni reali dato che coincidono sull'asse reale. Allo stesso modo il logaritmo principale $ \Log z $ è l'estensione analitica del logaritmo 
 reale nello spazio $ \C^- $. Inoltre le due funzioni intere $ f_1(z) = \cos^2 z + \sin^2 z $ e $ f_2(z) = 1 $ coincidono sull'asse reale e quindi sono la 
@@ -842,6 +904,7 @@ stessa funzione, dunque l'identità trigonometrica $ \cos^2 z + \sin^2 z = 1 $ v
     \lim_{z \to z_0} \frac{f(z)}{g(z)} = \lim_{z \to z_0} \frac{c_{n} + c_{n+1}(z - z_0) + \dots}{d_{n} + d_{n+1}(z - z_0) + \dots} = \frac{c_n}{d_n} 
     = \frac{f^{(n)}(z_0)}{g^{(n)}(z_0)}
   \end{align}
+  che è appunto la tesi.
 \end{proof}
 
 \begin{definition}[ Serie di Taylor-Laurent ]
@@ -910,8 +973,9 @@ Chiamiamo $ r = \frac1{R'} $, allora la serie non convergerà se $ r > R $, ment
   \end{align}
   che sostituita nell'integrale ci dà
   \begin{align}
-    f_L(z) = \frac1{2\pi i} \oint_{C_{\rho_1}} f(\eta) \sum_{n = 0}^\infty \frac{(\eta - z_0)^{n}}{(z - z_0)^{n+1}} \,d\eta 
-    = \sum_{n = 0}^\infty \frac1{(z - z_0)^{n+1}} \cdot \frac1{2\pi i} \oint_{C_{\rho_1}} {f(\eta)}{(\eta - z_0)^{n}}\,d\eta
+    f_L(z) &= \frac1{2\pi i} \oint_{C_{\rho_1}} f(\eta) \sum_{n = 0}^\infty \frac{(\eta - z_0)^{n}}{(z - z_0)^{n+1}} \,d\eta 
+    \\
+    &= \sum_{n = 0}^\infty \frac1{(z - z_0)^{n+1}} \cdot \frac1{2\pi i} \oint_{C_{\rho_1}} {f(\eta)}{(\eta - z_0)^{n}}\,d\eta
   \end{align}
   e sostituendo $ n \to -(n+1) $ si ottiene
   \begin{align}
@@ -920,20 +984,26 @@ Chiamiamo $ r = \frac1{R'} $, allora la serie non convergerà se $ r > R $, ment
   \end{align}
   e quindi la funzione totale si scrive come somma della parte di Taylor e della parte di Laurent.
 \end{proof}
-Se la funzione che consideriamo è analitica in tutto il disco di raggio $ R $, allora si può mostrare che la parte di Laurent è nulla, cioè 
-$ a_n = 0 \; \forall n < 0 $.
+
+Se la funzione che consideriamo è analitica in tutto il disco di raggio $ R $, allora la parte di Laurent è nulla 
+perché l'integranda $ f(\eta)(\eta - z_0)^{-n} $ è analitica per ogni $ n < 0 $ e quindi per il teorema di Cauchy su un semplicemente connesso 
+l'integrale è nullo.
+
 \begin{definition}[ Punti singolari isolati ]
   Diremo che $ z_0 $ è un \textit{punto singolare isolato} di una funzione $ f(z) $ se è analitica nella corona circolare $ r = 0 < \abs{z - z_0} < R $.
 \end{definition}
+
 Di seguito classificheremo i punti singolari isolati in tre casi possibili.
-\begin{theorem}[ \textbf{Caso 1}: singolarità eliminabile ]
+
+\begin{definition}[ \textbf{Caso 1}: singolarità eliminabile ]
   Sia $ z_0 $ un punto singolare isolato per la funzione $ f(z) $ analitica nella corona circolare $ 0 < \abs{z - z_0} < R $, se
-  la parte di Laurent è nulla per $ f $, cioè $ a_n = 0 \; \forall n < 0 $ allora esiste finito il limite
+  la parte di Laurent $ f_L(z) $ è nulla, cioè $ a_n = 0 \; \forall n < 0 $ allora esiste finito il limite
   \begin{align}
     \lim_{z \to z_0} f(z) = a_0
   \end{align}
-  quindi vale il termine $ n = 0 $ dello sviluppo in Taylor di $ f $. In tal caso $ z_0 $ si dice singolarità eliminabile.
-\end{theorem}
+  quindi vale il termine $ n = 0 $ dello sviluppo in Taylor di $ f $. In tal caso $ z_0 $ si dice \textit{singolarità eliminabile}.
+\end{definition}
+
 \begin{theorem}[  ] \label{thm: analitica limitata allora la singolarità è eliminabile}
   Se $ f $ analitica in una corona circolare $ A $ è limitata in un intorno del punto $ z_0 $ contenuto in $ A $, allora $ z_0 $ è una singolarità 
   eliminabile.
@@ -949,37 +1019,39 @@ Di seguito classificheremo i punti singolari isolati in tre casi possibili.
   è nullo dunque per la convergenza uniforme la serie di Laurent è identicamente nulla e per tanto $ z_0 $ è una singolarità eliminabile di $ f $.
 \end{proof}
 
-Un esempio è la (classica) funzione $ \frac{\sin z}{z} $ analitica in $ \C^* $, possiamo mostrare che $ z_0 = 0 $ è una singolarità eliminabile in tre 
-modi: il primo dalla definizione calcolando i coefficienti dello sviluppo di Laurent 
-\begin{align}
-  a_n = \frac1{2\pi i} \oint_\gamma \frac{\sin \eta}{\eta^{n+2}} \,d\eta \quad \textnormal{con}\;\; n = -1 = \dots = -\infty
-\end{align}
-e che si riscrive mandando $ n \to -n $ come
-\begin{align}
-  a_{-n} = \frac1{2\pi i} \oint_\gamma {\sin \eta}\cdot{\eta^{n-2}} \,d\eta = 0
-\end{align}
-perché per $ n \geq 2 $ l'integranda è intera, mentre per $ n = 1 $ si ha $ a_{-1} =\frac1{2\pi i} \cdot \sin 0 = 0 $. Il secondo è tramite lo sviluppo 
-in serie esplicito cioè 
-\begin{align}
-  \frac{\sin z}{z} = \frac1z \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n +1)!} \cdot z^{2n +1} = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n +1)!} \cdot z^{2n}
-\end{align}
-che non contiene potenze negative di $ z $, e dunque per l'unicità della parte di Taylor, la parte di Laurent è nulla. Il terzo è con il teorema di de 
-l'Hôpital e il teorema \ref{thm: analitica limitata allora la singolarità è eliminabile}: 
-dato che $ f $ è un rapporto di funzioni intere e per entrambe $ z_0 = 0 $ è uno zero di ordine 1, allora 
-\begin{align}
-  \lim_{z \to 0} \frac{\sin z}{z} =\lim_{z\to 0} \frac{\cos z}{1} = 1
-\end{align}
-dunque è limitata e quindi la singolarità è eliminabile per il teorema precedente. Di conseguenza se costruiamo la funzione
-\begin{align}
-  \tilde{f}(z) =
-  \begin{cases}
-    \DS 1 &\quad z = 0
-    \\
-    \DS \frac{\sin z}{z} &\quad z \in \C^*
-  \end{cases}
-\end{align}
-questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo $ 0 $, dunque per il teorema di unicità è l'unica estensione analitica 
-(intera) di $ f $ in $ \C $.
+\begin{example}
+  Consideriamo la funzione $ \frac{\sin z}{z} $ analitica in $ \C^* = \C\bs\{0\} $, possiamo mostrare che $ z_0 = 0 $ è una singolarità eliminabile 
+  in tre modi. Il primo dalla definizione calcolando i coefficienti dello sviluppo di Laurent 
+  \begin{align}
+    a_n = \frac1{2\pi i} \oint_\gamma \frac{\sin \eta}{\eta^{n+2}} \,d\eta \quad \textnormal{con}\;\; n < 0
+  \end{align}
+  e che si riscrive mandando $ n \to -n $ come
+  \begin{align}
+    a_{-n} = \frac1{2\pi i} \oint_\gamma {\sin \eta}\cdot{\eta^{n-2}} \,d\eta = 0
+  \end{align}
+  perché per $ n \geq 2 $ l'integranda è intera, mentre per $ n = 1 $ si ha $ a_{-1} =\frac1{2\pi i} \cdot \sin 0 = 0 $. 
+  Il secondo è tramite lo sviluppo in serie esplicito cioè 
+  \begin{align}
+    \frac{\sin z}{z} = \frac1z \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n +1)!} \cdot z^{2n +1} = \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n +1)!} \cdot z^{2n}
+  \end{align}
+  che non contiene potenze negative di $ z $, e dunque per l'unicità dello sviluppo, la parte di Laurent è nulla. Il terzo è con il teorema di de 
+  l'Hôpital e il teorema \ref{thm: analitica limitata allora la singolarità è eliminabile}: 
+  dato che $ f $ è un rapporto di funzioni intere e per entrambe $ z_0 = 0 $ è uno zero di ordine 1, allora 
+  \begin{align}
+    \lim_{z \to 0} \frac{\sin z}{z} =\lim_{z\to 0} \frac{\cos z}{1} = 1
+  \end{align}
+  dunque è limitata e quindi la singolarità è eliminabile per il teorema precedente. Di conseguenza se costruiamo la funzione
+  \begin{align}
+    \tilde{f}(z) =
+    \begin{cases}
+      \DS 1 &\quad z = 0
+      \\
+      \DS \frac{\sin z}{z} &\quad z \in \C^*
+    \end{cases}
+  \end{align}
+  questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo $ 0 $, dunque per il teorema di unicità è l'unica estensione analitica 
+  (intera) di $ f $ in $ \C $.
+\end{example}
 
 \begin{definition}[ \textbf{Caso 2}: polo di ordine $ m $ ]
   Sia $ f(z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ ($ r = 0!!$), se i coefficienti dello sviluppo di Laurent sono un 
@@ -987,7 +1059,12 @@ questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo
   \begin{align}
     a_{n} = 0 \; \forall n < -m \; \text{e} \; a_{-m} \neq 0 \iff z_0 \; \text{è un polo di ordine $ m $}.
   \end{align}
+  In tal caso la funzione avrà uno sviluppo di Taylor-Laurent della forma 
+  \begin{align}
+    f(z) = \frac{a_{-m}}{(z - z_0)^m} + \dots + \frac{a_{-1}}{z - z_0} + \sum_{n=0}^\infty a_n (z - z_0)^n.
+  \end{align}
 \end{definition}
+
 \begin{theorem}[ Condizione necessaria e sufficiente per poli di ordine $ m $ ]
   Il punto $ z_0 $ è un polo di ordine $ m $ per la funzione $ f $ analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ se e soltanto se
   \begin{align}
@@ -1002,10 +1079,12 @@ questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo
     \\
     = \lim_{z \to z_0} a_{-m} + \sum_{n = m + 1}^\infty \frac{a_{-n}}{ (z - z_0)^{n - m}}
   \end{gather}
-  e quindi il limite esiste finito e vale $ a_{-m} $ solo se tutti i termini successivi sono nulli.
+  e quindi il limite esiste finito e vale $ a_{-m} $ solo se tutti i termini $ a_{-n} $ con $ n \geq m + 1 $ sono nulli.
 \end{proof}
+
 \begin{corollary}
-  $ z_0 $ è un polo di ordine $ m $ della funzione $ f(z) $ se e soltanto se $ z_0 $ è uno zero di ordine $ m $ della funzione $ g(z) = \frac1{f(z)} $.
+  Il punto $ z_0 $ è un polo di ordine $ m $ della funzione $ f(z) $ se e soltanto se $ z_0 $ è uno zero di ordine $ m $ della funzione 
+  $ g(z) = \frac1{f(z)} $.
 \end{corollary}
 \begin{proof}
   Svolgiamo il seguente limite:
@@ -1017,7 +1096,6 @@ questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo
   dove l'ultimo limite è finito e non nullo solo se $ g_L(z) = 0 $ e $ b_n = 0\; \forall n < m $ con $ b_m \neq 0 $, ovvero solo se $ z_0 $ è 
   uno zero di ordine $ m $ di $ g(z) $.
 \end{proof}
-
 
 \begin{theorem}[  ]
   Il punto $ z_0 $ è un polo se e soltanto se $ \exists \lim_{z \to z_0} f(z) = \infty $, inteso nel senso della proiezione stereografica, quindi 
@@ -1039,44 +1117,78 @@ questa assume gli stessi valori della funzione $ f $ in tutti i punti escluso lo
 \end{definition}
 
 Sulle singolarità essenziali ci sono dei risultati molto potenti e affascinanti dell'analisi complessa fra cui il seguente teorema.
+
 \begin{theorem}[ di Picard ]
   Sia $ f(z) $ analitica nella corona circolare $ 0 < \abs{z - z_0} < R $, se $ z_0 $ è una singolarità essenziale per $ f $ allora in un 
   qualsiasi intorno di $ z_0 $ la funzione assume ogni numero complesso infinite volte, con al più un'eccezione.
 \end{theorem}
-Una singolarità essenziale è ad esempio $ z_0 = 0 $ per la funzione $ f(z) = e^{\frac1z} $: il limite non esiste e per notarlo basta fare il limite destro 
-e sinistro sull'asse reale che valgono rispettivamente $ +\infty $ e $ 0 $, e lo sviluppo in serie vale
-\begin{align}
-  e^{\frac1z} = \sum_{n = 0}^\infty \frac1{n!} \cdot \left( \frac1z \right)^n.
-\end{align}
-Essendo potenze negative di $ z $ la funzione è composta da $ a_0 $ e poi soltanto la parte di Laurent con infiniti termini, e per verificare la validità 
-del teorema di Picard risolviamo l'equazione 
-\begin{align}
-  e^{\frac1z} = \alpha = \abs{\alpha} \cdot e^{i\theta} \implies \frac1z = \log \abs{\alpha} + i \arg \alpha
-  \\
-  z = \frac1{\log \abs{\alpha} + i\theta + i2\pi k} \quad \textnormal{con}\; k \in \mathbb{Z}
-\end{align}
-che infatti ammette infinite soluzioni.
+
+\begin{example}
+  Una singolarità essenziale è ad esempio $ z_0 = 0 $ per la funzione $ f(z) = e^{\frac1z} $: il limite non esiste e per notarlo basta fare il limite destro 
+  e sinistro sull'asse reale che valgono rispettivamente $ +\infty $ e $ 0 $, e lo sviluppo in serie vale
+  \begin{align}
+    e^{\frac1z} = \sum_{n = 0}^\infty \frac1{n!} \cdot \left( \frac1z \right)^n.
+  \end{align}
+  Essendo potenze negative di $ z $ la funzione è composta da $ a_0 $ e poi soltanto la parte di Laurent con infiniti termini, e per verificare la validità 
+  del teorema di Picard risolviamo l'equazione 
+  \begin{align}
+    e^{\frac1z} = \alpha = \abs{\alpha} \cdot e^{i\theta} \implies \frac1z = \log \abs{\alpha} + i \arg \alpha
+    \\
+    z = \frac1{\log \abs{\alpha} + i\theta + i2\pi k} \quad \textnormal{con}\; k \in \mathbb{Z}
+  \end{align}
+  che infatti ammette infinite soluzioni.
+\end{example}
+
 \begin{definition}[ Punto all'infinito ]
   Definiamo lo spazio $ \hat{\C} \coloneq \C \cup \{\infty\} $ identificato tramite proiezione stereografica con la sfera $ S^2 $ 
   ($ \hat{\C} $ è quindi compatto), diremo che il \textit{punto all'infinito} $ z = \infty \in \hat{\C} $ è un punto singolare isolato 
   della funzione $ f(z) $ se si può trovare un $ r $-intorno di $ z = \infty $ in cui la funzione $ f $ è analitica, cioè se per 
   $ r < \abs{z} < R = \infty $ si ha che $ f $ è analitica.
 \end{definition}
-Il punto all'infinito è l'equivalente della punto singolare per la mappa che manda $ z \to \frac1z $, e infatti possiamo classificarli sempre in tre casi.
+
+Il punto all'infinito è l'equivalente della punto singolare per la mappa che manda $ z \to \frac1z $, e infatti possiamo classificarlo in modo analago 
+agli zeri e alle singolarità.
+
 \begin{theorem}[  ]
   Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor di $ f $ è nulla escluso $ a_0 $ allora il punto $ z = \infty $ è 
   una singolarità eliminabile.
 \end{theorem}
 \begin{proof}
-  Si vede subito che esiste finito il limite $ \lim_{z \to \infty} f(z) = a_0 $.
+  Svolgiamo il limite 
+  \begin{align}
+   \lim_{z \to \infty} a_0 + \sum_{n = 1}^{+\infty} \frac{a_n}{(z-z_0)^n} = a_0.
+  \end{align}
 \end{proof}
-\begin{theorem}[  ]
-  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor è nulla e $ a_{-m} $ (con $ m \geq 1 $) è il primo termine non nullo 
-  dello sviluppo di Laurent, allora $ z = \infty $ è uno zero di ordine $ m $ della funzione $ f $.
-\end{theorem}
 
-È il caso della funzione $ \frac1z $, analitica per $ \abs{z} > 0 $ e parte di Taylor chiaramente nulla, infatti il limite per $ z \to \infty $ vale 
-$ 0 $ e $ \lim_{z\to\infty} z f(z) = 1 = a_{-1} $ dunque $ z = \infty $ è uno zero di ordine $ 1 $.
+\begin{definition}[  ]
+  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor è nulla e $ a_{-m} $ (con $ m \geq 1 $) è il primo termine non nullo 
+  dello sviluppo di Laurent, cioè $ f(z) $ ha uno sviluppo del tipo 
+  \begin{align}
+    f(z) = \dots + \frac{a_{-m-1}}{(z-z_0)^{m+1}} + \frac{a_{-m}}{(z-z_0)^{m}}
+  \end{align}
+  allora diremo che $ z = \infty $ è uno zero di ordine $ m $ della funzione $ f $.
+\end{definition}
+
+\begin{theorem}[  ]
+  Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, allora $ z = \infty $ è uno zero di ordine $ m $ per $ f $ se e soltanto se 
+  \begin{align}
+    \exists\; \text{finito}\; \lim_{z \to \infty} z^m f(z) = a_{-m}.
+  \end{align}
+\end{theorem}
+\begin{proof}
+  Dato che $ f $ è analitica ammette sviluppo di Taylor-Laurent e quindi 
+  \begin{align}
+    \lim_{z\to \infty} z^m f(z) 
+    = \lim_{z \to \infty} \sum_{n = 1}^{+\infty} \frac{z^m \, a_{-m}}{(z - z_0)^n} + \sum_{n = 0}^{+\infty} z^m \, a_n ( z- z_0)^n
+  \end{align}
+  dove notiamo che il limite esiste finito (e vale $ a_{-m} $) se e soltanto se $ a_n = 0 $ per $ n > -m $ che è la definizione di zero di ordine $ m $ in $ z = \infty $. 
+
+\end{proof}
+
+\begin{example}
+  Consideriamo la funzione $ \frac1z $ che è analitica per $ \abs{z} > 0 $ con parte di Taylor chiaramente nulla. Il limite per $ z \to \infty $ vale 
+  $ 0 $ e $ \lim_{z\to\infty} z \cdot f(z) = 1 = a_{-1} $ dunque $ z = \infty $ è uno zero di ordine $ 1 $.
+\end{example}
 
 \begin{theorem}[  ]
   Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $ e sia $ a_{m} $ l'ultimo coefficiente non nullo dello sviluppo di Taylor, allora $ z = \infty $ 
