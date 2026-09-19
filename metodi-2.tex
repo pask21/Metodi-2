@@ -1146,7 +1146,7 @@ Sulle singolarità essenziali ci sono dei risultati molto potenti e affascinanti
   $ r < \abs{z} < R = \infty $ si ha che $ f $ è analitica.
 \end{definition}
 
-Il punto all'infinito è l'equivalente della punto singolare per la mappa che manda $ z \to \frac1z $, e infatti possiamo classificarlo in modo analago 
+Il punto all'infinito è l'equivalente del punto singolare per la mappa che manda $ z \to \frac1z $, e infatti possiamo classificarlo in modo analogo 
 agli zeri e alle singolarità.
 
 \begin{theorem}[  ]
@@ -1181,8 +1181,8 @@ agli zeri e alle singolarità.
     \lim_{z\to \infty} z^m f(z) 
     = \lim_{z \to \infty} \sum_{n = 1}^{+\infty} \frac{z^m \, a_{-m}}{(z - z_0)^n} + \sum_{n = 0}^{+\infty} z^m \, a_n ( z- z_0)^n
   \end{align}
-  dove notiamo che il limite esiste finito (e vale $ a_{-m} $) se e soltanto se $ a_n = 0 $ per $ n > -m $ che è la definizione di zero di ordine $ m $ in $ z = \infty $. 
-
+  dove notiamo che il limite esiste finito (e vale $ a_{-m} $) se e soltanto se $ a_n = 0 $ per $ n > -m $ che è la definizione di zero di 
+  ordine $ m $ in $ z = \infty $.
 \end{proof}
 
 \begin{example}
@@ -1190,18 +1190,33 @@ agli zeri e alle singolarità.
   $ 0 $ e $ \lim_{z\to\infty} z \cdot f(z) = 1 = a_{-1} $ dunque $ z = \infty $ è uno zero di ordine $ 1 $.
 \end{example}
 
-\begin{theorem}[  ]
+\begin{definition}[  ]
   Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $ e sia $ a_{m} $ l'ultimo coefficiente non nullo dello sviluppo di Taylor, allora $ z = \infty $ 
   è un polo di ordine $ m $ della funzione $ f $, inoltre vale ancora la condizione sufficiente e necessaria $ \lim_{z\to \infty} f(z) = \infty $.
-\end{theorem}
-\begin{theorem}[  ]
+  In tal caso la funzione $ f $ ammetterà uno sviluppo della forma 
+  \begin{align}
+    f(z) = f_L(z) + a_0 + a_1 z + \dots + a_m z^m.
+  \end{align}
+\end{definition}
+
+\begin{definition}[  ]
   Sia $ f(z) $ analitica in $ r < \abs{z} < R = \infty $, se la parte di Taylor contiene un numero infinito di termini allora 
   $ z = \infty $ è una singolarità essenziale della funzione $ f $, e in tal caso non esiste il limite $ \lim_{z\to \infty} f(z) $.
-\end{theorem}
-La funzione $ e^z $ ha in $ z = \infty $ una singolarità essenziale, un polinomio $ P(z) $ di grado $ m $ ha all'infinito un polo di ordine $ m $,
-una funzione razionale $ Q(z) $ che scomposta in fratti semplici ha grado massimo $ -m $ ($ f_T = 0 $) ha all'infinito uno zero di ordine $ m $.
+\end{definition}
+
+\begin{remark}
+  Consideriamo la mappa $ h(z) = \frac1z $ e notiamo che manda il punto all'infinito nel punto $ 0 $, allora è facile verificare che per la funzione 
+  $ g(z) = (f \circ h)(z) = f\left( \frac1z \right) $ il carattere del punto all'infinito è lo stesso di $ f(z) $, cioè se per $ g(z) $ è un polo allora lo è anche per $ f(z) $ 
+  e così via.
+\end{remark}
+
+\begin{example}
+  La funzione $ e^z $ ha in $ z = \infty $ una singolarità essenziale, un polinomio $ P(z) $ di grado $ m $ ha all'infinito un polo di ordine $ m $,
+  una funzione razionale $ Q(z) $ che scomposta in fratti semplici ha grado massimo $ -m $ ($ f_T = 0 $) ha all'infinito uno zero di ordine $ m $.
+\end{example}
 
 \section{Residui di una funzione analitica}
+
 \begin{definition}[ Residuo ]
   Sia $ f(z) $ una funzione analitica nella corona circolare $ 0 < \abs{z - z_0} < R $ e sia $ z_0 $ un punto singolare isolato, 
   si dice \textit{residuo della funzione $ f(z) $} nel punto $ z_0 $ la quantità 
@@ -1210,6 +1225,7 @@ una funzione razionale $ Q(z) $ che scomposta in fratti semplici ha grado massim
   \end{align}
   dove $ \gamma \in C^1_{\text{tratti}} $  semplice chiusa, percorsa in senso antiorario, contenuta nella corona e che contiene $ z_0 $.
 \end{definition}
+
 Si nota subito che se $ z_0 $ è una singolarità eliminabile allora il residuo è nullo:
 \begin{align}
   \Res[ f(z), z_0 ] = \frac1{2\pi i} \int_0^{2\pi} f(z_0 + \rho e^{i\theta}) i \rho e^{i\theta} d\rho \to 0 \quad \textnormal{per}\; \rho \to 0.
@@ -1227,6 +1243,7 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
   \end{align}
   e quindi il limite vale proprio $ a_{-1} \eqcolon \Res[ f(z), z_0 ] $.
 \end{proof}
+
 \begin{theorem}[  ]
   Sia $ f(z) = \frac{g(z)}{h(z)} $ con $ g,h $ analitiche in un intorno di $ z_0 $ e $ g(z_0) \neq 0 $ mentre $ h(z_0) = 0, h'(z_0) \neq 0 $, cioè 
   $ z_0 $ è uno zero di ordine $ 1 $ di $ h $, allora $ z_0 $ è un polo di ordine $ 1 $ per $ f $ con residuo pari a 
@@ -1246,6 +1263,7 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
   e dunque $ z_0 $ è un polo di ordine $ 1 $ per la funzione $ f(z) $ e per il teorema precedente il suo residuo coincide con il limite che abbiamo 
   calcolato.
 \end{proof}
+
 \begin{theorem}[  ]
   Se $ z_0 $ è un polo di ordine $ m $ della funzione $ f(z) $ allora vale la seguente formula per i residui:
   \begin{align}
@@ -1261,6 +1279,7 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
   volte e infine correggere dividendo per il fattore $ (m -1)! $ dovuto alla derivata, attraverso il limite otteniamo il residuo dato che è l'unico 
   termine a non avere più potenze di $ (z - z_0) $. 
 \end{proof}
+
 \begin{theorem}[ fondamentale dei residui ]
   Sia $ A $ un aperto regolare e sia $ \Gamma = \partial A $ il suo bordo, se la funzione $ f(z) $ è analitica in $ \ol{A} $ tranne che in un 
   numero $ N $ finito di punti interni, cioè ammette un numero finito di singolarità $ z_1, \dots, z_N \in A $, allora vale la seguente 
@@ -1286,10 +1305,12 @@ Potevamo anche dire che presa $ \tilde{f} $ l'estensione analitica di $ f $ con 
   \end{align}
   dalla definizione di residui.
 \end{proof}
+
 Il teorema dei residui è in generale ancora più forte: si può dimostrare che la tesi vale anche per una quantità numerabile di singolarità a patto che non 
 ci sia un punto di accumulazione. 
+
 \begin{definition}[ Residuo all'infinito ]
-  Se $ z = \infty \in \hat{\C} $ è una singolarità isolata per la funzione $ f(z) $ analitica nella corona $ r < \abs{z-z_0} < R = \infty $, allora 
+  Se $ z = \infty \in \hat{\C} $ è una singolarità isolata per la funzione $ f(z) $ analitica nella corona $ r < \abs{z} < R = \infty $, allora 
   si dice \textit{residuo all'infinito} della funzione $ f(z) $ la quantità
   \begin{align}
     \Res[ f(z), \infty ] \coloneq - a_{-1} = -\frac1{2\pi i}\oint_\gamma f(\eta)\,d\eta
@@ -1297,13 +1318,16 @@ ci sia un punto di accumulazione.
   dove la curva semplice chiusa $ \gamma $ è percorsa in senso antiorario, e per questo motivo c'è il segno $ - $ dato che stiamo considerando l'esterno 
   della curva e non l'interno.
 \end{definition}
-A differenza dei casi precedenti, se $ z = \infty $ è una singolarità eliminabile per una funzione $ f(z) $, allora non necessariamente 
-$ \Res[ f(z), \infty ] $ deve essere nullo, ad esempio per $ \frac1z $ abbiamo che $ -a_{-1} = -1 $ benché il limite $ \lim_{z \to \infty}\frac1z = 0 $ 
-esista finito.
+
+\begin{remark}
+  A differenza dei casi precedenti, se $ z = \infty $ è una singolarità eliminabile per una funzione $ f(z) $, allora non necessariamente 
+  $ \Res[ f(z), \infty ] $ deve essere nullo, ad esempio per $ \frac1z $ abbiamo che $ -a_{-1} = -1 $ benché il limite $ \lim_{z \to \infty}\frac1z = 0 $ 
+  esista finito.
+\end{remark}
+
 \begin{theorem}[ esterno dei residui ]
-  Sia $ A $ un aperto regolare $ r $-intorno di $ z = \infty $ (cioè $ \abs{z} > r $) e sia $ \Gamma = \partial A $ il suo bordo, 
-  se la funzione $ f(z) $ è analitica in $ \ol{A} $ tranne che in un numero $ N $ finito di punti di $ A $, cioè ammette un numero 
-  finito di singolarità $ z_1, \dots, z_N \in A $, allora vale la seguente 
+  Sia $ f(z) $ una funzione analitica all'esterno di un contorno chiuso $ \Gamma $ tranne che in un numero $ N $ finito di punti, 
+  cioè ammette un numero finito di singolarità $ z_1, \dots, z_N $, allora vale la seguente 
   \begin{align}
     \oint_\Gamma f(z) \,dz = -2\pi i \sum_{n = 1}^{N} \Res[ f(z), z_n ] - 2\pi i \,\Res[ f(z), \infty ]
   \end{align}
@@ -1327,7 +1351,9 @@ esista finito.
   \end{align}
   per la definizione di residuo all'infinito.
 \end{proof}
+
 Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ è una singolarità sia quando è un punto regolare. 
+
 \begin{corollary}
   Se la funzione $ f(z) $ è analitica su tutto il piano complesso tranne che in un numero finito di punti, allora vale la seguente 
   \begin{align}
@@ -1342,6 +1368,7 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   \end{align}
   dove abbiamo usato il teorema di Cauchy per annullare l'integrale su $ \Gamma $.
 \end{proof}
+
 \begin{corollary}
   Sia $ f(z) $ una funzione analitica in tutto il piano complesso tranne che in un numero $ N = N_{\text{int}} + N_{\text{ext}} $ 
   finito di punti $ z_n, n = 1, \dots, N$. Sia $ \Gamma $ una curva semplice chiusa orientata positivamente 
@@ -1353,8 +1380,12 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   \end{align}
 \end{corollary}
 \begin{proof}
-  Segue applicando i teoremi interno ed esterno dei residui agli aperti regolari interno ed esterno separati da $ \Gamma $.
+  Segue applicando i teoremi interno ed esterno dei residui ai domini interno ed esterno separati da $ \Gamma $.
 \end{proof}
+
+
+
+
 
 \section{Funzioni armoniche}
 \begin{definition}[ Funzione armonica ]
