@@ -1383,9 +1383,95 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   Segue applicando i teoremi interno ed esterno dei residui ai domini interno ed esterno separati da $ \Gamma $.
 \end{proof}
 
+\begin{lemma}[ di Jordan ]
+  Se la funzione $ f(z) $ è analitica nel semipiano complesso superiore ($ \text{Im}\,z \geq 0 $) tranne che in un numero finito di singolarità isolate, 
+  e se tende a zero uniformemente rispetto ad $ \arg z $, cioè 
+  \begin{align}
+    \lim_{R \to \infty} \left( \max_{z \in C^+_R} \abs{f(z)}\right) = 0
+  \end{align}
+  dove $ C^+_R = \{z: \abs{z} = R, \text{Im} \, z \geq 0\} $ è la semicirconferenza di raggio $ R $ e centro in $ 0 $ nel semipiano superiore, 
+  allora vale che 
+  \begin{align}
+    \lim_{R \to \infty} \int_{C^+_R} e^{iaz} f(z) \,dz = 0 \quad \text{per} \; a > 0.
+  \end{align}
+  Se invece $ f(z) $ è analitica nel semipiano inferiore ($ \text{Im}\,z \leq 0 $) e vale il limite 
+  \begin{align}
+    \lim_{R \to \infty} \left( \max_{z \in C^-_R} \abs{f(z)}\right) = 0
+  \end{align}
+  dove $ C^-_R = \{z: \abs{z} = R, \text{Im} \, z \leq 0\} $ è la semicirconferenza di raggio $ R $ e centro in $ 0 $ nel semipiano inferiore, 
+  allora vale che
+  \begin{align}
+    \lim_{R \to \infty} \int_{C^-_R} e^{iaz} f(z) \,dz = 0 \quad \text{per} \; a < 0.
+  \end{align}
+\end{lemma}
+\begin{proof}
+  Mostriamo il primo caso cioè $ a > 0 $ e $ f(z) $ analitica in $ \text{Im}\,z > 0 $. Se vale che il massimo di $ \abs{f(z)} $ tende a zero su 
+  $ C^+_R $ allora esiste una $ M(R) $ tale che 
+  \begin{align}
+    \lim_{R\to \infty} \left( \max_{z \in C^+_R} \abs{f(z)}\right) \leq \lim_{R\to \infty} M(R) = 0
+  \end{align}
+  che possiamo sfruttare per maggiorare l'integrale. Parametrizziamo la semicirconferenza come $ z = Re^{i\theta} $ e otteniamo
+  \begin{align}
+    \abs{\int_{C^+_R} e^{iaz} f(z) \,dz} = \abs{\int_0^{\pi} e^{iaR\cos \theta} e^{-aR\sin\theta} f(z) i R e^{i\theta} \, d\theta}
+    \leq \int_0^{\pi} e^{-aR\sin\theta} \abs{f(z)} R  \, d\theta
+  \end{align}
+  e per svolgere l'integrale possiamo sfruttare che per $ \theta \in [0, \frac\pi2] $ si ha $ \sin\theta \geq \frac2\pi \theta $, mentre per 
+  $ \theta \in [\frac\pi2, \pi] $ facciamo la sostituzione $ \theta = \pi - \theta' $. Dunque l'integrale diventa
+  \begin{gather}
+    \int_0^{\frac\pi2} e^{-aR\sin\theta}\,d\theta + \int_{\frac\pi2}^{\pi} e^{-aR\sin\theta}\,d\theta 
+    \\= 2 \int_0^{\frac\pi2} e^{-aR\sin\theta}\,d\theta \leq 2 \int_0^{\frac\pi2} e^{-aR \frac2\pi \theta}\,d\theta
+    = \frac\pi{a R} \left( 1 - e^{-aR} \right)
+  \end{gather}
+  e pertanto l'integrale iniziale è maggiorato da 
+  \begin{align}
+    \abs{\int_{C^+_R} e^{iaz} f(z) \,dz} \leq R \cdot M(R) \cdot \frac\pi{a R} \left( 1 - e^{-aR} \right) = M(R)\,\frac\pi{a} \left( 1 - e^{-aR} \right)
+    \xrightarrow[R \to \infty]{} 0.
+  \end{align}
+  Per quanto riguarda il secondo caso si eseguono gli analoghi passaggi per il semipiano inferiore con $ a < 0 $.
+\end{proof}
 
+Il lemma di Jordan è molto utile anche per calcolare integrali sull'asse reale estendendo analiticamente la funzione al piano complesso.
 
+\begin{corollary}
+  Sia $ f(x) $ una funzione di variabile reale definita per ogni $ x \in \R $. Se $ f(x) $ può essere prolungata in modo analitico nel semipiano 
+  complesso superiore o in quello inferiore in modo da soddisfare le ipotesi del lemma di Jordan (buon andamento all'infinito) allora 
+  valgono i seguenti:
+  \begin{align}
+    \int_{-\infty}^{+\infty} e^{iax} f(x) \, dx = 2\pi i \sum_{n = 1}^{N} \Res[ e^{iaz} f(z), z_n ] \quad \text{per} \; a > 0
+  \end{align}
+  se prolungata nel semipiano superiore, mentre vale 
+  \begin{align}
+    \int_{-\infty}^{+\infty} e^{iax} f(x) \, dx = - 2\pi i \sum_{n = 1}^{N} \Res[ e^{iaz} f(z), z_n ] \quad \text{per} \; a < 0
+  \end{align}
+  se prolungata nel semipiano inferiore. I punti $ z_1, \dots, z_N $ sono le eventuali singolarità del prolungamento.
+\end{corollary}
+\begin{proof}
+  Applicando il teorema interno dei residui alla curva $ [-R, R] \cup C_R $ insieme al lemma di Jordan a seconda del semipiano si ottiene subito la tesi, 
+  dove notiamo che il segno $ - $ nel caso del semipiano inferiore è dovuto al verso di percorrenza della curva.
+\end{proof}
 
+\begin{lemma}[ del piccolo arco ]
+  Sia $ f(z) $ una funzione analitica con un polo di ordine $ 1 $ in $ z = z_0 $ e sia $ \gamma_{r} $ un arco di circonferenza di raggio $ r $ 
+  e centro in $ z_0 $ di ampiezza $ \alpha $, cioè $ \gamma_r = \{z = z_ 0 + re^{i\theta} : \theta \in [\theta_0, \theta_0 + \alpha] \} $, allora 
+  si ha che 
+  \begin{align}
+    \lim_{r\to 0^+} \int_{\gamma_r} f(z) \, dz = i \alpha \Res[ f(z), z_0 ]
+  \end{align}
+  cioè l'integrale dell'arco attorno alla singolarità per $ r \to 0 $ è proporzionale all'ampiezza dell'arco.
+\end{lemma}
+\begin{proof}
+  Se $ z_0 $ è un polo di ordine $ 1 $ per $ f(z) $ allora esiste una corona circolare centrata in $ z_0 $ in cui $ f(z) = \frac{g(z)}{z - z_0} $ per lo 
+  sviluppo di Taylor-Laurent, con $ g(z) $ analitica in $ z_0 $. Possiamo quindi calcolare l'integrale 
+  \begin{gather}
+    \int_{\gamma_r} f(z)\,dz = \int_{\gamma_r} \frac{g(z)}{z - z_0} \, dz = \int_{\theta_0}^{\theta_0 + \alpha} g(z_0 + r e^{i\theta})\, i \,d\theta
+    \xrightarrow[r\to 0^+]{} i \,g(z_0) \int_{\theta_0}^{\theta_0 + \alpha} d\theta 
+    \\
+    = i \alpha g(z_0) = i \alpha \Res[ f(z), z_0 ]
+  \end{gather}
+  dove per fare il limite abbiamo usato la continuità di $ g(z) $.
+\end{proof}
+
+Nel caso in cui $ \alpha = \pi $ il risultato precedente è noto anche con il nome di \textit{teorema del mezzo residuo}.
 
 \section{Funzioni armoniche}
 \begin{definition}[ Funzione armonica ]
@@ -1436,6 +1522,16 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   \end{align}
   da cui si ha che $ v $ è armonica, infine dato che la primitiva di una forma differenziale esatta è unica a meno di una costante abbiamo la tesi.
 \end{proof}
+
+\begin{remark}
+  Per due armoniche coniugate $ u(x,y), v(x, y) $ vale che le rispettive curve di livello sono ortogonali fra loro, ovvero le curve del tipo 
+  $ u(x,y) = \text{costante} $, che si traduce nell'ortogonalità dei gradienti cioè 
+  \begin{align}
+    \nabla u \cdot \nabla v = u_x v_x + u_y v_y = 0
+  \end{align}
+  che segue direttamente dalle condizioni di Cauchy-Riemann.
+\end{remark}
+
 \begin{theorem}[ della media per le funzioni armoniche ]
   Sia $ u(x,y) $ armonica nell'aperto $ \Omega \subset \R^2 $ e sia $ D \subset \Omega $ 
   il disco di raggio $ R $ centrato nel punto $ (x_0,y_0) \in \Omega $, allora si ha che la media sul bordo del disco della funzione $ u(x,y) $ è uguale 
@@ -1452,6 +1548,7 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   \end{align}
   e prendendo la parte reale da entrambi i termini si ottiene la tesi.
 \end{proof}
+
 \begin{theorem}[ Principio del massimo/minimo ]
   Sia $ u(x,y) $ armonica in un aperto regolare connesso $ A $ e continua nel chiuso $ \ol{A} $, allora i punti di massimo e di minimo 
   di $ u $ si trovano nella frontiera $ \partial A $, cioè 
@@ -1464,13 +1561,16 @@ Notiamo che il teorema esterno dei residui è valido sia quando $ z = \infty $ �
   $ e^{f(z)} = e^u \cdot e^{iv} $, il cui modulo è $ \abs{e^f} = e^u $ che essendo monotona crescente garantisce che un massimo (minimo) di 
   $ u $ lo è anche per $ e^u $, e dunque si ottiene il principio per le funzioni armoniche. 
 \end{proof}
+
 \begin{definition}[ Trasformazioni conformi ]
   Sia $ f(z) $ analitica in un aperto $ A $ con $ f'(z) \neq 0 \; \forall z \in A $, diremo che l'applicazione $ z \mapsto z' = f(z) $, se biunivoca, è 
   una \textit{trasformazione conforme} del dominio $ A $ nel dominio $ A' = f(A) $.
 \end{definition}
+
 Questa definizione delle trasformazioni conformi è quella analitica, cioè che ci dà una regola operativa per verificare se una funzione è tale, ma in 
 realtà la conformità è anche un concetto geometrico cioè è la proprietà di conservare gli angoli. Col seguente teorema vediamo come il concetto 
 geometrico e il concetto analitico sono equivalenti.
+
 \begin{theorem}[  ]
   Una trasformazione è conforme se e soltanto se conserva gli angoli orientati fra le curve.
 \end{theorem}
@@ -1509,8 +1609,10 @@ geometrico e il concetto analitico sono equivalenti.
   e dunque gli angoli sono localmente conservati.
 \end{proof}
 
-Una trasformazione conforme utile è quella di Möbius $ f(z) = \frac{az + b}{cz + d} $, analitica in $ z \neq -d/c $ dove ha un 
-polo di ordine $ 1 $, e derivando $ f'(z) = \frac{ad - bc}{(cz + d)^2} $ si ottiene la condizione $ ad - bc \neq 0 $.
+\begin{example}
+  Una trasformazione conforme utile è quella di Möbius $ f(z) = \frac{az + b}{cz + d} $, analitica in $ z \neq -d/c $ dove ha un 
+  polo di ordine $ 1 $, e derivando $ f'(z) = \frac{ad - bc}{(cz + d)^2} $ si ottiene la condizione $ ad - bc \neq 0 $ che ci garantisce la conformità.
+\end{example}
 
 \begin{theorem}[ di Riemann ]
   Per ogni dominio $ A\subset \C $ ($ A \neq C $) semplicemente connesso esiste una trasformazione conforme $ f(z) $ tale che $ f(A) = D_1 $ 
