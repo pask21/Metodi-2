@@ -2956,7 +2956,7 @@ Per risolverla sfruttiamo le distribuzioni e in particolare la $ \delta(x) $, in
 \begin{definition}[ Funzione di Green ]
   Sia $ L_x $ un operatore differenziale lineare che agisce sulla variabile $ x \in \R^n $, allora definiamo come 
   \textit{funzione (distribuzione) di Green} 
-  dell'operatore $ L $ una distribuzione $ G $ tale che 
+  dell'operatore $ L_x $ una distribuzione $ G $ tale che 
   \begin{align}
     L_xG(x, \xi) = \delta(x -\xi)
   \end{align}
@@ -3054,16 +3054,70 @@ dove rimane solo da cambiare di segno per il $ - $ dovuto alla normale. Mettendo
 \end{align}
 per ogni $ \phi \in \S $.
 
+\section{Equazioni differenziali tramite trasformata di Fourier}
+
+Nella precedente sezione abbiamo definito cosa è la funzione di Green associata a un sistema lineare, ma non come effettivamente può essere 
+utilizzata per risolverlo. Dato un input (o forzante) $ b(t) $ a un sistema lineare, sia $ a(t) $ il suo output con la relazione 
+\begin{align}
+  L_t(a(t)) = b(t)
+\end{align}
+e sia infine $ G(t, t') $ la funzione di Green associata al sistema, allora l'output si scrive in funzione dell'input come 
+\begin{align}
+  a(t) = \int_{-\infty}^{+\infty} G(t,t')\,b(t') \, dt'. \label{eq: a = intf G b}
+\end{align}
+Questa scrittura segue direttamente dalla definizione di funzione di Green del sistema lineare infatti applicando l'operatore lineare 
+$ L_t $ all'output otteniamo 
+\begin{align}
+  L_t(a(t)) = \int_{-\infty}^{+\infty} L_t(G(t,t'))\,b(t')\, dt' = \int_{-\infty}^{+\infty} \delta(t - t')\,b(t') \, dt' = b(t)
+\end{align}
+e quindi abbiamo mostrato che l'espressione integrale per $ a(t) $ risolve il sistema lineare. Richiediamo ora che il sistema lineare sia 
+indipendente dal tempo e cioè che se l'input viene traslato nel tempo $ b_\tau(t') = b(t' - \tau) $, allora anche l'output dovrà avere la stessa traslazione 
+$ a_\tau(t) $. Questo si traduce in 
+\begin{align}
+  a_\tau(t) = \int_{-\infty}^{+\infty} G(t,t')\,b_\tau(t')\,dt' = \int_{-\infty}^{+\infty} G(t,t')\,b(t' - \tau)\,dt'
+\end{align}
+ma se nella \eqref{eq: a = intf G b} trasliamo nel tempo si ottiene
+\begin{align}
+  a(t - \tau) = \int_{-\infty}^{+\infty} G(t - \tau, t')\,b(t')\,dt' 
+  = \int_{-\infty}^{+\infty} G(t - \tau,\tilde{t} - \tau)\,b(\tilde{t} - \tau)\,d\tilde{t}.
+\end{align}
+L'ipotesi di invarianza temporale ci dice proprio che le quantità $ a_\tau(t) $ e $ a(t - \tau) $ sono uguali, per cui possiamo uguagliare le due 
+espressioni ottenute per ottenere la condizione che 
+\begin{align}
+  \int_{-\infty}^{+\infty} \left[ G(t, t') - G(t - \tau, t' - \tau) \right] b(t' - \tau) \,dt'
+\end{align}
+che deve valere per ogni input $ b(t') $, per cui (per il lemma fondamentale del calcolo delle variazioni) si ha
+\begin{align}
+  G(t - \tau,t' - \tau) = G(t,t') \; \forall \tau \in \R \implies G(t, t') = G(t - t', 0) = G(t-t').
+\end{align}
+Dunque la condizione di invarianza temporale equivale a richiedere che la funzione di Green dipenda dalla differenza dei suoi due 
+parametri. Grazie a ciò riconosciamo che possiamo scrivere la risposta come un prodotto di convoluzione fra la funzione di Green e la sorgente, cioè
+\begin{align}
+  a(t) = \int_{-\infty}^{+\infty} G(t - t')\, b(t')\,dt' = (G*b)(t)
+\end{align}
+e se ora supponiamo che $ a(t), b(t) $ siano trasformabili secondo Fourier (quindi a quadrato sommabile) otteniamo che 
+\begin{align}
+  \hat{a}(\omega) = \hat{G}(\omega) \hat{b}(\omega)
+\end{align}
+dove la trasformata della funzione di Green deve rispettare anche
+\begin{align}
+  \F\left[ L_\tau(G(\tau)) \right] = \F\left[ \delta(\tau) \right] = 1
+\end{align}
+dove abbiamo usato la sostituzione $ \tau = t - t' $, e tale relazione è detta \textit{legge di dispersione}. In questo modo abbiamo costruito un 
+criterio per risolvere i sistemi lineari ricavando la trasformata $ \hat{G}(\omega) $ dalla legge di dispersione, antitrasformarla e infine scrivere 
+l'output come convoluzione fra $ G(t) $ e l'input.
+
+
 \section{Equazioni differenziali tramite trasformata di Laplace}
 La trasformata di Laplace al pari della trasformata di Fourier rappresenta uno strumento utile per risolvere delle equazioni differenziali lineari e 
 indipendenti dal tempo. Consideriamo la soluzione di una equazione scritta in termini della funzione di Green del problema:
 \begin{align}
-  b(t) = (G*a)(t) = \int_{-\infty}^{+\infty} G(t - t') a(t') \, dt
+  a(t) = (G*b)(t) = \int_{-\infty}^{+\infty} G(t - t') b(t') \, dt
 \end{align}
-Se vale che $ G(t) = 0 $ per $ t < 0 $ allora il sistema è causale e $ G, a $ sono trasformabili secondo Laplace, allora 
+Se vale che $ G(\tau) = 0 $ per $ \tau < 0 $ allora il sistema è causale e $ G, b $ sono trasformabili secondo Laplace, allora 
 per il teorema di convoluzione si ha
 \begin{align}
-  \ti{b}(s) = \ti{G}(s) \ti{a}(s)
+  \ti{a}(s) = \ti{G}(s) \ti{b}(s)
 \end{align}
 e troviamo $ G(t) $ antitrasformando.
 È possibile estendere la definizione di trasformata di Laplace anche alle distribuzioni temperate con la seguente definizione. 
@@ -3093,7 +3147,78 @@ la quale si generalizza per la derivata $ n $-esima $ D^nT $ con la formula
   \L\left[ D^nT \right](s) = \sca{D^nT, e^{-st}} = (-1)^n \sca{T, D^n e^{-st}} = s^n \L[T](s)
 \end{align}
 
+\section{Causalità}
 
+Nella sezione precedente abbiamo introdotto il concetto di causalità di una funzione di Green $ G(t,t') $ il quale consiste nel richiedere che la 
+risposta di un sistema sia esclusivamente successiva alla causa, che si traduce in $ G(t,t') = 0 $ per $ t' > t $. In un sistema indipendente dal tempo 
+si ha che $ G(t - t') = G(\tau) = 0 $ per $ \tau < 0 $. La causalità di una funzione di Green è equivalente a richiedere che la sua trasformata sia 
+analitica nel semipiano superiore del piano complesso come vediamo con il seguente teorema. 
 
+\begin{theorem}[  ]
+  Sia $ G(t) $ una funzione di Green causale e a quadrato sommabile, cioè $ G(t) = 0 $ per $ t < 0 $ con $ G(t) \in L^2(0, +\infty) $, allora 
+  la sua trasformata di Fourier 
+  \begin{align}
+    \hat{G}(\omega) = \int_0^{+\infty}G(t) e^{i\omega t}\,dt
+  \end{align}
+  vista come funzione della variabile complessa $ \omega $ è una funzione analitica nel semipiano complesso superiore $ \text{Im}\,\omega >0 $.
+\end{theorem}
+\begin{proof}
+  Scriviamo il rapporto incrementale di $ \hat{G}(\omega) $ 
+  \begin{align}
+    \frac{\hat{G}(\omega + \eps) - \hat{G}(\omega)}{\eps} &= \int_0^{+\infty} G(t) e^{i\omega t} \left( \frac{e^{i \eps t} - 1}{\eps} \right) \, dt
+    \\
+    &= \int_0^{+\infty} G(t) e^{i\omega t} i\,t \left( \frac{e^{i \eps t} - 1}{i\eps t} \right) \, dt \eqcolon \int_{0}^{+\infty} f_\eps(t)\,dt
+  \end{align}
+  dove abbiamo definito $ f_\eps(t) $ come l'integranda. Vogliamo applicare il teorema della convergenza dominata di Lebesgue per poter scambiare il 
+  limite con l'integrale, dobbiamo quindi mostrare che la funzione $ \abs{f_\eps(t)} $ è maggiorata da una funzione $ F(t) $ sommabile. 
+  Consideriamo la funzione $ g(\eps) = \frac{e^{i\eps t} -1}{i\eps t} $ e notiamo che è analitica 
+  per $ \eps \neq 0 $, tuttavia in $ \eps = 0 $ ha una singolarità eliminabile dato che è uno zero di ordine $ 1 $ sia per il numeratore che per il 
+  denominatore e dunque il limite esiste finite e vale 
+  \begin{align}
+    \lim_{\eps \to 0} \frac{e^{i\eps t} -1}{i\eps t} = \lim_{\eps \to 0} \frac{(e^{i\eps t} -1)'}{(i\eps t)'} = 1
+  \end{align}
+  per de l'Hôpital. Dunque possiamo estendere analiticamente la funzione $ g(\eps) $ anche in $ \eps = 0 $, inoltre per il principio del massimo 
+  modulo si ha che $ \abs{g(\eps)} \leq \max_{\abs{\eps} = \rho} \abs{g(\eps)} $ per ogni $ \abs{\eps} \leq \rho $. In questo modo possiamo maggiorare 
+  la funzione considerando il bordo $ \eps = \rho e^{i\theta} $:
+  \begin{align}
+    \abs{g\left( \rho e^{i\theta} \right)} = \frac{\abs{e^{i\eps t} - 1}}{\abs{i\eps t}} \leq \frac{\abs{e^{i\eps t}}+ 1}{\abs{i\eps t}} 
+    = \frac{e^{-t \sin \theta}+ 1}{\rho t} \leq \frac{e^{\rho t}+ 1}{\rho t}
+  \end{align}
+  per ogni $ \theta \in [0,2\pi] $. Prendiamo ora il modulo $ \abs{f_\eps(t)} $ con $ \abs{\eps} \leq \rho $ e si trova ($ \omega = \omega' + i \omega'' $)
+  \begin{align}
+    \abs{f_\eps(t)} &= \abs{g(\eps)} \, t e^{-\omega'' t} \abs{G(t)} \leq \frac{e^{\rho t}+ 1}{\rho t} t e^{-\omega'' t} \abs{G(t)}
+    \\
+    &= \left( \frac{e^{-(\omega''- \rho)t}}\rho  + \frac{e^{-\omega'' t}}\rho  \right) \abs{G(t)} \coloneq F(t)
+  \end{align}
+  ma allora se $ \omega'' > 0 $, per $ \rho < \omega '' $ si ha che 
+  \begin{align}
+    \frac{e^{-(\omega''- \rho)t}}\rho, \frac{e^{-\omega'' t}}\rho, \abs{G(t)} \in L^2(0, +\infty)
+  \end{align} 
+  allora i due prodotti 
+  \begin{align}
+    \frac{e^{-(\omega''- \rho)t}}\rho \abs{G(t)}, \frac{e^{-\omega'' t}}\rho \abs{G(t)} \in L^1(0, +\infty)
+  \end{align}
+  e per ciò anche $ F(t) \in L^1(0, +\infty) $. Abbiamo quindi mostrato che $ F(t) $ è sommabile su $ (0,+\infty) $ dunque possiamo applicare la 
+  convergenza dominata:
+  \begin{align}
+    \lim_{\eps \to 0}\int_0^{+\infty} f_\eps(t) \, dt = \int_0^{+\infty} \lim_{\eps \to 0} f_\eps(t) \, dt 
+    = \int_0^{+\infty} i t\, G(t) e^{i\omega t} \, dt
+  \end{align}
+  ma allora abbiamo fatto vedere che se $ \omega'' > 0 $ il limite del rapporto incrementale di $ \hat{G}(\omega) $ esiste per cui è analitica nel 
+  semipiano superiore $ \text{Im}\,\omega > 0 $.
+\end{proof}
+
+\begin{theorem}[  ]
+  Se una funzione $ G(t) \in L^1(\R) $ è a supporto compatto, detto $ I = \supp G $, allora la sua trasformata di Fourier
+  \begin{align}
+    \hat{G}(\omega) = \int_{-\infty}^{+\infty} G(t) e^{i\omega t}\,dt = \int_I G(t)e^{i\omega t} \, dt
+  \end{align} 
+  è una funzione analitica per ogni $ \omega \in \C $ cioè intera.
+\end{theorem}
+\begin{proof}
+  La dimostrazione di questo teorema riprende quella precedente con le stesse identiche maggiorazioni, soltanto che adesso la funzione $ F(t) $ è 
+  sommabile per qualsiasi $ \omega'' $ dato che è limitata sul compatto $ I $ e quindi applicando la convergenza dominata si mostra che esiste il limite 
+  del rapporto incrementale, stavolta per ogni $ \omega \in \C $.
+\end{proof}
 
 \end{document}
