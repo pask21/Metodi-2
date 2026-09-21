@@ -3221,4 +3221,52 @@ analitica nel semipiano superiore del piano complesso come vediamo con il seguen
   del rapporto incrementale, stavolta per ogni $ \omega \in \C $.
 \end{proof}
 
+Abbiamo visto come per un sistema lineare indipendente dal tempo e causale (con $ G(t) \in L^2(0, +\infty) $) la trasformata di Fourier della funzione di 
+Green si ottiene come valore al contorno di una funzione analitica nel semipiano complesso superiore. Sfruttiamo ora tale risultato per ricavare 
+una proprietà delle trasformate di Fourier delle funzioni causali. Sia $ \chi(\omega) = \F\left[ G(t) \right] $ con $ \omega \in \R $ e $ G(t) $ 
+la funzione di Green causale di un sistema di cui sopra, vogliamo studiare la funzione $ \frac{\chi(z)}{z - \omega} $. Tale funzione 
+ha in $ z = \omega $ un polo semplice ed è per ipotesi analitica nel semipiano superiore $ z'' > 0 $, la vogliamo integrare su una curva $ \Gamma $ 
+definita come 
+\begin{align}
+  \Gamma = (-R, \omega - \eps) \cup \left\{ z = \eps e^{i\theta} : \theta \in [\pi, 0] \right\} \cup (\omega + \eps, R) \cup \left\{ z = Re^{i\theta} : \theta \in [0, \pi] \right\} 
+\end{align}
+dove i due segmenti sono sull'asse reale. Per il teorema di Cauchy abbiamo 
+\begin{align}
+  0 = \oint_\Gamma \frac{\chi(z)}{z - \omega} \, dz 
+  = \left\{ \int_{-R}^{\omega - \eps} + \int_{\omega + \eps}^R \right\} \frac{\chi(z)}{z - \omega} \, dz
+  + \oint_{C_\eps^-} \frac{\chi(z)}{z - \omega} \, dz + \oint_{C_R^+} \frac{\chi(z)}{z - \omega} \, dz 
+\end{align}
+dove $ C_\eps^- $ e $ C_R^+ $ sono le semicirconferenze ciascuna con la sua orientazione. Supponendo che $ \chi(z) $ abbia un buon andamento all'infinito 
+tale da poter applicare il lemma di Jordan (ad esempio $ \DS \lim_{R\to\infty} \max_{z \in C_R} \abs{\chi(z)} = 0 $) si ottiene che per il doppio limite 
+$ R \to \infty, \eps \to 0 $ gli integrali sui segmenti diventano un integrale in valor principale sull'asse reale, mentre per quello sulla 
+semicirconferenza $ C_\eps^- $ possiamo applicare il teorema del mezzo residuo:
+\begin{align}
+  \P \int_{-\infty}^{+\infty} \frac{\chi(z)}{z - \omega} \, dz = i \pi \Res\left[ \frac{\chi(z)}{z - \omega}, \omega \right] 
+  = i \pi \chi(\omega).
+\end{align}
+Dividendo fra parte reale e immaginaria $ \chi(z) = \chi'(z) + i \chi''(z) $ si trovano le seguenti relazioni
+\begin{align}
+  \chi'(\omega) &= \frac1\pi \P\int_{-\infty}^{+\infty} \frac{\chi''(z)}{z - \omega}\,dz
+  \\
+  \chi''(\omega) &= -\frac1\pi \P\int_{-\infty}^{+\infty} \frac{\chi'(z)}{z - \omega}\,dz
+\end{align}
+che è la definizione della \textit{trasformata di Hilbert}, per cui la parte reale e immaginaria della trasformata di Fourier di una funzione causale 
+si ottengono l'una dall'altra mediante trasformata di Hilbert.
+
+Riuniamo i concetti e i risultati di questa sezione nel seguente teorema.
+
+\begin{theorem}[ di Titchmarsh ]
+  Dato un sistema lineare indipendente dal tempo, sia $ G(t) $ la funzione di Green di tale sistema, allora le seguenti proprietà sono equivalenti:
+  \begin{enumerate}
+    \item $ G(t) $ è causale e a quadrato sommabile;
+    \item $ \chi(\omega') = \F\left[ G(t) \right] $ con $ \omega' \in \R $ è a quadrato sommabile ed è il limite per $ \omega'' \to 0^+ $ di una funzione 
+    analitica nel semipiano superiore e tale per cui esiste finito il 
+    \begin{align}
+      \sup_{\omega'' > 0} \int_{-\infty}^{+\infty} \abs{\chi(\omega' + i \omega'')}^2 \, d\omega' < +\infty;
+    \end{align}
+    \item le funzioni $ \chi'(\omega) = \text{Re} \F[G(t)], \chi''(\omega) = \text{Im} \F[G(t)] $ sono la trasformata di Hilbert l'una dell'altra e 
+    inoltre sono a quadrato sommabile.
+  \end{enumerate}
+\end{theorem}
+
 \end{document}
