@@ -2576,7 +2576,7 @@ per ogni $ \phi \in \E $.
     \quad= \theta(x)
   \end{align}
   mentre per $ x = 0 $ la convergenza puntuale fallisce, ma dato che ha misura nulla questo non è rilevante e possiamo definirlo a posteriori in 
-  base a come abbiamo definito la funzioni di Heaviside. Dato che la funzione $ h $ è continua e sommabile allora le $ v_n(x) $ sono limitate e 
+  base a come abbiamo definito la funzione di Heaviside. Dato che la funzione $ h $ è continua e sommabile allora le $ v_n(x) $ sono limitate e 
   quindi maggiorate da un polinomio per tanto possiamo applicare il lemma 
   \ref{lem: successione maggiorata da un polinomio allora converge la distribuzione} e quindi la successione $ T_{v_n} \to T_\theta $. 
   Infine per mostrare la tesi basta il teorema precedente cioè il \ref{thm: l'operatore derivata è un operatore continuo} che essendo la  
@@ -3183,7 +3183,7 @@ risposta di un sistema sia esclusivamente successiva alla causa, che si traduce 
 si ha che $ G(t - t') = G(\tau) = 0 $ per $ \tau < 0 $. La causalità di una funzione di Green è equivalente a richiedere che la sua trasformata sia 
 analitica nel semipiano superiore del piano complesso come vediamo con il seguente teorema. 
 
-\begin{theorem}[  ]
+\begin{theorem}[  ] \label{thm: G causale e L2 allora la sua trasformata è analitica nel semipiano complesso superiore}
   Sia $ G(t) $ una funzione di Green causale e a quadrato sommabile, cioè $ G(t) = 0 $ per $ t < 0 $ con $ G(t) \in L^2(0, +\infty) $, allora 
   la sua trasformata di Fourier 
   \begin{align}
@@ -3297,5 +3297,47 @@ Riuniamo i concetti e i risultati di questa sezione nel seguente teorema.
     inoltre sono a quadrato sommabile.
   \end{enumerate}
 \end{theorem}
+\begin{proof}
+  Per dimostrare che $ 1 \implies 2 $ applichiamo il teorema 
+  \ref{thm: G causale e L2 allora la sua trasformata è analitica nel semipiano complesso superiore} il quale afferma che la funzione 
+  $ \chi(\omega') = \F[G(t)] $ è analitica nel semipiano superiore per tanto scriviamo il limite 
+  \begin{align}
+    \lim_{\omega''\to 0^+} \chi(\omega) = \lim_{\omega''\to 0^+} \int_{0}^{+\infty} G(t) e^{i\omega t} \, dt
+  \end{align}
+  consideriamo ora l'integrando e osserviamo che è maggiorata in modulo da 
+  \begin{align}
+    \abs{G(t) e^{i\omega t}} = \abs{G(t)} \abs{ e^{i\omega t}} = \abs{G(t)} e^{-\omega'' t} \in L^1(0, +\infty)
+  \end{align}
+  che è sommabile $ \forall \omega'' > 0 $ perché è un prodotto di due funzioni entrambe $ L^2(0, +\infty) $. Dato che l'integranda è sommabile possiamo scambiare il limite con 
+  l'integrale per la convergenza dominata di Lebesgue e quindi
+  \begin{align}
+    \lim_{\omega''\to 0^+} \chi(\omega) =  \int_{0}^{+\infty} \lim_{\omega''\to 0^+} G(t) e^{i\omega t} \, dt = \chi(\omega') = \F\left[ G(t) \right].
+  \end{align}
+  Rimane da mostrare che è a quadrato sommabile ma ricordando che la trasformata di Fourier è una isometria a meno di un fattore $ 2\pi $ 
+  abbiamo per l'identità di Parseval
+  \begin{align}
+    \norm{\chi(\omega')}^2_2 = 2\pi \norm{G(t)}^2_2 < +\infty.
+  \end{align}
+  E infine il risultato sul $ \sup_{\omega'' > 0} $ si ottiene osservando che 
+  \begin{align}
+    \int_{-\infty}^{+\infty} \abs{\chi(\omega' + i \omega'')}^2 \, d\omega' 
+    = \norm{\chi(\omega' + i \omega'')}_2^2 = 2\pi \norm{G(t) e^{-\omega'' t}}_2^2 \leq 2\pi \norm{G(t)}_2^2
+  \end{align}
+  sempre per l'identità di Parseval.
+  
+  Per quanto riguarda $ 2 \implies 3 $ è proprio il risultato che abbiamo mostrato prima di questo teorema. 
+  Infine per $ 3 \implies 1 $ scriviamo la trasformata di Hilbert e riconosciamo che questa è una convoluzione:
+  \begin{align}
+    \chi(\omega) = \frac{i}{\pi} \P\int_{-\infty}^{+\infty} \frac{\chi(z)}{\omega - z} \, dz 
+    = \frac{i}{\pi} \left( \P\frac1{x} * \chi\right)(\omega)
+  \end{align}
+  e quindi antitrasformando la convoluzione (e notando che serve un fattore $ 2\pi $) si ottiene 
+  \begin{align}
+    G(t) = \F^{-1}\left[ \chi(\omega) \right] = 2\pi \F^{-1}\left[ \frac{i}{\pi}\P\frac1x \right] \F^{-1}\left[ \chi(\omega) \right]
+    = \sgn(t) \,G(t) 
+  \end{align}
+  dove abbiamo usato che $ \F^{-1}\left[ \P\frac1x \right] = {\sgn(t)}/{2i} $. Quindi $ G(t) $ deve essere tale che $ G(t) = 0 $ per $ t < 0 $, 
+  che è proprio la condizione di causalità.
+\end{proof}
 
 \end{document}
