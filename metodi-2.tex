@@ -803,7 +803,7 @@ di convergenza la serie diverge mentre per $ \abs{z - z_0} = R $ non ci dà info
   \end{align}
 \end{example}
 
-\section{Zeri di una funzione analitica}
+\section{Punti singolari di una funzione analitica}
 
 \begin{theorem}[  ]
   Sia $ f(z) $ analitica in un dominio connesso $ A $, se $ \exists z_0 \in A $ tale che la funzione e tutte le sue derivate si annullano in $ z_0 $, 
@@ -2104,7 +2104,7 @@ Definiamo ora tre spazi di funzioni che saranno poi le nostre funzioni di test, 
   per ogni $ h,k \in \mathbb{N}_0 = \mathbb{N} \cup 0 $. Indicheremo lo spazio formato da tali funzioni $ \phi $ con $ \S $ con la seguente 
   nozione di convergenza: sia $ \phi_n \in \S $ una successione, allora diremo che $ \phi_n \ov{\to}{\S} 0 $ se 
   \begin{align}
-    \sup_{x \in \R} \abs{x^h \frac{d^k \phi}{dx^k}} \to 0 \quad \textnormal{per} \quad n\to +\infty
+    \sup_{x \in \R} \abs{x^h \frac{d^k \phi_n}{dx^k}} \to 0 \quad \textnormal{per} \quad n\to +\infty
   \end{align}
   uniformemente, per ogni $ h,k \in \mathbb{N}_0 $.
 \end{definition}
@@ -2231,7 +2231,7 @@ La nozione di continuità di una distribuzione $ T \in \mathds{X} $ si scrive ne
   per il lemma \ref{lem: funzioni test sono L1}, dove $ M_u = \sup_{x \in \R} \abs{u(x)} < +\infty $.
 
   Per mostrare che $ T_u $ è una distribuzione temperata serve mostrare che è lineare, 
-  che segue dalla linearità dell'integrale, e che è continuo cioè $ T_u(\phi_n) \to T_u(\phi) $ per $ \phi_n \to \phi $ e si dal fatto che 
+  che segue dalla linearità dell'integrale, e che è continuo cioè $ T_u(\phi_n) \to T_u(\phi) $ per $ \phi_n \to \phi $ e si ha dal fatto che 
   \begin{align}
     \abs{\sc{T_u ,\phi_n - \phi}} \leq M_u \int_{-\infty}^{+\infty} \abs{\phi_n(x) - \phi(x)} \,dx \to 0
   \end{align}
@@ -2242,7 +2242,8 @@ La nozione di continuità di una distribuzione $ T \in \mathds{X} $ si scrive ne
   \begin{align}
     \int_K \abs{u(x) \phi(x)} \,dx \leq \sup_{x \in K} \abs{\phi(x)} \int_K \abs{u} \,dx < +\infty
   \end{align}
-  per la limitatezza di $ \phi $ e perché $ u \in L^1_{\text{loc}}(\R) $.
+  per la limitatezza di $ \phi $ e perché $ u \in L^1_{\text{loc}}(\R) $, e dunque è ben definito. Per vedere che $ T_u \in \D' $ basta notare che 
+  $ \phi \in D \implies \phi \in \S $ e quindi vale ciò che abbiamo mostrato prima.
 \end{proof}
 
 Possiamo moltiplicare una distribuzione $ T $ per una funzione $ f(x) $ definendo questa operazione come $ \sc{f T,\phi } = \sc{T, f\phi} \in \C $, 
@@ -2299,7 +2300,15 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
 \begin{proof}
   Se $ T = T_u $ allora 
   \begin{align}
-    \sc{T_u, \phi} = \int_{-\infty}^{+\infty} u(x) \phi(x) \, dx 
+    \sc{T_u, \phi} = \int_{-\infty}^{+\infty} u(x) \phi(x) \, dx = \int_{\supp u} u(x) \phi(x) \, dx
+  \end{align}
+  e in particolare abbiamo che 
+  \begin{align}
+    \sca{T_u, \phi} = 0 \quad \forall \phi : \supp \phi \cap \supp u = \emptyset
+  \end{align}
+  ma quindi $ T_u = 0 $ per ogni $ \phi : \supp \phi \subset \Omega $ dove $ \Omega \subset \R \bs \supp u $ ma allora abbiamo che 
+  \begin{align}
+    \supp T = \R \bs \{\sup \Omega\} = \R \bs \left( \R \bs \supp u \right) = \supp u.
   \end{align}
 \end{proof}
 
@@ -2309,6 +2318,8 @@ per ogni $ \phi $ nello spazio di test, che per linearità diventa $ \sc{T_1 - T
     T \in \E' \iff \supp T \; \textnormal{è compatto}.
   \end{align}
 \end{lemma}
+
+Per questo risultato le distribuzioni $ T \in \E' $ sono dette \textit{distribuzioni a supporto compatto}.
 
 \begin{lemma}[  ]
   Sia $ u_n \in L^2(\R) $ una successione convergente in norma $ \norm{\cdot}_2 $ a $ u \in L^2(\R) $, allora $ T_{u_n} $ converge a $ T_u $ 
@@ -2818,36 +2829,54 @@ che ci permette di calcolare la trasformata della $ \theta(\pm x) $. Per farlo s
 \begin{example}
   Consideriamo il seguente limite 
   \begin{align}
-    \lim_{\eps\to0} \frac1{x \pm i\eps}
+    \lim_{\eps\to0} \frac1{x \pm i\eps} = \lim_{\eps \to 0} u_\eps(x)
   \end{align}
-  tale limite si potrebbe fare nel senso delle funzioni per ogni punto $ x \neq 0 $, ma se lo svolgiamo nel senso delle distribuzioni ci porta ad un
-  risultato più profondo. Dividendo in parte reale e immaginaria si ha 
+  tale limite si potrebbe fare nel senso delle funzioni per ogni punto $ x \neq 0 $, ma se lo svolgiamo nel senso delle distribuzioni ci porta a un
+  risultato più profondo. Per calcolarlo sfruttiamo la continuità dell'operatore trasformata di Fourier e quindi 
   \begin{align}
-    \frac1{x \pm i\eps} = \frac1{x^2 + \eps^2} \left( x \mp i\eps \right)
-  \end{align} 
-  e notiamo subito che la parte immaginaria è una successione convergente alla delta (a meno di un $ \pi $) da quanto abbiamo mostrato nell'esempio 
-  \ref{exa: successione che converge alla delta}. Per quanto riguarda la parte reale sia 
-  \begin{align}
-    u_{\sigma, \eps}(x) = \frac{x}{x^2 + \eps^2}\, \chi_{\abs{x} > \sigma}
+    \F\left[ \lim_{\eps \to 0} u_\eps(x) \right] = \lim_{\eps \to 0} \F\left[ u_\eps(x) \right]
   \end{align}
-  e scriviamo la distribuzione associata come 
+  per ciò calcoliamo la trasformata della funzione $ u_\eps(x) $:
   \begin{align}
-    \sca{ T_{u_{\sigma,\eps}} , \phi} 
-    = \int_{\abs{x} > \sigma} \frac{x \,\phi(x)}{x^2 + \eps^2} \, dx 
-    = \int_{\abs{x} > \sigma} \frac1{1 + \frac{\eps^2}{x^2}}\frac{\phi(x)}{x} \, dx 
+    \hat{u}_\eps(\omega) = \int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{x \pm i\eps} \, dx
   \end{align}
-  a questo punto possiamo svolgere il limite in $ \eps $ dato che per $ \sigma $ fissato l'integranda è sommabile, e poi il limite in $ \sigma $ 
-  ottenendo la definizione di $ \P\frac1x $, cioè
+  e per calcolare questo integrale consideriamo l'estensione al piano complesso con $ z = x + iy $ data dalla funzione 
+  $ f(z) = \frac{e^{i\omega z}}{z\pm i\eps} $. Considerando il segno $ + $ la funzione $ f(z) $ è analitica in $ \C \bs \{-i\eps\} $ dove ha un polo 
+  semplice, per $ \omega > 0 $ chiudiamo nel semipiano superiore dove ha un buon andamento all'infinito, in particolare vale che 
   \begin{align}
-    \lim_{\sigma \to 0}\lim_{\eps \to 0} \int_{\abs{x} > \sigma} \frac1{1 + \frac{\eps^2}{x^2}}\frac{\phi(x)}{x} \, dx 
-    =\lim_{\sigma \to 0} \int_{\abs{x} > \sigma} \frac{\phi(x)}{x} \, dx = \P\int_{-\infty}^{+\infty} \frac{\phi(x)}{x} \, dx =\sca{ \P \frac1x,\phi(x)}.
+    \lim_{R\to \infty} \max_{x \in C_R} \abs{f(z)} = 0
   \end{align}
-  Il limite in $ \eps $ che abbiamo svolto non è veramente il limite iniziale che volevamo calcolare dato che abbiamo eliminato il pezzo di integrale 
-  in $ \abs{x} < \sigma $, tutta via quel pezzo tende a $ 0 $ in modo uniforme in $ \eps $ e questo si può vedere dal fatto che 
-  $ \frac{x}{x^2 + \eps^2} $ è dispari e la funzione test è regolare. 
-  Mettendo insieme parte reale e immaginaria si ha 
+  ed essendo analitica per $ \text{Im} \,z> 0 $ l'integrale sull'asse reale risulta nullo per il teorema di Cauchy e per il lemma di Jordan. Per quanto 
+  riguarda $ \omega < 0 $ chiudiamo nel semipiano inferiore dove vale ha adesso lo stesso andamento per all'infinito dunque è sempre valido il lemma di 
+  Jordan, applicando il teorema dei residui si ha 
   \begin{align}
-    \lim_{\eps\to0} \frac1{x \pm i\eps} = \P\frac1x \mp i \pi \delta_0.
+    \int_{-\infty}^{+\infty} \frac{e^{i\omega x}}{x + i\eps} \, dx = -2\pi i \Res[ f(z), -i\eps ] = -2\pi i \,e^{\eps \omega}
+  \end{align}
+  e quindi concludiamo che la trasformata che stavamo cercando vale 
+  \begin{align}
+    \hat{u}_\eps(\omega) = -\theta(-\omega) \,2\pi i\,e^{-\eps \omega} = (\pi i \sgn(\omega) -\pi i) e^{\eps \omega}.
+  \end{align}
+  Possiamo calcolare ora il limite nel senso delle distribuzioni $ \S' $ della trasformata $ \hat{u}_\eps(\omega) $ quindi troviamo prima il limite 
+  puntuale nel senso delle funzioni 
+  \begin{align}
+    \lim_{\eps \to 0} \hat{u}_\eps(\omega) = \pi i \sgn(\omega) -\pi i = \hat{u}(\omega)
+  \end{align}
+  e verifichiamo che vale la convergenza debole in $ \S' $ di $ T_{\hat{u}_\eps} \to T_{\hat{u}} $ cioè
+  \begin{align}
+    \lim_{\eps \to 0} \abs{\sca{T_{\hat{u}_\eps} - T_{\hat{u}}, \phi}} 
+    &= \lim_{\eps \to 0} \abs{\int_{-\infty}^{+\infty} (\pi i \sgn(\omega) -\pi i)\left( e^{\eps \omega} - 1 \right)\phi(\omega)\,d\omega}
+    \\
+    &= \lim_{\eps \to 0} \abs{\int_{-\infty}^{0} -2\pi i\left( e^{\eps \omega} - 1 \right)\phi(\omega)\,d\omega}
+  \end{align}
+  ma la funzione integranda è sommabile in $ (- \infty, 0) $ per cui possiamo scambiare il limite con l'integrale per la convergenza dominata di Lebesgue 
+  e dunque il limite è valido anche in $ \S' $. Rimane soltanto da antitrasformare per ottenere il limite iniziale cioè
+  \begin{align}
+    \lim_{\eps \to 0} \frac{1}{x + i\eps} = \F^{-1}\left[ \hat{u}(\omega) \right] 
+    = \F^{-1}\left[ \pi i \sgn(\omega) -\pi i \right] = \P\frac1x - \pi i \delta(x)
+  \end{align}
+  ed è facile vedere che con il segno $ - $ sarebbe cambiato solo il segno alla $ \delta(x) $ per cui 
+  \begin{align}
+    \lim_{\eps \to 0} \frac1{x\pm i\eps} = \P\frac1x \mp \pi i \delta(x).
   \end{align}
 \end{example}
 
