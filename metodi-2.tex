@@ -2324,7 +2324,7 @@ Per questo risultato le distribuzioni $ T \in \E' $ sono dette \textit{distribuz
 \begin{lemma}[  ]
   Sia $ u_n \in L^2(\R) $ una successione convergente in norma $ \norm{\cdot}_2 $ a $ u \in L^2(\R) $, allora $ T_{u_n} $ converge a $ T_u $ 
   con la convergenza debole di $ \S' $, cioè se $ \norm{u_n - u}_2 \to 0 $ allora $ T_{u_n} \to T_u $. 
-  La tesi vale anche se $ u_n \to u $ debolmente in $ L^2 $, cioè se $ \sc{u_n, g} \to \sc{u, g} \; \forall g \in L^(\R) $  allora $ T_{u_n} \to T_u $.
+  La tesi vale anche se $ u_n \to u $ debolmente in $ L^2 $, cioè se $ \sc{u_n, g} \to \sc{u, g} \; \forall g \in L^2(\R) $  allora $ T_{u_n} \to T_u $.
 \end{lemma}
 \begin{proof}
   Naturalmente il secondo caso comprende anche il primo dato che la tesi è la stessa ma la convergenza in norma implica la convergenza debole in 
@@ -2373,7 +2373,7 @@ Per questo risultato le distribuzioni $ T \in \E' $ sono dette \textit{distribuz
     \lim_{n\to \infty} \abs{\sc{T_{u_n} - T_u , \phi}} \leq \lim_{n\to \infty} \int_{-\infty}^{+\infty} \abs{(u_n(x) - u(x))\phi(x)}\,dx 
     \\
     \leq \lim_{n\to \infty} \int_{-\infty}^{+\infty} (\abs{u_n(x)} + \abs{u(x)}) \abs{\phi(x)} \,dx 
-    \leq \int_{-\infty}^{+\infty} 2P(x) \abs{\phi(x)} \,dx 
+    \leq \int_{-\infty}^{+\infty} 2\abs{P(x)} \abs{\phi(x)} \,dx 
   \end{gather}
   dove abbiamo usato la disuguaglianza triangolare $ \abs{u_n - u} \leq \abs{u_n} + \abs{u} $. A questo punto notiamo che con la stessa tecnica usata 
   per dimostrare il lemma \ref{lem: funzioni test sono L1} possiamo dire che $ \phi \in \S $ rimane sommabile moltiplicata per qualsiasi polinomio, 
@@ -2492,7 +2492,7 @@ sia la proprietà che definisce la derivata di una distribuzione anche per quell
   \begin{align}
     \sc{D^kT, \phi} = (-1)^k \sc{T, \phi^{(k)}}
   \end{align}
-  che è ben definita dato che $ \phi \in C^\infty $ per ogni tipo di funzione test.
+  che è ben definita in ogni spazio di distribuzioni dato che $ \phi \in C^\infty $ per ogni tipo di funzione test.
 \end{definition}
 
 \begin{lemma}[  ]
@@ -2504,7 +2504,8 @@ sia la proprietà che definisce la derivata di una distribuzione anche per quell
   \begin{align}
     \sc{D^kT, \phi_n} = (-1)^k \sc{T, \phi_n^{(k)}} \to (-1)^k \sc{T, \phi^{(k)}} = \sc{D^kT, \phi}
   \end{align}
-  uniformemente per $ \phi_n \to \phi $, per la continuità di $ T $.
+  uniformemente per $ \phi_n \xrightarrow[\E]{} \phi $, per la continuità di $ T $. Dato che le convergenze negli spazi delle funzioni testi implicano 
+  almeno la convergenza in $ \E $, questo è vero per ogni spazio di distribuzioni.
 \end{proof}
 
 \begin{definition}[ Funzione di Heaviside ]
@@ -2783,8 +2784,9 @@ $ n\to\infty $ si ha
 dunque la trasformata della successione $ u_n $ è la funzione costante $ 1 $, la cui antitrasformata abbiamo già dimostrato essere la 
 $ \delta $, per tanto concludiamo che il limite della successione $ u_n $ è la delta cioè
 \begin{align}
-  \lim_{n\to\infty} \frac{\sin(nx)}{\pi x} = \delta(x).
+  \lim_{n\to\infty} \frac{\sin(nx)}{\pi x} = \delta(x)
 \end{align}
+per la continuità dell'operatore $ \F^{-1} $.
 
 \begin{definition}[ Distribuzioni $ \delta_\pm $ ] 
   Definiamo le distribuzioni 
@@ -2794,23 +2796,27 @@ $ \delta $, per tanto concludiamo che il limite della successione $ u_n $ è la 
   come \textit{distribuzioni delta $ \delta_\pm(x) $}.
 \end{definition}
 
-La trasformata di Fourier delle distribuzioni $ \delta_\pm $ vale 
-\begin{align}
-  \F[\delta_\pm (x)] = \frac12\F[\delta(x)] \pm \frac1{2\pi i} \F\left[ \P\frac1x \right] 
-  = \frac12 \pm \frac1{2\pi i} \pi i \sgn(x) = \frac12 (1 \pm \sgn(x)) = \theta(\pm x).
-\end{align}
-Inoltre se calcoliamo l'antitrasformata della parte principale si ottiene
-\begin{gather}
-  \sca{\F^{-1}\left[ \P\frac1x \right], \phi} = \P\int_{-\infty}^{+\infty} \frac{\F^{-1}[\phi(x)]}{x} \,dx
-  = \frac1{2\pi} \P\int_{-\infty}^{+\infty} \frac1x \int_{-\infty}^{+\infty} \phi(t) e^{-ixt} \,dt\,dx
-  \\
-  = \frac1{2\pi} \P \int_{-\infty}^{+\infty} \phi(t) \int_{-\infty}^{+\infty} \frac{e^{-ixt}}{x} \,dx\,dt
-  = \frac1{2\pi} \P \int_{-\infty}^{+\infty} \phi(t) \pi i \sgn(-t)\,dt = \sca{\frac1{2i}\sgn(t), \phi(t)}
-\end{gather}
-che ci permette di calcolare la trasformata della $ \theta(\pm x) $. Per farlo sfruttiamo il risultato precedente con le $ \delta_\pm(x) $:
-\begin{align}
-  \F[\theta(\pm x)] = \frac12\left( \F[1] \pm \F[\sgn(x)] \right) = \pi \delta(x) \pm i \P\frac1x = 2\pi \delta_{\mp}(x).
-\end{align}
+\begin{example} % dubbio su quanto sia corretto
+  La trasformata di Fourier delle distribuzioni $ \delta_\pm $ vale 
+  \begin{align}
+    \F[\delta_\pm (x)] = \frac12\F[\delta(x)] \pm \frac1{2\pi i} \F\left[ \P\frac1x \right] 
+    = \frac12 \pm \frac1{2\pi i} \pi i \sgn(x) = \frac12 (1 \pm \sgn(x)) = \theta(\pm x).
+  \end{align}
+  Inoltre se calcoliamo l'antitrasformata della parte principale si ottiene
+  \begin{align}
+    \sca{\F^{-1}\left[ \P\frac1x \right], \phi} &= \P\int_{-\infty}^{+\infty} \frac{\F^{-1}[\phi(x)]}{x} \,dx
+    = \int_{-\infty}^{+\infty} \F^{-1}\left[ \frac1x \right] \phi(t) \,dt
+    \\
+    &= \frac1{2\pi} \int_{-\infty}^{+\infty} \phi(t) \P\int_{-\infty}^{+\infty} \frac{e^{-ixt}}{x} \,dx\,dt
+    \\
+    &= \frac1{2\pi} \int_{-\infty}^{+\infty} \phi(t) \pi i \sgn(-t)\,dt 
+    = \sca{\frac1{2i}\sgn(t), \phi(t)}
+  \end{align}
+  che ci permette di calcolare la trasformata della $ \theta(\pm x) $. Per farlo sfruttiamo il risultato precedente con le $ \delta_\pm(x) $:
+  \begin{align}
+    \F[\theta(\pm x)] = \frac12\left( \F[1] \pm \F[\sgn(x)] \right) = \pi \delta(x) \pm i \P\frac1x = 2\pi \delta_{\mp}(x).
+  \end{align}
+\end{example}
 
 \begin{remark}
   Le distribuzioni $ \theta(\pm x), \delta_\pm $ godono di una relazione molto simile a quella fra $ 1,\delta_0 $. 
@@ -3297,7 +3303,7 @@ Riuniamo i concetti e i risultati di questa sezione nel seguente teorema.
     inoltre sono a quadrato sommabile.
   \end{enumerate}
 \end{theorem}
-\begin{proof}
+\begin{proof} % errore: in realtà il teorema del mezzo residuo fallisce, e quindi 2 \implies 3 non è veramente dimostrato
   Per dimostrare che $ 1 \implies 2 $ applichiamo il teorema 
   \ref{thm: G causale e L2 allora la sua trasformata è analitica nel semipiano complesso superiore} il quale afferma che la funzione 
   $ \chi(\omega') = \F[G(t)] $ è analitica nel semipiano superiore per tanto scriviamo il limite 
